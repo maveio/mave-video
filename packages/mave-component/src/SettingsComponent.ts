@@ -1,7 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 
-@customElement("mave-settings")
 export class SettingsComponent extends LitElement {
   @property({ type: String }) embed!: string;
 
@@ -100,4 +99,8 @@ export class SettingsComponent extends LitElement {
   private iframeLoaded() {
     this._loaded = true;
   }
+}
+
+if (!customElements.get("mave-settings")) {
+  customElements.define("mave-settings", SettingsComponent);
 }

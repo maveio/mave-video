@@ -16,7 +16,6 @@ interface IEvent extends Event {
   };
 }
 
-@customElement("mave-component")
 export class MaveComponent extends LitElement {
   static styles = style;
 
@@ -402,4 +401,8 @@ export class MaveComponent extends LitElement {
       visible ? "mave:video_in_viewport" : "mave:video_out_viewport"
     );
   }
+}
+
+if (!customElements.get("mave-component")) {
+  customElements.define("mave-component", MaveComponent);
 }
