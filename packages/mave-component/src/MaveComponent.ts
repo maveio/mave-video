@@ -11,8 +11,14 @@ interface IEvent extends Event {
     hash: string;
     event?: any;
     video_src?: string;
-    autoplay?: boolean;
+    autoplay_enabled?: boolean;
+    autoplay?: string;
     blurhash?: string;
+    aspect_ratio_enabled?: boolean;
+    aspect_ratio?: string;
+    width?: string;
+    height?: string;
+    loop?: boolean;
   };
 }
 
@@ -167,7 +173,7 @@ export class MaveComponent extends LitElement {
     const { data } = event;
     const { message } = data;
 
-    if (!data || data.hash != this.embed) return;
+    if (!this.isConnected || !data || data.hash != this.embed) return;
 
     switch (message) {
       case "mave:player_ready":
@@ -234,6 +240,19 @@ export class MaveComponent extends LitElement {
       case "mave:close_settings":
         this._settingsActive = false;
         break;
+      case "mave:update_embed_settings":
+        this.aspectRatio = data.aspect_ratio_enabled
+          ? data.aspect_ratio
+          : undefined;
+        this.width = data.aspect_ratio_enabled ? undefined : data.width;
+        this.height = data.aspect_ratio_enabled ? undefined : data.height;
+        this.loop = data.loop;
+        this.autoplay = data.autoplay_enabled;
+
+        if (this.autoplay && this.video?.paused) this.video.play();
+        this.visibilityHandler();
+
+        break;
       case "mave:request_in_viewport":
         setTimeout(() => {
           this.visibilityHandler();
@@ -242,7 +261,7 @@ export class MaveComponent extends LitElement {
       case "mave:render_video":
         this._hlsLoaded = false;
         this.src = data.video_src;
-        this.autoplay = data.autoplay;
+        this.autoplay = data.autoplay == "true";
         if (data.blurhash) this.blurhash = data.blurhash;
         break;
     }
@@ -316,7 +335,7 @@ export class MaveComponent extends LitElement {
       } else if (this.reference_id) {
         return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`;
       } else if (this.display_name) {
-        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`;
+        return `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}`;
       } else {
         return `https://${this.baseUrl}/e/${this.embed}`;
       }
@@ -349,6 +368,7 @@ export class MaveComponent extends LitElement {
 
     const canvas = document.createElement("canvas");
     const pixels = decode(this.blurhash, 320, 180);
+
     const ctx = canvas.getContext("2d");
     const imageData = ctx?.createImageData(320, 180);
     imageData?.data.set(pixels);

@@ -1,11 +1,3 @@
 module.exports = {
-  extends: ["prettier"],
-  settings: {
-    next: {
-      rootDir: ["apps/*/", "packages/*/"],
-    },
-  },
-  rules: {
-    "react/jsx-key": "off",
-  },
+  extends: ["prettier"]
 };

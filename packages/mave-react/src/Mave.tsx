@@ -6,18 +6,27 @@ export interface MaveProps {
   reference_id?: string;
   display_name?: string;
   jwt?: string;
+  muted?: boolean;
+  autoplay?: boolean;
+  loop?: boolean;
+  float?: string;
+  src?: string;
+  blurhash?: string;
+  aspectRatio?: string;
+  width?: string;
+  height?: string;
 }
 
 export const Mave = (props: MaveProps) => {
-  const [autoplay, setAutoplay] = useState(null);
-  const [loop, setLoop] = useState(null);
-  const [settingsAspectRatio, setSettingsAspectRatio] = useState(null);
-  const [settingsFloat, setSettingsFloat] = useState(null);
-  const [videoBlurHash, setVideoBlurHash] = useState(null);
-  const [videoSource, setVideoSource] = useState(null);
-  const [videoAspectRatio, setVideoAspectRatio] = useState(null);
-  const [height, setHeight] = useState(null);
-  const [width, setWidth] = useState(null);
+  const [autoplay, setAutoplay] = useState(undefined);
+  const [loop, setLoop] = useState(undefined);
+  const [settingsAspectRatio, setSettingsAspectRatio] = useState(undefined);
+  const [settingsFloat, setSettingsFloat] = useState(undefined);
+  const [videoBlurHash, setVideoBlurHash] = useState(undefined);
+  const [videoSource, setVideoSource] = useState(undefined);
+  const [videoAspectRatio, setVideoAspectRatio] = useState(undefined);
+  const [height, setHeight] = useState(undefined);
+  const [width, setWidth] = useState(undefined);
 
   useEffect(() => {
     const url = `https://mave.io/${props.embed}/json`;
@@ -27,7 +36,8 @@ export const Mave = (props: MaveProps) => {
         // @ts-ignore
         const response = await fetch(url);
         const json = await response.json();
-        setAutoplay(json.autoplay);
+
+        setAutoplay(json.autoPlay);
         setLoop(json.loop);
         setSettingsAspectRatio(json.settingsAspectRatio);
         setSettingsFloat(json.settingsFloat);
@@ -45,23 +55,36 @@ export const Mave = (props: MaveProps) => {
     fetchData();
   }, []);
 
+  const attributes: MaveProps = {
+    embed: props.embed,
+    reference_id: props.reference_id,
+    display_name: props.display_name,
+    jwt: props.jwt,
+    float: settingsFloat,
+    src: videoSource,
+    blurhash: videoBlurHash,
+  };
+
+  if (loop) {
+    attributes.loop = loop;
+  }
+
+  if (autoplay) {
+    attributes.autoplay = autoplay;
+    attributes.muted = autoplay;
+  }
+
+  if (width && height) {
+    attributes.width = width;
+    attributes.height = height;
+  }
+
+  if (settingsAspectRatio || videoAspectRatio) {
+    attributes.aspectRatio = settingsAspectRatio || videoAspectRatio;
+  }
+
   return (
     // @ts-ignore
-    <mave-component
-      embed={props.embed}
-      reference_id={props.reference_id}
-      display_name={props.display_name}
-      jwt={props.jwt}
-      muted={autoplay}
-      autoplay={autoplay}
-      loop={loop}
-      float={settingsFloat}
-      src={videoSource}
-      blurhash={videoBlurHash}
-      aspectRatio={settingsAspectRatio || videoAspectRatio}
-      width={width}
-      height={height}
-      // @ts-ignore
-    ></mave-component>
+    <mave-component {...attributes}></mave-component>
   );
 };

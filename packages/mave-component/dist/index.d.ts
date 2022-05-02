@@ -8,8 +8,14 @@ interface IEvent extends Event {
         hash: string;
         event?: any;
         video_src?: string;
-        autoplay?: boolean;
+        autoplay_enabled?: boolean;
+        autoplay?: string;
         blurhash?: string;
+        aspect_ratio_enabled?: boolean;
+        aspect_ratio?: string;
+        width?: string;
+        height?: string;
+        loop?: boolean;
     };
 }
 declare class MaveComponent extends LitElement {
