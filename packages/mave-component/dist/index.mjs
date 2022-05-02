@@ -1,37 +1,4 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __decorateClass = (decorators, target, key, kind) => {
-  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
-  for (var i = decorators.length - 1, decorator; i >= 0; i--)
-    if (decorator = decorators[i])
-      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-  if (kind && result)
-    __defProp(target, key, result);
-  return result;
-};
-
-// src/MaveComponent.ts
-import { html as html2, LitElement as LitElement2 } from "lit";
-import { customElement as customElement2, property as property2, query as query2, state as state2 } from "lit/decorators.js";
-
-// src/style.ts
-import { css } from "lit";
-var style = css`
+var g=Object.defineProperty;var E=Object.getOwnPropertyDescriptor;var v=Object.getOwnPropertySymbols;var $=Object.prototype.hasOwnProperty,H=Object.prototype.propertyIsEnumerable;var b=(o,n,e)=>n in o?g(o,n,{enumerable:!0,configurable:!0,writable:!0,value:e}):o[n]=e,f=(o,n)=>{for(var e in n||(n={}))$.call(n,e)&&b(o,e,n[e]);if(v)for(var e of v(n))H.call(n,e)&&b(o,e,n[e]);return o};var i=(o,n,e,s)=>{for(var t=s>1?void 0:s?E(n,e):n,r=o.length-1,h;r>=0;r--)(h=o[r])&&(t=(s?h(n,e,t):h(t))||t);return s&&t&&g(n,e,t),t};import{html as m,LitElement as z}from"lit";import{property as l,query as c,state as w}from"lit/decorators.js";import{css as T}from"lit";var y=T`
   :host {
   }
 
@@ -121,40 +88,9 @@ var style = css`
   video::-webkit-media-text-track-display-backdrop {
     background: transparent !important;
   }
-`;
-
-// src/MaveComponent.ts
-import { decode } from "@fpapado/blurhash";
-
-// src/SettingsComponent.ts
-import { html, css as css2, LitElement } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
-var SettingsComponent = class extends LitElement {
-  constructor() {
-    super(...arguments);
-    this._ghostActive = true;
-    this._loaded = true;
-  }
-  connectedCallback() {
-    var _a;
-    super.connectedCallback();
-    this._globalStyle = document.documentElement.getAttribute("style") || "";
-    document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`);
-    setTimeout(() => {
-      this._ghostActive = true;
-    }, 0);
-    (_a = this.iframe) == null ? void 0 : _a.addEventListener("load", this.iframeLoaded.bind(this));
-  }
-  disconnectedCallback() {
-    var _a;
-    document.documentElement.setAttribute("style", this._globalStyle || "");
-    (_a = this.iframe) == null ? void 0 : _a.removeEventListener("load", this.iframeLoaded.bind(this));
-    super.disconnectedCallback();
-  }
-  render() {
-    return html`
+`;import{decode as j}from"@fpapado/blurhash";import{html as x,css as L,LitElement as S}from"lit";import{property as F,query as A,state as _}from"lit/decorators.js";var d=class extends S{constructor(){super(...arguments);this._ghostActive=!0;this._loaded=!0}connectedCallback(){var e;super.connectedCallback(),this._globalStyle=document.documentElement.getAttribute("style")||"",document.documentElement.setAttribute("style",`${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`),setTimeout(()=>{this._ghostActive=!0},0),(e=this.iframe)==null||e.addEventListener("load",this.iframeLoaded.bind(this))}disconnectedCallback(){var e;document.documentElement.setAttribute("style",this._globalStyle||""),(e=this.iframe)==null||e.removeEventListener("load",this.iframeLoaded.bind(this)),super.disconnectedCallback()}render(){return x`
       <div>
-        <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
+        <div class=${this._ghostActive?"ghost active":"ghost"}></div>
         <div class="settings">
           <iframe
             src="https://mave.io/e/${this.embed}/settings"
@@ -163,17 +99,11 @@ var SettingsComponent = class extends LitElement {
             allow="autoplay; fullscreen; clipboard-write;"
             width="100%"
             height="100%"
-            class=${this._loaded ? "loaded" : "initial"}
+            class=${this._loaded?"loaded":"initial"}
           ></iframe>
         </div>
       </div>
-    `;
-  }
-  iframeLoaded() {
-    this._loaded = true;
-  }
-};
-SettingsComponent.styles = css2`
+    `}iframeLoaded(){this._loaded=!0}};d.styles=L`
     .ghost {
       background-color: #1c1917;
       width: 14rem;
@@ -213,202 +143,12 @@ SettingsComponent.styles = css2`
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `;
-__decorateClass([
-  property({ type: String })
-], SettingsComponent.prototype, "embed", 2);
-__decorateClass([
-  query("#iframe")
-], SettingsComponent.prototype, "iframe", 2);
-__decorateClass([
-  state()
-], SettingsComponent.prototype, "_ghostActive", 2);
-__decorateClass([
-  state()
-], SettingsComponent.prototype, "_loaded", 2);
-SettingsComponent = __decorateClass([
-  customElement("mave-settings")
-], SettingsComponent);
-
-// src/MaveComponent.ts
-var MaveComponent = class extends LitElement2 {
-  constructor() {
-    super(...arguments);
-    this._settingsActive = false;
-    this._blurhashShouldBeVisible = true;
-    this._overlayActive = false;
-    this._hlsLoaded = false;
-    this._iframeReady = false;
-    this._initialPlayEventTriggered = false;
-    this.baseUrl = "mave.io";
-  }
-  connectedCallback() {
-    var _a;
-    super.connectedCallback();
-    window.addEventListener("message", this.messageHandler.bind(this));
-    window.addEventListener("load", this.visibilityHandler.bind(this));
-    window.addEventListener("scroll", this.visibilityHandler.bind(this));
-    window.addEventListener("resize", this.visibilityHandler.bind(this));
-    if (((_a = this.video) == null ? void 0 : _a.canPlayType("application/vnd.apple.mpegurl")) && !this._hlsLoaded) {
-      this.scriptHandler();
-    }
-  }
-  disconnectedCallback() {
-    window.removeEventListener("message", this.messageHandler.bind(this));
-    window.removeEventListener("load", this.visibilityHandler.bind(this));
-    window.removeEventListener("scroll", this.visibilityHandler.bind(this));
-    window.removeEventListener("resize", this.visibilityHandler.bind(this));
-    super.disconnectedCallback();
-  }
-  videoHandler(event) {
-    if (!this.video)
-      return;
-    switch (event.type) {
-      case "loadeddata":
-        if (this.video.readyState >= 2) {
-          setTimeout(() => {
-            if (this.blurhash)
-              this._blurhashShouldBeVisible = false;
-          }, 500);
-        }
-        break;
-      case "canplay":
-        const checkPlayerState = () => {
-          if (this._iframeReady)
-            return;
-          this.sendMessage("mave:video_canplay");
-          setTimeout(checkPlayerState.bind(this), 25);
-        };
-        checkPlayerState();
-        break;
-      case "progress":
-        try {
-          const lastBuffer = this.video.buffered.length - 1;
-          const buffer = Math.round(this.video.buffered.end(lastBuffer) / this.video.duration * 100);
-          this.sendMessage("mave:video_progress", { buffer });
-        } catch (e) {
-        }
-        break;
-      case "play":
-        if (this._iframeReady) {
-          this.timeUpdate();
-          const time = this.autoplay && !this._initialPlayEventTriggered ? 0 : this.video.currentTime;
-          this.sendMessage("mave:video_play", { currentTime: time });
-          this._initialPlayEventTriggered = true;
-        }
-        break;
-      case "timeupdate":
-        this.sendMessage("mave:video_timeupdate", {
-          currentTime: this.video.currentTime
-        });
-        break;
-      case "pause":
-      case "ended":
-        this.sendMessage("mave:video_timeupdate", {
-          currentTime: this.video.currentTime
-        });
-        if (this._animationFrame) {
-          cancelAnimationFrame(this._animationFrame);
-          this._animationFrame = void 0;
-        }
-        setTimeout(() => {
-          this.sendMessage(event.type == "ended" ? "mave:video_ended" : "mave:video_pause");
-        }, 25);
-        break;
-    }
-  }
-  messageHandler(event) {
-    const { data } = event;
-    const { message } = data;
-    if (!data || data.hash != this.embed)
-      return;
-    switch (message) {
-      case "mave:player_ready":
-        this._iframeReady = true;
-        if (!this._initialPlayEventTriggered && this.video && !this.video.paused) {
-          const time = this.autoplay ? 0 : this.video.currentTime;
-          this.sendMessage("mave:video_play", { currentTime: time });
-          this._initialPlayEventTriggered = true;
-        }
-        break;
-      case "mave:player_event":
-        if (!this.video)
-          return;
-        const playerEvent = data.event;
-        const type = Object.keys(playerEvent)[0];
-        switch (type) {
-          case "play":
-            playerEvent.play ? this.video.play() : this.video.pause();
-            break;
-          case "muted":
-            this.video.muted = playerEvent.muted;
-            break;
-          case "volume":
-            this.video.volume = playerEvent.volume;
-            break;
-          case "currentTime":
-            this.video.currentTime = playerEvent.currentTime;
-            break;
-        }
-        break;
-      case "mave:open_popup_overlay":
-        this._overlayActive = true;
-        window.scrollTo(0, 0);
-        this.dialog.showModal();
-        this.dialog.scrollIntoView(false);
-        break;
-      case "mave:close_popup_overlay":
-        this.dialog.close();
-        this._overlayActive = false;
-        break;
-      case "mave:toggle_fullscreen":
-        document.fullscreenElement ? this.closeFullscreen() : this.openFullscreen();
-        break;
-      case "mave:open_fullscreen":
-        this.openFullscreen();
-        break;
-      case "mave:close_fullscreen":
-        this.closeFullscreen();
-        break;
-      case "mave:open_settings":
-        this._settingsActive = !this._settingsActive;
-        break;
-      case "mave:close_settings":
-        this._settingsActive = false;
-        break;
-      case "mave:request_in_viewport":
-        setTimeout(() => {
-          this.visibilityHandler();
-        }, 20);
-        break;
-      case "mave:render_video":
-        this._hlsLoaded = false;
-        this.src = data.video_src;
-        this.autoplay = data.autoplay;
-        if (data.blurhash)
-          this.blurhash = data.blurhash;
-        break;
-    }
-  }
-  generateStyle() {
-    if (this.width && this.height) {
-      return `width: ${this.width}; height: ${this.height};`;
-    } else {
-      if (this.aspectRatio && this.aspectRatio != "auto") {
-        const [w, h] = this.aspectRatio.split(":");
-        return `aspect-ratio: ${w} / ${h}; width: 100%`;
-      } else {
-        return `aspect-ratio: 16 / 9; min-height: 360px; width: 100%;`;
-      }
-    }
-  }
-  render() {
-    return html2`
-      ${this._settingsActive && html2` <mave-settings embed=${this.embed} /> ` || ""}
+  `,i([F({type:String})],d.prototype,"embed",2),i([A("#iframe")],d.prototype,"iframe",2),i([_()],d.prototype,"_ghostActive",2),i([_()],d.prototype,"_loaded",2);customElements.get("mave-settings")||customElements.define("mave-settings",d);var a=class extends z{constructor(){super(...arguments);this._settingsActive=!1;this._blurhashShouldBeVisible=!0;this._overlayActive=!1;this._hlsLoaded=!1;this._iframeReady=!1;this._initialPlayEventTriggered=!1;this.baseUrl="mave.io"}connectedCallback(){var e;super.connectedCallback(),window.addEventListener("message",this.messageHandler.bind(this)),window.addEventListener("load",this.visibilityHandler.bind(this)),window.addEventListener("scroll",this.visibilityHandler.bind(this)),window.addEventListener("resize",this.visibilityHandler.bind(this)),((e=this.video)==null?void 0:e.canPlayType("application/vnd.apple.mpegurl"))&&!this._hlsLoaded&&this.scriptHandler()}disconnectedCallback(){window.removeEventListener("message",this.messageHandler.bind(this)),window.removeEventListener("load",this.visibilityHandler.bind(this)),window.removeEventListener("scroll",this.visibilityHandler.bind(this)),window.removeEventListener("resize",this.visibilityHandler.bind(this)),super.disconnectedCallback()}videoHandler(e){if(!!this.video)switch(e.type){case"loadeddata":this.video.readyState>=2&&setTimeout(()=>{this.blurhash&&(this._blurhashShouldBeVisible=!1)},500);break;case"canplay":let s=()=>{this._iframeReady||(this.sendMessage("mave:video_canplay"),setTimeout(s.bind(this),25))};s();break;case"progress":try{let t=this.video.buffered.length-1,r=Math.round(this.video.buffered.end(t)/this.video.duration*100);this.sendMessage("mave:video_progress",{buffer:r})}catch{}break;case"play":if(this._iframeReady){this.timeUpdate();let t=this.autoplay&&!this._initialPlayEventTriggered?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:t}),this._initialPlayEventTriggered=!0}break;case"timeupdate":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime});break;case"pause":case"ended":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this._animationFrame&&(cancelAnimationFrame(this._animationFrame),this._animationFrame=void 0),setTimeout(()=>{this.sendMessage(e.type=="ended"?"mave:video_ended":"mave:video_pause")},25);break}}messageHandler(e){let{data:s}=e,{message:t}=s;if(!(!s||s.hash!=this.embed))switch(t){case"mave:player_ready":if(this._iframeReady=!0,!this._initialPlayEventTriggered&&this.video&&!this.video.paused){let k=this.autoplay?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:k}),this._initialPlayEventTriggered=!0}break;case"mave:player_event":if(!this.video)return;let r=s.event;switch(Object.keys(r)[0]){case"play":r.play?this.video.play():this.video.pause();break;case"muted":this.video.muted=r.muted;break;case"volume":this.video.volume=r.volume;break;case"currentTime":this.video.currentTime=r.currentTime;break}break;case"mave:open_popup_overlay":this._overlayActive=!0,window.scrollTo(0,0),this.dialog.showModal(),this.dialog.scrollIntoView(!1);break;case"mave:close_popup_overlay":this.dialog.close(),this._overlayActive=!1;break;case"mave:toggle_fullscreen":document.fullscreenElement?this.closeFullscreen():this.openFullscreen();break;case"mave:open_fullscreen":this.openFullscreen();break;case"mave:close_fullscreen":this.closeFullscreen();break;case"mave:open_settings":this._settingsActive=!this._settingsActive;break;case"mave:close_settings":this._settingsActive=!1;break;case"mave:request_in_viewport":setTimeout(()=>{this.visibilityHandler()},20);break;case"mave:render_video":this._hlsLoaded=!1,this.src=s.video_src,this.autoplay=s.autoplay,s.blurhash&&(this.blurhash=s.blurhash);break}}generateStyle(){if(this.width&&this.height)return`width: ${this.width}; height: ${this.height};`;if(this.aspectRatio&&this.aspectRatio!="auto"){let[e,s]=this.aspectRatio.split(":");return`aspect-ratio: ${e} / ${s}; width: 100%`}else return"aspect-ratio: 16 / 9; min-height: 360px; width: 100%;"}render(){return m`
+      ${this._settingsActive&&m` <mave-settings embed=${this.embed} /> `||""}
 
       <dialog id="dialog" style="${this.generateStyle()}">
         ${this.renderCanvas()}
-        ${this.src && html2`
+        ${this.src&&m`
             ${this.initiateScript()}
 
             <video
@@ -426,8 +166,8 @@ var MaveComponent = class extends LitElement2 {
               .loop=${this.loop}
               .src=${this.src}
             ></video>
-          ` || ""}
-        ${this.embed && html2`
+          `||""}
+        ${this.embed&&m`
             <iframe
               title="embed"
               id="iframe"
@@ -437,155 +177,6 @@ var MaveComponent = class extends LitElement2 {
               frameborder="0"
             >
             </iframe>
-          ` || ""}
+          `||""}
       </dialog>
-    `;
-  }
-  generateUrl() {
-    if (this.jwt) {
-      return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}`;
-    } else {
-      if (this.reference_id && this.display_name) {
-        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}`;
-      } else if (this.reference_id) {
-        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`;
-      } else if (this.display_name) {
-        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`;
-      } else {
-        return `https://${this.baseUrl}/e/${this.embed}`;
-      }
-    }
-  }
-  sendMessage(event, options = {}) {
-    if (!this.iframe.contentWindow)
-      return;
-    const payload = __spreadValues({ message: event }, options);
-    this.iframe.contentWindow.postMessage(payload, "*");
-  }
-  openFullscreen() {
-    if (!document.fullscreenElement) {
-      this.requestFullscreen();
-      this.sendMessage("mave:video_fullscreen", { fullscreen: false });
-    }
-  }
-  closeFullscreen() {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-      this.sendMessage("mave:video_fullscreen", { fullscreen: true });
-    }
-  }
-  renderCanvas() {
-    if (!this.blurhash || !this._blurhashShouldBeVisible)
-      return;
-    const canvas = document.createElement("canvas");
-    const pixels = decode(this.blurhash, 320, 180);
-    const ctx = canvas.getContext("2d");
-    const imageData = ctx == null ? void 0 : ctx.createImageData(320, 180);
-    imageData == null ? void 0 : imageData.data.set(pixels);
-    if (imageData)
-      ctx == null ? void 0 : ctx.putImageData(imageData, 0, 0);
-    return canvas;
-  }
-  timeUpdate() {
-    this._animationFrame = requestAnimationFrame(() => {
-      if (!this.video)
-        return;
-      this.sendMessage("mave:video_timeupdate", {
-        currentTime: this.video.currentTime
-      });
-      this.timeUpdate();
-    });
-  }
-  initiateScript() {
-    let script = document.createElement("script");
-    script.onload = this.scriptHandler.bind(this);
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js";
-    return script;
-  }
-  scriptHandler() {
-    if (!this.video || !this.src || this._hlsLoaded)
-      return;
-    if (this.video.canPlayType("application/vnd.apple.mpegurl")) {
-      this.video.src = this.src;
-    } else if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(this.src);
-      hls.attachMedia(this.video);
-      hls.subtitleTrack = 0;
-      hls.subtitleDisplay = true;
-    }
-    this._hlsLoaded = true;
-  }
-  visibilityHandler() {
-    if (!this.iframe || !this.iframe.contentWindow)
-      return;
-    const { top, bottom } = this.iframe.getBoundingClientRect();
-    const vHeight = window.innerHeight || document.documentElement.clientHeight;
-    const visible = (top > 0 || bottom > 0) && top < vHeight;
-    this.sendMessage(visible ? "mave:video_in_viewport" : "mave:video_out_viewport");
-  }
-};
-MaveComponent.styles = style;
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "embed", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "reference_id", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "display_name", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "jwt", 2);
-__decorateClass([
-  property2({ type: Boolean })
-], MaveComponent.prototype, "muted", 2);
-__decorateClass([
-  property2({ type: Boolean })
-], MaveComponent.prototype, "autoplay", 2);
-__decorateClass([
-  property2({ type: Boolean })
-], MaveComponent.prototype, "loop", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "src", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "blurhash", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "aspectRatio", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "width", 2);
-__decorateClass([
-  property2({ type: String })
-], MaveComponent.prototype, "height", 2);
-__decorateClass([
-  query2("#dialog")
-], MaveComponent.prototype, "dialog", 2);
-__decorateClass([
-  query2("#iframe")
-], MaveComponent.prototype, "iframe", 2);
-__decorateClass([
-  query2("#video")
-], MaveComponent.prototype, "video", 2);
-__decorateClass([
-  query2("#canvas")
-], MaveComponent.prototype, "canvas", 2);
-__decorateClass([
-  query2("#script")
-], MaveComponent.prototype, "script", 2);
-__decorateClass([
-  state2()
-], MaveComponent.prototype, "_settingsActive", 2);
-__decorateClass([
-  state2()
-], MaveComponent.prototype, "_blurhashShouldBeVisible", 2);
-MaveComponent = __decorateClass([
-  customElement2("mave-component")
-], MaveComponent);
-export {
-  MaveComponent
-};
+    `}generateUrl(){return this.jwt?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}`:this.reference_id&&this.display_name?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}`:this.reference_id?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`:this.display_name?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`:`https://${this.baseUrl}/e/${this.embed}`}sendMessage(e,s={}){if(!this.iframe.contentWindow)return;let t=f({message:e},s);this.iframe.contentWindow.postMessage(t,"*")}openFullscreen(){document.fullscreenElement||(this.requestFullscreen(),this.sendMessage("mave:video_fullscreen",{fullscreen:!1}))}closeFullscreen(){document.fullscreenElement&&(document.exitFullscreen(),this.sendMessage("mave:video_fullscreen",{fullscreen:!0}))}renderCanvas(){if(!this.blurhash||!this._blurhashShouldBeVisible)return;let e=document.createElement("canvas"),s=j(this.blurhash,320,180),t=e.getContext("2d"),r=t==null?void 0:t.createImageData(320,180);return r==null||r.data.set(s),r&&(t==null||t.putImageData(r,0,0)),e}timeUpdate(){this._animationFrame=requestAnimationFrame(()=>{!this.video||(this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this.timeUpdate())})}initiateScript(){let e=document.createElement("script");return e.onload=this.scriptHandler.bind(this),e.src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js",e}scriptHandler(){if(!(!this.video||!this.src||this._hlsLoaded)){if(this.video.canPlayType("application/vnd.apple.mpegurl"))this.video.src=this.src;else if(Hls.isSupported()){let e=new Hls;e.loadSource(this.src),e.attachMedia(this.video),e.subtitleTrack=0,e.subtitleDisplay=!0}this._hlsLoaded=!0}}visibilityHandler(){if(!this.iframe||!this.iframe.contentWindow)return;let{top:e,bottom:s}=this.iframe.getBoundingClientRect(),t=window.innerHeight||document.documentElement.clientHeight,r=(e>0||s>0)&&e<t;this.sendMessage(r?"mave:video_in_viewport":"mave:video_out_viewport")}};a.styles=y,i([l({type:String})],a.prototype,"embed",2),i([l({type:String})],a.prototype,"reference_id",2),i([l({type:String})],a.prototype,"display_name",2),i([l({type:String})],a.prototype,"jwt",2),i([l({type:Boolean})],a.prototype,"muted",2),i([l({type:Boolean})],a.prototype,"autoplay",2),i([l({type:Boolean})],a.prototype,"loop",2),i([l({type:String})],a.prototype,"src",2),i([l({type:String})],a.prototype,"blurhash",2),i([l({type:String})],a.prototype,"aspectRatio",2),i([l({type:String})],a.prototype,"width",2),i([l({type:String})],a.prototype,"height",2),i([c("#dialog")],a.prototype,"dialog",2),i([c("#iframe")],a.prototype,"iframe",2),i([c("#video")],a.prototype,"video",2),i([c("#canvas")],a.prototype,"canvas",2),i([c("#script")],a.prototype,"script",2),i([w()],a.prototype,"_settingsActive",2),i([w()],a.prototype,"_blurhashShouldBeVisible",2);customElements.get("mave-component")||customElements.define("mave-component",a);export{a as MaveComponent};
