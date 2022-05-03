@@ -50,6 +50,7 @@ export const style = css`
   }
 
   video {
+    transform: scale(1.01);
     position: absolute;
     top: 0;
     z-index: 10;

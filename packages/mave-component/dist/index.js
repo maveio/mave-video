@@ -48,6 +48,7 @@ var b=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
   }
 
   video {
+    transform: scale(1.01);
     position: absolute;
     top: 0;
     z-index: 10;
