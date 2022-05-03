@@ -297,6 +297,7 @@ export class MaveComponent extends LitElement {
     if (this._overlayActive) {
       return html`<style>
       :host {
+        overflow: hidden;
         width: 100%; 
         height: 100%;
       }
@@ -306,6 +307,7 @@ export class MaveComponent extends LitElement {
     if (this.width && this.height) {
       return html`<style>
         :host {
+          overflow: hidden;
           width: ${this.width};
           height: ${this.height};
         }
@@ -315,6 +317,7 @@ export class MaveComponent extends LitElement {
         const [w, h] = this.aspectRatio.split(":");
         return html`<style>
           :host {
+            overflow: hidden;
             aspect-ratio: ${w} / ${h};
             width: 100%;
           }
@@ -322,6 +325,7 @@ export class MaveComponent extends LitElement {
       } else {
         return html`<style>
           :host {
+            overflow: hidden;
             aspect-ratio: 16 / 9;
             min-height: 360px;
             width: 100%;
