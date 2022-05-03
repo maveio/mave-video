@@ -78,6 +78,8 @@ export class MaveComponent extends LitElement {
 
   private baseUrl: string = Config.getInstance().baseUrl;
 
+  private _globalStyle?: string;
+
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener("message", this.messageHandler.bind(this));
@@ -218,11 +220,22 @@ export class MaveComponent extends LitElement {
         // @ts-ignore
         this.dialog.showModal();
         this.dialog.scrollIntoView(false);
+
+        this._globalStyle =
+          document.documentElement.getAttribute("style") || "";
+        document.documentElement.setAttribute(
+          "style",
+          `${this._globalStyle}; overflow: hidden;`
+        );
+
         break;
       case "mave:close_popup_overlay":
         // @ts-ignore
         this.dialog.close();
         this._overlayActive = false;
+
+        document.documentElement.setAttribute("style", this._globalStyle || "");
+
         break;
       case "mave:toggle_fullscreen":
         document.fullscreenElement

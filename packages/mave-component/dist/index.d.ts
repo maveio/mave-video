@@ -54,6 +54,7 @@ declare class MaveComponent extends LitElement {
     private _initialPlayEventTriggered;
     private _animationFrame?;
     private baseUrl;
+    private _globalStyle?;
     connectedCallback(): void;
     disconnectedCallback(): void;
     videoHandler(event: Event): void;

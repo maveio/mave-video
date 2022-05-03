@@ -1227,17 +1227,17 @@ var require_dist = __commonJS({
     var x2 = Object.getOwnPropertyNames;
     var y2 = Object.getOwnPropertySymbols;
     var k2 = Object.prototype.hasOwnProperty;
-    var L2 = Object.prototype.propertyIsEnumerable;
+    var S3 = Object.prototype.propertyIsEnumerable;
     var _2 = (o7, s5, e9) => s5 in o7 ? b2(o7, s5, { enumerable: true, configurable: true, writable: true, value: e9 }) : o7[s5] = e9;
-    var $2 = (o7, s5) => {
+    var E2 = (o7, s5) => {
       for (var e9 in s5 || (s5 = {}))
         k2.call(s5, e9) && _2(o7, e9, s5[e9]);
       if (y2)
         for (var e9 of y2(s5))
-          L2.call(s5, e9) && _2(o7, e9, s5[e9]);
+          S3.call(s5, e9) && _2(o7, e9, s5[e9]);
       return o7;
     };
-    var S3 = (o7, s5) => {
+    var L2 = (o7, s5) => {
       for (var e9 in s5)
         b2(o7, e9, { get: s5[e9], enumerable: true });
     };
@@ -1254,7 +1254,7 @@ var require_dist = __commonJS({
       return t4 && i5 && b2(s5, e9, i5), i5;
     };
     var U = {};
-    S3(U, { Config: () => d2, MaveComponent: () => r5 });
+    L2(U, { Config: () => d2, MaveComponent: () => r5 });
     module2.exports = F(U);
     var d2 = class {
       constructor() {
@@ -1272,8 +1272,8 @@ var require_dist = __commonJS({
     };
     var c2 = (init_lit(), __toCommonJS(lit_exports));
     var n7 = (init_decorators(), __toCommonJS(decorators_exports));
-    var E2 = (init_lit(), __toCommonJS(lit_exports));
-    var H2 = E2.css`
+    var $2 = (init_lit(), __toCommonJS(lit_exports));
+    var H2 = $2.css`
   dialog {
     position: relative;
     display: flex;
@@ -1361,7 +1361,7 @@ var require_dist = __commonJS({
 `;
     var T2 = (init_dist(), __toCommonJS(dist_exports));
     var v2 = (init_lit(), __toCommonJS(lit_exports));
-    var u2 = (init_decorators(), __toCommonJS(decorators_exports));
+    var p2 = (init_decorators(), __toCommonJS(decorators_exports));
     var m2 = class extends v2.LitElement {
       constructor() {
         super(...arguments);
@@ -1440,7 +1440,7 @@ var require_dist = __commonJS({
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `, a3([(0, u2.property)({ type: String })], m2.prototype, "embed", 2), a3([(0, u2.query)("#iframe")], m2.prototype, "iframe", 2), a3([(0, u2.state)()], m2.prototype, "_ghostActive", 2), a3([(0, u2.state)()], m2.prototype, "_loaded", 2);
+  `, a3([(0, p2.property)({ type: String })], m2.prototype, "embed", 2), a3([(0, p2.query)("#iframe")], m2.prototype, "iframe", 2), a3([(0, p2.state)()], m2.prototype, "_ghostActive", 2), a3([(0, p2.state)()], m2.prototype, "_loaded", 2);
     customElements.get("mave-settings") || customElements.define("mave-settings", m2);
     var r5 = class extends c2.LitElement {
       constructor() {
@@ -1506,8 +1506,8 @@ var require_dist = __commonJS({
           switch (i5) {
             case "mave:player_ready":
               if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
-                let p2 = this.autoplay ? 0 : this.video.currentTime;
-                this.sendMessage("mave:video_play", { currentTime: p2 }), this._initialPlayEventTriggered = true;
+                let u2 = this.autoplay ? 0 : this.video.currentTime;
+                this.sendMessage("mave:video_play", { currentTime: u2 }), this._initialPlayEventTriggered = true;
               }
               break;
             case "mave:player_event":
@@ -1530,10 +1530,10 @@ var require_dist = __commonJS({
               }
               break;
             case "mave:open_popup_overlay":
-              this._overlayActive = true, window.scrollTo(0, 0), this.dialog.showModal(), this.dialog.scrollIntoView(false);
+              this._overlayActive = true, window.scrollTo(0, 0), this.dialog.showModal(), this.dialog.scrollIntoView(false), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
               break;
             case "mave:close_popup_overlay":
-              this.dialog.close(), this._overlayActive = false;
+              this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
               break;
             case "mave:toggle_fullscreen":
               document.fullscreenElement ? this.closeFullscreen() : this.openFullscreen();
@@ -1546,11 +1546,11 @@ var require_dist = __commonJS({
               break;
             case "mave:open_settings":
               if (this._settingsActive = !this._settingsActive, this._settingsActive) {
-                let p2 = document.createElement("mave-settings");
-                p2.setAttribute("embed", this.embed), document.body.appendChild(p2);
+                let u2 = document.createElement("mave-settings");
+                u2.setAttribute("embed", this.embed), document.body.appendChild(u2);
               } else {
-                let p2 = document.querySelector("mave-settings");
-                p2 && p2.remove();
+                let u2 = document.querySelector("mave-settings");
+                u2 && u2.remove();
               }
               break;
             case "mave:close_settings":
@@ -1654,7 +1654,7 @@ var require_dist = __commonJS({
       sendMessage(e9, t4 = {}) {
         if (!this.iframe.contentWindow || !this.video)
           return;
-        let i5 = $2({ message: e9 }, t4);
+        let i5 = E2({ message: e9 }, t4);
         this.iframe.contentWindow.postMessage(i5, "*");
       }
       openFullscreen() {
