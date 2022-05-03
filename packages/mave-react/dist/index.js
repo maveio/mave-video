@@ -1222,44 +1222,45 @@ var init_dist = __esm({
 var require_dist = __commonJS({
   "../mave-component/dist/index.js"(exports, module2) {
     init_cjs_shims();
-    var u2 = Object.defineProperty;
-    var f2 = Object.getOwnPropertyDescriptor;
-    var H2 = Object.getOwnPropertyNames;
-    var b2 = Object.getOwnPropertySymbols;
-    var y2 = Object.prototype.hasOwnProperty;
-    var T2 = Object.prototype.propertyIsEnumerable;
-    var g2 = (o7, s5, e9) => s5 in o7 ? u2(o7, s5, { enumerable: true, configurable: true, writable: true, value: e9 }) : o7[s5] = e9;
-    var _2 = (o7, s5) => {
+    var v2 = Object.defineProperty;
+    var w2 = Object.getOwnPropertyDescriptor;
+    var x2 = Object.getOwnPropertyNames;
+    var y2 = Object.getOwnPropertySymbols;
+    var k2 = Object.prototype.hasOwnProperty;
+    var L2 = Object.prototype.propertyIsEnumerable;
+    var _2 = (o7, s5, e9) => s5 in o7 ? v2(o7, s5, { enumerable: true, configurable: true, writable: true, value: e9 }) : o7[s5] = e9;
+    var $2 = (o7, s5) => {
       for (var e9 in s5 || (s5 = {}))
-        y2.call(s5, e9) && g2(o7, e9, s5[e9]);
-      if (b2)
-        for (var e9 of b2(s5))
-          T2.call(s5, e9) && g2(o7, e9, s5[e9]);
+        k2.call(s5, e9) && _2(o7, e9, s5[e9]);
+      if (y2)
+        for (var e9 of y2(s5))
+          L2.call(s5, e9) && _2(o7, e9, s5[e9]);
       return o7;
     };
-    var x2 = (o7, s5) => {
+    var S3 = (o7, s5) => {
       for (var e9 in s5)
-        u2(o7, e9, { get: s5[e9], enumerable: true });
+        v2(o7, e9, { get: s5[e9], enumerable: true });
     };
-    var L2 = (o7, s5, e9, t4) => {
+    var A2 = (o7, s5, e9, t4) => {
       if (s5 && typeof s5 == "object" || typeof s5 == "function")
-        for (let i5 of H2(s5))
-          !y2.call(o7, i5) && i5 !== e9 && u2(o7, i5, { get: () => s5[i5], enumerable: !(t4 = f2(s5, i5)) || t4.enumerable });
+        for (let i5 of x2(s5))
+          !k2.call(o7, i5) && i5 !== e9 && v2(o7, i5, { get: () => s5[i5], enumerable: !(t4 = w2(s5, i5)) || t4.enumerable });
       return o7;
     };
-    var S3 = (o7) => L2(u2({}, "__esModule", { value: true }), o7);
+    var F = (o7) => A2(v2({}, "__esModule", { value: true }), o7);
     var a3 = (o7, s5, e9, t4) => {
-      for (var i5 = t4 > 1 ? void 0 : t4 ? f2(s5, e9) : s5, l5 = o7.length - 1, d2; l5 >= 0; l5--)
+      for (var i5 = t4 > 1 ? void 0 : t4 ? w2(s5, e9) : s5, l5 = o7.length - 1, d2; l5 >= 0; l5--)
         (d2 = o7[l5]) && (i5 = (t4 ? d2(s5, e9, i5) : d2(i5)) || i5);
-      return t4 && i5 && u2(s5, e9, i5), i5;
+      return t4 && i5 && v2(s5, e9, i5), i5;
     };
-    var F = {};
-    x2(F, { MaveComponent: () => r5 });
-    module2.exports = S3(F);
-    var m2 = (init_lit(), __toCommonJS(lit_exports));
+    var U = {};
+    S3(U, { MaveComponent: () => r5 });
+    module2.exports = F(U);
+    var u2 = (init_lit(), __toCommonJS(lit_exports));
     var n7 = (init_decorators(), __toCommonJS(decorators_exports));
-    var w2 = (init_lit(), __toCommonJS(lit_exports));
-    var k2 = w2.css`
+    var g2 = "mave.io";
+    var E2 = (init_lit(), __toCommonJS(lit_exports));
+    var H2 = E2.css`
   :host {
   }
 
@@ -1273,9 +1274,9 @@ var require_dist = __commonJS({
     align-items: center;
     width: 100%;
     height: 100%;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    transition-duration: 150ms;
+    // transition-property: all;
+    // transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    // transition-duration: 150ms;
     background: black;
     border-width: 0;
     aspect-ratio: 16 / 9;
@@ -1321,8 +1322,10 @@ var require_dist = __commonJS({
     z-index: 10;
     width: 100%;
     height: 100%;
+    display: flex;
     object-fit: cover;
   }
+  
   video::cue {
     color: white;
     opacity: 1;
@@ -1350,10 +1353,10 @@ var require_dist = __commonJS({
     background: transparent !important;
   }
 `;
-    var E2 = (init_dist(), __toCommonJS(dist_exports));
+    var T2 = (init_dist(), __toCommonJS(dist_exports));
     var p2 = (init_lit(), __toCommonJS(lit_exports));
-    var c2 = (init_decorators(), __toCommonJS(decorators_exports));
-    var h4 = class extends p2.LitElement {
+    var m2 = (init_decorators(), __toCommonJS(decorators_exports));
+    var c2 = class extends p2.LitElement {
       constructor() {
         super(...arguments);
         this._ghostActive = true;
@@ -1375,7 +1378,7 @@ var require_dist = __commonJS({
         <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
           <iframe
-            src="https://mave.eu.ngrok.io/e/${this.embed}/settings"
+            src="https://${g2}/e/${this.embed}/settings"
             frameborder="0"
             sandbox="allow-scripts allow-forms allow-same-origin"
             allow="autoplay; fullscreen; clipboard-write;"
@@ -1391,7 +1394,7 @@ var require_dist = __commonJS({
         this._loaded = true;
       }
     };
-    h4.styles = p2.css`
+    c2.styles = p2.css`
     .ghost {
       background-color: #1c1917;
       width: 14rem;
@@ -1431,9 +1434,9 @@ var require_dist = __commonJS({
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `, a3([(0, c2.property)({ type: String })], h4.prototype, "embed", 2), a3([(0, c2.query)("#iframe")], h4.prototype, "iframe", 2), a3([(0, c2.state)()], h4.prototype, "_ghostActive", 2), a3([(0, c2.state)()], h4.prototype, "_loaded", 2);
-    customElements.get("mave-settings") || customElements.define("mave-settings", h4);
-    var r5 = class extends m2.LitElement {
+  `, a3([(0, m2.property)({ type: String })], c2.prototype, "embed", 2), a3([(0, m2.query)("#iframe")], c2.prototype, "iframe", 2), a3([(0, m2.state)()], c2.prototype, "_ghostActive", 2), a3([(0, m2.state)()], c2.prototype, "_loaded", 2);
+    customElements.get("mave-settings") || customElements.define("mave-settings", c2);
+    var r5 = class extends u2.LitElement {
       constructor() {
         super(...arguments);
         this._settingsActive = false;
@@ -1442,7 +1445,7 @@ var require_dist = __commonJS({
         this._hlsLoaded = false;
         this._iframeReady = false;
         this._initialPlayEventTriggered = false;
-        this.baseUrl = "mave.eu.ngrok.io";
+        this.baseUrl = g2;
       }
       connectedCallback() {
         var e9;
@@ -1497,8 +1500,8 @@ var require_dist = __commonJS({
           switch (i5) {
             case "mave:player_ready":
               if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
-                let $2 = this.autoplay ? 0 : this.video.currentTime;
-                this.sendMessage("mave:video_play", { currentTime: $2 }), this._initialPlayEventTriggered = true;
+                let h4 = this.autoplay ? 0 : this.video.currentTime;
+                this.sendMessage("mave:video_play", { currentTime: h4 }), this._initialPlayEventTriggered = true;
               }
               break;
             case "mave:player_event":
@@ -1536,10 +1539,18 @@ var require_dist = __commonJS({
               this.closeFullscreen();
               break;
             case "mave:open_settings":
-              this._settingsActive = !this._settingsActive;
+              if (this._settingsActive = !this._settingsActive, this._settingsActive) {
+                let h4 = document.createElement("mave-settings");
+                h4.setAttribute("embed", this.embed), document.body.appendChild(h4);
+              } else {
+                let h4 = document.querySelector("mave-settings");
+                h4 && h4.remove();
+              }
               break;
             case "mave:close_settings":
               this._settingsActive = false;
+              let f2 = document.querySelector("mave-settings");
+              f2 && f2.remove();
               break;
             case "mave:update_embed_settings":
               this.aspectRatio = t4.aspect_ratio_enabled ? t4.aspect_ratio : void 0, this.width = t4.aspect_ratio_enabled ? void 0 : t4.width, this.height = t4.aspect_ratio_enabled ? void 0 : t4.height, this.loop = t4.loop, this.autoplay = t4.autoplay_enabled, this.autoplay && ((l5 = this.video) == null ? void 0 : l5.paused) && this.video.play(), this.visibilityHandler();
@@ -1555,6 +1566,8 @@ var require_dist = __commonJS({
           }
       }
       generateStyle() {
+        if (this._overlayActive)
+          return "width: 100%; height: 100%;";
         if (this.width && this.height)
           return `width: ${this.width}; height: ${this.height};`;
         if (this.aspectRatio && this.aspectRatio != "auto") {
@@ -1563,13 +1576,19 @@ var require_dist = __commonJS({
         } else
           return "aspect-ratio: 16 / 9; min-height: 360px; width: 100%;";
       }
+      closeDialog() {
+        this._overlayActive = false, this.sendMessage("mave:closing_overlay");
+      }
       render() {
-        return m2.html`
-      ${this._settingsActive && m2.html` <mave-settings embed=${this.embed} /> ` || ""}
-
-      <dialog id="dialog" style="${this.generateStyle()}">
+        return u2.html`
+      <dialog
+        id="dialog"
+        @close=${this.closeDialog}
+        style="${this.generateStyle()}"
+        class=${this._overlayActive ? "active_overlay" : ""}
+      >
         ${this.renderCanvas()}
-        ${this.src && m2.html`
+        ${this.src ? u2.html`
             ${this.initiateScript()}
 
             <video
@@ -1587,8 +1606,8 @@ var require_dist = __commonJS({
               .loop=${this.loop}
               .src=${this.src}
             ></video>
-          ` || ""}
-        ${this.embed && m2.html`
+          ` : ""}
+        ${this.embed ? u2.html`
             <iframe
               title="embed"
               id="iframe"
@@ -1598,7 +1617,7 @@ var require_dist = __commonJS({
               frameborder="0"
             >
             </iframe>
-          ` || ""}
+          ` : ""}
       </dialog>
     `;
       }
@@ -1606,9 +1625,9 @@ var require_dist = __commonJS({
         return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}`;
       }
       sendMessage(e9, t4 = {}) {
-        if (!this.iframe.contentWindow)
+        if (!this.iframe.contentWindow || !this.video)
           return;
-        let i5 = _2({ message: e9 }, t4);
+        let i5 = $2({ message: e9 }, t4);
         this.iframe.contentWindow.postMessage(i5, "*");
       }
       openFullscreen() {
@@ -1620,7 +1639,7 @@ var require_dist = __commonJS({
       renderCanvas() {
         if (!this.blurhash || !this._blurhashShouldBeVisible)
           return;
-        let e9 = document.createElement("canvas"), t4 = (0, E2.decode)(this.blurhash, 320, 180), i5 = e9.getContext("2d"), l5 = i5 == null ? void 0 : i5.createImageData(320, 180);
+        let e9 = document.createElement("canvas"), t4 = (0, T2.decode)(this.blurhash, 320, 180), i5 = e9.getContext("2d"), l5 = i5 == null ? void 0 : i5.createImageData(320, 180);
         return l5 == null || l5.data.set(t4), l5 && (i5 == null || i5.putImageData(l5, 0, 0)), e9;
       }
       timeUpdate() {
@@ -1650,7 +1669,7 @@ var require_dist = __commonJS({
         this.sendMessage(l5 ? "mave:video_in_viewport" : "mave:video_out_viewport");
       }
     };
-    r5.styles = k2, a3([(0, n7.property)({ type: String })], r5.prototype, "embed", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "reference_id", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "display_name", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "jwt", 2), a3([(0, n7.property)({ type: Boolean })], r5.prototype, "muted", 2), a3([(0, n7.property)({ type: Boolean })], r5.prototype, "autoplay", 2), a3([(0, n7.property)({ type: Boolean })], r5.prototype, "loop", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "src", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "blurhash", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "aspectRatio", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "width", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "height", 2), a3([(0, n7.query)("#dialog")], r5.prototype, "dialog", 2), a3([(0, n7.query)("#iframe")], r5.prototype, "iframe", 2), a3([(0, n7.query)("#video")], r5.prototype, "video", 2), a3([(0, n7.query)("#canvas")], r5.prototype, "canvas", 2), a3([(0, n7.query)("#script")], r5.prototype, "script", 2), a3([(0, n7.state)()], r5.prototype, "_settingsActive", 2), a3([(0, n7.state)()], r5.prototype, "_blurhashShouldBeVisible", 2);
+    r5.styles = H2, a3([(0, n7.property)({ type: String })], r5.prototype, "embed", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "reference_id", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "display_name", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "jwt", 2), a3([(0, n7.property)({ type: Boolean })], r5.prototype, "muted", 2), a3([(0, n7.property)({ type: Boolean })], r5.prototype, "autoplay", 2), a3([(0, n7.property)({ type: Boolean })], r5.prototype, "loop", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "src", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "blurhash", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "aspectRatio", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "width", 2), a3([(0, n7.property)({ type: String })], r5.prototype, "height", 2), a3([(0, n7.query)("#dialog")], r5.prototype, "dialog", 2), a3([(0, n7.query)("#iframe")], r5.prototype, "iframe", 2), a3([(0, n7.query)("#video")], r5.prototype, "video", 2), a3([(0, n7.query)("#canvas")], r5.prototype, "canvas", 2), a3([(0, n7.query)("#script")], r5.prototype, "script", 2), a3([(0, n7.state)()], r5.prototype, "_settingsActive", 2), a3([(0, n7.state)()], r5.prototype, "_blurhashShouldBeVisible", 2), a3([(0, n7.state)()], r5.prototype, "_overlayActive", 2);
     customElements.get("mave-component") || customElements.define("mave-component", r5);
   }
 });
@@ -1665,7 +1684,13 @@ init_cjs_shims();
 
 // src/Mave.tsx
 init_cjs_shims();
-var import_react = __toESM(require("react"));
+var import_react = require("react");
+
+// ../config/config.ts
+init_cjs_shims();
+var baseURL = "mave.io";
+
+// src/Mave.tsx
 var import_mave_component = __toESM(require_dist());
 var Mave = (props) => {
   const [autoplay, setAutoplay] = (0, import_react.useState)(void 0);
@@ -1678,7 +1703,7 @@ var Mave = (props) => {
   const [height, setHeight] = (0, import_react.useState)(void 0);
   const [width, setWidth] = (0, import_react.useState)(void 0);
   (0, import_react.useEffect)(() => {
-    const url = `https://mave.io/${props.embed}/json`;
+    const url = `https://${baseURL}/${props.embed}/json`;
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -1721,7 +1746,7 @@ var Mave = (props) => {
   if (settingsAspectRatio || videoAspectRatio) {
     attributes.aspectRatio = settingsAspectRatio || videoAspectRatio;
   }
-  return /* @__PURE__ */ import_react.default.createElement("mave-component", __spreadValues({}, attributes));
+  return /* @__PURE__ */ React.createElement("mave-component", __spreadValues({}, attributes));
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

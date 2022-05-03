@@ -14,9 +14,9 @@ export const style = css`
     align-items: center;
     width: 100%;
     height: 100%;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    transition-duration: 150ms;
+    // transition-property: all;
+    // transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    // transition-duration: 150ms;
     background: black;
     border-width: 0;
     aspect-ratio: 16 / 9;
@@ -62,8 +62,10 @@ export const style = css`
     z-index: 10;
     width: 100%;
     height: 100%;
+    display: flex;
     object-fit: cover;
   }
+
   video::cue {
     color: white;
     opacity: 1;

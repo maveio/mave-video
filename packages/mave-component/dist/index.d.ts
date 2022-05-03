@@ -50,6 +50,7 @@ declare class MaveComponent extends LitElement {
     videoHandler(event: Event): void;
     messageHandler(event: IEvent): void;
     generateStyle(): string;
+    closeDialog(): void;
     render(): lit_html.TemplateResult<1>;
     private generateUrl;
     private sendMessage;

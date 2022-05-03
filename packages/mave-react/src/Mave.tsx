@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { baseURL } from "../../config/config";
 import "@maveio/mave-component";
 
 export interface MaveProps {
@@ -29,7 +30,7 @@ export const Mave = (props: MaveProps) => {
   const [width, setWidth] = useState(undefined);
 
   useEffect(() => {
-    const url = `https://mave.io/${props.embed}/json`;
+    const url = `https://${baseURL}/${props.embed}/json`;
 
     const fetchData = async () => {
       try {

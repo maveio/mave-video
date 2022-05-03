@@ -1,5 +1,6 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
+import { baseURL } from "../../config/config";
 
 export class SettingsComponent extends LitElement {
   @property({ type: String }) embed!: string;
@@ -83,7 +84,7 @@ export class SettingsComponent extends LitElement {
         <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
           <iframe
-            src="https://mave.io/e/${this.embed}/settings"
+            src="https://${baseURL}/e/${this.embed}/settings"
             frameborder="0"
             sandbox="allow-scripts allow-forms allow-same-origin"
             allow="autoplay; fullscreen; clipboard-write;"

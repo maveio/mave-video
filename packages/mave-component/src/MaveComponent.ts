@@ -1,5 +1,6 @@
 import { html, LitElement } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
+import { baseURL } from "../../config/config";
 import { style } from "./style";
 import { decode } from "@fpapado/blurhash";
 import "./SettingsComponent";
@@ -65,7 +66,7 @@ export class MaveComponent extends LitElement {
 
   @state() private _blurhashShouldBeVisible: boolean = true;
 
-  private _overlayActive: boolean = false;
+  @state() private _overlayActive: boolean = false;
 
   private _hlsLoaded: boolean = false;
 
@@ -75,7 +76,7 @@ export class MaveComponent extends LitElement {
 
   private _animationFrame?: number;
 
-  private baseUrl: string = "mave.io";
+  private baseUrl: string = baseURL;
 
   connectedCallback() {
     super.connectedCallback();
@@ -236,9 +237,21 @@ export class MaveComponent extends LitElement {
         break;
       case "mave:open_settings":
         this._settingsActive = !this._settingsActive;
+
+        if (this._settingsActive) {
+          const settings = document.createElement(`mave-settings`);
+          settings.setAttribute("embed", this.embed);
+          document.body.appendChild(settings);
+        } else {
+          const settings = document.querySelector("mave-settings");
+          if (settings) settings.remove();
+        }
         break;
       case "mave:close_settings":
         this._settingsActive = false;
+
+        const settings = document.querySelector("mave-settings");
+        if (settings) settings.remove();
         break;
       case "mave:update_embed_settings":
         this.aspectRatio = data.aspect_ratio_enabled
@@ -268,6 +281,7 @@ export class MaveComponent extends LitElement {
   }
 
   generateStyle() {
+    if (this._overlayActive) return "width: 100%; height: 100%;";
     if (this.width && this.height) {
       return `width: ${this.width}; height: ${this.height};`;
     } else {
@@ -280,48 +294,54 @@ export class MaveComponent extends LitElement {
     }
   }
 
+  closeDialog() {
+    this._overlayActive = false;
+    this.sendMessage("mave:closing_overlay");
+  }
+
   render() {
     return html`
-      ${(this._settingsActive &&
-        html` <mave-settings embed=${this.embed} /> `) ||
-      ""}
-
-      <dialog id="dialog" style="${this.generateStyle()}">
+      <dialog
+        id="dialog"
+        @close=${this.closeDialog}
+        style="${this.generateStyle()}"
+        class=${this._overlayActive ? "active_overlay" : ""}
+      >
         ${this.renderCanvas()}
-        ${(this.src &&
-          html`
-            ${this.initiateScript()}
+        ${this.src
+          ? html`
+              ${this.initiateScript()}
 
-            <video
-              id="video"
-              playsinline
-              @canplay=${this.videoHandler}
-              @play=${this.videoHandler}
-              @pause=${this.videoHandler}
-              @ended=${this.videoHandler}
-              @progress=${this.videoHandler}
-              @loadeddata=${this.videoHandler}
-              @timeupdate=${this.videoHandler}
-              .muted=${this.muted}
-              .autoplay=${this.autoplay}
-              .loop=${this.loop}
-              .src=${this.src}
-            ></video>
-          `) ||
-        ""}
-        ${(this.embed &&
-          html`
-            <iframe
-              title="embed"
-              id="iframe"
-              src="${this.generateUrl()}"
-              sandbox="allow-scripts allow-forms allow-same-origin"
-              allow="autoplay; fullscreen; clipboard-write;"
-              frameborder="0"
-            >
-            </iframe>
-          `) ||
-        ""}
+              <video
+                id="video"
+                playsinline
+                @canplay=${this.videoHandler}
+                @play=${this.videoHandler}
+                @pause=${this.videoHandler}
+                @ended=${this.videoHandler}
+                @progress=${this.videoHandler}
+                @loadeddata=${this.videoHandler}
+                @timeupdate=${this.videoHandler}
+                .muted=${this.muted}
+                .autoplay=${this.autoplay}
+                .loop=${this.loop}
+                .src=${this.src}
+              ></video>
+            `
+          : ""}
+        ${this.embed
+          ? html`
+              <iframe
+                title="embed"
+                id="iframe"
+                src="${this.generateUrl()}"
+                sandbox="allow-scripts allow-forms allow-same-origin"
+                allow="autoplay; fullscreen; clipboard-write;"
+                frameborder="0"
+              >
+              </iframe>
+            `
+          : ""}
       </dialog>
     `;
   }
@@ -343,7 +363,8 @@ export class MaveComponent extends LitElement {
   }
 
   private sendMessage(event: string, options: any = {}) {
-    if (!this.iframe.contentWindow) return;
+    if (!this.iframe.contentWindow || !this.video) return;
+
     const payload = { message: event, ...options };
     this.iframe.contentWindow.postMessage(payload, "*");
   }

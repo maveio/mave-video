@@ -1,4 +1,4 @@
-var g=Object.defineProperty;var E=Object.getOwnPropertyDescriptor;var v=Object.getOwnPropertySymbols;var $=Object.prototype.hasOwnProperty,H=Object.prototype.propertyIsEnumerable;var b=(o,r,e)=>r in o?g(o,r,{enumerable:!0,configurable:!0,writable:!0,value:e}):o[r]=e,f=(o,r)=>{for(var e in r||(r={}))$.call(r,e)&&b(o,e,r[e]);if(v)for(var e of v(r))H.call(r,e)&&b(o,e,r[e]);return o};var s=(o,r,e,t)=>{for(var i=t>1?void 0:t?E(r,e):r,n=o.length-1,d;n>=0;n--)(d=o[n])&&(i=(t?d(r,e,i):d(i))||i);return t&&i&&g(r,e,i),i};import{html as m,LitElement as z}from"lit";import{property as l,query as c,state as w}from"lit/decorators.js";import{css as T}from"lit";var y=T`
+var w=Object.defineProperty;var H=Object.getOwnPropertyDescriptor;var y=Object.getOwnPropertySymbols;var T=Object.prototype.hasOwnProperty,x=Object.prototype.propertyIsEnumerable;var _=(o,r,e)=>r in o?w(o,r,{enumerable:!0,configurable:!0,writable:!0,value:e}):o[r]=e,k=(o,r)=>{for(var e in r||(r={}))T.call(r,e)&&_(o,e,r[e]);if(y)for(var e of y(r))x.call(r,e)&&_(o,e,r[e]);return o};var i=(o,r,e,t)=>{for(var s=t>1?void 0:t?H(r,e):r,n=o.length-1,d;n>=0;n--)(d=o[n])&&(s=(t?d(r,e,s):d(s))||s);return t&&s&&w(r,e,s),s};import{html as b,LitElement as z}from"lit";import{property as l,query as m,state as g}from"lit/decorators.js";var v="mave.io";import{css as L}from"lit";var $=L`
   :host {
   }
 
@@ -12,9 +12,9 @@ var g=Object.defineProperty;var E=Object.getOwnPropertyDescriptor;var v=Object.g
     align-items: center;
     width: 100%;
     height: 100%;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    transition-duration: 150ms;
+    // transition-property: all;
+    // transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    // transition-duration: 150ms;
     background: black;
     border-width: 0;
     aspect-ratio: 16 / 9;
@@ -60,8 +60,10 @@ var g=Object.defineProperty;var E=Object.getOwnPropertyDescriptor;var v=Object.g
     z-index: 10;
     width: 100%;
     height: 100%;
+    display: flex;
     object-fit: cover;
   }
+
   video::cue {
     color: white;
     opacity: 1;
@@ -88,12 +90,12 @@ var g=Object.defineProperty;var E=Object.getOwnPropertyDescriptor;var v=Object.g
   video::-webkit-media-text-track-display-backdrop {
     background: transparent !important;
   }
-`;import{decode as j}from"@fpapado/blurhash";import{html as x,css as L,LitElement as S}from"lit";import{property as F,query as A,state as _}from"lit/decorators.js";var h=class extends S{constructor(){super(...arguments);this._ghostActive=!0;this._loaded=!0}connectedCallback(){var e;super.connectedCallback(),this._globalStyle=document.documentElement.getAttribute("style")||"",document.documentElement.setAttribute("style",`${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`),setTimeout(()=>{this._ghostActive=!0},0),(e=this.iframe)==null||e.addEventListener("load",this.iframeLoaded.bind(this))}disconnectedCallback(){var e;document.documentElement.setAttribute("style",this._globalStyle||""),(e=this.iframe)==null||e.removeEventListener("load",this.iframeLoaded.bind(this)),super.disconnectedCallback()}render(){return x`
+`;import{decode as j}from"@fpapado/blurhash";import{html as S,css as A,LitElement as F}from"lit";import{property as U,query as R,state as E}from"lit/decorators.js";var c=class extends F{constructor(){super(...arguments);this._ghostActive=!0;this._loaded=!0}connectedCallback(){var e;super.connectedCallback(),this._globalStyle=document.documentElement.getAttribute("style")||"",document.documentElement.setAttribute("style",`${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`),setTimeout(()=>{this._ghostActive=!0},0),(e=this.iframe)==null||e.addEventListener("load",this.iframeLoaded.bind(this))}disconnectedCallback(){var e;document.documentElement.setAttribute("style",this._globalStyle||""),(e=this.iframe)==null||e.removeEventListener("load",this.iframeLoaded.bind(this)),super.disconnectedCallback()}render(){return S`
       <div>
         <div class=${this._ghostActive?"ghost active":"ghost"}></div>
         <div class="settings">
           <iframe
-            src="https://mave.io/e/${this.embed}/settings"
+            src="https://${v}/e/${this.embed}/settings"
             frameborder="0"
             sandbox="allow-scripts allow-forms allow-same-origin"
             allow="autoplay; fullscreen; clipboard-write;"
@@ -103,7 +105,7 @@ var g=Object.defineProperty;var E=Object.getOwnPropertyDescriptor;var v=Object.g
           ></iframe>
         </div>
       </div>
-    `}iframeLoaded(){this._loaded=!0}};h.styles=L`
+    `}iframeLoaded(){this._loaded=!0}};c.styles=A`
     .ghost {
       background-color: #1c1917;
       width: 14rem;
@@ -143,40 +145,43 @@ var g=Object.defineProperty;var E=Object.getOwnPropertyDescriptor;var v=Object.g
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `,s([F({type:String})],h.prototype,"embed",2),s([A("#iframe")],h.prototype,"iframe",2),s([_()],h.prototype,"_ghostActive",2),s([_()],h.prototype,"_loaded",2);customElements.get("mave-settings")||customElements.define("mave-settings",h);var a=class extends z{constructor(){super(...arguments);this._settingsActive=!1;this._blurhashShouldBeVisible=!0;this._overlayActive=!1;this._hlsLoaded=!1;this._iframeReady=!1;this._initialPlayEventTriggered=!1;this.baseUrl="mave.io"}connectedCallback(){var e;super.connectedCallback(),window.addEventListener("message",this.messageHandler.bind(this)),window.addEventListener("load",this.visibilityHandler.bind(this)),window.addEventListener("scroll",this.visibilityHandler.bind(this)),window.addEventListener("resize",this.visibilityHandler.bind(this)),((e=this.video)==null?void 0:e.canPlayType("application/vnd.apple.mpegurl"))&&!this._hlsLoaded&&this.scriptHandler()}disconnectedCallback(){window.removeEventListener("message",this.messageHandler.bind(this)),window.removeEventListener("load",this.visibilityHandler.bind(this)),window.removeEventListener("scroll",this.visibilityHandler.bind(this)),window.removeEventListener("resize",this.visibilityHandler.bind(this)),super.disconnectedCallback()}videoHandler(e){if(!!this.video)switch(e.type){case"loadeddata":this.video.readyState>=2&&setTimeout(()=>{this.blurhash&&(this._blurhashShouldBeVisible=!1)},500);break;case"canplay":let t=()=>{this._iframeReady||(this.sendMessage("mave:video_canplay"),setTimeout(t.bind(this),25))};t();break;case"progress":try{let i=this.video.buffered.length-1,n=Math.round(this.video.buffered.end(i)/this.video.duration*100);this.sendMessage("mave:video_progress",{buffer:n})}catch{}break;case"play":if(this._iframeReady){this.timeUpdate();let i=this.autoplay&&!this._initialPlayEventTriggered?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:i}),this._initialPlayEventTriggered=!0}break;case"timeupdate":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime});break;case"pause":case"ended":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this._animationFrame&&(cancelAnimationFrame(this._animationFrame),this._animationFrame=void 0),setTimeout(()=>{this.sendMessage(e.type=="ended"?"mave:video_ended":"mave:video_pause")},25);break}}messageHandler(e){var n;let{data:t}=e,{message:i}=t;if(!(!this.isConnected||!t||t.hash!=this.embed))switch(i){case"mave:player_ready":if(this._iframeReady=!0,!this._initialPlayEventTriggered&&this.video&&!this.video.paused){let k=this.autoplay?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:k}),this._initialPlayEventTriggered=!0}break;case"mave:player_event":if(!this.video)return;let d=t.event;switch(Object.keys(d)[0]){case"play":d.play?this.video.play():this.video.pause();break;case"muted":this.video.muted=d.muted;break;case"volume":this.video.volume=d.volume;break;case"currentTime":this.video.currentTime=d.currentTime;break}break;case"mave:open_popup_overlay":this._overlayActive=!0,window.scrollTo(0,0),this.dialog.showModal(),this.dialog.scrollIntoView(!1);break;case"mave:close_popup_overlay":this.dialog.close(),this._overlayActive=!1;break;case"mave:toggle_fullscreen":document.fullscreenElement?this.closeFullscreen():this.openFullscreen();break;case"mave:open_fullscreen":this.openFullscreen();break;case"mave:close_fullscreen":this.closeFullscreen();break;case"mave:open_settings":this._settingsActive=!this._settingsActive;break;case"mave:close_settings":this._settingsActive=!1;break;case"mave:update_embed_settings":this.aspectRatio=t.aspect_ratio_enabled?t.aspect_ratio:void 0,this.width=t.aspect_ratio_enabled?void 0:t.width,this.height=t.aspect_ratio_enabled?void 0:t.height,this.loop=t.loop,this.autoplay=t.autoplay_enabled,this.autoplay&&((n=this.video)==null?void 0:n.paused)&&this.video.play(),this.visibilityHandler();break;case"mave:request_in_viewport":setTimeout(()=>{this.visibilityHandler()},20);break;case"mave:render_video":this._hlsLoaded=!1,this.src=t.video_src,this.autoplay=t.autoplay=="true",t.blurhash&&(this.blurhash=t.blurhash);break}}generateStyle(){if(this.width&&this.height)return`width: ${this.width}; height: ${this.height};`;if(this.aspectRatio&&this.aspectRatio!="auto"){let[e,t]=this.aspectRatio.split(":");return`aspect-ratio: ${e} / ${t}; width: 100%`}else return"aspect-ratio: 16 / 9; min-height: 360px; width: 100%;"}render(){return m`
-      ${this._settingsActive&&m` <mave-settings embed=${this.embed} /> `||""}
-
-      <dialog id="dialog" style="${this.generateStyle()}">
+  `,i([U({type:String})],c.prototype,"embed",2),i([R("#iframe")],c.prototype,"iframe",2),i([E()],c.prototype,"_ghostActive",2),i([E()],c.prototype,"_loaded",2);customElements.get("mave-settings")||customElements.define("mave-settings",c);var a=class extends z{constructor(){super(...arguments);this._settingsActive=!1;this._blurhashShouldBeVisible=!0;this._overlayActive=!1;this._hlsLoaded=!1;this._iframeReady=!1;this._initialPlayEventTriggered=!1;this.baseUrl=v}connectedCallback(){var e;super.connectedCallback(),window.addEventListener("message",this.messageHandler.bind(this)),window.addEventListener("load",this.visibilityHandler.bind(this)),window.addEventListener("scroll",this.visibilityHandler.bind(this)),window.addEventListener("resize",this.visibilityHandler.bind(this)),((e=this.video)==null?void 0:e.canPlayType("application/vnd.apple.mpegurl"))&&!this._hlsLoaded&&this.scriptHandler()}disconnectedCallback(){window.removeEventListener("message",this.messageHandler.bind(this)),window.removeEventListener("load",this.visibilityHandler.bind(this)),window.removeEventListener("scroll",this.visibilityHandler.bind(this)),window.removeEventListener("resize",this.visibilityHandler.bind(this)),super.disconnectedCallback()}videoHandler(e){if(!!this.video)switch(e.type){case"loadeddata":this.video.readyState>=2&&setTimeout(()=>{this.blurhash&&(this._blurhashShouldBeVisible=!1)},500);break;case"canplay":let t=()=>{this._iframeReady||(this.sendMessage("mave:video_canplay"),setTimeout(t.bind(this),25))};t();break;case"progress":try{let s=this.video.buffered.length-1,n=Math.round(this.video.buffered.end(s)/this.video.duration*100);this.sendMessage("mave:video_progress",{buffer:n})}catch{}break;case"play":if(this._iframeReady){this.timeUpdate();let s=this.autoplay&&!this._initialPlayEventTriggered?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:s}),this._initialPlayEventTriggered=!0}break;case"timeupdate":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime});break;case"pause":case"ended":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this._animationFrame&&(cancelAnimationFrame(this._animationFrame),this._animationFrame=void 0),setTimeout(()=>{this.sendMessage(e.type=="ended"?"mave:video_ended":"mave:video_pause")},25);break}}messageHandler(e){var n;let{data:t}=e,{message:s}=t;if(!(!this.isConnected||!t||t.hash!=this.embed))switch(s){case"mave:player_ready":if(this._iframeReady=!0,!this._initialPlayEventTriggered&&this.video&&!this.video.paused){let h=this.autoplay?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:h}),this._initialPlayEventTriggered=!0}break;case"mave:player_event":if(!this.video)return;let d=t.event;switch(Object.keys(d)[0]){case"play":d.play?this.video.play():this.video.pause();break;case"muted":this.video.muted=d.muted;break;case"volume":this.video.volume=d.volume;break;case"currentTime":this.video.currentTime=d.currentTime;break}break;case"mave:open_popup_overlay":this._overlayActive=!0,window.scrollTo(0,0),this.dialog.showModal(),this.dialog.scrollIntoView(!1);break;case"mave:close_popup_overlay":this.dialog.close(),this._overlayActive=!1;break;case"mave:toggle_fullscreen":document.fullscreenElement?this.closeFullscreen():this.openFullscreen();break;case"mave:open_fullscreen":this.openFullscreen();break;case"mave:close_fullscreen":this.closeFullscreen();break;case"mave:open_settings":if(this._settingsActive=!this._settingsActive,this._settingsActive){let h=document.createElement("mave-settings");h.setAttribute("embed",this.embed),document.body.appendChild(h)}else{let h=document.querySelector("mave-settings");h&&h.remove()}break;case"mave:close_settings":this._settingsActive=!1;let f=document.querySelector("mave-settings");f&&f.remove();break;case"mave:update_embed_settings":this.aspectRatio=t.aspect_ratio_enabled?t.aspect_ratio:void 0,this.width=t.aspect_ratio_enabled?void 0:t.width,this.height=t.aspect_ratio_enabled?void 0:t.height,this.loop=t.loop,this.autoplay=t.autoplay_enabled,this.autoplay&&((n=this.video)==null?void 0:n.paused)&&this.video.play(),this.visibilityHandler();break;case"mave:request_in_viewport":setTimeout(()=>{this.visibilityHandler()},20);break;case"mave:render_video":this._hlsLoaded=!1,this.src=t.video_src,this.autoplay=t.autoplay=="true",t.blurhash&&(this.blurhash=t.blurhash);break}}generateStyle(){if(this._overlayActive)return"width: 100%; height: 100%;";if(this.width&&this.height)return`width: ${this.width}; height: ${this.height};`;if(this.aspectRatio&&this.aspectRatio!="auto"){let[e,t]=this.aspectRatio.split(":");return`aspect-ratio: ${e} / ${t}; width: 100%`}else return"aspect-ratio: 16 / 9; min-height: 360px; width: 100%;"}closeDialog(){this._overlayActive=!1,this.sendMessage("mave:closing_overlay")}render(){return b`
+      <dialog
+        id="dialog"
+        @close=${this.closeDialog}
+        style="${this.generateStyle()}"
+        class=${this._overlayActive?"active_overlay":""}
+      >
         ${this.renderCanvas()}
-        ${this.src&&m`
-            ${this.initiateScript()}
+        ${this.src?b`
+              ${this.initiateScript()}
 
-            <video
-              id="video"
-              playsinline
-              @canplay=${this.videoHandler}
-              @play=${this.videoHandler}
-              @pause=${this.videoHandler}
-              @ended=${this.videoHandler}
-              @progress=${this.videoHandler}
-              @loadeddata=${this.videoHandler}
-              @timeupdate=${this.videoHandler}
-              .muted=${this.muted}
-              .autoplay=${this.autoplay}
-              .loop=${this.loop}
-              .src=${this.src}
-            ></video>
-          `||""}
-        ${this.embed&&m`
-            <iframe
-              title="embed"
-              id="iframe"
-              src="${this.generateUrl()}"
-              sandbox="allow-scripts allow-forms allow-same-origin"
-              allow="autoplay; fullscreen; clipboard-write;"
-              frameborder="0"
-            >
-            </iframe>
-          `||""}
+              <video
+                id="video"
+                playsinline
+                @canplay=${this.videoHandler}
+                @play=${this.videoHandler}
+                @pause=${this.videoHandler}
+                @ended=${this.videoHandler}
+                @progress=${this.videoHandler}
+                @loadeddata=${this.videoHandler}
+                @timeupdate=${this.videoHandler}
+                .muted=${this.muted}
+                .autoplay=${this.autoplay}
+                .loop=${this.loop}
+                .src=${this.src}
+              ></video>
+            `:""}
+        ${this.embed?b`
+              <iframe
+                title="embed"
+                id="iframe"
+                src="${this.generateUrl()}"
+                sandbox="allow-scripts allow-forms allow-same-origin"
+                allow="autoplay; fullscreen; clipboard-write;"
+                frameborder="0"
+              >
+              </iframe>
+            `:""}
       </dialog>
-    `}generateUrl(){return this.jwt?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}`:this.reference_id&&this.display_name?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}`:this.reference_id?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`:this.display_name?`https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}`:`https://${this.baseUrl}/e/${this.embed}`}sendMessage(e,t={}){if(!this.iframe.contentWindow)return;let i=f({message:e},t);this.iframe.contentWindow.postMessage(i,"*")}openFullscreen(){document.fullscreenElement||(this.requestFullscreen(),this.sendMessage("mave:video_fullscreen",{fullscreen:!1}))}closeFullscreen(){document.fullscreenElement&&(document.exitFullscreen(),this.sendMessage("mave:video_fullscreen",{fullscreen:!0}))}renderCanvas(){if(!this.blurhash||!this._blurhashShouldBeVisible)return;let e=document.createElement("canvas"),t=j(this.blurhash,320,180),i=e.getContext("2d"),n=i==null?void 0:i.createImageData(320,180);return n==null||n.data.set(t),n&&(i==null||i.putImageData(n,0,0)),e}timeUpdate(){this._animationFrame=requestAnimationFrame(()=>{!this.video||(this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this.timeUpdate())})}initiateScript(){let e=document.createElement("script");return e.onload=this.scriptHandler.bind(this),e.src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js",e}scriptHandler(){if(!(!this.video||!this.src||this._hlsLoaded)){if(this.video.canPlayType("application/vnd.apple.mpegurl"))this.video.src=this.src;else if(Hls.isSupported()){let e=new Hls;e.loadSource(this.src),e.attachMedia(this.video),e.subtitleTrack=0,e.subtitleDisplay=!0}this._hlsLoaded=!0}}visibilityHandler(){if(!this.iframe||!this.iframe.contentWindow)return;let{top:e,bottom:t}=this.iframe.getBoundingClientRect(),i=window.innerHeight||document.documentElement.clientHeight,n=(e>0||t>0)&&e<i;this.sendMessage(n?"mave:video_in_viewport":"mave:video_out_viewport")}};a.styles=y,s([l({type:String})],a.prototype,"embed",2),s([l({type:String})],a.prototype,"reference_id",2),s([l({type:String})],a.prototype,"display_name",2),s([l({type:String})],a.prototype,"jwt",2),s([l({type:Boolean})],a.prototype,"muted",2),s([l({type:Boolean})],a.prototype,"autoplay",2),s([l({type:Boolean})],a.prototype,"loop",2),s([l({type:String})],a.prototype,"src",2),s([l({type:String})],a.prototype,"blurhash",2),s([l({type:String})],a.prototype,"aspectRatio",2),s([l({type:String})],a.prototype,"width",2),s([l({type:String})],a.prototype,"height",2),s([c("#dialog")],a.prototype,"dialog",2),s([c("#iframe")],a.prototype,"iframe",2),s([c("#video")],a.prototype,"video",2),s([c("#canvas")],a.prototype,"canvas",2),s([c("#script")],a.prototype,"script",2),s([w()],a.prototype,"_settingsActive",2),s([w()],a.prototype,"_blurhashShouldBeVisible",2);customElements.get("mave-component")||customElements.define("mave-component",a);export{a as MaveComponent};
+    `}generateUrl(){return this.jwt?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}`:this.reference_id&&this.display_name?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}`:this.reference_id?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`:this.display_name?`https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}`:`https://${this.baseUrl}/e/${this.embed}`}sendMessage(e,t={}){if(!this.iframe.contentWindow||!this.video)return;let s=k({message:e},t);this.iframe.contentWindow.postMessage(s,"*")}openFullscreen(){document.fullscreenElement||(this.requestFullscreen(),this.sendMessage("mave:video_fullscreen",{fullscreen:!1}))}closeFullscreen(){document.fullscreenElement&&(document.exitFullscreen(),this.sendMessage("mave:video_fullscreen",{fullscreen:!0}))}renderCanvas(){if(!this.blurhash||!this._blurhashShouldBeVisible)return;let e=document.createElement("canvas"),t=j(this.blurhash,320,180),s=e.getContext("2d"),n=s==null?void 0:s.createImageData(320,180);return n==null||n.data.set(t),n&&(s==null||s.putImageData(n,0,0)),e}timeUpdate(){this._animationFrame=requestAnimationFrame(()=>{!this.video||(this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this.timeUpdate())})}initiateScript(){let e=document.createElement("script");return e.onload=this.scriptHandler.bind(this),e.src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js",e}scriptHandler(){if(!(!this.video||!this.src||this._hlsLoaded)){if(this.video.canPlayType("application/vnd.apple.mpegurl"))this.video.src=this.src;else if(Hls.isSupported()){let e=new Hls;e.loadSource(this.src),e.attachMedia(this.video),e.subtitleTrack=0,e.subtitleDisplay=!0}this._hlsLoaded=!0}}visibilityHandler(){if(!this.iframe||!this.iframe.contentWindow)return;let{top:e,bottom:t}=this.iframe.getBoundingClientRect(),s=window.innerHeight||document.documentElement.clientHeight,n=(e>0||t>0)&&e<s;this.sendMessage(n?"mave:video_in_viewport":"mave:video_out_viewport")}};a.styles=$,i([l({type:String})],a.prototype,"embed",2),i([l({type:String})],a.prototype,"reference_id",2),i([l({type:String})],a.prototype,"display_name",2),i([l({type:String})],a.prototype,"jwt",2),i([l({type:Boolean})],a.prototype,"muted",2),i([l({type:Boolean})],a.prototype,"autoplay",2),i([l({type:Boolean})],a.prototype,"loop",2),i([l({type:String})],a.prototype,"src",2),i([l({type:String})],a.prototype,"blurhash",2),i([l({type:String})],a.prototype,"aspectRatio",2),i([l({type:String})],a.prototype,"width",2),i([l({type:String})],a.prototype,"height",2),i([m("#dialog")],a.prototype,"dialog",2),i([m("#iframe")],a.prototype,"iframe",2),i([m("#video")],a.prototype,"video",2),i([m("#canvas")],a.prototype,"canvas",2),i([m("#script")],a.prototype,"script",2),i([g()],a.prototype,"_settingsActive",2),i([g()],a.prototype,"_blurhashShouldBeVisible",2),i([g()],a.prototype,"_overlayActive",2);customElements.get("mave-component")||customElements.define("mave-component",a);export{a as MaveComponent};
