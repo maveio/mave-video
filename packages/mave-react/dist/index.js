@@ -1222,13 +1222,13 @@ var init_dist = __esm({
 var require_dist = __commonJS({
   "../mave-component/dist/index.js"(exports, module2) {
     init_cjs_shims();
-    var v2 = Object.defineProperty;
+    var b2 = Object.defineProperty;
     var w2 = Object.getOwnPropertyDescriptor;
     var x2 = Object.getOwnPropertyNames;
     var y2 = Object.getOwnPropertySymbols;
     var k2 = Object.prototype.hasOwnProperty;
     var L2 = Object.prototype.propertyIsEnumerable;
-    var _2 = (o7, s5, e9) => s5 in o7 ? v2(o7, s5, { enumerable: true, configurable: true, writable: true, value: e9 }) : o7[s5] = e9;
+    var _2 = (o7, s5, e9) => s5 in o7 ? b2(o7, s5, { enumerable: true, configurable: true, writable: true, value: e9 }) : o7[s5] = e9;
     var $2 = (o7, s5) => {
       for (var e9 in s5 || (s5 = {}))
         k2.call(s5, e9) && _2(o7, e9, s5[e9]);
@@ -1239,48 +1239,58 @@ var require_dist = __commonJS({
     };
     var S3 = (o7, s5) => {
       for (var e9 in s5)
-        v2(o7, e9, { get: s5[e9], enumerable: true });
+        b2(o7, e9, { get: s5[e9], enumerable: true });
     };
     var A2 = (o7, s5, e9, t4) => {
       if (s5 && typeof s5 == "object" || typeof s5 == "function")
         for (let i5 of x2(s5))
-          !k2.call(o7, i5) && i5 !== e9 && v2(o7, i5, { get: () => s5[i5], enumerable: !(t4 = w2(s5, i5)) || t4.enumerable });
+          !k2.call(o7, i5) && i5 !== e9 && b2(o7, i5, { get: () => s5[i5], enumerable: !(t4 = w2(s5, i5)) || t4.enumerable });
       return o7;
     };
-    var F = (o7) => A2(v2({}, "__esModule", { value: true }), o7);
+    var F = (o7) => A2(b2({}, "__esModule", { value: true }), o7);
     var a3 = (o7, s5, e9, t4) => {
-      for (var i5 = t4 > 1 ? void 0 : t4 ? w2(s5, e9) : s5, l5 = o7.length - 1, d2; l5 >= 0; l5--)
-        (d2 = o7[l5]) && (i5 = (t4 ? d2(s5, e9, i5) : d2(i5)) || i5);
-      return t4 && i5 && v2(s5, e9, i5), i5;
+      for (var i5 = t4 > 1 ? void 0 : t4 ? w2(s5, e9) : s5, l5 = o7.length - 1, h4; l5 >= 0; l5--)
+        (h4 = o7[l5]) && (i5 = (t4 ? h4(s5, e9, i5) : h4(i5)) || i5);
+      return t4 && i5 && b2(s5, e9, i5), i5;
     };
     var U = {};
-    S3(U, { MaveComponent: () => r5 });
+    S3(U, { Config: () => d2, MaveComponent: () => r5 });
     module2.exports = F(U);
-    var u2 = (init_lit(), __toCommonJS(lit_exports));
+    var d2 = class {
+      constructor() {
+        this._baseUrl = "mave.io";
+      }
+      static getInstance() {
+        return d2._inst || (d2._inst = new d2()), d2._inst;
+      }
+      get baseUrl() {
+        return this._baseUrl;
+      }
+      set baseUrl(s5) {
+        this._baseUrl = s5;
+      }
+    };
+    var c2 = (init_lit(), __toCommonJS(lit_exports));
     var n7 = (init_decorators(), __toCommonJS(decorators_exports));
-    var g2 = "mave.io";
     var E2 = (init_lit(), __toCommonJS(lit_exports));
     var H2 = E2.css`
-  :host {
-  }
-
   dialog {
     position: relative;
     display: flex;
     float: left;
-    margin-bottom: -2px;
-    padding: 0;
-    margin: 0;
     align-items: center;
-    width: 100%;
-    height: 100%;
     // transition-property: all;
     // transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     // transition-duration: 150ms;
     background: black;
     border-width: 0;
-    aspect-ratio: 16 / 9;
-    min-height: 360px;
+    // aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    padding: 0;
+    margin: 0;
   }
 
   canvas {
@@ -1293,12 +1303,8 @@ var require_dist = __commonJS({
   }
 
   .active_overlay {
-    display: flex;
-    background: black;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: 20px solid black;
+    width: 100vw;
+    height: 100vh;
   }
 
   .active_overlay video {
@@ -1325,7 +1331,7 @@ var require_dist = __commonJS({
     display: flex;
     object-fit: cover;
   }
-  
+
   video::cue {
     color: white;
     opacity: 1;
@@ -1354,9 +1360,9 @@ var require_dist = __commonJS({
   }
 `;
     var T2 = (init_dist(), __toCommonJS(dist_exports));
-    var p2 = (init_lit(), __toCommonJS(lit_exports));
-    var m2 = (init_decorators(), __toCommonJS(decorators_exports));
-    var c2 = class extends p2.LitElement {
+    var v2 = (init_lit(), __toCommonJS(lit_exports));
+    var u2 = (init_decorators(), __toCommonJS(decorators_exports));
+    var m2 = class extends v2.LitElement {
       constructor() {
         super(...arguments);
         this._ghostActive = true;
@@ -1373,12 +1379,12 @@ var require_dist = __commonJS({
         document.documentElement.setAttribute("style", this._globalStyle || ""), (e9 = this.iframe) == null || e9.removeEventListener("load", this.iframeLoaded.bind(this)), super.disconnectedCallback();
       }
       render() {
-        return p2.html`
+        return v2.html`
       <div>
         <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
           <iframe
-            src="https://${g2}/e/${this.embed}/settings"
+            src="https://${d2.getInstance().baseUrl}/e/${this.embed}/settings"
             frameborder="0"
             sandbox="allow-scripts allow-forms allow-same-origin"
             allow="autoplay; fullscreen; clipboard-write;"
@@ -1394,7 +1400,7 @@ var require_dist = __commonJS({
         this._loaded = true;
       }
     };
-    c2.styles = p2.css`
+    m2.styles = v2.css`
     .ghost {
       background-color: #1c1917;
       width: 14rem;
@@ -1434,9 +1440,9 @@ var require_dist = __commonJS({
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `, a3([(0, m2.property)({ type: String })], c2.prototype, "embed", 2), a3([(0, m2.query)("#iframe")], c2.prototype, "iframe", 2), a3([(0, m2.state)()], c2.prototype, "_ghostActive", 2), a3([(0, m2.state)()], c2.prototype, "_loaded", 2);
-    customElements.get("mave-settings") || customElements.define("mave-settings", c2);
-    var r5 = class extends u2.LitElement {
+  `, a3([(0, u2.property)({ type: String })], m2.prototype, "embed", 2), a3([(0, u2.query)("#iframe")], m2.prototype, "iframe", 2), a3([(0, u2.state)()], m2.prototype, "_ghostActive", 2), a3([(0, u2.state)()], m2.prototype, "_loaded", 2);
+    customElements.get("mave-settings") || customElements.define("mave-settings", m2);
+    var r5 = class extends c2.LitElement {
       constructor() {
         super(...arguments);
         this._settingsActive = false;
@@ -1445,7 +1451,7 @@ var require_dist = __commonJS({
         this._hlsLoaded = false;
         this._iframeReady = false;
         this._initialPlayEventTriggered = false;
-        this.baseUrl = g2;
+        this.baseUrl = d2.getInstance().baseUrl;
       }
       connectedCallback() {
         var e9;
@@ -1500,26 +1506,26 @@ var require_dist = __commonJS({
           switch (i5) {
             case "mave:player_ready":
               if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
-                let h4 = this.autoplay ? 0 : this.video.currentTime;
-                this.sendMessage("mave:video_play", { currentTime: h4 }), this._initialPlayEventTriggered = true;
+                let p2 = this.autoplay ? 0 : this.video.currentTime;
+                this.sendMessage("mave:video_play", { currentTime: p2 }), this._initialPlayEventTriggered = true;
               }
               break;
             case "mave:player_event":
               if (!this.video)
                 return;
-              let d2 = t4.event;
-              switch (Object.keys(d2)[0]) {
+              let h4 = t4.event;
+              switch (Object.keys(h4)[0]) {
                 case "play":
-                  d2.play ? this.video.play() : this.video.pause();
+                  h4.play ? this.video.play() : this.video.pause();
                   break;
                 case "muted":
-                  this.video.muted = d2.muted;
+                  this.video.muted = h4.muted;
                   break;
                 case "volume":
-                  this.video.volume = d2.volume;
+                  this.video.volume = h4.volume;
                   break;
                 case "currentTime":
-                  this.video.currentTime = d2.currentTime;
+                  this.video.currentTime = h4.currentTime;
                   break;
               }
               break;
@@ -1540,11 +1546,11 @@ var require_dist = __commonJS({
               break;
             case "mave:open_settings":
               if (this._settingsActive = !this._settingsActive, this._settingsActive) {
-                let h4 = document.createElement("mave-settings");
-                h4.setAttribute("embed", this.embed), document.body.appendChild(h4);
+                let p2 = document.createElement("mave-settings");
+                p2.setAttribute("embed", this.embed), document.body.appendChild(p2);
               } else {
-                let h4 = document.querySelector("mave-settings");
-                h4 && h4.remove();
+                let p2 = document.querySelector("mave-settings");
+                p2 && p2.remove();
               }
               break;
             case "mave:close_settings":
@@ -1567,57 +1573,78 @@ var require_dist = __commonJS({
       }
       generateStyle() {
         if (this._overlayActive)
-          return "width: 100%; height: 100%;";
+          return c2.html`<style>
+      :host {
+        width: 100%; 
+        height: 100%;
+      }
+    `;
         if (this.width && this.height)
-          return `width: ${this.width}; height: ${this.height};`;
+          return c2.html`<style>
+        :host {
+          width: ${this.width};
+          height: ${this.height};
+        }
+      </style>`;
         if (this.aspectRatio && this.aspectRatio != "auto") {
           let [e9, t4] = this.aspectRatio.split(":");
-          return `aspect-ratio: ${e9} / ${t4}; width: 100%`;
+          return c2.html`<style>
+          :host {
+            aspect-ratio: ${e9} / ${t4};
+            width: 100%;
+          }
+        </style>`;
         } else
-          return "aspect-ratio: 16 / 9; min-height: 360px; width: 100%;";
+          return c2.html`<style>
+          :host {
+            aspect-ratio: 16 / 9;
+            min-height: 360px;
+            width: 100%;
+          }
+        </style>`;
       }
       closeDialog() {
         this._overlayActive = false, this.sendMessage("mave:closing_overlay");
       }
       render() {
-        return u2.html`
+        return c2.html`
+      ${this.generateStyle()}
       <dialog
         id="dialog"
         @close=${this.closeDialog}
-        style="${this.generateStyle()}"
         class=${this._overlayActive ? "active_overlay" : ""}
       >
         ${this.renderCanvas()}
-        ${this.src ? u2.html`
-            ${this.initiateScript()}
+        ${this.src ? c2.html`
+              ${this.initiateScript()}
 
-            <video
-              id="video"
-              playsinline
-              @canplay=${this.videoHandler}
-              @play=${this.videoHandler}
-              @pause=${this.videoHandler}
-              @ended=${this.videoHandler}
-              @progress=${this.videoHandler}
-              @loadeddata=${this.videoHandler}
-              @timeupdate=${this.videoHandler}
-              .muted=${this.muted}
-              .autoplay=${this.autoplay}
-              .loop=${this.loop}
-              .src=${this.src}
-            ></video>
-          ` : ""}
-        ${this.embed ? u2.html`
-            <iframe
-              title="embed"
-              id="iframe"
-              src="${this.generateUrl()}"
-              sandbox="allow-scripts allow-forms allow-same-origin"
-              allow="autoplay; fullscreen; clipboard-write;"
-              frameborder="0"
-            >
-            </iframe>
-          ` : ""}
+              <video
+                id="video"
+                playsinline
+                @canplay=${this.videoHandler}
+                @play=${this.videoHandler}
+                @pause=${this.videoHandler}
+                @ended=${this.videoHandler}
+                @progress=${this.videoHandler}
+                @loadeddata=${this.videoHandler}
+                @timeupdate=${this.videoHandler}
+                .muted=${this.muted}
+                .autoplay=${this.autoplay}
+                .loop=${this.loop}
+                .src=${this.src}
+              ></video>
+            ` : ""}
+        ${this.embed ? c2.html`
+              <iframe
+                title="embed"
+                id="iframe"
+                src="${this.generateUrl()}"
+                sandbox="allow-scripts allow-forms allow-same-origin"
+                allow="autoplay; fullscreen; clipboard-write;"
+                frameborder="0"
+              >
+              </iframe>
+            ` : ""}
       </dialog>
     `;
       }
@@ -1631,7 +1658,7 @@ var require_dist = __commonJS({
         this.iframe.contentWindow.postMessage(i5, "*");
       }
       openFullscreen() {
-        document.fullscreenElement || (this.requestFullscreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
+        document.fullscreenElement || (this.requestFullscreen ? this.requestFullscreen() : this.dialog.webkitRequestFullScreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
       }
       closeFullscreen() {
         document.fullscreenElement && (document.exitFullscreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: true }));
@@ -1688,7 +1715,23 @@ var import_react = require("react");
 
 // ../config/config.ts
 init_cjs_shims();
-var baseURL = "mave.io";
+var Config2 = class {
+  constructor() {
+    this._baseUrl = "mave.io";
+  }
+  static getInstance() {
+    if (!Config2._inst) {
+      Config2._inst = new Config2();
+    }
+    return Config2._inst;
+  }
+  get baseUrl() {
+    return this._baseUrl;
+  }
+  set baseUrl(val) {
+    this._baseUrl = val;
+  }
+};
 
 // src/Mave.tsx
 var import_mave_component = __toESM(require_dist());
@@ -1703,7 +1746,7 @@ var Mave = (props) => {
   const [height, setHeight] = (0, import_react.useState)(void 0);
   const [width, setWidth] = (0, import_react.useState)(void 0);
   (0, import_react.useEffect)(() => {
-    const url = `https://${baseURL}/${props.embed}/json`;
+    const url = `https://${Config2.getInstance().baseUrl}/${props.embed}/json`;
     const fetchData = async () => {
       try {
         const response = await fetch(url);

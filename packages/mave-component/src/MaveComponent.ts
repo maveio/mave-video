@@ -1,6 +1,6 @@
 import { html, LitElement } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import { baseURL } from "../../config/config";
+import { Config } from "../../config/config";
 import { style } from "./style";
 import { decode } from "@fpapado/blurhash";
 import "./SettingsComponent";
@@ -76,7 +76,7 @@ export class MaveComponent extends LitElement {
 
   private _animationFrame?: number;
 
-  private baseUrl: string = baseURL;
+  private baseUrl: string = Config.getInstance().baseUrl;
 
   connectedCallback() {
     super.connectedCallback();
@@ -281,15 +281,39 @@ export class MaveComponent extends LitElement {
   }
 
   generateStyle() {
-    if (this._overlayActive) return "width: 100%; height: 100%;";
+    if (this._overlayActive) {
+      return html`<style>
+      :host {
+        width: 100%; 
+        height: 100%;
+      }
+    `;
+    }
+
     if (this.width && this.height) {
-      return `width: ${this.width}; height: ${this.height};`;
+      return html`<style>
+        :host {
+          width: ${this.width};
+          height: ${this.height};
+        }
+      </style>`;
     } else {
       if (this.aspectRatio && this.aspectRatio != "auto") {
         const [w, h] = this.aspectRatio.split(":");
-        return `aspect-ratio: ${w} / ${h}; width: 100%`;
+        return html`<style>
+          :host {
+            aspect-ratio: ${w} / ${h};
+            width: 100%;
+          }
+        </style>`;
       } else {
-        return `aspect-ratio: 16 / 9; min-height: 360px; width: 100%;`;
+        return html`<style>
+          :host {
+            aspect-ratio: 16 / 9;
+            min-height: 360px;
+            width: 100%;
+          }
+        </style>`;
       }
     }
   }
@@ -301,10 +325,10 @@ export class MaveComponent extends LitElement {
 
   render() {
     return html`
+      ${this.generateStyle()}
       <dialog
         id="dialog"
         @close=${this.closeDialog}
-        style="${this.generateStyle()}"
         class=${this._overlayActive ? "active_overlay" : ""}
       >
         ${this.renderCanvas()}
@@ -371,8 +395,13 @@ export class MaveComponent extends LitElement {
 
   private openFullscreen() {
     if (!document.fullscreenElement) {
-      // @ts-ignore
-      this.requestFullscreen();
+      if (this.requestFullscreen) {
+        this.requestFullscreen();
+      } else {
+        // @ts-ignore
+        this.dialog.webkitRequestFullScreen();
+      }
+
       this.sendMessage("mave:video_fullscreen", { fullscreen: false });
     }
   }

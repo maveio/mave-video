@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "files": [
+    "config.ts",
+    "tsconfig.json",
     "eslint-preset.js"
   ],
   "dependencies": {

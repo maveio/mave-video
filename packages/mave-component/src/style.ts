@@ -1,26 +1,23 @@
 import { css } from "lit";
 
 export const style = css`
-  :host {
-  }
-
   dialog {
     position: relative;
     display: flex;
     float: left;
-    margin-bottom: -2px;
-    padding: 0;
-    margin: 0;
     align-items: center;
-    width: 100%;
-    height: 100%;
     // transition-property: all;
     // transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     // transition-duration: 150ms;
     background: black;
     border-width: 0;
-    aspect-ratio: 16 / 9;
-    min-height: 360px;
+    // aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    padding: 0;
+    margin: 0;
   }
 
   canvas {
@@ -33,12 +30,8 @@ export const style = css`
   }
 
   .active_overlay {
-    display: flex;
-    background: black;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: 20px solid black;
+    width: 100vw;
+    height: 100vh;
   }
 
   .active_overlay video {

@@ -1,6 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import { baseURL } from "../../config/config";
+import { Config } from "../../config/config";
 
 export class SettingsComponent extends LitElement {
   @property({ type: String }) embed!: string;
@@ -84,7 +84,8 @@ export class SettingsComponent extends LitElement {
         <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
           <iframe
-            src="https://${baseURL}/e/${this.embed}/settings"
+            src="https://${Config.getInstance().baseUrl}/e/${this
+              .embed}/settings"
             frameborder="0"
             sandbox="allow-scripts allow-forms allow-same-origin"
             allow="autoplay; fullscreen; clipboard-write;"

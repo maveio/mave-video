@@ -2,6 +2,15 @@ import * as lit_html from 'lit-html';
 import * as lit from 'lit';
 import { LitElement } from 'lit';
 
+declare class Config {
+    private _baseUrl;
+    private static _inst;
+    private constructor();
+    static getInstance(): Config;
+    get baseUrl(): string;
+    set baseUrl(val: string);
+}
+
 interface IEvent extends Event {
     data: {
         message: string;
@@ -49,7 +58,7 @@ declare class MaveComponent extends LitElement {
     disconnectedCallback(): void;
     videoHandler(event: Event): void;
     messageHandler(event: IEvent): void;
-    generateStyle(): string;
+    generateStyle(): lit_html.TemplateResult<1>;
     closeDialog(): void;
     render(): lit_html.TemplateResult<1>;
     private generateUrl;
@@ -63,4 +72,4 @@ declare class MaveComponent extends LitElement {
     private visibilityHandler;
 }
 
-export { MaveComponent };
+export { Config, MaveComponent };
