@@ -1,4 +1,4 @@
-var b=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames,y=Object.getOwnPropertySymbols;var k=Object.prototype.hasOwnProperty,S=Object.prototype.propertyIsEnumerable;var _=(l,s,e)=>s in l?b(l,s,{enumerable:!0,configurable:!0,writable:!0,value:e}):l[s]=e,E=(l,s)=>{for(var e in s||(s={}))k.call(s,e)&&_(l,e,s[e]);if(y)for(var e of y(s))S.call(s,e)&&_(l,e,s[e]);return l};var L=(l,s)=>{for(var e in s)b(l,e,{get:s[e],enumerable:!0})},A=(l,s,e,t)=>{if(s&&typeof s=="object"||typeof s=="function")for(let i of x(s))!k.call(l,i)&&i!==e&&b(l,i,{get:()=>s[i],enumerable:!(t=w(s,i))||t.enumerable});return l};var F=l=>A(b({},"__esModule",{value:!0}),l),a=(l,s,e,t)=>{for(var i=t>1?void 0:t?w(s,e):s,o=l.length-1,h;o>=0;o--)(h=l[o])&&(i=(t?h(s,e,i):h(i))||i);return t&&i&&b(s,e,i),i};var U={};L(U,{Config:()=>d,MaveComponent:()=>r});module.exports=F(U);var d=class{constructor(){this._baseUrl="mave.io"}static getInstance(){return d._inst||(d._inst=new d),d._inst}get baseUrl(){return this._baseUrl}set baseUrl(s){this._baseUrl=s}};var c=require("lit"),n=require("lit/decorators.js");var $=require("lit"),H=$.css`
+var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames,y=Object.getOwnPropertySymbols;var k=Object.prototype.hasOwnProperty,S=Object.prototype.propertyIsEnumerable;var _=(l,s,e)=>s in l?g(l,s,{enumerable:!0,configurable:!0,writable:!0,value:e}):l[s]=e,E=(l,s)=>{for(var e in s||(s={}))k.call(s,e)&&_(l,e,s[e]);if(y)for(var e of y(s))S.call(s,e)&&_(l,e,s[e]);return l};var L=(l,s)=>{for(var e in s)g(l,e,{get:s[e],enumerable:!0})},A=(l,s,e,t)=>{if(s&&typeof s=="object"||typeof s=="function")for(let i of x(s))!k.call(l,i)&&i!==e&&g(l,i,{get:()=>s[i],enumerable:!(t=w(s,i))||t.enumerable});return l};var F=l=>A(g({},"__esModule",{value:!0}),l),a=(l,s,e,t)=>{for(var i=t>1?void 0:t?w(s,e):s,o=l.length-1,h;o>=0;o--)(h=l[o])&&(i=(t?h(s,e,i):h(i))||i);return t&&i&&g(s,e,i),i};var U={};L(U,{Config:()=>d,MaveComponent:()=>r});module.exports=F(U);var d=class{constructor(){this._baseUrl="mave.io"}static getInstance(){return d._inst||(d._inst=new d),d._inst}get baseUrl(){return this._baseUrl}set baseUrl(s){this._baseUrl=s}};var c=require("lit"),n=require("lit/decorators.js");var $=require("lit"),H=$.css`
   dialog {
     position: relative;
     display: flex;
@@ -11,6 +11,7 @@ var b=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
     max-height: 100vh !important;
     padding: 0;
     margin: 0;
+    background: transparent;
   }
 
   canvas {
@@ -191,6 +192,7 @@ var b=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
                 sandbox="allow-scripts allow-forms allow-same-origin"
                 allow="autoplay; fullscreen; clipboard-write;"
                 frameborder="0"
+                scrolling="no"
               >
               </iframe>
             `:""}

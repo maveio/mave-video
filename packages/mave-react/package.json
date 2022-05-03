@@ -1,6 +1,6 @@
 {
   "name": "@maveio/mave-react",
-  "version": "0.0.1-beta.16",
+  "version": "0.0.1-beta.17",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

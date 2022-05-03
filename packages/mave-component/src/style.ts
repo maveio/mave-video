@@ -13,6 +13,7 @@ export const style = css`
     max-height: 100vh !important;
     padding: 0;
     margin: 0;
+    background: transparent;
   }
 
   canvas {

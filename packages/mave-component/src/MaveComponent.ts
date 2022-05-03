@@ -375,6 +375,7 @@ export class MaveComponent extends LitElement {
                 sandbox="allow-scripts allow-forms allow-same-origin"
                 allow="autoplay; fullscreen; clipboard-write;"
                 frameborder="0"
+                scrolling="no"
               >
               </iframe>
             `
