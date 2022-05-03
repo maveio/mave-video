@@ -6,12 +6,7 @@ export const style = css`
     display: flex;
     float: left;
     align-items: center;
-    // transition-property: all;
-    // transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    // transition-duration: 150ms;
-    background: black;
     border-width: 0;
-    // aspect-ratio: 16 / 9;
     width: 100%;
     height: 100%;
     max-width: 100vw !important;
@@ -30,6 +25,7 @@ export const style = css`
   }
 
   .active_overlay {
+    background: black;
     width: 100vw;
     height: 100vh;
   }

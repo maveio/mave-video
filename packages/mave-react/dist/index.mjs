@@ -1323,6 +1323,7 @@ var require_dist = __commonJS({
   }
 
   video {
+    transform: scale(1.01);
     position: absolute;
     top: 0;
     z-index: 10;
