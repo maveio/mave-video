@@ -18,7 +18,7 @@ interface IEvent extends Event {
         event?: any;
         video_src?: string;
         autoplay_enabled?: boolean;
-        autoplay?: string;
+        autoplay?: boolean;
         blurhash?: string;
         aspect_ratio_enabled?: boolean;
         aspect_ratio?: string;

@@ -13,7 +13,7 @@ interface IEvent extends Event {
     event?: any;
     video_src?: string;
     autoplay_enabled?: boolean;
-    autoplay?: string;
+    autoplay?: boolean;
     blurhash?: string;
     aspect_ratio_enabled?: boolean;
     aspect_ratio?: string;
@@ -100,6 +100,11 @@ export class MaveComponent extends LitElement {
     window.removeEventListener("load", this.visibilityHandler.bind(this));
     window.removeEventListener("scroll", this.visibilityHandler.bind(this));
     window.removeEventListener("resize", this.visibilityHandler.bind(this));
+
+    // remove settings when it's active
+    const settings = document.querySelector("mave-settings");
+    if (settings) settings.remove();
+
     super.disconnectedCallback();
   }
 
@@ -262,7 +267,6 @@ export class MaveComponent extends LitElement {
         break;
       case "mave:close_settings":
         this._settingsActive = false;
-
         const settings = document.querySelector("mave-settings");
         if (settings) settings.remove();
         break;
@@ -285,9 +289,10 @@ export class MaveComponent extends LitElement {
         }, 20);
         break;
       case "mave:render_video":
+        console.log("HJAJAJAJA", data);
         this._hlsLoaded = false;
         this.src = data.video_src;
-        this.autoplay = data.autoplay == "true";
+        this.autoplay = data.autoplay;
         if (data.blurhash) this.blurhash = data.blurhash;
         break;
     }
@@ -307,6 +312,7 @@ export class MaveComponent extends LitElement {
     if (this.width && this.height) {
       return html`<style>
         :host {
+          display: block;
           overflow: hidden;
           width: ${this.width};
           height: ${this.height};
@@ -317,6 +323,7 @@ export class MaveComponent extends LitElement {
         const [w, h] = this.aspectRatio.split(":");
         return html`<style>
           :host {
+            display: block;
             overflow: hidden;
             aspect-ratio: ${w} / ${h};
             width: 100%;
@@ -325,6 +332,7 @@ export class MaveComponent extends LitElement {
       } else {
         return html`<style>
           :host {
+            display: block;
             overflow: hidden;
             aspect-ratio: 16 / 9;
             min-height: 360px;
