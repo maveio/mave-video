@@ -1697,7 +1697,7 @@ init_cjs_shims();
 
 // src/Mave.tsx
 init_cjs_shims();
-var import_react = require("react");
+var import_react = __toESM(require("react"));
 
 // ../config/config.ts
 init_cjs_shims();
@@ -1777,7 +1777,7 @@ var Mave = (props) => {
   if (settingsAspectRatio || videoAspectRatio) {
     attributes.aspectRatio = settingsAspectRatio || videoAspectRatio;
   }
-  return /* @__PURE__ */ React.createElement("mave-component", __spreadValues({
+  return /* @__PURE__ */ import_react.default.createElement("mave-component", __spreadValues({
     class: attributes.className
   }, attributes));
 };

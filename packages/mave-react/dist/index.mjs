@@ -1692,7 +1692,7 @@ init_esm_shims();
 
 // src/Mave.tsx
 init_esm_shims();
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // ../config/config.ts
 init_esm_shims();
