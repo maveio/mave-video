@@ -34,6 +34,8 @@ export class MaveComponent extends LitElement {
 
   @property({ type: String }) jwt?: string;
 
+  @property({ type: String }) classname?: string;
+
   // Internal properties
 
   @property({ type: Boolean }) muted?: boolean;
@@ -80,8 +82,13 @@ export class MaveComponent extends LitElement {
 
   private _globalStyle?: string;
 
+  private canPlay: boolean = false;
+
+  private loadeddata: boolean = false;
+
   connectedCallback() {
     super.connectedCallback();
+
     window.addEventListener("message", this.messageHandler.bind(this));
     window.addEventListener("load", this.visibilityHandler.bind(this));
     window.addEventListener("scroll", this.visibilityHandler.bind(this));
@@ -108,27 +115,37 @@ export class MaveComponent extends LitElement {
     super.disconnectedCallback();
   }
 
+  initializeVideo() {
+    if (!this.loadeddata && this.video && this.video.readyState >= 1) {
+      setTimeout(() => {
+        if (this.blurhash) this._blurhashShouldBeVisible = false;
+      }, 500);
+      this.loadeddata = true;
+    }
+
+    if (!this.canPlay) {
+      const checkPlayerState = () => {
+        if (this._iframeReady) return;
+
+        this.sendMessage("mave:video_canplay");
+        setTimeout(checkPlayerState.bind(this), 25);
+        this.canPlay = true;
+      };
+
+      checkPlayerState();
+    }
+  }
+
   videoHandler(event: Event) {
     if (!this.video) return;
 
     switch (event.type) {
       case "loadeddata":
-        if (this.video.readyState >= 2) {
-          setTimeout(() => {
-            if (this.blurhash) this._blurhashShouldBeVisible = false;
-          }, 500);
-        }
-        break;
       case "canplay":
-        const checkPlayerState = () => {
-          if (this._iframeReady) return;
-          this.sendMessage("mave:video_canplay");
-          setTimeout(checkPlayerState.bind(this), 25);
-        };
-
-        checkPlayerState();
+        this.initializeVideo();
         break;
       case "progress":
+        if (!this.canPlay || !this.loadeddata) this.initializeVideo();
         try {
           const lastBuffer = this.video.buffered.length - 1;
           const buffer = Math.round(
@@ -289,7 +306,6 @@ export class MaveComponent extends LitElement {
         }, 20);
         break;
       case "mave:render_video":
-        console.log("HJAJAJAJA", data);
         this._hlsLoaded = false;
         this.src = data.video_src;
         this.autoplay = data.autoplay;
@@ -299,48 +315,26 @@ export class MaveComponent extends LitElement {
   }
 
   generateStyle() {
+    const css = document.createElement("style");
+
     if (this._overlayActive) {
-      return html`<style>
-      :host {
-        overflow: hidden;
-        width: 100%; 
-        height: 100%;
-      }
-    `;
+      css.textContent =
+        ":host { overflow: hidden; width: 100%; height: 100%; }";
     }
 
     if (this.width && this.height) {
-      return html`<style>
-        :host {
-          display: block;
-          overflow: hidden;
-          width: ${this.width};
-          height: ${this.height};
-        }
-      </style>`;
+      css.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; }`;
     } else {
       if (this.aspectRatio && this.aspectRatio != "auto") {
         const [w, h] = this.aspectRatio.split(":");
-        return html`<style>
-          :host {
-            display: block;
-            overflow: hidden;
-            aspect-ratio: ${w} / ${h};
-            width: 100%;
-          }
-        </style>`;
+        css.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w} / ${h}; width: 100%; }`;
       } else {
-        return html`<style>
-          :host {
-            display: block;
-            overflow: hidden;
-            aspect-ratio: 16 / 9;
-            min-height: 360px;
-            width: 100%;
-          }
-        </style>`;
+        css.textContent =
+          ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; min-height: 360px; width: 100%; }";
       }
     }
+
+    return css;
   }
 
   closeDialog() {
@@ -349,6 +343,7 @@ export class MaveComponent extends LitElement {
   }
 
   render() {
+    console.log(this.classList);
     return html`
       ${this.generateStyle()}
       <dialog
@@ -472,6 +467,7 @@ export class MaveComponent extends LitElement {
 
   private scriptHandler() {
     if (!this.video || !this.src || this._hlsLoaded) return;
+
     if (this.video.canPlayType("application/vnd.apple.mpegurl")) {
       this.video.src = this.src;
       // @ts-ignore

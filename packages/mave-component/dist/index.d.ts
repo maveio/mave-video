@@ -33,6 +33,7 @@ declare class MaveComponent extends LitElement {
     reference_id?: string;
     display_name?: string;
     jwt?: string;
+    classname?: string;
     muted?: boolean;
     autoplay?: boolean;
     loop?: boolean;
@@ -55,11 +56,14 @@ declare class MaveComponent extends LitElement {
     private _animationFrame?;
     private baseUrl;
     private _globalStyle?;
+    private canPlay;
+    private loadeddata;
     connectedCallback(): void;
     disconnectedCallback(): void;
+    initializeVideo(): void;
     videoHandler(event: Event): void;
     messageHandler(event: IEvent): void;
-    generateStyle(): lit_html.TemplateResult<1>;
+    generateStyle(): HTMLStyleElement;
     closeDialog(): void;
     render(): lit_html.TemplateResult<1>;
     private generateUrl;

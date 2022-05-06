@@ -16,6 +16,8 @@ export interface MaveProps {
   aspectRatio?: string;
   width?: string;
   height?: string;
+  className?: string;
+  style?: string;
 }
 
 export const Mave = (props: MaveProps) => {
@@ -64,6 +66,8 @@ export const Mave = (props: MaveProps) => {
     float: settingsFloat,
     src: videoSource,
     blurhash: videoBlurHash,
+    className: props.className,
+    style: props.style,
   };
 
   if (loop) {
@@ -86,6 +90,10 @@ export const Mave = (props: MaveProps) => {
 
   return (
     // @ts-ignore
-    <mave-component {...attributes}></mave-component>
+    <mave-component
+      class={attributes.className}
+      {...attributes}
+      // @ts-ignore
+    ></mave-component>
   );
 };

@@ -12,6 +12,8 @@ interface MaveProps {
     aspectRatio?: string;
     width?: string;
     height?: string;
+    className?: string;
+    style?: string;
 }
 declare const Mave: (props: MaveProps) => JSX.Element;
 
