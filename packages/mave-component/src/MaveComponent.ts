@@ -48,7 +48,7 @@ export class MaveComponent extends LitElement {
 
   @property({ type: String }) blurhash?: string;
 
-  @property({ type: String }) aspectRatio?: string;
+  @property({ type: String, attribute: "aspect-ratio" }) aspectRatio?: string;
 
   @property({ type: String }) width?: string;
 
@@ -324,14 +324,14 @@ export class MaveComponent extends LitElement {
     }
 
     if (this.width && this.height) {
-      css.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; }`;
+      css.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
     } else {
-      if (this.aspectRatio && this.aspectRatio != "auto") {
+      if (this.aspectRatio) {
         const [w, h] = this.aspectRatio.split(":");
-        css.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w} / ${h}; width: 100%; }`;
+        css.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w} / ${h}; width: 100%; min-width: 320px; min-height: 180px; }`;
       } else {
         css.textContent =
-          ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; min-height: 360px; width: 100%; }";
+          ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
       }
     }
 

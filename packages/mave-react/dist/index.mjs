@@ -1686,13 +1686,13 @@ var require_dist = __commonJS({
           css3.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }";
         }
         if (this.width && this.height) {
-          css3.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; }`;
+          css3.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
         } else {
-          if (this.aspectRatio && this.aspectRatio != "auto") {
+          if (this.aspectRatio) {
             const [w2, h4] = this.aspectRatio.split(":");
-            css3.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w2} / ${h4}; width: 100%; }`;
+            css3.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w2} / ${h4}; width: 100%; min-width: 320px; min-height: 180px; }`;
           } else {
-            css3.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; min-height: 360px; width: 100%; }";
+            css3.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
           }
         }
         return css3;
@@ -1864,7 +1864,7 @@ var require_dist = __commonJS({
       (0, import_decorators2.property)({ type: String })
     ], MaveComponent.prototype, "blurhash", 2);
     __decorateClass([
-      (0, import_decorators2.property)({ type: String })
+      (0, import_decorators2.property)({ type: String, attribute: "aspect-ratio" })
     ], MaveComponent.prototype, "aspectRatio", 2);
     __decorateClass([
       (0, import_decorators2.property)({ type: String })
