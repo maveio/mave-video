@@ -11,6 +11,8 @@ export class SettingsComponent extends LitElement {
 
   @state() private _loaded: boolean = true;
 
+  @state() private _delayed: boolean = false;
+
   private _globalStyle?: string;
 
   static styles = css`
@@ -58,6 +60,11 @@ export class SettingsComponent extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
+    // workaround for animation
+    setTimeout(() => {
+      this._delayed = true;
+    }, 250);
+
     this._globalStyle = document.documentElement.getAttribute("style") || "";
     document.documentElement.setAttribute(
       "style",
@@ -91,7 +98,7 @@ export class SettingsComponent extends LitElement {
             allow="autoplay; fullscreen; clipboard-write;"
             width="100%"
             height="100%"
-            class=${this._loaded ? "loaded" : "initial"}
+            class=${this._loaded && this._delayed ? "loaded" : "initial"}
           ></iframe>
         </div>
       </div>

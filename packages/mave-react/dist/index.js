@@ -1314,9 +1314,11 @@ var require_dist = __commonJS({
   }
 
   .active_overlay {
+    position: fixed;
     background: black;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
   }
 
   .active_overlay video {
@@ -1380,10 +1382,14 @@ var require_dist = __commonJS({
         super(...arguments);
         this._ghostActive = true;
         this._loaded = true;
+        this._delayed = false;
       }
       connectedCallback() {
         var _a;
         super.connectedCallback();
+        setTimeout(() => {
+          this._delayed = true;
+        }, 250);
         this._globalStyle = document.documentElement.getAttribute("style") || "";
         document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`);
         setTimeout(() => {
@@ -1409,7 +1415,7 @@ var require_dist = __commonJS({
             allow="autoplay; fullscreen; clipboard-write;"
             width="100%"
             height="100%"
-            class=${this._loaded ? "loaded" : "initial"}
+            class=${this._loaded && this._delayed ? "loaded" : "initial"}
           ></iframe>
         </div>
       </div>
@@ -1472,6 +1478,9 @@ var require_dist = __commonJS({
     __decorateClass([
       (0, import_decorators.state)()
     ], SettingsComponent.prototype, "_loaded", 2);
+    __decorateClass([
+      (0, import_decorators.state)()
+    ], SettingsComponent.prototype, "_delayed", 2);
     if (!customElements.get("mave-settings")) {
       customElements.define("mave-settings", SettingsComponent);
     }
@@ -1611,9 +1620,7 @@ var require_dist = __commonJS({
             break;
           case "mave:open_popup_overlay":
             this._overlayActive = true;
-            window.scrollTo(0, 0);
             this.dialog.showModal();
-            this.dialog.scrollIntoView(false);
             this._globalStyle = document.documentElement.getAttribute("style") || "";
             document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
             break;

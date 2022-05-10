@@ -26,9 +26,11 @@ export const style = css`
   }
 
   .active_overlay {
+    position: fixed;
     background: black;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
   }
 
   .active_overlay video {

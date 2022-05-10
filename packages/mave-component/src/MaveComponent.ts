@@ -241,10 +241,8 @@ export class MaveComponent extends LitElement {
         break;
       case "mave:open_popup_overlay":
         this._overlayActive = true;
-        window.scrollTo(0, 0);
         // @ts-ignore
         this.dialog.showModal();
-        this.dialog.scrollIntoView(false);
 
         this._globalStyle =
           document.documentElement.getAttribute("style") || "";
