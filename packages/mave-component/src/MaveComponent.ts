@@ -159,9 +159,11 @@ export class MaveComponent extends LitElement {
           this.timeUpdate();
 
           const time =
-            this.autoplay && !this._initialPlayEventTriggered
+            (this.autoplay && !this._initialPlayEventTriggered) ||
+            this.video.currentTime < 0.0001
               ? 0
               : this.video.currentTime;
+
           this.sendMessage("mave:video_play", { currentTime: time });
 
           this._initialPlayEventTriggered = true;
@@ -210,6 +212,7 @@ export class MaveComponent extends LitElement {
           !this.video.paused
         ) {
           const time = this.autoplay ? 0 : this.video.currentTime;
+
           this.sendMessage("mave:video_play", { currentTime: time });
           this._initialPlayEventTriggered = true;
         }
@@ -343,7 +346,6 @@ export class MaveComponent extends LitElement {
   }
 
   render() {
-    console.log(this.classList);
     return html`
       ${this.generateStyle()}
       <dialog
