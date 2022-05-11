@@ -1,7 +1,7 @@
 import "vue";
 var b = Object.defineProperty;
 var w = Object.getOwnPropertyDescriptor;
-var x = Object.getOwnPropertyNames, y = Object.getOwnPropertySymbols;
+var T = Object.getOwnPropertyNames, y = Object.getOwnPropertySymbols;
 var k = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
 var _ = (o, s, e) => s in o ? b(o, s, { enumerable: true, configurable: true, writable: true, value: e }) : o[s] = e, E = (o, s) => {
   for (var e in s || (s = {}))
@@ -16,13 +16,13 @@ var L = (o, s) => {
     b(o, e, { get: s[e], enumerable: true });
 }, A = (o, s, e, t) => {
   if (s && typeof s == "object" || typeof s == "function")
-    for (let i of x(s))
+    for (let i of T(s))
       !k.call(o, i) && i !== e && b(o, i, { get: () => s[i], enumerable: !(t = w(s, i)) || t.enumerable });
   return o;
 };
 var F = (o) => A(b({}, "__esModule", { value: true }), o), a = (o, s, e, t) => {
-  for (var i = t > 1 ? void 0 : t ? w(s, e) : s, l = o.length - 1, c; l >= 0; l--)
-    (c = o[l]) && (i = (t ? c(s, e, i) : c(i)) || i);
+  for (var i = t > 1 ? void 0 : t ? w(s, e) : s, l = o.length - 1, h; l >= 0; l--)
+    (h = o[l]) && (i = (t ? h(s, e, i) : h(i)) || i);
   return t && i && b(s, e, i), i;
 };
 var U = {};
@@ -43,7 +43,7 @@ var d = class {
   }
 };
 var v = require("lit"), n = require("lit/decorators.js");
-var $ = require("lit"), H = $.css`
+var $ = require("lit"), x = $.css`
   dialog {
     position: relative;
     display: flex;
@@ -69,9 +69,11 @@ var $ = require("lit"), H = $.css`
   }
 
   .active_overlay {
+    position: fixed;
     background: black;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
   }
 
   .active_overlay video {
@@ -127,17 +129,20 @@ var $ = require("lit"), H = $.css`
     background: transparent !important;
   }
 `;
-var T = require("@fpapado/blurhash");
-var p = require("lit"), u = require("lit/decorators.js");
-var h = class extends p.LitElement {
+var H = require("@fpapado/blurhash");
+var u = require("lit"), m = require("lit/decorators.js");
+var c = class extends u.LitElement {
   constructor() {
     super(...arguments);
     this._ghostActive = true;
     this._loaded = true;
+    this._delayed = false;
   }
   connectedCallback() {
     var e;
-    super.connectedCallback(), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`), setTimeout(() => {
+    super.connectedCallback(), setTimeout(() => {
+      this._delayed = true;
+    }, 250), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`), setTimeout(() => {
       this._ghostActive = true;
     }, 0), (e = this.iframe) == null || e.addEventListener("load", this.iframeLoaded.bind(this));
   }
@@ -146,7 +151,7 @@ var h = class extends p.LitElement {
     document.documentElement.setAttribute("style", this._globalStyle || ""), (e = this.iframe) == null || e.removeEventListener("load", this.iframeLoaded.bind(this)), super.disconnectedCallback();
   }
   render() {
-    return p.html`
+    return u.html`
       <div>
         <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
@@ -157,7 +162,7 @@ var h = class extends p.LitElement {
             allow="autoplay; fullscreen; clipboard-write;"
             width="100%"
             height="100%"
-            class=${this._loaded ? "loaded" : "initial"}
+            class=${this._loaded && this._delayed ? "loaded" : "initial"}
           ></iframe>
         </div>
       </div>
@@ -167,7 +172,7 @@ var h = class extends p.LitElement {
     this._loaded = true;
   }
 };
-h.styles = p.css`
+c.styles = u.css`
     .ghost {
       background-color: #1c1917;
       width: 14rem;
@@ -207,8 +212,8 @@ h.styles = p.css`
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `, a([(0, u.property)({ type: String })], h.prototype, "embed", 2), a([(0, u.query)("#iframe")], h.prototype, "iframe", 2), a([(0, u.state)()], h.prototype, "_ghostActive", 2), a([(0, u.state)()], h.prototype, "_loaded", 2);
-customElements.get("mave-settings") || customElements.define("mave-settings", h);
+  `, a([(0, m.property)({ type: String })], c.prototype, "embed", 2), a([(0, m.query)("#iframe")], c.prototype, "iframe", 2), a([(0, m.state)()], c.prototype, "_ghostActive", 2), a([(0, m.state)()], c.prototype, "_loaded", 2), a([(0, m.state)()], c.prototype, "_delayed", 2);
+customElements.get("mave-settings") || customElements.define("mave-settings", c);
 var r = class extends v.LitElement {
   constructor() {
     super(...arguments);
@@ -259,7 +264,7 @@ var r = class extends v.LitElement {
         case "play":
           if (this._iframeReady) {
             this.timeUpdate();
-            let t = this.autoplay && !this._initialPlayEventTriggered ? 0 : this.video.currentTime;
+            let t = this.autoplay && !this._initialPlayEventTriggered || this.video.currentTime < 1e-4 ? 0 : this.video.currentTime;
             this.sendMessage("mave:video_play", { currentTime: t }), this._initialPlayEventTriggered = true;
           }
           break;
@@ -281,31 +286,31 @@ var r = class extends v.LitElement {
       switch (i) {
         case "mave:player_ready":
           if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
-            let m = this.autoplay ? 0 : this.video.currentTime;
-            this.sendMessage("mave:video_play", { currentTime: m }), this._initialPlayEventTriggered = true;
+            let p = this.autoplay ? 0 : this.video.currentTime;
+            this.sendMessage("mave:video_play", { currentTime: p }), this._initialPlayEventTriggered = true;
           }
           break;
         case "mave:player_event":
           if (!this.video)
             return;
-          let c = t.event;
-          switch (Object.keys(c)[0]) {
+          let h = t.event;
+          switch (Object.keys(h)[0]) {
             case "play":
-              c.play ? this.video.play() : this.video.pause();
+              h.play ? this.video.play() : this.video.pause();
               break;
             case "muted":
-              this.video.muted = c.muted;
+              this.video.muted = h.muted;
               break;
             case "volume":
-              this.video.volume = c.volume;
+              this.video.volume = h.volume;
               break;
             case "currentTime":
-              this.video.currentTime = c.currentTime;
+              this.video.currentTime = h.currentTime;
               break;
           }
           break;
         case "mave:open_popup_overlay":
-          this._overlayActive = true, window.scrollTo(0, 0), this.dialog.showModal(), this.dialog.scrollIntoView(false), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
+          this._overlayActive = true, this.dialog.showModal(), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
           break;
         case "mave:close_popup_overlay":
           this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
@@ -321,11 +326,11 @@ var r = class extends v.LitElement {
           break;
         case "mave:open_settings":
           if (this._settingsActive = !this._settingsActive, this._settingsActive) {
-            let m = document.createElement("mave-settings");
-            m.setAttribute("embed", this.embed), document.body.appendChild(m);
+            let p = document.createElement("mave-settings");
+            p.setAttribute("embed", this.embed), document.body.appendChild(p);
           } else {
-            let m = document.querySelector("mave-settings");
-            m && m.remove();
+            let p = document.querySelector("mave-settings");
+            p && p.remove();
           }
           break;
         case "mave:close_settings":
@@ -349,12 +354,12 @@ var r = class extends v.LitElement {
   generateStyle() {
     let e = document.createElement("style");
     if (this._overlayActive && (e.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
-      e.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; }`;
-    else if (this.aspectRatio && this.aspectRatio != "auto") {
+      e.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
+    else if (this.aspectRatio) {
       let [t, i] = this.aspectRatio.split(":");
-      e.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t} / ${i}; width: 100%; }`;
+      e.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t} / ${i}; width: 100%; min-width: 320px; min-height: 180px; }`;
     } else
-      e.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; min-height: 360px; width: 100%; }";
+      e.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
     return e;
   }
   closeDialog() {
@@ -421,7 +426,7 @@ var r = class extends v.LitElement {
   renderCanvas() {
     if (!this.blurhash || !this._blurhashShouldBeVisible)
       return;
-    let e = document.createElement("canvas"), t = (0, T.decode)(this.blurhash, 320, 180), i = e.getContext("2d"), l = i == null ? void 0 : i.createImageData(320, 180);
+    let e = document.createElement("canvas"), t = (0, H.decode)(this.blurhash, 320, 180), i = e.getContext("2d"), l = i == null ? void 0 : i.createImageData(320, 180);
     return l == null || l.data.set(t), l && (i == null || i.putImageData(l, 0, 0)), e;
   }
   timeUpdate() {
@@ -451,5 +456,5 @@ var r = class extends v.LitElement {
     this.sendMessage(l ? "mave:video_in_viewport" : "mave:video_out_viewport");
   }
 };
-r.styles = H, a([(0, n.property)({ type: String })], r.prototype, "embed", 2), a([(0, n.property)({ type: String })], r.prototype, "reference_id", 2), a([(0, n.property)({ type: String })], r.prototype, "display_name", 2), a([(0, n.property)({ type: String })], r.prototype, "jwt", 2), a([(0, n.property)({ type: String })], r.prototype, "classname", 2), a([(0, n.property)({ type: Boolean })], r.prototype, "muted", 2), a([(0, n.property)({ type: Boolean })], r.prototype, "autoplay", 2), a([(0, n.property)({ type: Boolean })], r.prototype, "loop", 2), a([(0, n.property)({ type: String })], r.prototype, "src", 2), a([(0, n.property)({ type: String })], r.prototype, "blurhash", 2), a([(0, n.property)({ type: String })], r.prototype, "aspectRatio", 2), a([(0, n.property)({ type: String })], r.prototype, "width", 2), a([(0, n.property)({ type: String })], r.prototype, "height", 2), a([(0, n.query)("#dialog")], r.prototype, "dialog", 2), a([(0, n.query)("#iframe")], r.prototype, "iframe", 2), a([(0, n.query)("#video")], r.prototype, "video", 2), a([(0, n.query)("#canvas")], r.prototype, "canvas", 2), a([(0, n.query)("#script")], r.prototype, "script", 2), a([(0, n.state)()], r.prototype, "_settingsActive", 2), a([(0, n.state)()], r.prototype, "_blurhashShouldBeVisible", 2), a([(0, n.state)()], r.prototype, "_overlayActive", 2);
+r.styles = x, a([(0, n.property)({ type: String })], r.prototype, "embed", 2), a([(0, n.property)({ type: String })], r.prototype, "reference_id", 2), a([(0, n.property)({ type: String })], r.prototype, "display_name", 2), a([(0, n.property)({ type: String })], r.prototype, "jwt", 2), a([(0, n.property)({ type: String })], r.prototype, "classname", 2), a([(0, n.property)({ type: Boolean })], r.prototype, "muted", 2), a([(0, n.property)({ type: Boolean })], r.prototype, "autoplay", 2), a([(0, n.property)({ type: Boolean })], r.prototype, "loop", 2), a([(0, n.property)({ type: String })], r.prototype, "src", 2), a([(0, n.property)({ type: String })], r.prototype, "blurhash", 2), a([(0, n.property)({ type: String, attribute: "aspect-ratio" })], r.prototype, "aspectRatio", 2), a([(0, n.property)({ type: String })], r.prototype, "width", 2), a([(0, n.property)({ type: String })], r.prototype, "height", 2), a([(0, n.query)("#dialog")], r.prototype, "dialog", 2), a([(0, n.query)("#iframe")], r.prototype, "iframe", 2), a([(0, n.query)("#video")], r.prototype, "video", 2), a([(0, n.query)("#canvas")], r.prototype, "canvas", 2), a([(0, n.query)("#script")], r.prototype, "script", 2), a([(0, n.state)()], r.prototype, "_settingsActive", 2), a([(0, n.state)()], r.prototype, "_blurhashShouldBeVisible", 2), a([(0, n.state)()], r.prototype, "_overlayActive", 2);
 customElements.get("mave-component") || customElements.define("mave-component", r);
