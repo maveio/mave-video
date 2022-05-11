@@ -1,8 +1,8 @@
 {
   "name": "@maveio/mave-vue",
-  "version": "0.0.1-beta.3",
-  "main": "./dist/mave-vue.umd.js",
-  "module": "./dist/mave-vue.es.js",
+  "version": "0.0.1-beta.4",
+  "main": "./dist/mave-vue.es.js",
+  "module": "./dist/mave-vue.cjs.js",
   "license": "MIT",
   "scripts": {
     "storybook": "start-storybook --ci -p 6008",
