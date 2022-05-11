@@ -15,6 +15,7 @@ interface MaveProps {
     className?: string;
     style?: string;
 }
+
 declare const Mave: (props: MaveProps) => JSX.Element;
 
-export { Mave, MaveProps };
+export { Mave };

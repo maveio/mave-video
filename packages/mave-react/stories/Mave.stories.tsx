@@ -1,6 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Mave, MaveProps } from "../src/Mave";
+import { Mave } from "../src/Mave";
+import { MaveProps } from "../../props/Mave";
 
 export default {
   title: "mave/Mave",
