@@ -1,3 +1,4 @@
 import Vue from "vue";
+
 // @ts-ignore
-export * from "./Mave.vue";
+export { default as Mave } from "./Mave.vue";

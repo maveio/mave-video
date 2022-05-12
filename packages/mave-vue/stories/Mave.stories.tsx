@@ -1,5 +1,5 @@
 // @ts-ignore
-import Mave from "../src/Mave.vue";
+import { Mave } from "../src/index";
 import type { MaveProps } from "../../props/Mave";
 
 export default {
