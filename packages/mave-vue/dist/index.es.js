@@ -20,31 +20,31 @@ var b = Object.defineProperty;
 var w = Object.getOwnPropertyDescriptor;
 var T = Object.getOwnPropertyNames, y = Object.getOwnPropertySymbols;
 var k = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
-var _ = (o, s, e) => s in o ? b(o, s, { enumerable: true, configurable: true, writable: true, value: e }) : o[s] = e, E = (o, s) => {
-  for (var e in s || (s = {}))
-    k.call(s, e) && _(o, e, s[e]);
+var _ = (o, i, e) => i in o ? b(o, i, { enumerable: true, configurable: true, writable: true, value: e }) : o[i] = e, $ = (o, i) => {
+  for (var e in i || (i = {}))
+    k.call(i, e) && _(o, e, i[e]);
   if (y)
-    for (var e of y(s))
-      S.call(s, e) && _(o, e, s[e]);
+    for (var e of y(i))
+      S.call(i, e) && _(o, e, i[e]);
   return o;
 };
-var L = (o, s) => {
-  for (var e in s)
-    b(o, e, { get: s[e], enumerable: true });
-}, A = (o, s, e, t) => {
-  if (s && typeof s == "object" || typeof s == "function")
-    for (let i of T(s))
-      !k.call(o, i) && i !== e && b(o, i, { get: () => s[i], enumerable: !(t = w(s, i)) || t.enumerable });
+var L = (o, i) => {
+  for (var e in i)
+    b(o, e, { get: i[e], enumerable: true });
+}, A = (o, i, e, t) => {
+  if (i && typeof i == "object" || typeof i == "function")
+    for (let s of T(i))
+      !k.call(o, s) && s !== e && b(o, s, { get: () => i[s], enumerable: !(t = w(i, s)) || t.enumerable });
   return o;
 };
-var F = (o) => A(b({}, "__esModule", { value: true }), o), a = (o, s, e, t) => {
-  for (var i = t > 1 ? void 0 : t ? w(s, e) : s, l = o.length - 1, h; l >= 0; l--)
-    (h = o[l]) && (i = (t ? h(s, e, i) : h(i)) || i);
-  return t && i && b(s, e, i), i;
+var U = (o) => A(b({}, "__esModule", { value: true }), o), a = (o, i, e, t) => {
+  for (var s = t > 1 ? void 0 : t ? w(i, e) : i, l = o.length - 1, h; l >= 0; l--)
+    (h = o[l]) && (s = (t ? h(i, e, s) : h(s)) || s);
+  return t && s && b(i, e, s), s;
 };
-var U = {};
-L(U, { Config: () => d, MaveComponent: () => r });
-module.exports = F(U);
+var z = {};
+L(z, { Config: () => d, MaveComponent: () => r });
+module.exports = U(z);
 var d = class {
   constructor() {
     this._baseUrl = "mave.io";
@@ -55,12 +55,12 @@ var d = class {
   get baseUrl() {
     return this._baseUrl;
   }
-  set baseUrl(s) {
-    this._baseUrl = s;
+  set baseUrl(i) {
+    this._baseUrl = i;
   }
 };
 var v = require("lit"), n = require("lit/decorators.js");
-var $ = require("lit"), x = $.css`
+var E = require("lit"), x = E.css`
   dialog {
     position: relative;
     display: flex;
@@ -231,7 +231,7 @@ c.styles = u.css`
     }
   `, a([(0, m.property)({ type: String })], c.prototype, "embed", 2), a([(0, m.query)("#iframe")], c.prototype, "iframe", 2), a([(0, m.state)()], c.prototype, "_ghostActive", 2), a([(0, m.state)()], c.prototype, "_loaded", 2), a([(0, m.state)()], c.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", c);
-var r = class extends v.LitElement {
+var F = crypto.getRandomValues(new Uint8Array(21)).reduce((o, i) => o += (i &= 63) < 36 ? i.toString(36) : i < 62 ? (i - 26).toString(36).toUpperCase() : i < 63 ? "_" : "-", ""), r = class extends v.LitElement {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -256,7 +256,7 @@ var r = class extends v.LitElement {
   initializeVideo() {
     if (!this.loadeddata && this.video && this.video.readyState >= 1 && (setTimeout(() => {
       this.blurhash && (this._blurhashShouldBeVisible = false);
-    }, 500), this.loadeddata = true), !this.canPlay) {
+    }, 750), this.loadeddata = true), !this.canPlay) {
       let e = () => {
         this._iframeReady || (this.sendMessage("mave:video_canplay"), setTimeout(e.bind(this), 25), this.canPlay = true);
       };
@@ -273,8 +273,8 @@ var r = class extends v.LitElement {
         case "progress":
           (!this.canPlay || !this.loadeddata) && this.initializeVideo();
           try {
-            let t = this.video.buffered.length - 1, i = Math.round(this.video.buffered.end(t) / this.video.duration * 100);
-            this.sendMessage("mave:video_progress", { buffer: i });
+            let t = this.video.buffered.length - 1, s = Math.round(this.video.buffered.end(t) / this.video.duration * 100);
+            this.sendMessage("mave:video_progress", { buffer: s });
           } catch {
           }
           break;
@@ -298,9 +298,9 @@ var r = class extends v.LitElement {
   }
   messageHandler(e) {
     var l;
-    let { data: t } = e, { message: i } = t;
+    let { data: t } = e, { message: s } = t;
     if (!(!this.isConnected || !t || t.hash != this.embed))
-      switch (i) {
+      switch (s) {
         case "mave:player_ready":
           if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
             let p = this.autoplay ? 0 : this.video.currentTime;
@@ -327,7 +327,7 @@ var r = class extends v.LitElement {
           }
           break;
         case "mave:open_popup_overlay":
-          this._overlayActive = true, this.dialog.showModal(), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
+          this._overlayActive = true, this._blurhashShouldBeVisible && (this._blurhashShouldBeVisible = false), this.dialog.showModal(), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
           break;
         case "mave:close_popup_overlay":
           this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
@@ -373,14 +373,18 @@ var r = class extends v.LitElement {
     if (this._overlayActive && (e.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
       e.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
     else if (this.aspectRatio) {
-      let [t, i] = this.aspectRatio.split(":");
-      e.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t} / ${i}; width: 100%; min-width: 320px; min-height: 180px; }`;
+      let [t, s] = this.aspectRatio.split(":");
+      e.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t} / ${s}; width: 100%; min-width: 320px; min-height: 180px; }`;
     } else
       e.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
     return e;
   }
   closeDialog() {
     this._overlayActive = false, this.sendMessage("mave:closing_overlay");
+  }
+  poster() {
+    var e;
+    return `${(e = this.src) == null ? void 0 : e.replace("stream", "image")}/thumbnail.jpg?time=0`;
   }
   render() {
     return v.html`
@@ -404,6 +408,7 @@ var r = class extends v.LitElement {
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
+                .poster=${this.poster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
@@ -426,13 +431,13 @@ var r = class extends v.LitElement {
     `;
   }
   generateUrl() {
-    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}`;
+    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${F}`;
   }
   sendMessage(e, t = {}) {
     if (!this.iframe.contentWindow || !this.video)
       return;
-    let i = E({ message: e }, t);
-    this.iframe.contentWindow.postMessage(i, "*");
+    let s = $({ message: e }, t);
+    this.iframe.contentWindow.postMessage(s, "*");
   }
   openFullscreen() {
     document.fullscreenElement || (this.requestFullscreen ? this.requestFullscreen() : this.dialog.webkitRequestFullScreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
@@ -443,8 +448,8 @@ var r = class extends v.LitElement {
   renderCanvas() {
     if (!this.blurhash || !this._blurhashShouldBeVisible)
       return;
-    let e = document.createElement("canvas"), t = (0, H.decode)(this.blurhash, 320, 180), i = e.getContext("2d"), l = i == null ? void 0 : i.createImageData(320, 180);
-    return l == null || l.data.set(t), l && (i == null || i.putImageData(l, 0, 0)), e;
+    let e = document.createElement("canvas"), t = (0, H.decode)(this.blurhash, 320, 180), s = e.getContext("2d"), l = s == null ? void 0 : s.createImageData(320, 180);
+    return l == null || l.data.set(t), l && (s == null || s.putImageData(l, 0, 0)), e;
   }
   timeUpdate() {
     this._animationFrame = requestAnimationFrame(() => {
@@ -469,7 +474,7 @@ var r = class extends v.LitElement {
   visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow)
       return;
-    let { top: e, bottom: t } = this.iframe.getBoundingClientRect(), i = window.innerHeight || document.documentElement.clientHeight, l = (e > 0 || t > 0) && e < i;
+    let { top: e, bottom: t } = this.iframe.getBoundingClientRect(), s = window.innerHeight || document.documentElement.clientHeight, l = (e > 0 || t > 0) && e < s;
     this.sendMessage(l ? "mave:video_in_viewport" : "mave:video_out_viewport");
   }
 };

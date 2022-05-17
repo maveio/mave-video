@@ -65,6 +65,7 @@ declare class MaveComponent extends LitElement {
     messageHandler(event: IEvent): void;
     generateStyle(): HTMLStyleElement;
     closeDialog(): void;
+    poster(): string;
     render(): lit_html.TemplateResult<1>;
     private generateUrl;
     private sendMessage;

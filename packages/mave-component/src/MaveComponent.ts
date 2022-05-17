@@ -4,7 +4,22 @@ import { Config } from "../../config/config";
 import { style } from "./style";
 import { decode } from "@fpapado/blurhash";
 import "./SettingsComponent";
-// import { nanoid } from 'nanoid';
+
+// (c) nanoid.js
+let nanoid = crypto
+  .getRandomValues(new Uint8Array(21))
+  .reduce(
+    (t, e) =>
+      (t +=
+        (e &= 63) < 36
+          ? e.toString(36)
+          : e < 62
+          ? (e - 26).toString(36).toUpperCase()
+          : e < 63
+          ? "_"
+          : "-"),
+    ""
+  );
 
 interface IEvent extends Event {
   data: {
@@ -119,7 +134,7 @@ export class MaveComponent extends LitElement {
     if (!this.loadeddata && this.video && this.video.readyState >= 1) {
       setTimeout(() => {
         if (this.blurhash) this._blurhashShouldBeVisible = false;
-      }, 500);
+      }, 750);
       this.loadeddata = true;
     }
 
@@ -241,6 +256,8 @@ export class MaveComponent extends LitElement {
         break;
       case "mave:open_popup_overlay":
         this._overlayActive = true;
+        if (this._blurhashShouldBeVisible)
+          this._blurhashShouldBeVisible = false;
         // @ts-ignore
         this.dialog.showModal();
 
@@ -343,6 +360,10 @@ export class MaveComponent extends LitElement {
     this.sendMessage("mave:closing_overlay");
   }
 
+  poster() {
+    return `${this.src?.replace("stream", "image")}/thumbnail.jpg?time=0`;
+  }
+
   render() {
     return html`
       ${this.generateStyle()}
@@ -366,6 +387,7 @@ export class MaveComponent extends LitElement {
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
+                .poster=${this.poster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
@@ -402,7 +424,7 @@ export class MaveComponent extends LitElement {
       } else if (this.display_name) {
         return `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}`;
       } else {
-        return `https://${this.baseUrl}/e/${this.embed}`;
+        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${nanoid}`;
       }
     }
   }
