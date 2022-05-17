@@ -1,9 +1,14 @@
 {
   "name": "@maveio/mave-react",
-  "version": "0.0.1-beta.26",
+  "version": "0.0.1-beta.27",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.mjs"
+  },
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "storybook": "start-storybook --ci -p 6007",

@@ -1,6 +1,6 @@
 {
   "name": "@maveio/mave-vue",
-  "version": "0.0.1-beta.8",
+  "version": "0.0.1-beta.9",
   "files": [
     "dist"
   ],
@@ -13,6 +13,7 @@
       "require": "./dist/index.umd.js"
     }
   },
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "storybook": "start-storybook --ci -p 6008",

@@ -1,5 +1,9 @@
+var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -14,9 +18,30 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.tsx
+var src_exports = {};
+__export(src_exports, {
+  Mave: () => Mave
+});
+module.exports = __toCommonJS(src_exports);
 
 // src/Mave.tsx
-import React, { useEffect, useState } from "react";
+var import_react = __toESM(require("react"), 1);
 
 // ../config/config.ts
 var Config = class {
@@ -38,18 +63,18 @@ var Config = class {
 };
 
 // src/Mave.tsx
-import "@maveio/mave-component";
+var import_mave_component = require("@maveio/mave-component");
 var Mave = (props) => {
-  const [autoplay, setAutoplay] = useState(void 0);
-  const [loop, setLoop] = useState(void 0);
-  const [settingsAspectRatio, setSettingsAspectRatio] = useState(void 0);
-  const [settingsFloat, setSettingsFloat] = useState(void 0);
-  const [videoBlurHash, setVideoBlurHash] = useState(void 0);
-  const [videoSource, setVideoSource] = useState(void 0);
-  const [videoAspectRatio, setVideoAspectRatio] = useState(void 0);
-  const [height, setHeight] = useState(void 0);
-  const [width, setWidth] = useState(void 0);
-  useEffect(() => {
+  const [autoplay, setAutoplay] = (0, import_react.useState)(void 0);
+  const [loop, setLoop] = (0, import_react.useState)(void 0);
+  const [settingsAspectRatio, setSettingsAspectRatio] = (0, import_react.useState)(void 0);
+  const [settingsFloat, setSettingsFloat] = (0, import_react.useState)(void 0);
+  const [videoBlurHash, setVideoBlurHash] = (0, import_react.useState)(void 0);
+  const [videoSource, setVideoSource] = (0, import_react.useState)(void 0);
+  const [videoAspectRatio, setVideoAspectRatio] = (0, import_react.useState)(void 0);
+  const [height, setHeight] = (0, import_react.useState)(void 0);
+  const [width, setWidth] = (0, import_react.useState)(void 0);
+  (0, import_react.useEffect)(() => {
     const url = `https://${Config.getInstance().baseUrl}/${props.embed}/json`;
     const fetchData = async () => {
       try {
@@ -95,10 +120,11 @@ var Mave = (props) => {
   if (settingsAspectRatio || videoAspectRatio) {
     attributes.aspectRatio = settingsAspectRatio || videoAspectRatio;
   }
-  return /* @__PURE__ */ React.createElement("mave-component", __spreadValues({
+  return /* @__PURE__ */ import_react.default.createElement("mave-component", __spreadValues({
     class: attributes.className
   }, attributes));
 };
-export {
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
   Mave
-};
+});
