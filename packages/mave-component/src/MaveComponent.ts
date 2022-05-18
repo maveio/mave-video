@@ -314,7 +314,12 @@ export class MaveComponent extends LitElement {
         this.loop = data.loop;
         this.autoplay = data.autoplay_enabled;
 
-        if (this.autoplay && this.video?.paused) this.video.play();
+        if (
+          this.autoplay &&
+          this.video?.paused &&
+          this.video.currentTime < this.video.duration
+        )
+          this.video.play();
         this.visibilityHandler();
 
         break;
@@ -376,6 +381,9 @@ export class MaveComponent extends LitElement {
         ${this.src
           ? html`
               ${this.initiateScript()}
+              ${this._blurhashShouldBeVisible
+                ? html` <img class="poster" .src=${this.poster()} /> `
+                : ""}
 
               <video
                 id="video"
@@ -387,7 +395,6 @@ export class MaveComponent extends LitElement {
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
-                .poster=${this.poster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}

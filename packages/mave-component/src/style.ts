@@ -16,7 +16,9 @@ export const style = css`
     background: transparent;
   }
 
-  canvas {
+  canvas,
+  .poster {
+    transform: scale(1.01);
     position: absolute;
     top: 0;
     width: 100%;

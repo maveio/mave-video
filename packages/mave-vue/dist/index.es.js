@@ -853,13 +853,13 @@ const decode = (blurhash, width, height, punch) => {
 var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
-var H = Object.prototype.hasOwnProperty, T = Object.prototype.propertyIsEnumerable;
+var T = Object.prototype.hasOwnProperty, H = Object.prototype.propertyIsEnumerable;
 var w = (n2, a2, e2) => a2 in n2 ? k(n2, a2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[a2] = e2, $ = (n2, a2) => {
   for (var e2 in a2 || (a2 = {}))
-    H.call(a2, e2) && w(n2, e2, a2[e2]);
+    T.call(a2, e2) && w(n2, e2, a2[e2]);
   if (_)
     for (var e2 of _(a2))
-      T.call(a2, e2) && w(n2, e2, a2[e2]);
+      H.call(a2, e2) && w(n2, e2, a2[e2]);
   return n2;
 };
 var i = (n2, a2, e2, t2) => {
@@ -897,7 +897,9 @@ var E = r$2`
     background: transparent;
   }
 
-  canvas {
+  canvas,
+  .poster {
+    transform: scale(1.01);
     position: absolute;
     top: 0;
     width: 100%;
@@ -1050,7 +1052,7 @@ c.styles = r$2`
     }
   `, i([e({ type: String })], c.prototype, "embed", 2), i([i$1("#iframe")], c.prototype, "iframe", 2), i([t()], c.prototype, "_ghostActive", 2), i([t()], c.prototype, "_loaded", 2), i([t()], c.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", c);
-var R = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 &= 63) < 36 ? a2.toString(36) : a2 < 62 ? (a2 - 26).toString(36).toUpperCase() : a2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 &= 63) < 36 ? a2.toString(36) : a2 < 62 ? (a2 - 26).toString(36).toUpperCase() : a2 < 63 ? "_" : "-", ""), s = class extends s$1 {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -1175,7 +1177,7 @@ var R = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
           y && y.remove();
           break;
         case "mave:update_embed_settings":
-          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((o2 = this.video) == null ? void 0 : o2.paused) && this.video.play(), this.visibilityHandler();
+          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((o2 = this.video) == null ? void 0 : o2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
           break;
         case "mave:request_in_viewport":
           setTimeout(() => {
@@ -1216,6 +1218,7 @@ var R = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
         ${this.renderCanvas()}
         ${this.src ? $$1`
               ${this.initiateScript()}
+              ${this._blurhashShouldBeVisible ? $$1` <img class="poster" .src=${this.poster()} /> ` : ""}
 
               <video
                 id="video"
@@ -1227,7 +1230,6 @@ var R = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
-                .poster=${this.poster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
@@ -1250,7 +1252,7 @@ var R = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
     `;
   }
   generateUrl() {
-    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${R}`;
+    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${B}`;
   }
   sendMessage(e2, t2 = {}) {
     if (!this.iframe.contentWindow || !this.video)
