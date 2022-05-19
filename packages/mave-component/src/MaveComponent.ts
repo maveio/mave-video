@@ -93,6 +93,8 @@ export class MaveComponent extends LitElement {
 
   private _animationFrame?: number;
 
+  private _bitrate?: number;
+
   private baseUrl: string = Config.getInstance().baseUrl;
 
   private _globalStyle?: string;
@@ -179,7 +181,7 @@ export class MaveComponent extends LitElement {
               ? 0
               : this.video.currentTime;
 
-          this.sendMessage("mave:video_play", { currentTime: time });
+          this.sendMessage("mave:video_play", { currentTime: time, bitrate: this._bitrate });
 
           this._initialPlayEventTriggered = true;
         }
@@ -228,7 +230,7 @@ export class MaveComponent extends LitElement {
         ) {
           const time = this.autoplay ? 0 : this.video.currentTime;
 
-          this.sendMessage("mave:video_play", { currentTime: time });
+          this.sendMessage("mave:video_play", { currentTime: time, bitrate: this._bitrate });
           this._initialPlayEventTriggered = true;
         }
 
@@ -499,12 +501,27 @@ export class MaveComponent extends LitElement {
 
     if (this.video.canPlayType("application/vnd.apple.mpegurl")) {
       this.video.src = this.src;
+
+      // no bitrate detected
+
       // @ts-ignore
     } else if (Hls.isSupported()) {
       // @ts-ignore
       const hls = new Hls();
       hls.loadSource(this.src);
       hls.attachMedia(this.video);
+      let levels : any = []
+      // @ts-ignore
+      hls.on(Hls.Events.MANIFEST_LOADED, (_, data: any) => {  
+        levels = data.levels.reverse();
+      });
+      // @ts-ignore
+      hls.on(Hls.Events.LEVEL_LOADED, (_, data: any) => {
+        if(this._bitrate != levels[data.level].bitrate) {
+          this._bitrate = levels[data.level].bitrate
+          this.sendMessage("mave:bitrate", { bitrate: this._bitrate });
+        }
+      });
       hls.subtitleTrack = 0;
       hls.subtitleDisplay = true;
     }
