@@ -382,7 +382,7 @@ export class MaveComponent extends LitElement {
           ? html`
               ${this.initiateScript()}
               ${this._blurhashShouldBeVisible
-                ? html` <img class="poster" .src=${this.poster()} /> `
+                ? html` <img class="poster" .src=${this.poster()} style="filter: contrast(1.05); filter: brightness(1.1);" /> `
                 : ""}
 
               <video
