@@ -41,7 +41,7 @@ class Config {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const t$2 = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, e$3 = Symbol(), n$4 = /* @__PURE__ */ new Map();
-class s$4 {
+class s$3 {
   constructor(t2, n2) {
     if (this._$cssResult$ = true, n2 !== e$3)
       throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
@@ -55,7 +55,7 @@ class s$4 {
     return this.cssText;
   }
 }
-const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t2, ...n2) => {
+const o$4 = (t2) => new s$3(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t2, ...n2) => {
   const o2 = t2.length === 1 ? t2[0] : n2.reduce((e2, n3, s2) => e2 + ((t3) => {
     if (t3._$cssResult$ === true)
       return t3.cssText;
@@ -63,13 +63,13 @@ const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
       return t3;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + t3 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(n3) + t2[s2 + 1], t2[0]);
-  return new s$4(o2, e$3);
+  return new s$3(o2, e$3);
 }, i$4 = (e2, n2) => {
   t$2 ? e2.adoptedStyleSheets = n2.map((t2) => t2 instanceof CSSStyleSheet ? t2 : t2.styleSheet) : n2.forEach((t2) => {
     const n3 = document.createElement("style"), s2 = window.litNonce;
     s2 !== void 0 && n3.setAttribute("nonce", s2), n3.textContent = t2.cssText, e2.appendChild(n3);
   });
-}, S$1 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+}, S$2 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
   let e2 = "";
   for (const n2 of t3.cssRules)
     e2 += n2.cssText;
@@ -80,8 +80,8 @@ const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var s$3;
-const e$2 = window.trustedTypes, r$1 = e$2 ? e$2.emptyScript : "", h$1 = window.reactiveElementPolyfillSupport, o$3 = { toAttribute(t2, i2) {
+var s$2;
+const e$2 = window.trustedTypes, r$1 = e$2 ? e$2.emptyScript : "", h$2 = window.reactiveElementPolyfillSupport, o$3 = { toAttribute(t2, i2) {
   switch (i2) {
     case Boolean:
       t2 = t2 ? r$1 : null;
@@ -110,7 +110,7 @@ const e$2 = window.trustedTypes, r$1 = e$2 ? e$2.emptyScript : "", h$1 = window.
   }
   return s2;
 } }, n$3 = (t2, i2) => i2 !== t2 && (i2 == i2 || t2 == t2), l$2 = { attribute: true, type: String, converter: o$3, reflect: false, hasChanged: n$3 };
-class a$1 extends HTMLElement {
+class a$2 extends HTMLElement {
   constructor() {
     super(), this._$Et = /* @__PURE__ */ new Map(), this.isUpdatePending = false, this.hasUpdated = false, this._$Ei = null, this.o();
   }
@@ -160,9 +160,9 @@ class a$1 extends HTMLElement {
     if (Array.isArray(i2)) {
       const e2 = new Set(i2.flat(1 / 0).reverse());
       for (const i3 of e2)
-        s2.unshift(S$1(i3));
+        s2.unshift(S$2(i3));
     } else
-      i2 !== void 0 && s2.push(S$1(i2));
+      i2 !== void 0 && s2.push(S$2(i2));
     return s2;
   }
   static _$Eh(t2, i2) {
@@ -289,40 +289,40 @@ class a$1 extends HTMLElement {
   firstUpdated(t2) {
   }
 }
-a$1.finalized = true, a$1.elementProperties = /* @__PURE__ */ new Map(), a$1.elementStyles = [], a$1.shadowRootOptions = { mode: "open" }, h$1 == null || h$1({ ReactiveElement: a$1 }), ((s$3 = globalThis.reactiveElementVersions) !== null && s$3 !== void 0 ? s$3 : globalThis.reactiveElementVersions = []).push("1.3.1");
+a$2.finalized = true, a$2.elementProperties = /* @__PURE__ */ new Map(), a$2.elementStyles = [], a$2.shadowRootOptions = { mode: "open" }, h$2 == null || h$2({ ReactiveElement: a$2 }), ((s$2 = globalThis.reactiveElementVersions) !== null && s$2 !== void 0 ? s$2 : globalThis.reactiveElementVersions = []).push("1.3.1");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
 var t$1;
-const i$3 = globalThis.trustedTypes, s$2 = i$3 ? i$3.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$1 = `lit$${(Math.random() + "").slice(9)}$`, o$2 = "?" + e$1, n$2 = `<${o$2}>`, l$1 = document, h = (t2 = "") => l$1.createComment(t2), r = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$1 = Array.isArray, u = (t2) => {
+const i$3 = globalThis.trustedTypes, s$1 = i$3 ? i$3.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$1 = `lit$${(Math.random() + "").slice(9)}$`, o$2 = "?" + e$1, n$2 = `<${o$2}>`, l$1 = document, h$1 = (t2 = "") => l$1.createComment(t2), r = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$1 = Array.isArray, u = (t2) => {
   var i2;
   return d$1(t2) || typeof ((i2 = t2) === null || i2 === void 0 ? void 0 : i2[Symbol.iterator]) == "function";
-}, c$1 = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T$1 = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
+}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a$1 = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T$1 = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
   var e2, o2;
   const n2 = (e2 = s2 == null ? void 0 : s2.renderBefore) !== null && e2 !== void 0 ? e2 : i2;
   let l2 = n2._$litPart$;
   if (l2 === void 0) {
     const t3 = (o2 = s2 == null ? void 0 : s2.renderBefore) !== null && o2 !== void 0 ? o2 : null;
-    n2._$litPart$ = l2 = new N(i2.insertBefore(h(), t3), t3, void 0, s2 != null ? s2 : {});
+    n2._$litPart$ = l2 = new N(i2.insertBefore(h$1(), t3), t3, void 0, s2 != null ? s2 : {});
   }
   return l2._$AI(t2), l2;
 }, A = l$1.createTreeWalker(l$1, 129, null, false), C = (t2, i2) => {
   const o2 = t2.length - 1, l2 = [];
-  let h2, r2 = i2 === 2 ? "<svg>" : "", d2 = c$1;
+  let h2, r2 = i2 === 2 ? "<svg>" : "", d2 = c;
   for (let i3 = 0; i3 < o2; i3++) {
     const s2 = t2[i3];
     let o3, u3, p2 = -1, $2 = 0;
     for (; $2 < s2.length && (d2.lastIndex = $2, u3 = d2.exec(s2), u3 !== null); )
-      $2 = d2.lastIndex, d2 === c$1 ? u3[1] === "!--" ? d2 = v : u3[1] !== void 0 ? d2 = a : u3[2] !== void 0 ? (g.test(u3[2]) && (h2 = RegExp("</" + u3[2], "g")), d2 = f) : u3[3] !== void 0 && (d2 = f) : d2 === f ? u3[0] === ">" ? (d2 = h2 != null ? h2 : c$1, p2 = -1) : u3[1] === void 0 ? p2 = -2 : (p2 = d2.lastIndex - u3[2].length, o3 = u3[1], d2 = u3[3] === void 0 ? f : u3[3] === '"' ? m : _$1) : d2 === m || d2 === _$1 ? d2 = f : d2 === v || d2 === a ? d2 = c$1 : (d2 = f, h2 = void 0);
+      $2 = d2.lastIndex, d2 === c ? u3[1] === "!--" ? d2 = v : u3[1] !== void 0 ? d2 = a$1 : u3[2] !== void 0 ? (g.test(u3[2]) && (h2 = RegExp("</" + u3[2], "g")), d2 = f) : u3[3] !== void 0 && (d2 = f) : d2 === f ? u3[0] === ">" ? (d2 = h2 != null ? h2 : c, p2 = -1) : u3[1] === void 0 ? p2 = -2 : (p2 = d2.lastIndex - u3[2].length, o3 = u3[1], d2 = u3[3] === void 0 ? f : u3[3] === '"' ? m : _$1) : d2 === m || d2 === _$1 ? d2 = f : d2 === v || d2 === a$1 ? d2 = c : (d2 = f, h2 = void 0);
     const y = d2 === f && t2[i3 + 1].startsWith("/>") ? " " : "";
-    r2 += d2 === c$1 ? s2 + n$2 : p2 >= 0 ? (l2.push(o3), s2.slice(0, p2) + "$lit$" + s2.slice(p2) + e$1 + y) : s2 + e$1 + (p2 === -2 ? (l2.push(void 0), i3) : y);
+    r2 += d2 === c ? s2 + n$2 : p2 >= 0 ? (l2.push(o3), s2.slice(0, p2) + "$lit$" + s2.slice(p2) + e$1 + y) : s2 + e$1 + (p2 === -2 ? (l2.push(void 0), i3) : y);
   }
   const u2 = r2 + (t2[o2] || "<?>") + (i2 === 2 ? "</svg>" : "");
   if (!Array.isArray(t2) || !t2.hasOwnProperty("raw"))
     throw Error("invalid template strings array");
-  return [s$2 !== void 0 ? s$2.createHTML(u2) : u2, l2];
+  return [s$1 !== void 0 ? s$1.createHTML(u2) : u2, l2];
 };
 class E$1 {
   constructor({ strings: t2, _$litType$: s2 }, n2) {
@@ -343,7 +343,7 @@ class E$1 {
               const s3 = a2[d2++];
               if (t3.push(i2), s3 !== void 0) {
                 const t4 = l2.getAttribute(s3.toLowerCase() + "$lit$").split(e$1), i3 = /([.?@])?(.*)/.exec(s3);
-                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H$1 : i3[1] === "@" ? I : S });
+                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H : i3[1] === "@" ? I : S$1 });
               } else
                 c2.push({ type: 6, index: r2 });
             }
@@ -355,8 +355,8 @@ class E$1 {
           if (s3 > 0) {
             l2.textContent = i$3 ? i$3.emptyScript : "";
             for (let i2 = 0; i2 < s3; i2++)
-              l2.append(t3[i2], h()), A.nextNode(), c2.push({ type: 2, index: ++r2 });
-            l2.append(t3[s3], h());
+              l2.append(t3[i2], h$1()), A.nextNode(), c2.push({ type: 2, index: ++r2 });
+            l2.append(t3[s3], h$1());
           }
         }
       } else if (l2.nodeType === 8)
@@ -383,7 +383,7 @@ function P(t2, i2, s2 = t2, e2) {
   const u2 = r(i2) ? void 0 : i2._$litDirective$;
   return (d2 == null ? void 0 : d2.constructor) !== u2 && ((n2 = d2 == null ? void 0 : d2._$AO) === null || n2 === void 0 || n2.call(d2, false), u2 === void 0 ? d2 = void 0 : (d2 = new u2(t2), d2._$AT(t2, s2, e2)), e2 !== void 0 ? ((l2 = (h2 = s2)._$Cl) !== null && l2 !== void 0 ? l2 : h2._$Cl = [])[e2] = d2 : s2._$Cu = d2), d2 !== void 0 && (i2 = P(t2, d2._$AS(t2, i2.values), d2, e2)), i2;
 }
-class V {
+class V$1 {
   constructor(t2, i2) {
     this.v = [], this._$AN = void 0, this._$AD = t2, this._$AM = i2;
   }
@@ -451,7 +451,7 @@ class N {
     if (((i2 = this._$AH) === null || i2 === void 0 ? void 0 : i2._$AD) === o2)
       this._$AH.m(s2);
     else {
-      const t3 = new V(o2, this), i3 = t3.p(this.options);
+      const t3 = new V$1(o2, this), i3 = t3.p(this.options);
       t3.m(s2), this.k(i3), this._$AH = t3;
     }
   }
@@ -464,7 +464,7 @@ class N {
     const i2 = this._$AH;
     let s2, e2 = 0;
     for (const o2 of t2)
-      e2 === i2.length ? i2.push(s2 = new N(this.M(h()), this.M(h()), this, this.options)) : s2 = i2[e2], s2._$AI(o2), e2++;
+      e2 === i2.length ? i2.push(s2 = new N(this.M(h$1()), this.M(h$1()), this, this.options)) : s2 = i2[e2], s2._$AI(o2), e2++;
     e2 < i2.length && (this._$AR(s2 && s2._$AB.nextSibling, e2), i2.length = e2);
   }
   _$AR(t2 = this._$AA.nextSibling, i2) {
@@ -479,7 +479,7 @@ class N {
     this._$AM === void 0 && (this._$Cg = t2, (i2 = this._$AP) === null || i2 === void 0 || i2.call(this, t2));
   }
 }
-class S {
+class S$1 {
   constructor(t2, i2, s2, e2, o2) {
     this.type = 1, this._$AH = w$1, this._$AN = void 0, this.element = t2, this.name = i2, this._$AM = e2, this.options = o2, s2.length > 2 || s2[0] !== "" || s2[1] !== "" ? (this._$AH = Array(s2.length - 1).fill(new String()), this.strings = s2) : this._$AH = w$1;
   }
@@ -506,7 +506,7 @@ class S {
     t2 === w$1 ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t2 != null ? t2 : "");
   }
 }
-class M extends S {
+class M extends S$1 {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -515,7 +515,7 @@ class M extends S {
   }
 }
 const k$1 = i$3 ? i$3.emptyScript : "";
-class H$1 extends S {
+class H extends S$1 {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -523,7 +523,7 @@ class H$1 extends S {
     t2 && t2 !== w$1 ? this.element.setAttribute(this.name, k$1) : this.element.removeAttribute(this.name);
   }
 }
-class I extends S {
+class I extends S$1 {
   constructor(t2, i2, s2, e2, o2) {
     super(t2, i2, s2, e2, o2), this.type = 5;
   }
@@ -558,7 +558,7 @@ z == null || z(E$1, N), ((t$1 = globalThis.litHtmlVersions) !== null && t$1 !== 
  * SPDX-License-Identifier: BSD-3-Clause
  */
 var l, o$1;
-class s$1 extends a$1 {
+class s extends a$2 {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Dt = void 0;
   }
@@ -583,9 +583,9 @@ class s$1 extends a$1 {
     return b;
   }
 }
-s$1.finalized = true, s$1._$litElement$ = true, (l = globalThis.litElementHydrateSupport) === null || l === void 0 || l.call(globalThis, { LitElement: s$1 });
+s.finalized = true, s._$litElement$ = true, (l = globalThis.litElementHydrateSupport) === null || l === void 0 || l.call(globalThis, { LitElement: s });
 const n$1 = globalThis.litElementPolyfillSupport;
-n$1 == null || n$1({ LitElement: s$1 });
+n$1 == null || n$1({ LitElement: s });
 ((o$1 = globalThis.litElementVersions) !== null && o$1 !== void 0 ? o$1 : globalThis.litElementVersions = []).push("3.2.0");
 /**
  * @license
@@ -853,19 +853,19 @@ const decode = (blurhash, width, height, punch) => {
 var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
-var T = Object.prototype.hasOwnProperty, H = Object.prototype.propertyIsEnumerable;
-var w = (n2, a2, e2) => a2 in n2 ? k(n2, a2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[a2] = e2, $ = (n2, a2) => {
-  for (var e2 in a2 || (a2 = {}))
-    T.call(a2, e2) && w(n2, e2, a2[e2]);
+var T = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
+var w = (l2, r2, e2) => r2 in l2 ? k(l2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : l2[r2] = e2, E = (l2, r2) => {
+  for (var e2 in r2 || (r2 = {}))
+    T.call(r2, e2) && w(l2, e2, r2[e2]);
   if (_)
-    for (var e2 of _(a2))
-      H.call(a2, e2) && w(n2, e2, a2[e2]);
-  return n2;
+    for (var e2 of _(r2))
+      S.call(r2, e2) && w(l2, e2, r2[e2]);
+  return l2;
 };
-var i = (n2, a2, e2, t2) => {
-  for (var r2 = t2 > 1 ? void 0 : t2 ? x(a2, e2) : a2, o2 = n2.length - 1, h2; o2 >= 0; o2--)
-    (h2 = n2[o2]) && (r2 = (t2 ? h2(a2, e2, r2) : h2(r2)) || r2);
-  return t2 && r2 && k(a2, e2, r2), r2;
+var i = (l2, r2, e2, t2) => {
+  for (var s2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, n2 = l2.length - 1, c2; n2 >= 0; n2--)
+    (c2 = l2[n2]) && (s2 = (t2 ? c2(r2, e2, s2) : c2(s2)) || s2);
+  return t2 && s2 && k(r2, e2, s2), s2;
 };
 var d = class {
   constructor() {
@@ -877,11 +877,11 @@ var d = class {
   get baseUrl() {
     return this._baseUrl;
   }
-  set baseUrl(a2) {
-    this._baseUrl = a2;
+  set baseUrl(r2) {
+    this._baseUrl = r2;
   }
 };
-var E = r$2`
+var $ = r$2`
   dialog {
     position: relative;
     display: flex;
@@ -969,7 +969,7 @@ var E = r$2`
     background: transparent !important;
   }
 `;
-var c = class extends s$1 {
+var h = class extends s {
   constructor() {
     super(...arguments);
     this._ghostActive = true;
@@ -981,16 +981,23 @@ var c = class extends s$1 {
     super.connectedCallback(), setTimeout(() => {
       this._delayed = true;
     }, 250), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`), setTimeout(() => {
-      this._ghostActive = true;
+      this._ghostActive = true, this.dialog.showModal();
     }, 0), (e2 = this.iframe) == null || e2.addEventListener("load", this.iframeLoaded.bind(this));
   }
   disconnectedCallback() {
     var e2;
-    document.documentElement.setAttribute("style", this._globalStyle || ""), (e2 = this.iframe) == null || e2.removeEventListener("load", this.iframeLoaded.bind(this)), super.disconnectedCallback();
+    document.documentElement.setAttribute("style", this._globalStyle || ""), (e2 = this.iframe) == null || e2.removeEventListener("load", this.iframeLoaded.bind(this)), this.dialog.close(), super.disconnectedCallback();
+  }
+  dialogHandler(e2) {
+    e2.type == "close" && window.postMessage({ message: "mave:close_settings", hash: this.embed }, "*"), e2.target.nodeName === "DIALOG" && this.dialog.close();
   }
   render() {
     return $$1`
-      <div>
+      <dialog
+        id="dialog"
+        @close=${this.dialogHandler}
+        @click=${this.dialogHandler}
+      >
         <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
           <iframe
@@ -1003,14 +1010,28 @@ var c = class extends s$1 {
             class=${this._loaded && this._delayed ? "loaded" : "initial"}
           ></iframe>
         </div>
-      </div>
+      </dialog>
     `;
   }
   iframeLoaded() {
     this._loaded = true;
   }
 };
-c.styles = r$2`
+h.styles = r$2`
+    dialog {
+      position: relative;
+      display: flex;
+      float: right;
+      align-items: center;
+      border-width: 0;
+      background: transparent;
+      height: 100vh;
+    }
+
+    dialog::backdrop {
+      background: none;
+    }
+
     .ghost {
       background-color: #1c1917;
       width: 14rem;
@@ -1050,9 +1071,9 @@ c.styles = r$2`
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `, i([e({ type: String })], c.prototype, "embed", 2), i([i$1("#iframe")], c.prototype, "iframe", 2), i([t()], c.prototype, "_ghostActive", 2), i([t()], c.prototype, "_loaded", 2), i([t()], c.prototype, "_delayed", 2);
-customElements.get("mave-settings") || customElements.define("mave-settings", c);
-var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 &= 63) < 36 ? a2.toString(36) : a2 < 62 ? (a2 - 26).toString(36).toUpperCase() : a2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+  `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
+customElements.get("mave-settings") || customElements.define("mave-settings", h);
+var V = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), a = class extends s {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -1094,8 +1115,8 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
         case "progress":
           (!this.canPlay || !this.loadeddata) && this.initializeVideo();
           try {
-            let t2 = this.video.buffered.length - 1, r2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
-            this.sendMessage("mave:video_progress", { buffer: r2 });
+            let t2 = this.video.buffered.length - 1, s2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
+            this.sendMessage("mave:video_progress", { buffer: s2 });
           } catch {
           }
           break;
@@ -1103,7 +1124,7 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
           if (this._iframeReady) {
             this.timeUpdate();
             let t2 = this.autoplay && !this._initialPlayEventTriggered || this.video.currentTime < 1e-4 ? 0 : this.video.currentTime;
-            this.sendMessage("mave:video_play", { currentTime: t2 }), this._initialPlayEventTriggered = true;
+            this.sendMessage("mave:video_play", { currentTime: t2, bitrate: this._bitrate }), this._initialPlayEventTriggered = true;
           }
           break;
         case "timeupdate":
@@ -1118,32 +1139,32 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
       }
   }
   messageHandler(e2) {
-    var o2;
-    let { data: t2 } = e2, { message: r2 } = t2;
+    var n2;
+    let { data: t2 } = e2, { message: s2 } = t2;
     if (!(!this.isConnected || !t2 || t2.hash != this.embed))
-      switch (r2) {
+      switch (s2) {
         case "mave:player_ready":
           if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
             let m2 = this.autoplay ? 0 : this.video.currentTime;
-            this.sendMessage("mave:video_play", { currentTime: m2 }), this._initialPlayEventTriggered = true;
+            this.sendMessage("mave:video_play", { currentTime: m2, bitrate: this._bitrate }), this._initialPlayEventTriggered = true;
           }
           break;
         case "mave:player_event":
           if (!this.video)
             return;
-          let h2 = t2.event;
-          switch (Object.keys(h2)[0]) {
+          let c2 = t2.event;
+          switch (Object.keys(c2)[0]) {
             case "play":
-              h2.play ? this.video.play() : this.video.pause();
+              c2.play ? this.video.play() : this.video.pause();
               break;
             case "muted":
-              this.video.muted = h2.muted;
+              this.video.muted = c2.muted;
               break;
             case "volume":
-              this.video.volume = h2.volume;
+              this.video.volume = c2.volume;
               break;
             case "currentTime":
-              this.video.currentTime = h2.currentTime;
+              this.video.currentTime = c2.currentTime;
               break;
           }
           break;
@@ -1177,7 +1198,7 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
           y && y.remove();
           break;
         case "mave:update_embed_settings":
-          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((o2 = this.video) == null ? void 0 : o2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
+          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((n2 = this.video) == null ? void 0 : n2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
           break;
         case "mave:request_in_viewport":
           setTimeout(() => {
@@ -1194,8 +1215,8 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
     if (this._overlayActive && (e2.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
       e2.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
     else if (this.aspectRatio) {
-      let [t2, r2] = this.aspectRatio.split(":");
-      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${r2}; width: 100%; min-width: 320px; min-height: 180px; }`;
+      let [t2, s2] = this.aspectRatio.split(":");
+      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${s2}; width: 100%; min-width: 320px; min-height: 180px; }`;
     } else
       e2.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
     return e2;
@@ -1218,7 +1239,13 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
         ${this.renderCanvas()}
         ${this.src ? $$1`
               ${this.initiateScript()}
-              ${this._blurhashShouldBeVisible ? $$1` <img class="poster" .src=${this.poster()} /> ` : ""}
+              ${this._blurhashShouldBeVisible ? $$1`
+                    <img
+                      class="poster"
+                      .src=${this.poster()}
+                      style="filter: contrast(1.05); filter: brightness(1.1);"
+                    />
+                  ` : ""}
 
               <video
                 id="video"
@@ -1252,13 +1279,13 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
     `;
   }
   generateUrl() {
-    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${B}`;
+    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${V}`;
   }
   sendMessage(e2, t2 = {}) {
     if (!this.iframe.contentWindow || !this.video)
       return;
-    let r2 = $({ message: e2 }, t2);
-    this.iframe.contentWindow.postMessage(r2, "*");
+    let s2 = E({ message: e2 }, t2);
+    this.iframe.contentWindow.postMessage(s2, "*");
   }
   openFullscreen() {
     document.fullscreenElement || (this.requestFullscreen ? this.requestFullscreen() : this.dialog.webkitRequestFullScreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
@@ -1269,8 +1296,8 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
   renderCanvas() {
     if (!this.blurhash || !this._blurhashShouldBeVisible)
       return;
-    let e2 = document.createElement("canvas"), t2 = decode(this.blurhash, 320, 180), r2 = e2.getContext("2d"), o2 = r2 == null ? void 0 : r2.createImageData(320, 180);
-    return o2 == null || o2.data.set(t2), o2 && (r2 == null || r2.putImageData(o2, 0, 0)), e2;
+    let e2 = document.createElement("canvas"), t2 = decode(this.blurhash, 320, 180), s2 = e2.getContext("2d"), n2 = s2 == null ? void 0 : s2.createImageData(320, 180);
+    return n2 == null || n2.data.set(t2), n2 && (s2 == null || s2.putImageData(n2, 0, 0)), e2;
   }
   timeUpdate() {
     this._animationFrame = requestAnimationFrame(() => {
@@ -1287,7 +1314,13 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
         this.video.src = this.src;
       else if (Hls.isSupported()) {
         let e2 = new Hls();
-        e2.loadSource(this.src), e2.attachMedia(this.video), e2.subtitleTrack = 0, e2.subtitleDisplay = true;
+        e2.loadSource(this.src), e2.attachMedia(this.video);
+        let t2 = [];
+        e2.on(Hls.Events.MANIFEST_LOADED, (s2, n2) => {
+          t2 = n2.levels.reverse();
+        }), e2.on(Hls.Events.LEVEL_LOADED, (s2, n2) => {
+          this._bitrate != t2[n2.level].bitrate && (this._bitrate = t2[n2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
+        }), e2.subtitleTrack = 0, e2.subtitleDisplay = true;
       }
       this._hlsLoaded = true;
     }
@@ -1295,12 +1328,12 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
   visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow)
       return;
-    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), r2 = window.innerHeight || document.documentElement.clientHeight, o2 = (e2 > 0 || t2 > 0) && e2 < r2;
-    this.sendMessage(o2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
+    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), s2 = window.innerHeight || document.documentElement.clientHeight, n2 = (e2 > 0 || t2 > 0) && e2 < s2;
+    this.sendMessage(n2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
   }
 };
-s.styles = E, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2);
-customElements.get("mave-component") || customElements.define("mave-component", s);
+a.styles = $, i([e({ type: String })], a.prototype, "embed", 2), i([e({ type: String })], a.prototype, "reference_id", 2), i([e({ type: String })], a.prototype, "display_name", 2), i([e({ type: String })], a.prototype, "jwt", 2), i([e({ type: String })], a.prototype, "classname", 2), i([e({ type: Boolean })], a.prototype, "muted", 2), i([e({ type: Boolean })], a.prototype, "autoplay", 2), i([e({ type: Boolean })], a.prototype, "loop", 2), i([e({ type: String })], a.prototype, "src", 2), i([e({ type: String })], a.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], a.prototype, "aspectRatio", 2), i([e({ type: String })], a.prototype, "width", 2), i([e({ type: String })], a.prototype, "height", 2), i([i$1("#dialog")], a.prototype, "dialog", 2), i([i$1("#iframe")], a.prototype, "iframe", 2), i([i$1("#video")], a.prototype, "video", 2), i([i$1("#canvas")], a.prototype, "canvas", 2), i([i$1("#script")], a.prototype, "script", 2), i([t()], a.prototype, "_settingsActive", 2), i([t()], a.prototype, "_blurhashShouldBeVisible", 2), i([t()], a.prototype, "_overlayActive", 2);
+customElements.get("mave-component") || customElements.define("mave-component", a);
 const _hoisted_1 = ["src", "blurhash", "loop", "autoplay", "muted", "width", "height", "aspectRatio"];
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   props: {

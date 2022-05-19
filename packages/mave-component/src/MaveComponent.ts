@@ -181,7 +181,10 @@ export class MaveComponent extends LitElement {
               ? 0
               : this.video.currentTime;
 
-          this.sendMessage("mave:video_play", { currentTime: time, bitrate: this._bitrate });
+          this.sendMessage("mave:video_play", {
+            currentTime: time,
+            bitrate: this._bitrate,
+          });
 
           this._initialPlayEventTriggered = true;
         }
@@ -230,7 +233,10 @@ export class MaveComponent extends LitElement {
         ) {
           const time = this.autoplay ? 0 : this.video.currentTime;
 
-          this.sendMessage("mave:video_play", { currentTime: time, bitrate: this._bitrate });
+          this.sendMessage("mave:video_play", {
+            currentTime: time,
+            bitrate: this._bitrate,
+          });
           this._initialPlayEventTriggered = true;
         }
 
@@ -384,7 +390,13 @@ export class MaveComponent extends LitElement {
           ? html`
               ${this.initiateScript()}
               ${this._blurhashShouldBeVisible
-                ? html` <img class="poster" .src=${this.poster()} style="filter: contrast(1.05); filter: brightness(1.1);" /> `
+                ? html`
+                    <img
+                      class="poster"
+                      .src=${this.poster()}
+                      style="filter: contrast(1.05); filter: brightness(1.1);"
+                    />
+                  `
                 : ""}
 
               <video
@@ -510,15 +522,15 @@ export class MaveComponent extends LitElement {
       const hls = new Hls();
       hls.loadSource(this.src);
       hls.attachMedia(this.video);
-      let levels : any = []
+      let levels: any = [];
       // @ts-ignore
-      hls.on(Hls.Events.MANIFEST_LOADED, (_, data: any) => {  
+      hls.on(Hls.Events.MANIFEST_LOADED, (_, data: any) => {
         levels = data.levels.reverse();
       });
       // @ts-ignore
       hls.on(Hls.Events.LEVEL_LOADED, (_, data: any) => {
-        if(this._bitrate != levels[data.level].bitrate) {
-          this._bitrate = levels[data.level].bitrate
+        if (this._bitrate != levels[data.level].bitrate) {
+          this._bitrate = levels[data.level].bitrate;
           this.sendMessage("mave:bitrate", { bitrate: this._bitrate });
         }
       });

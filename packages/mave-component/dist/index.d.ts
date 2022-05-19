@@ -54,6 +54,7 @@ declare class MaveComponent extends LitElement {
     private _iframeReady;
     private _initialPlayEventTriggered;
     private _animationFrame?;
+    private _bitrate?;
     private baseUrl;
     private _globalStyle?;
     private canPlay;
