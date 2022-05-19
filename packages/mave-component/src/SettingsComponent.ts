@@ -5,6 +5,8 @@ import { Config } from "../../config/config";
 export class SettingsComponent extends LitElement {
   @property({ type: String }) embed!: string;
 
+  @query("#dialog") dialog!: HTMLDialogElement;
+
   @query("#iframe") iframe!: HTMLIFrameElement;
 
   @state() private _ghostActive: boolean = true;
@@ -16,6 +18,20 @@ export class SettingsComponent extends LitElement {
   private _globalStyle?: string;
 
   static styles = css`
+    dialog {
+      position: relative;
+      display: flex;
+      float: right;
+      align-items: center;
+      border-width: 0;
+      background: transparent;
+      height: 100vh;
+    }
+
+    dialog::backdrop {
+      background: none;
+    }
+
     .ghost {
       background-color: #1c1917;
       width: 14rem;
@@ -74,6 +90,9 @@ export class SettingsComponent extends LitElement {
     // workaround for animation
     setTimeout(() => {
       this._ghostActive = true;
+
+      // @ts-ignore
+      this.dialog.showModal();
     }, 0);
 
     this.iframe?.addEventListener("load", this.iframeLoaded.bind(this));
@@ -82,12 +101,35 @@ export class SettingsComponent extends LitElement {
   disconnectedCallback() {
     document.documentElement.setAttribute("style", this._globalStyle || "");
     this.iframe?.removeEventListener("load", this.iframeLoaded.bind(this));
+
+    // @ts-ignore
+    this.dialog.close();
+
     super.disconnectedCallback();
+  }
+
+  dialogHandler(event: Event) {
+    if (event.type == "close") {
+      window.postMessage(
+        { message: "mave:close_settings", hash: this.embed },
+        "*"
+      );
+    }
+
+    // @ts-ignore
+    if (event.target.nodeName === "DIALOG") {
+      // @ts-ignore
+      this.dialog.close();
+    }
   }
 
   render() {
     return html`
-      <div>
+      <dialog
+        id="dialog"
+        @close=${this.dialogHandler}
+        @click=${this.dialogHandler}
+      >
         <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
           <iframe
@@ -101,7 +143,7 @@ export class SettingsComponent extends LitElement {
             class=${this._loaded && this._delayed ? "loaded" : "initial"}
           ></iframe>
         </div>
-      </div>
+      </dialog>
     `;
   }
 
