@@ -15,7 +15,7 @@ export const style = css`
     margin: 0;
     background: transparent;
   }
-  
+
   dialog::backdrop {
     background: black;
   }
@@ -24,7 +24,7 @@ export const style = css`
     -webkit-animation: show 250ms ease-out normal;
   }
 
-  @-webkit-keyframes show{
+  @-webkit-keyframes show {
     from {
       opacity: 0;
       transform: scale(0.95);

@@ -854,17 +854,17 @@ var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
 var T = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
-var w = (l2, r2, e2) => r2 in l2 ? k(l2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : l2[r2] = e2, E = (l2, r2) => {
+var w = (o2, r2, e2) => r2 in o2 ? k(o2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : o2[r2] = e2, E = (o2, r2) => {
   for (var e2 in r2 || (r2 = {}))
-    T.call(r2, e2) && w(l2, e2, r2[e2]);
+    T.call(r2, e2) && w(o2, e2, r2[e2]);
   if (_)
     for (var e2 of _(r2))
-      S.call(r2, e2) && w(l2, e2, r2[e2]);
-  return l2;
+      S.call(r2, e2) && w(o2, e2, r2[e2]);
+  return o2;
 };
-var i = (l2, r2, e2, t2) => {
-  for (var s2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, n2 = l2.length - 1, c2; n2 >= 0; n2--)
-    (c2 = l2[n2]) && (s2 = (t2 ? c2(r2, e2, s2) : c2(s2)) || s2);
+var i = (o2, r2, e2, t2) => {
+  for (var s2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, n2 = o2.length - 1, c2; n2 >= 0; n2--)
+    (c2 = o2[n2]) && (s2 = (t2 ? c2(r2, e2, s2) : c2(s2)) || s2);
   return t2 && s2 && k(r2, e2, s2), s2;
 };
 var d = class {
@@ -895,6 +895,25 @@ var $ = r$2`
     padding: 0;
     margin: 0;
     background: transparent;
+  }
+
+  dialog::backdrop {
+    background: black;
+  }
+
+  dialog[open] {
+    -webkit-animation: show 250ms ease-out normal;
+  }
+
+  @-webkit-keyframes show {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 100;
+      transform: scale(1);
+    }
   }
 
   canvas,
@@ -1073,7 +1092,7 @@ h.styles = r$2`
     }
   `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", h);
-var V = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), a = class extends s {
+var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), a = class extends s {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
