@@ -69,7 +69,7 @@ const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
     const n3 = document.createElement("style"), s2 = window.litNonce;
     s2 !== void 0 && n3.setAttribute("nonce", s2), n3.textContent = t2.cssText, e2.appendChild(n3);
   });
-}, S$2 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+}, S$1 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
   let e2 = "";
   for (const n2 of t3.cssRules)
     e2 += n2.cssText;
@@ -160,9 +160,9 @@ class a$1 extends HTMLElement {
     if (Array.isArray(i2)) {
       const e2 = new Set(i2.flat(1 / 0).reverse());
       for (const i3 of e2)
-        s2.unshift(S$2(i3));
+        s2.unshift(S$1(i3));
     } else
-      i2 !== void 0 && s2.push(S$2(i2));
+      i2 !== void 0 && s2.push(S$1(i2));
     return s2;
   }
   static _$Eh(t2, i2) {
@@ -343,7 +343,7 @@ class E$1 {
               const s3 = a2[d2++];
               if (t3.push(i2), s3 !== void 0) {
                 const t4 = l2.getAttribute(s3.toLowerCase() + "$lit$").split(e$1), i3 = /([.?@])?(.*)/.exec(s3);
-                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H : i3[1] === "@" ? I : S$1 });
+                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H : i3[1] === "@" ? I : S });
               } else
                 c2.push({ type: 6, index: r2 });
             }
@@ -401,7 +401,7 @@ class V$1 {
     for (; d2 !== void 0; ) {
       if (h2 === d2.index) {
         let i3;
-        d2.type === 2 ? i3 = new N(n2, n2.nextSibling, this, t2) : d2.type === 1 ? i3 = new d2.ctor(n2, d2.name, d2.strings, this, t2) : d2.type === 6 && (i3 = new L(n2, this, t2)), this.v.push(i3), d2 = e2[++r2];
+        d2.type === 2 ? i3 = new N(n2, n2.nextSibling, this, t2) : d2.type === 1 ? i3 = new d2.ctor(n2, d2.name, d2.strings, this, t2) : d2.type === 6 && (i3 = new L$1(n2, this, t2)), this.v.push(i3), d2 = e2[++r2];
       }
       h2 !== (d2 == null ? void 0 : d2.index) && (n2 = A.nextNode(), h2++);
     }
@@ -479,7 +479,7 @@ class N {
     this._$AM === void 0 && (this._$Cg = t2, (i2 = this._$AP) === null || i2 === void 0 || i2.call(this, t2));
   }
 }
-class S$1 {
+class S {
   constructor(t2, i2, s2, e2, o2) {
     this.type = 1, this._$AH = w$1, this._$AN = void 0, this.element = t2, this.name = i2, this._$AM = e2, this.options = o2, s2.length > 2 || s2[0] !== "" || s2[1] !== "" ? (this._$AH = Array(s2.length - 1).fill(new String()), this.strings = s2) : this._$AH = w$1;
   }
@@ -506,7 +506,7 @@ class S$1 {
     t2 === w$1 ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t2 != null ? t2 : "");
   }
 }
-class M extends S$1 {
+class M extends S {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -515,7 +515,7 @@ class M extends S$1 {
   }
 }
 const k$1 = i$3 ? i$3.emptyScript : "";
-class H extends S$1 {
+class H extends S {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -523,7 +523,7 @@ class H extends S$1 {
     t2 && t2 !== w$1 ? this.element.setAttribute(this.name, k$1) : this.element.removeAttribute(this.name);
   }
 }
-class I extends S$1 {
+class I extends S {
   constructor(t2, i2, s2, e2, o2) {
     super(t2, i2, s2, e2, o2), this.type = 5;
   }
@@ -539,7 +539,7 @@ class I extends S$1 {
     typeof this._$AH == "function" ? this._$AH.call((s2 = (i2 = this.options) === null || i2 === void 0 ? void 0 : i2.host) !== null && s2 !== void 0 ? s2 : this.element, t2) : this._$AH.handleEvent(t2);
   }
 }
-class L {
+class L$1 {
   constructor(t2, i2, s2) {
     this.element = t2, this.type = 6, this._$AN = void 0, this._$AM = i2, this.options = s2;
   }
@@ -853,18 +853,18 @@ const decode = (blurhash, width, height, punch) => {
 var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
-var T = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
-var w = (o2, r2, e2) => r2 in o2 ? k(o2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : o2[r2] = e2, E = (o2, r2) => {
+var T = Object.prototype.hasOwnProperty, L = Object.prototype.propertyIsEnumerable;
+var w = (l2, r2, e2) => r2 in l2 ? k(l2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : l2[r2] = e2, E = (l2, r2) => {
   for (var e2 in r2 || (r2 = {}))
-    T.call(r2, e2) && w(o2, e2, r2[e2]);
+    T.call(r2, e2) && w(l2, e2, r2[e2]);
   if (_)
     for (var e2 of _(r2))
-      S.call(r2, e2) && w(o2, e2, r2[e2]);
-  return o2;
+      L.call(r2, e2) && w(l2, e2, r2[e2]);
+  return l2;
 };
-var i = (o2, r2, e2, t2) => {
-  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, l2 = o2.length - 1, c2; l2 >= 0; l2--)
-    (c2 = o2[l2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
+var i = (l2, r2, e2, t2) => {
+  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, o2 = l2.length - 1, c2; o2 >= 0; o2--)
+    (c2 = l2[o2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
   return t2 && a2 && k(r2, e2, a2), a2;
 };
 var d = class {
@@ -1008,13 +1008,16 @@ var h = class extends s$1 {
     var e2;
     super.connectedCallback(), setTimeout(() => {
       this._delayed = true;
-    }, 250), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`), setTimeout(() => {
+    }, 250), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`), window.addEventListener("resize", this.appHeight), window.addEventListener("focus", this.appHeight), this.appHeight(), setTimeout(() => {
       this._ghostActive = true, this.dialog.showModal();
     }, 0), (e2 = this.iframe) == null || e2.addEventListener("load", this.iframeLoaded.bind(this));
   }
+  appHeight() {
+    document.documentElement.style.setProperty("--app-height", `${window.innerHeight}px`);
+  }
   disconnectedCallback() {
     var e2;
-    document.documentElement.setAttribute("style", this._globalStyle || ""), (e2 = this.iframe) == null || e2.removeEventListener("load", this.iframeLoaded.bind(this)), this.dialog.close(), super.disconnectedCallback();
+    document.documentElement.setAttribute("style", this._globalStyle || ""), (e2 = this.iframe) == null || e2.removeEventListener("load", this.iframeLoaded.bind(this)), this.dialog.close(), window.removeEventListener("resize", this.appHeight), window.removeEventListener("focus", this.appHeight), super.disconnectedCallback();
   }
   dialogHandler(e2) {
     e2.type == "close" && window.postMessage({ message: "mave:close_settings", hash: this.embed }, "*"), e2.target == this.dialog && this.dialog.close();
@@ -1053,7 +1056,6 @@ h.styles = r$2`
       align-items: center;
       border-width: 0;
       background: transparent;
-      height: 100vh;
     }
 
     dialog::backdrop {
@@ -1084,6 +1086,8 @@ h.styles = r$2`
       top: 0;
       right: 0;
       z-index: 10000;
+      height: var(--app-height);
+      min-height: -webkit-fill-available;
     }
 
     .initial {
@@ -1101,7 +1105,7 @@ h.styles = r$2`
     }
   `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", h);
-var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+var V = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -1168,7 +1172,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
       }
   }
   messageHandler(e2) {
-    var l2;
+    var o2;
     let { data: t2 } = e2, { message: a2 } = t2;
     if (!(!this.isConnected || !t2 || t2.hash != this.embed))
       switch (a2) {
@@ -1233,7 +1237,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
           y && y.remove();
           break;
         case "mave:update_embed_settings":
-          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((l2 = this.video) == null ? void 0 : l2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
+          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((o2 = this.video) == null ? void 0 : o2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
           break;
         case "mave:request_in_viewport":
           setTimeout(() => {
@@ -1335,8 +1339,8 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
   renderCanvas() {
     if (!this.blurhash || !this._blurhashShouldBeVisible)
       return;
-    let e2 = document.createElement("canvas"), t2 = decode(this.blurhash, 320, 180), a2 = e2.getContext("2d"), l2 = a2 == null ? void 0 : a2.createImageData(320, 180);
-    return l2 == null || l2.data.set(t2), l2 && (a2 == null || a2.putImageData(l2, 0, 0)), e2;
+    let e2 = document.createElement("canvas"), t2 = decode(this.blurhash, 320, 180), a2 = e2.getContext("2d"), o2 = a2 == null ? void 0 : a2.createImageData(320, 180);
+    return o2 == null || o2.data.set(t2), o2 && (a2 == null || a2.putImageData(o2, 0, 0)), e2;
   }
   timeUpdate() {
     this._animationFrame = requestAnimationFrame(() => {
@@ -1355,10 +1359,10 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
         let e2 = new Hls();
         e2.loadSource(this.src), e2.attachMedia(this.video);
         let t2 = [];
-        e2.on(Hls.Events.MANIFEST_LOADED, (a2, l2) => {
-          t2 = l2.levels.reverse();
-        }), e2.on(Hls.Events.LEVEL_LOADED, (a2, l2) => {
-          this._bitrate != t2[l2.level].bitrate && (this._bitrate = t2[l2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
+        e2.on(Hls.Events.MANIFEST_LOADED, (a2, o2) => {
+          t2 = o2.levels.reverse();
+        }), e2.on(Hls.Events.LEVEL_LOADED, (a2, o2) => {
+          this._bitrate != t2[o2.level].bitrate && (this._bitrate = t2[o2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
         }), e2.subtitleTrack = 0, e2.subtitleDisplay = true;
       }
       this._hlsLoaded = true;
@@ -1367,8 +1371,8 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
   visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow)
       return;
-    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), a2 = window.innerHeight || document.documentElement.clientHeight, l2 = (e2 > 0 || t2 > 0) && e2 < a2;
-    this.sendMessage(l2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
+    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), a2 = window.innerHeight || document.documentElement.clientHeight, o2 = (e2 > 0 || t2 > 0) && e2 < a2;
+    this.sendMessage(o2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
   }
 };
 s.styles = $, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_uploadActive", 2);

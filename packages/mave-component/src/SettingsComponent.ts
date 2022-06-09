@@ -25,7 +25,6 @@ export class SettingsComponent extends LitElement {
       align-items: center;
       border-width: 0;
       background: transparent;
-      height: 100vh;
     }
 
     dialog::backdrop {
@@ -56,6 +55,8 @@ export class SettingsComponent extends LitElement {
       top: 0;
       right: 0;
       z-index: 10000;
+      height: var(--app-height);
+      min-height: -webkit-fill-available;
     }
 
     .initial {
@@ -87,6 +88,11 @@ export class SettingsComponent extends LitElement {
       `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`
     );
 
+    window.addEventListener("resize", this.appHeight);
+    window.addEventListener("focus", this.appHeight);
+
+    this.appHeight();
+
     // workaround for animation
     setTimeout(() => {
       this._ghostActive = true;
@@ -98,12 +104,20 @@ export class SettingsComponent extends LitElement {
     this.iframe?.addEventListener("load", this.iframeLoaded.bind(this));
   }
 
+  appHeight() {
+    const doc = document.documentElement;
+    doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+  }
+
   disconnectedCallback() {
     document.documentElement.setAttribute("style", this._globalStyle || "");
     this.iframe?.removeEventListener("load", this.iframeLoaded.bind(this));
 
     // @ts-ignore
     this.dialog.close();
+
+    window.removeEventListener("resize", this.appHeight);
+    window.removeEventListener("focus", this.appHeight);
 
     super.disconnectedCallback();
   }

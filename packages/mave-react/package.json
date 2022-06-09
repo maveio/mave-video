@@ -20,7 +20,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@maveio/mave-component": "0.0.1-beta.23"
+    "@maveio/mave-component": "0.0.1-beta.24"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
