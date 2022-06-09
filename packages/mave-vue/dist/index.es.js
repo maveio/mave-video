@@ -41,7 +41,7 @@ class Config {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const t$2 = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, e$3 = Symbol(), n$4 = /* @__PURE__ */ new Map();
-class s$3 {
+class s$4 {
   constructor(t2, n2) {
     if (this._$cssResult$ = true, n2 !== e$3)
       throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
@@ -55,7 +55,7 @@ class s$3 {
     return this.cssText;
   }
 }
-const o$4 = (t2) => new s$3(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t2, ...n2) => {
+const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t2, ...n2) => {
   const o2 = t2.length === 1 ? t2[0] : n2.reduce((e2, n3, s2) => e2 + ((t3) => {
     if (t3._$cssResult$ === true)
       return t3.cssText;
@@ -63,7 +63,7 @@ const o$4 = (t2) => new s$3(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
       return t3;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + t3 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(n3) + t2[s2 + 1], t2[0]);
-  return new s$3(o2, e$3);
+  return new s$4(o2, e$3);
 }, i$4 = (e2, n2) => {
   t$2 ? e2.adoptedStyleSheets = n2.map((t2) => t2 instanceof CSSStyleSheet ? t2 : t2.styleSheet) : n2.forEach((t2) => {
     const n3 = document.createElement("style"), s2 = window.litNonce;
@@ -80,7 +80,7 @@ const o$4 = (t2) => new s$3(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var s$2;
+var s$3;
 const e$2 = window.trustedTypes, r$1 = e$2 ? e$2.emptyScript : "", h$2 = window.reactiveElementPolyfillSupport, o$3 = { toAttribute(t2, i2) {
   switch (i2) {
     case Boolean:
@@ -110,7 +110,7 @@ const e$2 = window.trustedTypes, r$1 = e$2 ? e$2.emptyScript : "", h$2 = window.
   }
   return s2;
 } }, n$3 = (t2, i2) => i2 !== t2 && (i2 == i2 || t2 == t2), l$2 = { attribute: true, type: String, converter: o$3, reflect: false, hasChanged: n$3 };
-class a$2 extends HTMLElement {
+class a$1 extends HTMLElement {
   constructor() {
     super(), this._$Et = /* @__PURE__ */ new Map(), this.isUpdatePending = false, this.hasUpdated = false, this._$Ei = null, this.o();
   }
@@ -289,17 +289,17 @@ class a$2 extends HTMLElement {
   firstUpdated(t2) {
   }
 }
-a$2.finalized = true, a$2.elementProperties = /* @__PURE__ */ new Map(), a$2.elementStyles = [], a$2.shadowRootOptions = { mode: "open" }, h$2 == null || h$2({ ReactiveElement: a$2 }), ((s$2 = globalThis.reactiveElementVersions) !== null && s$2 !== void 0 ? s$2 : globalThis.reactiveElementVersions = []).push("1.3.1");
+a$1.finalized = true, a$1.elementProperties = /* @__PURE__ */ new Map(), a$1.elementStyles = [], a$1.shadowRootOptions = { mode: "open" }, h$2 == null || h$2({ ReactiveElement: a$1 }), ((s$3 = globalThis.reactiveElementVersions) !== null && s$3 !== void 0 ? s$3 : globalThis.reactiveElementVersions = []).push("1.3.1");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
 var t$1;
-const i$3 = globalThis.trustedTypes, s$1 = i$3 ? i$3.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$1 = `lit$${(Math.random() + "").slice(9)}$`, o$2 = "?" + e$1, n$2 = `<${o$2}>`, l$1 = document, h$1 = (t2 = "") => l$1.createComment(t2), r = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$1 = Array.isArray, u = (t2) => {
+const i$3 = globalThis.trustedTypes, s$2 = i$3 ? i$3.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$1 = `lit$${(Math.random() + "").slice(9)}$`, o$2 = "?" + e$1, n$2 = `<${o$2}>`, l$1 = document, h$1 = (t2 = "") => l$1.createComment(t2), r = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$1 = Array.isArray, u = (t2) => {
   var i2;
   return d$1(t2) || typeof ((i2 = t2) === null || i2 === void 0 ? void 0 : i2[Symbol.iterator]) == "function";
-}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a$1 = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T$1 = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
+}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T$1 = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
   var e2, o2;
   const n2 = (e2 = s2 == null ? void 0 : s2.renderBefore) !== null && e2 !== void 0 ? e2 : i2;
   let l2 = n2._$litPart$;
@@ -315,14 +315,14 @@ const i$3 = globalThis.trustedTypes, s$1 = i$3 ? i$3.createPolicy("lit-html", { 
     const s2 = t2[i3];
     let o3, u3, p2 = -1, $2 = 0;
     for (; $2 < s2.length && (d2.lastIndex = $2, u3 = d2.exec(s2), u3 !== null); )
-      $2 = d2.lastIndex, d2 === c ? u3[1] === "!--" ? d2 = v : u3[1] !== void 0 ? d2 = a$1 : u3[2] !== void 0 ? (g.test(u3[2]) && (h2 = RegExp("</" + u3[2], "g")), d2 = f) : u3[3] !== void 0 && (d2 = f) : d2 === f ? u3[0] === ">" ? (d2 = h2 != null ? h2 : c, p2 = -1) : u3[1] === void 0 ? p2 = -2 : (p2 = d2.lastIndex - u3[2].length, o3 = u3[1], d2 = u3[3] === void 0 ? f : u3[3] === '"' ? m : _$1) : d2 === m || d2 === _$1 ? d2 = f : d2 === v || d2 === a$1 ? d2 = c : (d2 = f, h2 = void 0);
+      $2 = d2.lastIndex, d2 === c ? u3[1] === "!--" ? d2 = v : u3[1] !== void 0 ? d2 = a : u3[2] !== void 0 ? (g.test(u3[2]) && (h2 = RegExp("</" + u3[2], "g")), d2 = f) : u3[3] !== void 0 && (d2 = f) : d2 === f ? u3[0] === ">" ? (d2 = h2 != null ? h2 : c, p2 = -1) : u3[1] === void 0 ? p2 = -2 : (p2 = d2.lastIndex - u3[2].length, o3 = u3[1], d2 = u3[3] === void 0 ? f : u3[3] === '"' ? m : _$1) : d2 === m || d2 === _$1 ? d2 = f : d2 === v || d2 === a ? d2 = c : (d2 = f, h2 = void 0);
     const y = d2 === f && t2[i3 + 1].startsWith("/>") ? " " : "";
     r2 += d2 === c ? s2 + n$2 : p2 >= 0 ? (l2.push(o3), s2.slice(0, p2) + "$lit$" + s2.slice(p2) + e$1 + y) : s2 + e$1 + (p2 === -2 ? (l2.push(void 0), i3) : y);
   }
   const u2 = r2 + (t2[o2] || "<?>") + (i2 === 2 ? "</svg>" : "");
   if (!Array.isArray(t2) || !t2.hasOwnProperty("raw"))
     throw Error("invalid template strings array");
-  return [s$1 !== void 0 ? s$1.createHTML(u2) : u2, l2];
+  return [s$2 !== void 0 ? s$2.createHTML(u2) : u2, l2];
 };
 class E$1 {
   constructor({ strings: t2, _$litType$: s2 }, n2) {
@@ -558,7 +558,7 @@ z == null || z(E$1, N), ((t$1 = globalThis.litHtmlVersions) !== null && t$1 !== 
  * SPDX-License-Identifier: BSD-3-Clause
  */
 var l, o$1;
-class s extends a$2 {
+class s$1 extends a$1 {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Dt = void 0;
   }
@@ -583,9 +583,9 @@ class s extends a$2 {
     return b;
   }
 }
-s.finalized = true, s._$litElement$ = true, (l = globalThis.litElementHydrateSupport) === null || l === void 0 || l.call(globalThis, { LitElement: s });
+s$1.finalized = true, s$1._$litElement$ = true, (l = globalThis.litElementHydrateSupport) === null || l === void 0 || l.call(globalThis, { LitElement: s$1 });
 const n$1 = globalThis.litElementPolyfillSupport;
-n$1 == null || n$1({ LitElement: s });
+n$1 == null || n$1({ LitElement: s$1 });
 ((o$1 = globalThis.litElementVersions) !== null && o$1 !== void 0 ? o$1 : globalThis.litElementVersions = []).push("3.2.0");
 /**
  * @license
@@ -863,9 +863,9 @@ var w = (o2, r2, e2) => r2 in o2 ? k(o2, r2, { enumerable: true, configurable: t
   return o2;
 };
 var i = (o2, r2, e2, t2) => {
-  for (var s2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, n2 = o2.length - 1, c2; n2 >= 0; n2--)
-    (c2 = o2[n2]) && (s2 = (t2 ? c2(r2, e2, s2) : c2(s2)) || s2);
-  return t2 && s2 && k(r2, e2, s2), s2;
+  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, l2 = o2.length - 1, c2; l2 >= 0; l2--)
+    (c2 = o2[l2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
+  return t2 && a2 && k(r2, e2, a2), a2;
 };
 var d = class {
   constructor() {
@@ -925,6 +925,15 @@ var $ = r$2`
     height: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+  }
+
+  .active_upload {
+    width: calc(100vw - 14rem);
+    height: 100vh;
+  }
+
+  .active_upload::backdrop {
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .active_overlay {
@@ -988,7 +997,7 @@ var $ = r$2`
     background: transparent !important;
   }
 `;
-var h = class extends s {
+var h = class extends s$1 {
   constructor() {
     super(...arguments);
     this._ghostActive = true;
@@ -1008,7 +1017,7 @@ var h = class extends s {
     document.documentElement.setAttribute("style", this._globalStyle || ""), (e2 = this.iframe) == null || e2.removeEventListener("load", this.iframeLoaded.bind(this)), this.dialog.close(), super.disconnectedCallback();
   }
   dialogHandler(e2) {
-    e2.type == "close" && window.postMessage({ message: "mave:close_settings", hash: this.embed }, "*"), e2.target.nodeName === "DIALOG" && this.dialog.close();
+    e2.type == "close" && window.postMessage({ message: "mave:close_settings", hash: this.embed }, "*"), e2.target == this.dialog && this.dialog.close();
   }
   render() {
     return $$1`
@@ -1092,12 +1101,13 @@ h.styles = r$2`
     }
   `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", h);
-var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), a = class extends s {
+var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
     this._blurhashShouldBeVisible = true;
     this._overlayActive = false;
+    this._uploadActive = false;
     this._hlsLoaded = false;
     this._iframeReady = false;
     this._initialPlayEventTriggered = false;
@@ -1134,8 +1144,8 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
         case "progress":
           (!this.canPlay || !this.loadeddata) && this.initializeVideo();
           try {
-            let t2 = this.video.buffered.length - 1, s2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
-            this.sendMessage("mave:video_progress", { buffer: s2 });
+            let t2 = this.video.buffered.length - 1, a2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
+            this.sendMessage("mave:video_progress", { buffer: a2 });
           } catch {
           }
           break;
@@ -1158,10 +1168,10 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
       }
   }
   messageHandler(e2) {
-    var n2;
-    let { data: t2 } = e2, { message: s2 } = t2;
+    var l2;
+    let { data: t2 } = e2, { message: a2 } = t2;
     if (!(!this.isConnected || !t2 || t2.hash != this.embed))
-      switch (s2) {
+      switch (a2) {
         case "mave:player_ready":
           if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
             let m2 = this.autoplay ? 0 : this.video.currentTime;
@@ -1193,6 +1203,12 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
         case "mave:close_popup_overlay":
           this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
           break;
+        case "mave:open_dialog":
+          this.dialog.showModal(), this._uploadActive = true;
+          break;
+        case "mave:close_dialog":
+          this.dialog.close(), this._uploadActive = false;
+          break;
         case "mave:toggle_fullscreen":
           document.fullscreenElement ? this.closeFullscreen() : this.openFullscreen();
           break;
@@ -1217,7 +1233,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
           y && y.remove();
           break;
         case "mave:update_embed_settings":
-          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((n2 = this.video) == null ? void 0 : n2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
+          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((l2 = this.video) == null ? void 0 : l2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
           break;
         case "mave:request_in_viewport":
           setTimeout(() => {
@@ -1225,7 +1241,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
           }, 20);
           break;
         case "mave:render_video":
-          this._hlsLoaded = false, this.src = t2.video_src, this.autoplay = t2.autoplay, t2.blurhash && (this.blurhash = t2.blurhash);
+          this._hlsLoaded = false, this._blurhashShouldBeVisible = false, this.loadeddata = false, this.canPlay = false, this.src = t2.video_src, this.autoplay = t2.autoplay, t2.blurhash && (this.blurhash = t2.blurhash);
           break;
       }
   }
@@ -1234,14 +1250,17 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
     if (this._overlayActive && (e2.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
       e2.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
     else if (this.aspectRatio) {
-      let [t2, s2] = this.aspectRatio.split(":");
-      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${s2}; width: 100%; min-width: 320px; min-height: 180px; }`;
+      let [t2, a2] = this.aspectRatio.split(":");
+      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${a2}; width: 100%; min-width: 320px; min-height: 180px; }`;
     } else
       e2.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
     return e2;
   }
   closeDialog() {
-    this._overlayActive = false, this.sendMessage("mave:closing_overlay");
+    this._overlayActive = false, this._uploadActive = false, this.sendMessage("mave:closing_overlay");
+  }
+  clickDialog(e2) {
+    this._uploadActive && e2.target == this.dialog && (this.closeDialog(), this.sendMessage("mave:cancel_upload"));
   }
   poster() {
     var e2;
@@ -1252,8 +1271,9 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
       ${this.generateStyle()}
       <dialog
         id="dialog"
+        @click=${this.clickDialog}
         @close=${this.closeDialog}
-        class=${this._overlayActive ? "active_overlay" : ""}
+        class=${this._overlayActive ? "active_overlay" : this._uploadActive ? "active_upload" : ""}
       >
         ${this.renderCanvas()}
         ${this.src ? $$1`
@@ -1303,8 +1323,8 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
   sendMessage(e2, t2 = {}) {
     if (!this.iframe.contentWindow || !this.video)
       return;
-    let s2 = E({ message: e2 }, t2);
-    this.iframe.contentWindow.postMessage(s2, "*");
+    let a2 = E({ message: e2 }, t2);
+    this.iframe.contentWindow.postMessage(a2, "*");
   }
   openFullscreen() {
     document.fullscreenElement || (this.requestFullscreen ? this.requestFullscreen() : this.dialog.webkitRequestFullScreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
@@ -1315,8 +1335,8 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
   renderCanvas() {
     if (!this.blurhash || !this._blurhashShouldBeVisible)
       return;
-    let e2 = document.createElement("canvas"), t2 = decode(this.blurhash, 320, 180), s2 = e2.getContext("2d"), n2 = s2 == null ? void 0 : s2.createImageData(320, 180);
-    return n2 == null || n2.data.set(t2), n2 && (s2 == null || s2.putImageData(n2, 0, 0)), e2;
+    let e2 = document.createElement("canvas"), t2 = decode(this.blurhash, 320, 180), a2 = e2.getContext("2d"), l2 = a2 == null ? void 0 : a2.createImageData(320, 180);
+    return l2 == null || l2.data.set(t2), l2 && (a2 == null || a2.putImageData(l2, 0, 0)), e2;
   }
   timeUpdate() {
     this._animationFrame = requestAnimationFrame(() => {
@@ -1335,10 +1355,10 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
         let e2 = new Hls();
         e2.loadSource(this.src), e2.attachMedia(this.video);
         let t2 = [];
-        e2.on(Hls.Events.MANIFEST_LOADED, (s2, n2) => {
-          t2 = n2.levels.reverse();
-        }), e2.on(Hls.Events.LEVEL_LOADED, (s2, n2) => {
-          this._bitrate != t2[n2.level].bitrate && (this._bitrate = t2[n2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
+        e2.on(Hls.Events.MANIFEST_LOADED, (a2, l2) => {
+          t2 = l2.levels.reverse();
+        }), e2.on(Hls.Events.LEVEL_LOADED, (a2, l2) => {
+          this._bitrate != t2[l2.level].bitrate && (this._bitrate = t2[l2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
         }), e2.subtitleTrack = 0, e2.subtitleDisplay = true;
       }
       this._hlsLoaded = true;
@@ -1347,12 +1367,12 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((o2, r2) => o2 += (r2 
   visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow)
       return;
-    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), s2 = window.innerHeight || document.documentElement.clientHeight, n2 = (e2 > 0 || t2 > 0) && e2 < s2;
-    this.sendMessage(n2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
+    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), a2 = window.innerHeight || document.documentElement.clientHeight, l2 = (e2 > 0 || t2 > 0) && e2 < a2;
+    this.sendMessage(l2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
   }
 };
-a.styles = $, i([e({ type: String })], a.prototype, "embed", 2), i([e({ type: String })], a.prototype, "reference_id", 2), i([e({ type: String })], a.prototype, "display_name", 2), i([e({ type: String })], a.prototype, "jwt", 2), i([e({ type: String })], a.prototype, "classname", 2), i([e({ type: Boolean })], a.prototype, "muted", 2), i([e({ type: Boolean })], a.prototype, "autoplay", 2), i([e({ type: Boolean })], a.prototype, "loop", 2), i([e({ type: String })], a.prototype, "src", 2), i([e({ type: String })], a.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], a.prototype, "aspectRatio", 2), i([e({ type: String })], a.prototype, "width", 2), i([e({ type: String })], a.prototype, "height", 2), i([i$1("#dialog")], a.prototype, "dialog", 2), i([i$1("#iframe")], a.prototype, "iframe", 2), i([i$1("#video")], a.prototype, "video", 2), i([i$1("#canvas")], a.prototype, "canvas", 2), i([i$1("#script")], a.prototype, "script", 2), i([t()], a.prototype, "_settingsActive", 2), i([t()], a.prototype, "_blurhashShouldBeVisible", 2), i([t()], a.prototype, "_overlayActive", 2);
-customElements.get("mave-component") || customElements.define("mave-component", a);
+s.styles = $, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_uploadActive", 2);
+customElements.get("mave-component") || customElements.define("mave-component", s);
 const _hoisted_1 = ["src", "blurhash", "loop", "autoplay", "muted", "width", "height", "aspectRatio"];
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   props: {

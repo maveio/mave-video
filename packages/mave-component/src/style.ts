@@ -46,6 +46,15 @@ export const style = css`
     object-fit: cover;
   }
 
+  .active_upload {
+    width: calc(100vw - 14rem);
+    height: 100vh;
+  }
+
+  .active_upload::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
   .active_overlay {
     position: fixed;
     background: black;

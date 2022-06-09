@@ -1,6 +1,6 @@
 {
   "name": "@maveio/mave-react",
-  "version": "0.0.1-beta.30",
+  "version": "0.0.1-beta.31",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -20,7 +20,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@maveio/mave-component": "0.0.1-beta.17"
+    "@maveio/mave-component": "0.0.1-beta.23"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",

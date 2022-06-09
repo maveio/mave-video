@@ -117,7 +117,7 @@ export class SettingsComponent extends LitElement {
     }
 
     // @ts-ignore
-    if (event.target.nodeName === "DIALOG") {
+    if (event.target == this.dialog) {
       // @ts-ignore
       this.dialog.close();
     }

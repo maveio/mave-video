@@ -50,6 +50,7 @@ declare class MaveComponent extends LitElement {
     private _settingsActive;
     private _blurhashShouldBeVisible;
     private _overlayActive;
+    private _uploadActive;
     private _hlsLoaded;
     private _iframeReady;
     private _initialPlayEventTriggered;
@@ -66,6 +67,7 @@ declare class MaveComponent extends LitElement {
     messageHandler(event: IEvent): void;
     generateStyle(): HTMLStyleElement;
     closeDialog(): void;
+    clickDialog(e: Event): void;
     poster(): string;
     render(): lit_html.TemplateResult<1>;
     private generateUrl;

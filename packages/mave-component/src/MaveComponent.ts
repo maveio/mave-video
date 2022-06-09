@@ -85,6 +85,8 @@ export class MaveComponent extends LitElement {
 
   @state() private _overlayActive: boolean = false;
 
+  @state() private _uploadActive: boolean = false;
+
   private _hlsLoaded: boolean = false;
 
   private _iframeReady: boolean = false;
@@ -285,6 +287,16 @@ export class MaveComponent extends LitElement {
         document.documentElement.setAttribute("style", this._globalStyle || "");
 
         break;
+      case "mave:open_dialog":
+        // @ts-ignore
+        this.dialog.showModal();
+        this._uploadActive = true;
+        break;
+      case "mave:close_dialog":
+        // @ts-ignore
+        this.dialog.close();
+        this._uploadActive = false;
+        break;
       case "mave:toggle_fullscreen":
         document.fullscreenElement
           ? this.closeFullscreen()
@@ -337,7 +349,12 @@ export class MaveComponent extends LitElement {
         }, 20);
         break;
       case "mave:render_video":
+        // reset video
         this._hlsLoaded = false;
+        this._blurhashShouldBeVisible = false;
+        this.loadeddata = false;
+        this.canPlay = false;
+
         this.src = data.video_src;
         this.autoplay = data.autoplay;
         if (data.blurhash) this.blurhash = data.blurhash;
@@ -370,7 +387,15 @@ export class MaveComponent extends LitElement {
 
   closeDialog() {
     this._overlayActive = false;
+    this._uploadActive = false;
     this.sendMessage("mave:closing_overlay");
+  }
+
+  clickDialog(e: Event) {
+    if (this._uploadActive && e.target == this.dialog) {
+      this.closeDialog();
+      this.sendMessage("mave:cancel_upload");
+    }
   }
 
   poster() {
@@ -382,8 +407,13 @@ export class MaveComponent extends LitElement {
       ${this.generateStyle()}
       <dialog
         id="dialog"
+        @click=${this.clickDialog}
         @close=${this.closeDialog}
-        class=${this._overlayActive ? "active_overlay" : ""}
+        class=${this._overlayActive
+          ? "active_overlay"
+          : "" || this._uploadActive
+          ? "active_upload"
+          : ""}
       >
         ${this.renderCanvas()}
         ${this.src
