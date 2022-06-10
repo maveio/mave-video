@@ -854,17 +854,17 @@ var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
 var T = Object.prototype.hasOwnProperty, L = Object.prototype.propertyIsEnumerable;
-var w = (l2, r2, e2) => r2 in l2 ? k(l2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : l2[r2] = e2, E = (l2, r2) => {
+var w = (n2, r2, e2) => r2 in n2 ? k(n2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[r2] = e2, E = (n2, r2) => {
   for (var e2 in r2 || (r2 = {}))
-    T.call(r2, e2) && w(l2, e2, r2[e2]);
+    T.call(r2, e2) && w(n2, e2, r2[e2]);
   if (_)
     for (var e2 of _(r2))
-      L.call(r2, e2) && w(l2, e2, r2[e2]);
-  return l2;
+      L.call(r2, e2) && w(n2, e2, r2[e2]);
+  return n2;
 };
-var i = (l2, r2, e2, t2) => {
-  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, o2 = l2.length - 1, c2; o2 >= 0; o2--)
-    (c2 = l2[o2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
+var i = (n2, r2, e2, t2) => {
+  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, o2 = n2.length - 1, c2; o2 >= 0; o2--)
+    (c2 = n2[o2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
   return t2 && a2 && k(r2, e2, a2), a2;
 };
 var d = class {
@@ -1105,7 +1105,7 @@ h.styles = r$2`
     }
   `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", h);
-var V = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+var V = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -1129,9 +1129,9 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
     e2 && e2.remove(), super.disconnectedCallback();
   }
   initializeVideo() {
-    if (!this.loadeddata && this.video && this.video.readyState >= 1 && (setTimeout(() => {
+    if (!this.loadeddata && this.video && this.video.readyState >= 2 && (setTimeout(() => {
       this.blurhash && (this._blurhashShouldBeVisible = false);
-    }, 750), this.loadeddata = true), !this.canPlay) {
+    }, 1250), this.loadeddata = true), !this.canPlay) {
       let e2 = () => {
         this._iframeReady || (this.sendMessage("mave:video_canplay"), setTimeout(e2.bind(this), 25), this.canPlay = true);
       };
@@ -1331,10 +1331,10 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
     this.iframe.contentWindow.postMessage(a2, "*");
   }
   openFullscreen() {
-    document.fullscreenElement || (this.requestFullscreen ? this.requestFullscreen() : this.dialog.webkitRequestFullScreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
+    document.fullscreenElement || (this.requestFullscreen ? this.requestFullscreen() : this.video.webkitEnterFullScreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: true }));
   }
   closeFullscreen() {
-    document.fullscreenElement && (document.exitFullscreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: true }));
+    document.fullscreenElement && (document.exitFullscreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
   }
   renderCanvas() {
     if (!this.blurhash || !this._blurhashShouldBeVisible)

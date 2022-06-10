@@ -135,10 +135,10 @@ export class MaveComponent extends LitElement {
   }
 
   initializeVideo() {
-    if (!this.loadeddata && this.video && this.video.readyState >= 1) {
+    if (!this.loadeddata && this.video && this.video.readyState >= 2) {
       setTimeout(() => {
         if (this.blurhash) this._blurhashShouldBeVisible = false;
-      }, 750);
+      }, 1250);
       this.loadeddata = true;
     }
 
@@ -493,17 +493,17 @@ export class MaveComponent extends LitElement {
         this.requestFullscreen();
       } else {
         // @ts-ignore
-        this.dialog.webkitRequestFullScreen();
+        this.video.webkitEnterFullScreen();
       }
 
-      this.sendMessage("mave:video_fullscreen", { fullscreen: false });
+      this.sendMessage("mave:video_fullscreen", { fullscreen: true });
     }
   }
 
   private closeFullscreen() {
     if (document.fullscreenElement) {
       document.exitFullscreen();
-      this.sendMessage("mave:video_fullscreen", { fullscreen: true });
+      this.sendMessage("mave:video_fullscreen", { fullscreen: false });
     }
   }
 
