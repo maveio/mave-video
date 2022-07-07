@@ -35,6 +35,8 @@ interface IEvent extends Event {
     width?: string;
     height?: string;
     loop?: boolean;
+    poster_image?: string;
+    poster_video_source?: string;
   };
 }
 
@@ -68,6 +70,11 @@ export class MaveComponent extends LitElement {
   @property({ type: String }) width?: string;
 
   @property({ type: String }) height?: string;
+
+  @property({ type: String, attribute: "poster-image" }) posterImage?: string;
+
+  @property({ type: String, attribute: "poster-video-source" })
+  posterVideoSource?: string;
 
   @query("#dialog") dialog!: HTMLDialogElement;
 
@@ -355,9 +362,14 @@ export class MaveComponent extends LitElement {
         this.loadeddata = false;
         this.canPlay = false;
 
-        this.src = data.video_src;
-        this.autoplay = data.autoplay;
-        if (data.blurhash) this.blurhash = data.blurhash;
+        if (this.src != data.video_src) this.src = data.video_src;
+        if (this.autoplay != data.autoplay) this.autoplay = data.autoplay;
+        if (this.blurhash != data.blurhash) this.blurhash = data.blurhash;
+        if (this.posterImage != data.poster_image)
+          this.posterImage = data.poster_image;
+        if (this.posterVideoSource != data.poster_video_source)
+          this.posterVideoSource = data.poster_video_source;
+
         break;
     }
   }
@@ -399,7 +411,11 @@ export class MaveComponent extends LitElement {
   }
 
   poster() {
-    return `${this.src?.replace("stream", "image")}/thumbnail.jpg?time=0`;
+    if (this.posterImage) {
+      return this.posterImage;
+    } else {
+      return `${this.src?.replace("stream", "image")}/thumbnail.jpg?time=0`;
+    }
   }
 
   render() {
@@ -443,6 +459,7 @@ export class MaveComponent extends LitElement {
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
                 .src=${this.src}
+                .poster=${this.poster()}
               ></video>
             `
           : ""}

@@ -74,6 +74,8 @@ var Mave = (props) => {
   const [videoAspectRatio, setVideoAspectRatio] = (0, import_react.useState)(void 0);
   const [height, setHeight] = (0, import_react.useState)(void 0);
   const [width, setWidth] = (0, import_react.useState)(void 0);
+  const [posterImage, setPosterImage] = (0, import_react.useState)(void 0);
+  const [posterVideoSource, setPosterVideoSource] = (0, import_react.useState)(void 0);
   (0, import_react.useEffect)(() => {
     const url = `https://${Config.getInstance().baseUrl}/${props.embed}/json`;
     const fetchData = async () => {
@@ -89,6 +91,8 @@ var Mave = (props) => {
         setVideoAspectRatio(json.videoAspectRatio);
         setHeight(json.height);
         setWidth(json.width);
+        setPosterImage(json.posterImage);
+        setPosterVideoSource(json.posterVideoSource);
       } catch (error) {
         console.log("error", error);
       }
@@ -104,7 +108,9 @@ var Mave = (props) => {
     src: videoSource,
     blurhash: videoBlurHash,
     className: props.className,
-    style: props.style
+    style: props.style,
+    posterImage: props.posterImage,
+    posterVideoSource: props.posterVideoSource
   };
   if (loop) {
     attributes.loop = loop;

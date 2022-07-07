@@ -13,6 +13,8 @@ export const Mave = (props: MaveProps) => {
   const [videoAspectRatio, setVideoAspectRatio] = useState(undefined);
   const [height, setHeight] = useState(undefined);
   const [width, setWidth] = useState(undefined);
+  const [posterImage, setPosterImage] = useState(undefined);
+  const [posterVideoSource, setPosterVideoSource] = useState(undefined);
 
   useEffect(() => {
     const url = `https://${Config.getInstance().baseUrl}/${props.embed}/json`;
@@ -32,6 +34,8 @@ export const Mave = (props: MaveProps) => {
         setVideoAspectRatio(json.videoAspectRatio);
         setHeight(json.height);
         setWidth(json.width);
+        setPosterImage(json.posterImage);
+        setPosterVideoSource(json.posterVideoSource);
       } catch (error) {
         // @ts-ignore
         console.log("error", error);
@@ -51,6 +55,8 @@ export const Mave = (props: MaveProps) => {
     blurhash: videoBlurHash,
     className: props.className,
     style: props.style,
+    posterImage: props.posterImage,
+    posterVideoSource: props.posterVideoSource,
   };
 
   if (loop) {

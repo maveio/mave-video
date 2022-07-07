@@ -69,7 +69,7 @@ const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
     const n3 = document.createElement("style"), s2 = window.litNonce;
     s2 !== void 0 && n3.setAttribute("nonce", s2), n3.textContent = t2.cssText, e2.appendChild(n3);
   });
-}, S$1 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+}, S$2 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
   let e2 = "";
   for (const n2 of t3.cssRules)
     e2 += n2.cssText;
@@ -160,9 +160,9 @@ class a$1 extends HTMLElement {
     if (Array.isArray(i2)) {
       const e2 = new Set(i2.flat(1 / 0).reverse());
       for (const i3 of e2)
-        s2.unshift(S$1(i3));
+        s2.unshift(S$2(i3));
     } else
-      i2 !== void 0 && s2.push(S$1(i2));
+      i2 !== void 0 && s2.push(S$2(i2));
     return s2;
   }
   static _$Eh(t2, i2) {
@@ -343,7 +343,7 @@ class E$1 {
               const s3 = a2[d2++];
               if (t3.push(i2), s3 !== void 0) {
                 const t4 = l2.getAttribute(s3.toLowerCase() + "$lit$").split(e$1), i3 = /([.?@])?(.*)/.exec(s3);
-                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H : i3[1] === "@" ? I : S });
+                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H : i3[1] === "@" ? I : S$1 });
               } else
                 c2.push({ type: 6, index: r2 });
             }
@@ -375,15 +375,15 @@ class E$1 {
     return s2.innerHTML = t2, s2;
   }
 }
-function P(t2, i2, s2 = t2, e2) {
+function P$1(t2, i2, s2 = t2, e2) {
   var o2, n2, l2, h2;
   if (i2 === b)
     return i2;
   let d2 = e2 !== void 0 ? (o2 = s2._$Cl) === null || o2 === void 0 ? void 0 : o2[e2] : s2._$Cu;
   const u2 = r(i2) ? void 0 : i2._$litDirective$;
-  return (d2 == null ? void 0 : d2.constructor) !== u2 && ((n2 = d2 == null ? void 0 : d2._$AO) === null || n2 === void 0 || n2.call(d2, false), u2 === void 0 ? d2 = void 0 : (d2 = new u2(t2), d2._$AT(t2, s2, e2)), e2 !== void 0 ? ((l2 = (h2 = s2)._$Cl) !== null && l2 !== void 0 ? l2 : h2._$Cl = [])[e2] = d2 : s2._$Cu = d2), d2 !== void 0 && (i2 = P(t2, d2._$AS(t2, i2.values), d2, e2)), i2;
+  return (d2 == null ? void 0 : d2.constructor) !== u2 && ((n2 = d2 == null ? void 0 : d2._$AO) === null || n2 === void 0 || n2.call(d2, false), u2 === void 0 ? d2 = void 0 : (d2 = new u2(t2), d2._$AT(t2, s2, e2)), e2 !== void 0 ? ((l2 = (h2 = s2)._$Cl) !== null && l2 !== void 0 ? l2 : h2._$Cl = [])[e2] = d2 : s2._$Cu = d2), d2 !== void 0 && (i2 = P$1(t2, d2._$AS(t2, i2.values), d2, e2)), i2;
 }
-class V$1 {
+class V {
   constructor(t2, i2) {
     this.v = [], this._$AN = void 0, this._$AD = t2, this._$AM = i2;
   }
@@ -401,7 +401,7 @@ class V$1 {
     for (; d2 !== void 0; ) {
       if (h2 === d2.index) {
         let i3;
-        d2.type === 2 ? i3 = new N(n2, n2.nextSibling, this, t2) : d2.type === 1 ? i3 = new d2.ctor(n2, d2.name, d2.strings, this, t2) : d2.type === 6 && (i3 = new L$1(n2, this, t2)), this.v.push(i3), d2 = e2[++r2];
+        d2.type === 2 ? i3 = new N(n2, n2.nextSibling, this, t2) : d2.type === 1 ? i3 = new d2.ctor(n2, d2.name, d2.strings, this, t2) : d2.type === 6 && (i3 = new L(n2, this, t2)), this.v.push(i3), d2 = e2[++r2];
       }
       h2 !== (d2 == null ? void 0 : d2.index) && (n2 = A.nextNode(), h2++);
     }
@@ -434,7 +434,7 @@ class N {
     return this._$AB;
   }
   _$AI(t2, i2 = this) {
-    t2 = P(this, t2, i2), r(t2) ? t2 === w$1 || t2 == null || t2 === "" ? (this._$AH !== w$1 && this._$AR(), this._$AH = w$1) : t2 !== this._$AH && t2 !== b && this.$(t2) : t2._$litType$ !== void 0 ? this.T(t2) : t2.nodeType !== void 0 ? this.k(t2) : u(t2) ? this.S(t2) : this.$(t2);
+    t2 = P$1(this, t2, i2), r(t2) ? t2 === w$1 || t2 == null || t2 === "" ? (this._$AH !== w$1 && this._$AR(), this._$AH = w$1) : t2 !== this._$AH && t2 !== b && this.$(t2) : t2._$litType$ !== void 0 ? this.T(t2) : t2.nodeType !== void 0 ? this.k(t2) : u(t2) ? this.S(t2) : this.$(t2);
   }
   M(t2, i2 = this._$AB) {
     return this._$AA.parentNode.insertBefore(t2, i2);
@@ -451,7 +451,7 @@ class N {
     if (((i2 = this._$AH) === null || i2 === void 0 ? void 0 : i2._$AD) === o2)
       this._$AH.m(s2);
     else {
-      const t3 = new V$1(o2, this), i3 = t3.p(this.options);
+      const t3 = new V(o2, this), i3 = t3.p(this.options);
       t3.m(s2), this.k(i3), this._$AH = t3;
     }
   }
@@ -479,7 +479,7 @@ class N {
     this._$AM === void 0 && (this._$Cg = t2, (i2 = this._$AP) === null || i2 === void 0 || i2.call(this, t2));
   }
 }
-class S {
+class S$1 {
   constructor(t2, i2, s2, e2, o2) {
     this.type = 1, this._$AH = w$1, this._$AN = void 0, this.element = t2, this.name = i2, this._$AM = e2, this.options = o2, s2.length > 2 || s2[0] !== "" || s2[1] !== "" ? (this._$AH = Array(s2.length - 1).fill(new String()), this.strings = s2) : this._$AH = w$1;
   }
@@ -493,12 +493,12 @@ class S {
     const o2 = this.strings;
     let n2 = false;
     if (o2 === void 0)
-      t2 = P(this, t2, i2, 0), n2 = !r(t2) || t2 !== this._$AH && t2 !== b, n2 && (this._$AH = t2);
+      t2 = P$1(this, t2, i2, 0), n2 = !r(t2) || t2 !== this._$AH && t2 !== b, n2 && (this._$AH = t2);
     else {
       const e3 = t2;
       let l2, h2;
       for (t2 = o2[0], l2 = 0; l2 < o2.length - 1; l2++)
-        h2 = P(this, e3[s2 + l2], i2, l2), h2 === b && (h2 = this._$AH[l2]), n2 || (n2 = !r(h2) || h2 !== this._$AH[l2]), h2 === w$1 ? t2 = w$1 : t2 !== w$1 && (t2 += (h2 != null ? h2 : "") + o2[l2 + 1]), this._$AH[l2] = h2;
+        h2 = P$1(this, e3[s2 + l2], i2, l2), h2 === b && (h2 = this._$AH[l2]), n2 || (n2 = !r(h2) || h2 !== this._$AH[l2]), h2 === w$1 ? t2 = w$1 : t2 !== w$1 && (t2 += (h2 != null ? h2 : "") + o2[l2 + 1]), this._$AH[l2] = h2;
     }
     n2 && !e2 && this.C(t2);
   }
@@ -506,7 +506,7 @@ class S {
     t2 === w$1 ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t2 != null ? t2 : "");
   }
 }
-class M extends S {
+class M extends S$1 {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -515,7 +515,7 @@ class M extends S {
   }
 }
 const k$1 = i$3 ? i$3.emptyScript : "";
-class H extends S {
+class H extends S$1 {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -523,13 +523,13 @@ class H extends S {
     t2 && t2 !== w$1 ? this.element.setAttribute(this.name, k$1) : this.element.removeAttribute(this.name);
   }
 }
-class I extends S {
+class I extends S$1 {
   constructor(t2, i2, s2, e2, o2) {
     super(t2, i2, s2, e2, o2), this.type = 5;
   }
   _$AI(t2, i2 = this) {
     var s2;
-    if ((t2 = (s2 = P(this, t2, i2, 0)) !== null && s2 !== void 0 ? s2 : w$1) === b)
+    if ((t2 = (s2 = P$1(this, t2, i2, 0)) !== null && s2 !== void 0 ? s2 : w$1) === b)
       return;
     const e2 = this._$AH, o2 = t2 === w$1 && e2 !== w$1 || t2.capture !== e2.capture || t2.once !== e2.once || t2.passive !== e2.passive, n2 = t2 !== w$1 && (e2 === w$1 || o2);
     o2 && this.element.removeEventListener(this.name, this, e2), n2 && this.element.addEventListener(this.name, this, t2), this._$AH = t2;
@@ -539,7 +539,7 @@ class I extends S {
     typeof this._$AH == "function" ? this._$AH.call((s2 = (i2 = this.options) === null || i2 === void 0 ? void 0 : i2.host) !== null && s2 !== void 0 ? s2 : this.element, t2) : this._$AH.handleEvent(t2);
   }
 }
-class L$1 {
+class L {
   constructor(t2, i2, s2) {
     this.element = t2, this.type = 6, this._$AN = void 0, this._$AM = i2, this.options = s2;
   }
@@ -547,7 +547,7 @@ class L$1 {
     return this._$AM._$AU;
   }
   _$AI(t2) {
-    P(this, t2);
+    P$1(this, t2);
   }
 }
 const z = window.litHtmlPolyfillSupport;
@@ -853,13 +853,13 @@ const decode = (blurhash, width, height, punch) => {
 var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
-var T = Object.prototype.hasOwnProperty, L = Object.prototype.propertyIsEnumerable;
+var S = Object.prototype.hasOwnProperty, T = Object.prototype.propertyIsEnumerable;
 var w = (n2, r2, e2) => r2 in n2 ? k(n2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[r2] = e2, E = (n2, r2) => {
   for (var e2 in r2 || (r2 = {}))
-    T.call(r2, e2) && w(n2, e2, r2[e2]);
+    S.call(r2, e2) && w(n2, e2, r2[e2]);
   if (_)
     for (var e2 of _(r2))
-      L.call(r2, e2) && w(n2, e2, r2[e2]);
+      T.call(r2, e2) && w(n2, e2, r2[e2]);
   return n2;
 };
 var i = (n2, r2, e2, t2) => {
@@ -1105,7 +1105,7 @@ h.styles = r$2`
     }
   `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", h);
-var V = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -1245,7 +1245,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
           }, 20);
           break;
         case "mave:render_video":
-          this._hlsLoaded = false, this._blurhashShouldBeVisible = false, this.loadeddata = false, this.canPlay = false, this.src = t2.video_src, this.autoplay = t2.autoplay, t2.blurhash && (this.blurhash = t2.blurhash);
+          this._hlsLoaded = false, this._blurhashShouldBeVisible = false, this.loadeddata = false, this.canPlay = false, this.src != t2.video_src && (this.src = t2.video_src), this.autoplay != t2.autoplay && (this.autoplay = t2.autoplay), this.blurhash != t2.blurhash && (this.blurhash = t2.blurhash), this.posterImage != t2.poster_image && (this.posterImage = t2.poster_image), this.posterVideoSource != t2.poster_video_source && (this.posterVideoSource = t2.poster_video_source);
           break;
       }
   }
@@ -1268,7 +1268,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
   }
   poster() {
     var e2;
-    return `${(e2 = this.src) == null ? void 0 : e2.replace("stream", "image")}/thumbnail.jpg?time=0`;
+    return this.posterImage ? this.posterImage : `${(e2 = this.src) == null ? void 0 : e2.replace("stream", "image")}/thumbnail.jpg?time=0`;
   }
   render() {
     return $$1`
@@ -1304,6 +1304,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
                 .src=${this.src}
+                .poster=${this.poster()}
               ></video>
             ` : ""}
         ${this.embed ? $$1`
@@ -1322,7 +1323,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
     `;
   }
   generateUrl() {
-    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${V}`;
+    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${P}`;
   }
   sendMessage(e2, t2 = {}) {
     if (!this.iframe.contentWindow || !this.video)
@@ -1375,7 +1376,7 @@ var V = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
     this.sendMessage(o2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
   }
 };
-s.styles = $, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_uploadActive", 2);
+s.styles = $, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([e({ type: String, attribute: "poster-image" })], s.prototype, "posterImage", 2), i([e({ type: String, attribute: "poster-video-source" })], s.prototype, "posterVideoSource", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_uploadActive", 2);
 customElements.get("mave-component") || customElements.define("mave-component", s);
 const _hoisted_1 = ["src", "blurhash", "loop", "autoplay", "muted", "width", "height", "aspectRatio"];
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
@@ -1441,7 +1442,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     width: null,
     height: null,
     className: null,
-    style: null
+    style: null,
+    posterImage: null,
+    posterVideoSource: null
   },
   setup(__props) {
     return (_ctx, _cache) => {

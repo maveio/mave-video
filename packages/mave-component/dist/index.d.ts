@@ -25,6 +25,8 @@ interface IEvent extends Event {
         width?: string;
         height?: string;
         loop?: boolean;
+        poster_image?: string;
+        poster_video_source?: string;
     };
 }
 declare class MaveComponent extends LitElement {
@@ -42,6 +44,8 @@ declare class MaveComponent extends LitElement {
     aspectRatio?: string;
     width?: string;
     height?: string;
+    posterImage?: string;
+    posterVideoSource?: string;
     dialog: HTMLDialogElement;
     iframe: HTMLIFrameElement;
     video?: HTMLVideoElement;

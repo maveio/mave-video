@@ -21,6 +21,8 @@
     height?: string;
     className?: string;
     style?: string;
+    posterImage?: string;
+    posterVideoSource?: string;
   }
 
   const props = defineProps<MaveProps>()

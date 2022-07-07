@@ -14,4 +14,6 @@ export interface MaveProps {
   height?: string;
   className?: string;
   style?: string;
+  posterImage?: string;
+  posterVideoSource?: string;
 }
