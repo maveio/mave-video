@@ -56,6 +56,7 @@ declare class MaveComponent extends LitElement {
     private _overlayActive;
     private _isFullscreen;
     private _uploadActive;
+    private _posterShouldBeVisible;
     private _hlsLoaded;
     private _iframeReady;
     private _initialPlayEventTriggered;

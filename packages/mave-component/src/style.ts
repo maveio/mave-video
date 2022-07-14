@@ -60,7 +60,6 @@ export const style = css`
     width: 100%;
     height: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
   }
 
   .active_upload {
@@ -80,7 +79,7 @@ export const style = css`
     overflow: hidden;
   }
 
-  .active_overlay video {
+  .active_overlay #video {
     object-fit: contain;
   }
 
@@ -95,7 +94,7 @@ export const style = css`
     transition-duration: 150ms;
   }
 
-  video {
+  #video {
     transform: scale(1.01);
     position: absolute;
     top: 0;
@@ -103,33 +102,32 @@ export const style = css`
     width: 100%;
     height: 100%;
     display: flex;
-    object-fit: cover;
   }
 
-  video::cue {
+  #video::cue {
     color: white;
     opacity: 1;
     background-color: rgba(0, 0, 0, 1) !important;
     /* background-image: linear-gradient(to bottom, black, black); */
   }
 
-  video::-webkit-media-text-track-container {
+  #video::-webkit-media-text-track-container {
     opacity: 1;
     top: -3rem;
     overflow: visible !important;
   }
 
-  video::-webkit-media-text-track-background {
+  #video::-webkit-media-text-track-background {
     display: none !important;
   }
 
-  video::-webkit-media-text-track-display {
+  #video::-webkit-media-text-track-display {
     display: inline-block !important;
     /* border: 1px solid red; */
     overflow: visible !important;
   }
 
-  video::-webkit-media-text-track-display-backdrop {
+  #video::-webkit-media-text-track-display-backdrop {
     background: transparent !important;
   }
 `;

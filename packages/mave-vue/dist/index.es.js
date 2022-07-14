@@ -69,7 +69,7 @@ const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
     const n3 = document.createElement("style"), s2 = window.litNonce;
     s2 !== void 0 && n3.setAttribute("nonce", s2), n3.textContent = t2.cssText, e2.appendChild(n3);
   });
-}, S$1 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+}, S$2 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
   let e2 = "";
   for (const n2 of t3.cssRules)
     e2 += n2.cssText;
@@ -160,9 +160,9 @@ class a$1 extends HTMLElement {
     if (Array.isArray(i2)) {
       const e2 = new Set(i2.flat(1 / 0).reverse());
       for (const i3 of e2)
-        s2.unshift(S$1(i3));
+        s2.unshift(S$2(i3));
     } else
-      i2 !== void 0 && s2.push(S$1(i2));
+      i2 !== void 0 && s2.push(S$2(i2));
     return s2;
   }
   static _$Eh(t2, i2) {
@@ -299,7 +299,7 @@ var t$1;
 const i$3 = globalThis.trustedTypes, s$2 = i$3 ? i$3.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$1 = `lit$${(Math.random() + "").slice(9)}$`, o$2 = "?" + e$1, n$2 = `<${o$2}>`, l$1 = document, h$1 = (t2 = "") => l$1.createComment(t2), r = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$1 = Array.isArray, u = (t2) => {
   var i2;
   return d$1(t2) || typeof ((i2 = t2) === null || i2 === void 0 ? void 0 : i2[Symbol.iterator]) == "function";
-}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $ = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T$1 = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
+}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
   var e2, o2;
   const n2 = (e2 = s2 == null ? void 0 : s2.renderBefore) !== null && e2 !== void 0 ? e2 : i2;
   let l2 = n2._$litPart$;
@@ -343,7 +343,7 @@ class E$1 {
               const s3 = a2[d2++];
               if (t3.push(i2), s3 !== void 0) {
                 const t4 = l2.getAttribute(s3.toLowerCase() + "$lit$").split(e$1), i3 = /([.?@])?(.*)/.exec(s3);
-                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H$1 : i3[1] === "@" ? I$1 : S });
+                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H : i3[1] === "@" ? I : S$1 });
               } else
                 c2.push({ type: 6, index: r2 });
             }
@@ -456,8 +456,8 @@ class N {
     }
   }
   _$AC(t2) {
-    let i2 = T$1.get(t2.strings);
-    return i2 === void 0 && T$1.set(t2.strings, i2 = new E$1(t2)), i2;
+    let i2 = T.get(t2.strings);
+    return i2 === void 0 && T.set(t2.strings, i2 = new E$1(t2)), i2;
   }
   S(t2) {
     d$1(this._$AH) || (this._$AH = [], this._$AR());
@@ -479,7 +479,7 @@ class N {
     this._$AM === void 0 && (this._$Cg = t2, (i2 = this._$AP) === null || i2 === void 0 || i2.call(this, t2));
   }
 }
-class S {
+class S$1 {
   constructor(t2, i2, s2, e2, o2) {
     this.type = 1, this._$AH = w$1, this._$AN = void 0, this.element = t2, this.name = i2, this._$AM = e2, this.options = o2, s2.length > 2 || s2[0] !== "" || s2[1] !== "" ? (this._$AH = Array(s2.length - 1).fill(new String()), this.strings = s2) : this._$AH = w$1;
   }
@@ -506,7 +506,7 @@ class S {
     t2 === w$1 ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t2 != null ? t2 : "");
   }
 }
-class M extends S {
+class M extends S$1 {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -515,7 +515,7 @@ class M extends S {
   }
 }
 const k$1 = i$3 ? i$3.emptyScript : "";
-class H$1 extends S {
+class H extends S$1 {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -523,7 +523,7 @@ class H$1 extends S {
     t2 && t2 !== w$1 ? this.element.setAttribute(this.name, k$1) : this.element.removeAttribute(this.name);
   }
 }
-class I$1 extends S {
+class I extends S$1 {
   constructor(t2, i2, s2, e2, o2) {
     super(t2, i2, s2, e2, o2), this.type = 5;
   }
@@ -550,8 +550,8 @@ class L {
     P(this, t2);
   }
 }
-const z = window.litHtmlPolyfillSupport;
-z == null || z(E$1, N), ((t$1 = globalThis.litHtmlVersions) !== null && t$1 !== void 0 ? t$1 : globalThis.litHtmlVersions = []).push("2.2.2");
+const z$1 = window.litHtmlPolyfillSupport;
+z$1 == null || z$1(E$1, N), ((t$1 = globalThis.litHtmlVersions) !== null && t$1 !== void 0 ? t$1 : globalThis.litHtmlVersions = []).push("2.2.2");
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -658,214 +658,22 @@ function i$1(i2, n2) {
  */
 var n;
 ((n = window.HTMLSlotElement) === null || n === void 0 ? void 0 : n.prototype.assignedElements) != null ? (o2, n2) => o2.assignedElements(n2) : (o2, n2) => o2.assignedNodes(n2).filter((o3) => o3.nodeType === Node.ELEMENT_NODE);
-const digitCharacters = [
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-  "#",
-  "$",
-  "%",
-  "*",
-  "+",
-  ",",
-  "-",
-  ".",
-  ":",
-  ";",
-  "=",
-  "?",
-  "@",
-  "[",
-  "]",
-  "^",
-  "_",
-  "{",
-  "|",
-  "}",
-  "~"
-];
-const decode83 = (str) => {
-  let value = 0;
-  for (let i2 = 0; i2 < str.length; i2++) {
-    const c2 = str[i2];
-    const digit = digitCharacters.indexOf(c2);
-    value = value * 83 + digit;
-  }
-  return value;
-};
-const sRGBToLinear = (value) => {
-  let v2 = value / 255;
-  if (v2 <= 0.04045) {
-    return v2 / 12.92;
-  } else {
-    return Math.pow((v2 + 0.055) / 1.055, 2.4);
-  }
-};
-const linearTosRGB = (value) => {
-  let v2 = Math.max(0, Math.min(1, value));
-  if (v2 <= 31308e-7) {
-    return Math.round(v2 * 12.92 * 255 + 0.5);
-  } else {
-    return Math.round((1.055 * Math.pow(v2, 1 / 2.4) - 0.055) * 255 + 0.5);
-  }
-};
-const sign = (n2) => n2 < 0 ? -1 : 1;
-const signPow = (val, exp) => sign(val) * Math.pow(Math.abs(val), exp);
-class ValidationError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "ValidationError";
-    this.message = message;
-  }
-}
-const validateBlurhash = (blurhash) => {
-  if (!blurhash || blurhash.length < 6) {
-    throw new ValidationError("The blurhash string must be at least 6 characters");
-  }
-  const sizeFlag = decode83(blurhash[0]);
-  const numY = Math.floor(sizeFlag / 9) + 1;
-  const numX = sizeFlag % 9 + 1;
-  if (blurhash.length !== 4 + 2 * numX * numY) {
-    throw new ValidationError(`blurhash length mismatch: length is ${blurhash.length} but it should be ${4 + 2 * numX * numY}`);
-  }
-};
-const decodeDC = (value) => {
-  const intR = value >> 16;
-  const intG = value >> 8 & 255;
-  const intB = value & 255;
-  return [sRGBToLinear(intR), sRGBToLinear(intG), sRGBToLinear(intB)];
-};
-const decodeAC = (value, maximumValue) => {
-  const quantR = Math.floor(value / (19 * 19));
-  const quantG = Math.floor(value / 19) % 19;
-  const quantB = value % 19;
-  const rgb = [
-    signPow((quantR - 9) / 9, 2) * maximumValue,
-    signPow((quantG - 9) / 9, 2) * maximumValue,
-    signPow((quantB - 9) / 9, 2) * maximumValue
-  ];
-  return rgb;
-};
-const decode = (blurhash, width, height, punch) => {
-  validateBlurhash(blurhash);
-  punch = punch | 1;
-  const sizeFlag = decode83(blurhash[0]);
-  const numY = Math.floor(sizeFlag / 9) + 1;
-  const numX = sizeFlag % 9 + 1;
-  const quantisedMaximumValue = decode83(blurhash[1]);
-  const maximumValue = (quantisedMaximumValue + 1) / 166;
-  const colors = new Array(numX * numY);
-  for (let i2 = 0; i2 < colors.length; i2++) {
-    if (i2 === 0) {
-      const value = decode83(blurhash.substring(2, 6));
-      colors[i2] = decodeDC(value);
-    } else {
-      const value = decode83(blurhash.substring(4 + i2 * 2, 6 + i2 * 2));
-      colors[i2] = decodeAC(value, maximumValue * punch);
-    }
-  }
-  const bytesPerRow = width * 4;
-  const pixels = new Uint8ClampedArray(bytesPerRow * height);
-  for (let y = 0; y < height; y++) {
-    for (let x2 = 0; x2 < width; x2++) {
-      let r2 = 0;
-      let g2 = 0;
-      let b2 = 0;
-      for (let j = 0; j < numY; j++) {
-        for (let i2 = 0; i2 < numX; i2++) {
-          const basis = Math.cos(Math.PI * x2 * i2 / width) * Math.cos(Math.PI * y * j / height);
-          let color = colors[i2 + j * numX];
-          r2 += color[0] * basis;
-          g2 += color[1] * basis;
-          b2 += color[2] * basis;
-        }
-      }
-      let intR = linearTosRGB(r2);
-      let intG = linearTosRGB(g2);
-      let intB = linearTosRGB(b2);
-      pixels[4 * x2 + 0 + y * bytesPerRow] = intR;
-      pixels[4 * x2 + 1 + y * bytesPerRow] = intG;
-      pixels[4 * x2 + 2 + y * bytesPerRow] = intB;
-      pixels[4 * x2 + 3 + y * bytesPerRow] = 255;
-    }
-  }
-  return pixels;
-};
 var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
-var F = Object.prototype.hasOwnProperty, T = Object.prototype.propertyIsEnumerable;
-var w = (l2, r2, e2) => r2 in l2 ? k(l2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : l2[r2] = e2, E = (l2, r2) => {
-  for (var e2 in r2 || (r2 = {}))
-    F.call(r2, e2) && w(l2, e2, r2[e2]);
+var F = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
+var w = (n2, a2, e2) => a2 in n2 ? k(n2, a2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[a2] = e2, E = (n2, a2) => {
+  for (var e2 in a2 || (a2 = {}))
+    F.call(a2, e2) && w(n2, e2, a2[e2]);
   if (_)
-    for (var e2 of _(r2))
-      T.call(r2, e2) && w(l2, e2, r2[e2]);
-  return l2;
+    for (var e2 of _(a2))
+      S.call(a2, e2) && w(n2, e2, a2[e2]);
+  return n2;
 };
-var i = (l2, r2, e2, t2) => {
-  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, o2 = l2.length - 1, c2; o2 >= 0; o2--)
-    (c2 = l2[o2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
-  return t2 && a2 && k(r2, e2, a2), a2;
+var i = (n2, a2, e2, t2) => {
+  for (var r2 = t2 > 1 ? void 0 : t2 ? x(a2, e2) : a2, o2 = n2.length - 1, c2; o2 >= 0; o2--)
+    (c2 = n2[o2]) && (r2 = (t2 ? c2(a2, e2, r2) : c2(r2)) || r2);
+  return t2 && r2 && k(a2, e2, r2), r2;
 };
 var d = class {
   constructor() {
@@ -877,11 +685,11 @@ var d = class {
   get baseUrl() {
     return this._baseUrl;
   }
-  set baseUrl(r2) {
-    this._baseUrl = r2;
+  set baseUrl(a2) {
+    this._baseUrl = a2;
   }
 };
-var H = r$2`
+var $ = r$2`
   :root {
     --mave_embed_dialog_height: 100vh !important;
   }
@@ -941,7 +749,6 @@ var H = r$2`
     width: 100%;
     height: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
   }
 
   .active_upload {
@@ -961,7 +768,7 @@ var H = r$2`
     overflow: hidden;
   }
 
-  .active_overlay video {
+  .active_overlay #video {
     object-fit: contain;
   }
 
@@ -976,7 +783,7 @@ var H = r$2`
     transition-duration: 150ms;
   }
 
-  video {
+  #video {
     transform: scale(1.01);
     position: absolute;
     top: 0;
@@ -984,33 +791,32 @@ var H = r$2`
     width: 100%;
     height: 100%;
     display: flex;
-    object-fit: cover;
   }
 
-  video::cue {
+  #video::cue {
     color: white;
     opacity: 1;
     background-color: rgba(0, 0, 0, 1) !important;
     /* background-image: linear-gradient(to bottom, black, black); */
   }
 
-  video::-webkit-media-text-track-container {
+  #video::-webkit-media-text-track-container {
     opacity: 1;
     top: -3rem;
     overflow: visible !important;
   }
 
-  video::-webkit-media-text-track-background {
+  #video::-webkit-media-text-track-background {
     display: none !important;
   }
 
-  video::-webkit-media-text-track-display {
+  #video::-webkit-media-text-track-display {
     display: inline-block !important;
     /* border: 1px solid red; */
     overflow: visible !important;
   }
 
-  video::-webkit-media-text-track-display-backdrop {
+  #video::-webkit-media-text-track-display-backdrop {
     background: transparent !important;
   }
 `;
@@ -1040,7 +846,7 @@ var h = class extends s$1 {
     e2.type == "close" && window.postMessage({ message: "mave:close_settings", hash: this.embed }, "*"), e2.target == this.dialog && this.dialog.close();
   }
   render() {
-    return $`
+    return $$1`
       <dialog
         id="dialog"
         @close=${this.dialogHandler}
@@ -1122,8 +928,7 @@ h.styles = r$2`
     }
   `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", h);
-console.log("KUT");
-var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+var z = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 &= 63) < 36 ? a2.toString(36) : a2 < 62 ? (a2 - 26).toString(36).toUpperCase() : a2 < 63 ? "_" : "-", ""), s = class extends s$1 {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -1131,6 +936,7 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
     this._overlayActive = false;
     this._isFullscreen = false;
     this._uploadActive = false;
+    this._posterShouldBeVisible = true;
     this._hlsLoaded = false;
     this._iframeReady = false;
     this._initialPlayEventTriggered = false;
@@ -1173,13 +979,15 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
         case "progress":
           (!this.canPlay || !this.loadeddata) && this.initializeVideo();
           try {
-            let t2 = this.video.buffered.length - 1, a2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
-            this.sendMessage("mave:video_progress", { buffer: a2 });
+            let t2 = this.video.buffered.length - 1, r2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
+            this.sendMessage("mave:video_progress", { buffer: r2 });
           } catch {
           }
           break;
         case "play":
-          if (this._iframeReady) {
+          if (this._posterShouldBeVisible && (document.webkitExitFullscreen ? setTimeout(() => {
+            this._posterShouldBeVisible = false;
+          }, 250) : this._posterShouldBeVisible = false), this._iframeReady) {
             this.timeUpdate();
             let t2 = this.autoplay && !this._initialPlayEventTriggered || this.video.currentTime < 1e-4 ? 0 : this.video.currentTime;
             this.sendMessage("mave:video_play", { currentTime: t2, bitrate: this._bitrate }), this._initialPlayEventTriggered = true;
@@ -1198,9 +1006,9 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
   }
   messageHandler(e2) {
     var o2;
-    let { data: t2 } = e2, { message: a2 } = t2;
+    let { data: t2 } = e2, { message: r2 } = t2;
     if (!(!this.isConnected || !t2 || t2.hash != this.embed))
-      switch (a2) {
+      switch (r2) {
         case "mave:player_ready":
           if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
             let m2 = this.autoplay ? 0 : this.video.currentTime;
@@ -1284,12 +1092,12 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
   generateStyle() {
     let e2 = document.createElement("style");
     if ((this._overlayActive || this._isFullscreen) && (e2.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
-      e2.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
+      e2.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; } canvas, .poster { width: ${this.width}; object-fit: cover; } #video, #video[poster] { object-fit: cover; }`;
     else if (this.aspectRatio) {
-      let [t2, a2] = this.aspectRatio.split(":");
-      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${a2}; width: 100%; min-width: 320px; min-height: 180px; }`;
+      let [t2, r2] = this.aspectRatio.split(":");
+      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${r2}; width: 100%; min-width: 320px; min-height: 180px; } canvas, .poster { aspect-ratio: ${t2} / ${r2}; object-fit: contain; } #video, #video[poster] { object-fit: contain; }`;
     } else
-      e2.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
+      e2.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; } #video, #video[poster] { object-fit: contain; }";
     return e2;
   }
   closeDialog() {
@@ -1300,10 +1108,10 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
   }
   poster() {
     var e2;
-    return this.posterImage ? this.posterImage : `${(e2 = this.src) == null ? void 0 : e2.replace("stream", "image")}/thumbnail.jpg?time=0`;
+    return this.posterImage && !this.autoplay ? this.posterImage : `${(e2 = this.src) == null ? void 0 : e2.replace("stream", "image")}/thumbnail.jpg?time=0`;
   }
   render() {
-    return $`
+    return $$1`
       ${this.generateStyle()}
       <dialog
         id="dialog"
@@ -1312,18 +1120,13 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
         class=${this._overlayActive || this._isFullscreen ? "active_overlay" : this._uploadActive ? "active_upload" : ""}
       >
         ${this.renderCanvas()}
-        ${this.src ? $`
+        ${this.src ? $$1`
               ${this.initiateScript()}
-              ${this._blurhashShouldBeVisible ? $`
-                    <img
-                      class="poster"
-                      .src=${this.poster()}
-                      style="filter: contrast(1.05); filter: brightness(1.1);"
-                    />
-                  ` : ""}
+              ${this._posterShouldBeVisible ? $$1` <img class="poster" .src=${this.poster()} /> ` : ""}
 
               <video
                 id="video"
+                style=${this._posterShouldBeVisible ? "opacity: 0;" : ""}
                 playsinline
                 @canplay=${this.videoHandler}
                 @play=${this.videoHandler}
@@ -1338,7 +1141,7 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
                 .src=${this.src}
               ></video>
             ` : ""}
-        ${this.embed ? $`
+        ${this.embed ? $$1`
               <iframe
                 title="embed"
                 id="iframe"
@@ -1357,13 +1160,13 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
     this.appHeight();
   }
   generateUrl() {
-    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${I}`;
+    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${z}`;
   }
   sendMessage(e2, t2 = {}) {
     if (!this.iframe.contentWindow || !this.video)
       return;
-    let a2 = E({ message: e2 }, t2);
-    this.iframe.contentWindow.postMessage(a2, "*");
+    let r2 = E({ message: e2 }, t2);
+    this.iframe.contentWindow.postMessage(r2, "*");
   }
   openFullscreen() {
     this.isFullscreen() || (this.requestFullscreen ? this.requestFullscreen() : this.webkitRequestFullscreen ? this.webkitRequestFullscreen() : (this.sendMessage("mave:open_overlay", {}), this.openOverlay()), this.video && !this.video.paused && (this.video.muted = false, this.sendMessage("mave:video_muted", { muted: this.video.muted })));
@@ -1372,10 +1175,6 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
     (this.isFullscreen() || this._overlayActive) && (document.exitFullscreen && !this._overlayActive ? document.exitFullscreen() : document.webkitExitFullscreen && !this._overlayActive ? document.webkitExitFullscreen() : (this.sendMessage("mave:close_overlay", {}), this.closeOverlay(), this.closeDialog()));
   }
   renderCanvas() {
-    if (!this.blurhash || !this._blurhashShouldBeVisible)
-      return;
-    let e2 = document.createElement("canvas"), t2 = decode(this.blurhash, 320, 180), a2 = e2.getContext("2d"), o2 = a2 == null ? void 0 : a2.createImageData(320, 180);
-    return o2 == null || o2.data.set(t2), o2 && (a2 == null || a2.putImageData(o2, 0, 0)), e2;
   }
   timeUpdate() {
     this._animationFrame = requestAnimationFrame(() => {
@@ -1394,9 +1193,9 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
         let e2 = new Hls();
         e2.loadSource(this.src), e2.attachMedia(this.video);
         let t2 = [];
-        e2.on(Hls.Events.MANIFEST_LOADED, (a2, o2) => {
+        e2.on(Hls.Events.MANIFEST_LOADED, (r2, o2) => {
           t2 = o2.levels.reverse();
-        }), e2.on(Hls.Events.LEVEL_LOADED, (a2, o2) => {
+        }), e2.on(Hls.Events.LEVEL_LOADED, (r2, o2) => {
           this._bitrate != t2[o2.level].bitrate && (this._bitrate = t2[o2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
         }), e2.subtitleTrack = 0, e2.subtitleDisplay = true;
       }
@@ -1409,7 +1208,7 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
   visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow)
       return;
-    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), a2 = window.innerHeight || document.documentElement.clientHeight, o2 = (e2 > 0 || t2 > 0) && e2 < a2;
+    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), r2 = window.innerHeight || document.documentElement.clientHeight, o2 = (e2 > 0 || t2 > 0) && e2 < r2;
     this.sendMessage(o2 ? "mave:video_in_viewport" : "mave:video_out_viewport"), this.debouncedAppHeight();
   }
   isFullscreen() {
@@ -1422,15 +1221,15 @@ var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 
     this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
   }
   debounce(e2, t2) {
-    let a2;
+    let r2;
     return (...o2) => {
-      clearTimeout(a2), a2 = setTimeout(() => {
+      clearTimeout(r2), r2 = setTimeout(() => {
         e2(...o2);
       }, t2);
     };
   }
 };
-s.styles = H, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([e({ type: String, attribute: "poster-image" })], s.prototype, "posterImage", 2), i([e({ type: String, attribute: "poster-video-source" })], s.prototype, "posterVideoSource", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_isFullscreen", 2), i([t()], s.prototype, "_uploadActive", 2);
+s.styles = $, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([e({ type: String, attribute: "poster-image" })], s.prototype, "posterImage", 2), i([e({ type: String, attribute: "poster-video-source" })], s.prototype, "posterVideoSource", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_isFullscreen", 2), i([t()], s.prototype, "_uploadActive", 2), i([t()], s.prototype, "_posterShouldBeVisible", 2);
 customElements.get("mave-component") || customElements.define("mave-component", s);
 const _hoisted_1 = ["src", "blurhash", "loop", "autoplay", "muted", "width", "height", "aspectRatio"];
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({

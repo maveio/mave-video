@@ -96,6 +96,8 @@ export class MaveComponent extends LitElement {
 
   @state() private _uploadActive: boolean = false;
 
+  @state() private _posterShouldBeVisible: boolean = true;
+
   private _hlsLoaded: boolean = false;
 
   private _iframeReady: boolean = false;
@@ -196,6 +198,19 @@ export class MaveComponent extends LitElement {
         } catch (e) {}
         break;
       case "play":
+        if (this._posterShouldBeVisible) {
+          // workaround for Safari (poster image glitch)
+
+          // @ts-ignore
+          if (document.webkitExitFullscreen) {
+            setTimeout(() => {
+              this._posterShouldBeVisible = false;
+            }, 250);
+          } else {
+            this._posterShouldBeVisible = false;
+          }
+        }
+
         if (this._iframeReady) {
           this.timeUpdate();
 
@@ -348,6 +363,7 @@ export class MaveComponent extends LitElement {
           this.video.currentTime < this.video.duration
         )
           this.video.play();
+
         this.visibilityHandler();
 
         break;
@@ -391,14 +407,14 @@ export class MaveComponent extends LitElement {
     }
 
     if (this.width && this.height) {
-      css.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
+      css.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; } canvas, .poster { width: ${this.width}; object-fit: cover; } #video, #video[poster] { object-fit: cover; }`;
     } else {
       if (this.aspectRatio) {
         const [w, h] = this.aspectRatio.split(":");
-        css.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w} / ${h}; width: 100%; min-width: 320px; min-height: 180px; }`;
+        css.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w} / ${h}; width: 100%; min-width: 320px; min-height: 180px; } canvas, .poster { aspect-ratio: ${w} / ${h}; object-fit: contain; } #video, #video[poster] { object-fit: contain; }`;
       } else {
         css.textContent =
-          ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; }";
+          ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; } #video, #video[poster] { object-fit: contain; }";
       }
     }
 
@@ -423,7 +439,7 @@ export class MaveComponent extends LitElement {
   }
 
   poster() {
-    if (this.posterImage) {
+    if (this.posterImage && !this.autoplay) {
       return this.posterImage;
     } else {
       return `${this.src?.replace("stream", "image")}/thumbnail.jpg?time=0`;
@@ -447,18 +463,13 @@ export class MaveComponent extends LitElement {
         ${this.src
           ? html`
               ${this.initiateScript()}
-              ${this._blurhashShouldBeVisible
-                ? html`
-                    <img
-                      class="poster"
-                      .src=${this.poster()}
-                      style="filter: contrast(1.05); filter: brightness(1.1);"
-                    />
-                  `
+              ${this._posterShouldBeVisible
+                ? html` <img class="poster" .src=${this.poster()} /> `
                 : ""}
 
               <video
                 id="video"
+                style=${this._posterShouldBeVisible ? "opacity: 0;" : ""}
                 playsinline
                 @canplay=${this.videoHandler}
                 @play=${this.videoHandler}
@@ -556,16 +567,19 @@ export class MaveComponent extends LitElement {
   }
 
   private renderCanvas() {
-    if (!this.blurhash || !this._blurhashShouldBeVisible) return;
+    // current no canvas support
+    return;
 
-    const canvas = document.createElement("canvas");
-    const pixels = decode(this.blurhash, 320, 180);
+    // if (!this.blurhash || !this._blurhashShouldBeVisible) return;
 
-    const ctx = canvas.getContext("2d");
-    const imageData = ctx?.createImageData(320, 180);
-    imageData?.data.set(pixels);
-    if (imageData) ctx?.putImageData(imageData, 0, 0);
-    return canvas;
+    // const canvas = document.createElement("canvas");
+    // const pixels = decode(this.blurhash, 320, 180);
+
+    // const ctx = canvas.getContext("2d");
+    // const imageData = ctx?.createImageData(320, 180);
+    // imageData?.data.set(pixels);
+    // if (imageData) ctx?.putImageData(imageData, 0, 0);
+    // return canvas;
   }
 
   private timeUpdate() {
