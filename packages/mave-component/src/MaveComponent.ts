@@ -446,6 +446,19 @@ export class MaveComponent extends LitElement {
     }
   }
 
+  videoPoster() {
+    return navigator.userAgent.toLowerCase().includes("chrome")
+      ? this.poster()
+      : "";
+  }
+
+  videoStyle() {
+    return !navigator.userAgent.toLowerCase().includes("chrome") &&
+      this._posterShouldBeVisible
+      ? "opacity: 0;"
+      : "";
+  }
+
   render() {
     return html`
       ${this.generateStyle()}
@@ -469,7 +482,7 @@ export class MaveComponent extends LitElement {
 
               <video
                 id="video"
-                style=${this._posterShouldBeVisible ? "opacity: 0;" : ""}
+                style=${this.videoStyle()}
                 playsinline
                 @canplay=${this.videoHandler}
                 @play=${this.videoHandler}
@@ -478,6 +491,7 @@ export class MaveComponent extends LitElement {
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
+                .poster=${this.videoPoster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}

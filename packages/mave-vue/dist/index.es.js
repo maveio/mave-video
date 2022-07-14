@@ -661,13 +661,13 @@ var n;
 var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
-var F = Object.prototype.hasOwnProperty, S = Object.prototype.propertyIsEnumerable;
+var S = Object.prototype.hasOwnProperty, F = Object.prototype.propertyIsEnumerable;
 var w = (n2, a2, e2) => a2 in n2 ? k(n2, a2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[a2] = e2, E = (n2, a2) => {
   for (var e2 in a2 || (a2 = {}))
-    F.call(a2, e2) && w(n2, e2, a2[e2]);
+    S.call(a2, e2) && w(n2, e2, a2[e2]);
   if (_)
     for (var e2 of _(a2))
-      S.call(a2, e2) && w(n2, e2, a2[e2]);
+      F.call(a2, e2) && w(n2, e2, a2[e2]);
   return n2;
 };
 var i = (n2, a2, e2, t2) => {
@@ -1110,6 +1110,12 @@ var z = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
     var e2;
     return this.posterImage && !this.autoplay ? this.posterImage : `${(e2 = this.src) == null ? void 0 : e2.replace("stream", "image")}/thumbnail.jpg?time=0`;
   }
+  videoPoster() {
+    return navigator.userAgent.toLowerCase().includes("chrome") ? this.poster() : "";
+  }
+  videoStyle() {
+    return !navigator.userAgent.toLowerCase().includes("chrome") && this._posterShouldBeVisible ? "opacity: 0;" : "";
+  }
   render() {
     return $$1`
       ${this.generateStyle()}
@@ -1126,7 +1132,7 @@ var z = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
 
               <video
                 id="video"
-                style=${this._posterShouldBeVisible ? "opacity: 0;" : ""}
+                style=${this.videoStyle()}
                 playsinline
                 @canplay=${this.videoHandler}
                 @play=${this.videoHandler}
@@ -1135,6 +1141,7 @@ var z = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, a2) => n2 += (a2 
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
+                .poster=${this.videoPoster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}

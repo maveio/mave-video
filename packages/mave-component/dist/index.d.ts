@@ -77,6 +77,8 @@ declare class MaveComponent extends LitElement {
     closeDialog(): void;
     clickDialog(e: Event): void;
     poster(): string;
+    videoPoster(): string;
+    videoStyle(): "" | "opacity: 0;";
     render(): lit_html.TemplateResult<1>;
     firstUpdated(changedProperties: any): void;
     private generateUrl;
