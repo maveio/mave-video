@@ -92,6 +92,8 @@ export class MaveComponent extends LitElement {
 
   @state() private _overlayActive: boolean = false;
 
+  @state() private _isFullscreen: boolean = false;
+
   @state() private _uploadActive: boolean = false;
 
   private _hlsLoaded: boolean = false;
@@ -112,6 +114,11 @@ export class MaveComponent extends LitElement {
 
   private loadeddata: boolean = false;
 
+  private debouncedAppHeight: Function = this.debounce(
+    this.appHeight.bind(this),
+    550
+  );
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -119,6 +126,10 @@ export class MaveComponent extends LitElement {
     window.addEventListener("load", this.visibilityHandler.bind(this));
     window.addEventListener("scroll", this.visibilityHandler.bind(this));
     window.addEventListener("resize", this.visibilityHandler.bind(this));
+
+    for (const e of ["fullscreenchange", "webkitfullscreenchange"]) {
+      this.addEventListener(e, this.fullscreenChangeHandler.bind(this));
+    }
 
     if (
       this.video?.canPlayType("application/vnd.apple.mpegurl") &&
@@ -133,6 +144,10 @@ export class MaveComponent extends LitElement {
     window.removeEventListener("load", this.visibilityHandler.bind(this));
     window.removeEventListener("scroll", this.visibilityHandler.bind(this));
     window.removeEventListener("resize", this.visibilityHandler.bind(this));
+
+    for (const e of ["fullscreenchange", "webkitfullscreenchange"]) {
+      this.removeEventListener(e, this.fullscreenChangeHandler.bind(this));
+    }
 
     // remove settings when it's active
     const settings = document.querySelector("mave-settings");
@@ -261,6 +276,7 @@ export class MaveComponent extends LitElement {
             break;
           case "muted":
             this.video.muted = playerEvent.muted;
+            this.sendMessage("mave:video_muted", { muted: this.video.muted });
             break;
           case "volume":
             this.video.volume = playerEvent.volume;
@@ -272,27 +288,12 @@ export class MaveComponent extends LitElement {
 
         break;
       case "mave:open_popup_overlay":
-        this._overlayActive = true;
-        if (this._blurhashShouldBeVisible)
-          this._blurhashShouldBeVisible = false;
-        // @ts-ignore
-        this.dialog.showModal();
-
-        this._globalStyle =
-          document.documentElement.getAttribute("style") || "";
-        document.documentElement.setAttribute(
-          "style",
-          `${this._globalStyle}; overflow: hidden;`
-        );
-
+        if (this.isFullscreen()) return;
+        this.openOverlay();
         break;
       case "mave:close_popup_overlay":
-        // @ts-ignore
-        this.dialog.close();
-        this._overlayActive = false;
-
-        document.documentElement.setAttribute("style", this._globalStyle || "");
-
+        if (this.isFullscreen()) return;
+        this.closeOverlay();
         break;
       case "mave:open_dialog":
         // @ts-ignore
@@ -305,12 +306,12 @@ export class MaveComponent extends LitElement {
         this._uploadActive = false;
         break;
       case "mave:toggle_fullscreen":
-        document.fullscreenElement
+        this.isFullscreen() || this._overlayActive
           ? this.closeFullscreen()
           : this.openFullscreen();
         break;
       case "mave:open_fullscreen":
-        this.openFullscreen();
+        if (!this._overlayActive) this.openFullscreen();
         break;
       case "mave:close_fullscreen":
         this.closeFullscreen();
@@ -374,10 +375,17 @@ export class MaveComponent extends LitElement {
     }
   }
 
+  fullscreenChangeHandler() {
+    this._isFullscreen = !this._isFullscreen;
+    this.sendMessage("mave:video_fullscreen", {
+      fullscreen: this.isFullscreen(),
+    });
+  }
+
   generateStyle() {
     const css = document.createElement("style");
 
-    if (this._overlayActive) {
+    if (this._overlayActive || this._isFullscreen) {
       css.textContent =
         ":host { overflow: hidden; width: 100%; height: 100%; }";
     }
@@ -398,9 +406,13 @@ export class MaveComponent extends LitElement {
   }
 
   closeDialog() {
-    this._overlayActive = false;
-    this._uploadActive = false;
-    this.sendMessage("mave:closing_overlay");
+    if (this.isFullscreen()) {
+      this.closeFullscreen();
+    } else {
+      this._overlayActive = false;
+      this._uploadActive = false;
+      this.sendMessage("mave:close_overlay");
+    }
   }
 
   clickDialog(e: Event) {
@@ -425,7 +437,7 @@ export class MaveComponent extends LitElement {
         id="dialog"
         @click=${this.clickDialog}
         @close=${this.closeDialog}
-        class=${this._overlayActive
+        class=${this._overlayActive || this._isFullscreen
           ? "active_overlay"
           : "" || this._uploadActive
           ? "active_upload"
@@ -459,7 +471,6 @@ export class MaveComponent extends LitElement {
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
                 .src=${this.src}
-                .poster=${this.poster()}
               ></video>
             `
           : ""}
@@ -479,6 +490,10 @@ export class MaveComponent extends LitElement {
           : ""}
       </dialog>
     `;
+  }
+
+  firstUpdated(changedProperties: any) {
+    this.appHeight();
   }
 
   private generateUrl() {
@@ -505,22 +520,38 @@ export class MaveComponent extends LitElement {
   }
 
   private openFullscreen() {
-    if (!document.fullscreenElement) {
+    if (!this.isFullscreen()) {
       if (this.requestFullscreen) {
         this.requestFullscreen();
-      } else {
         // @ts-ignore
-        this.video.webkitEnterFullScreen();
+      } else if (this.webkitRequestFullscreen) {
+        // @ts-ignore
+        this.webkitRequestFullscreen();
+      } else {
+        this.sendMessage("mave:open_overlay", {});
+        this.openOverlay();
       }
 
-      this.sendMessage("mave:video_fullscreen", { fullscreen: true });
+      if (this.video && !this.video.paused) {
+        this.video.muted = false;
+        this.sendMessage("mave:video_muted", { muted: this.video.muted });
+      }
     }
   }
 
   private closeFullscreen() {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-      this.sendMessage("mave:video_fullscreen", { fullscreen: false });
+    if (this.isFullscreen() || this._overlayActive) {
+      if (document.exitFullscreen && !this._overlayActive) {
+        document.exitFullscreen();
+        // @ts-ignore
+      } else if (document.webkitExitFullscreen && !this._overlayActive) {
+        // @ts-ignore
+        document.webkitExitFullscreen();
+      } else {
+        this.sendMessage("mave:close_overlay", {});
+        this.closeOverlay();
+        this.closeDialog();
+      }
     }
   }
 
@@ -587,6 +618,14 @@ export class MaveComponent extends LitElement {
     this._hlsLoaded = true;
   }
 
+  private appHeight() {
+    const doc = document.documentElement;
+    doc.style.setProperty(
+      "--mave_embed_dialog_height",
+      `${window.innerHeight}px`
+    );
+  }
+
   private visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow) return;
     const { top, bottom } = this.iframe.getBoundingClientRect();
@@ -597,6 +636,54 @@ export class MaveComponent extends LitElement {
     this.sendMessage(
       visible ? "mave:video_in_viewport" : "mave:video_out_viewport"
     );
+
+    this.debouncedAppHeight();
+  }
+
+  private isFullscreen(): boolean {
+    return (
+      !!document.fullscreenElement ||
+      // @ts-ignore
+      !!document.webkitFullscreenElement ||
+      ("ontouchend" in document && this._isFullscreen)
+    );
+  }
+
+  private openOverlay() {
+    if (this.isFullscreen()) return;
+
+    this._overlayActive = true;
+    if (this._blurhashShouldBeVisible) this._blurhashShouldBeVisible = false;
+
+    // @ts-ignore
+    this.dialog.showModal();
+
+    this._globalStyle = document.documentElement.getAttribute("style") || "";
+    document.documentElement.setAttribute(
+      "style",
+      `${this._globalStyle}; overflow: hidden;`
+    );
+  }
+
+  private closeOverlay() {
+    // @ts-ignore
+    this.dialog.close();
+    this._overlayActive = false;
+
+    document.documentElement.setAttribute("style", this._globalStyle || "");
+  }
+
+  private debounce<Params extends any[]>(
+    func: (...args: Params) => any,
+    timeout: number
+  ): (...args: Params) => void {
+    let timer: NodeJS.Timeout;
+    return (...args: Params) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, timeout);
+    };
   }
 }
 

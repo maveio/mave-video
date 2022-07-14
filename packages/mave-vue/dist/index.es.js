@@ -69,7 +69,7 @@ const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
     const n3 = document.createElement("style"), s2 = window.litNonce;
     s2 !== void 0 && n3.setAttribute("nonce", s2), n3.textContent = t2.cssText, e2.appendChild(n3);
   });
-}, S$2 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+}, S$1 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
   let e2 = "";
   for (const n2 of t3.cssRules)
     e2 += n2.cssText;
@@ -160,9 +160,9 @@ class a$1 extends HTMLElement {
     if (Array.isArray(i2)) {
       const e2 = new Set(i2.flat(1 / 0).reverse());
       for (const i3 of e2)
-        s2.unshift(S$2(i3));
+        s2.unshift(S$1(i3));
     } else
-      i2 !== void 0 && s2.push(S$2(i2));
+      i2 !== void 0 && s2.push(S$1(i2));
     return s2;
   }
   static _$Eh(t2, i2) {
@@ -299,7 +299,7 @@ var t$1;
 const i$3 = globalThis.trustedTypes, s$2 = i$3 ? i$3.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$1 = `lit$${(Math.random() + "").slice(9)}$`, o$2 = "?" + e$1, n$2 = `<${o$2}>`, l$1 = document, h$1 = (t2 = "") => l$1.createComment(t2), r = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$1 = Array.isArray, u = (t2) => {
   var i2;
   return d$1(t2) || typeof ((i2 = t2) === null || i2 === void 0 ? void 0 : i2[Symbol.iterator]) == "function";
-}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T$1 = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
+}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _$1 = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $ = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T$1 = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
   var e2, o2;
   const n2 = (e2 = s2 == null ? void 0 : s2.renderBefore) !== null && e2 !== void 0 ? e2 : i2;
   let l2 = n2._$litPart$;
@@ -343,7 +343,7 @@ class E$1 {
               const s3 = a2[d2++];
               if (t3.push(i2), s3 !== void 0) {
                 const t4 = l2.getAttribute(s3.toLowerCase() + "$lit$").split(e$1), i3 = /([.?@])?(.*)/.exec(s3);
-                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H : i3[1] === "@" ? I : S$1 });
+                c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H$1 : i3[1] === "@" ? I$1 : S });
               } else
                 c2.push({ type: 6, index: r2 });
             }
@@ -375,13 +375,13 @@ class E$1 {
     return s2.innerHTML = t2, s2;
   }
 }
-function P$1(t2, i2, s2 = t2, e2) {
+function P(t2, i2, s2 = t2, e2) {
   var o2, n2, l2, h2;
   if (i2 === b)
     return i2;
   let d2 = e2 !== void 0 ? (o2 = s2._$Cl) === null || o2 === void 0 ? void 0 : o2[e2] : s2._$Cu;
   const u2 = r(i2) ? void 0 : i2._$litDirective$;
-  return (d2 == null ? void 0 : d2.constructor) !== u2 && ((n2 = d2 == null ? void 0 : d2._$AO) === null || n2 === void 0 || n2.call(d2, false), u2 === void 0 ? d2 = void 0 : (d2 = new u2(t2), d2._$AT(t2, s2, e2)), e2 !== void 0 ? ((l2 = (h2 = s2)._$Cl) !== null && l2 !== void 0 ? l2 : h2._$Cl = [])[e2] = d2 : s2._$Cu = d2), d2 !== void 0 && (i2 = P$1(t2, d2._$AS(t2, i2.values), d2, e2)), i2;
+  return (d2 == null ? void 0 : d2.constructor) !== u2 && ((n2 = d2 == null ? void 0 : d2._$AO) === null || n2 === void 0 || n2.call(d2, false), u2 === void 0 ? d2 = void 0 : (d2 = new u2(t2), d2._$AT(t2, s2, e2)), e2 !== void 0 ? ((l2 = (h2 = s2)._$Cl) !== null && l2 !== void 0 ? l2 : h2._$Cl = [])[e2] = d2 : s2._$Cu = d2), d2 !== void 0 && (i2 = P(t2, d2._$AS(t2, i2.values), d2, e2)), i2;
 }
 class V {
   constructor(t2, i2) {
@@ -434,7 +434,7 @@ class N {
     return this._$AB;
   }
   _$AI(t2, i2 = this) {
-    t2 = P$1(this, t2, i2), r(t2) ? t2 === w$1 || t2 == null || t2 === "" ? (this._$AH !== w$1 && this._$AR(), this._$AH = w$1) : t2 !== this._$AH && t2 !== b && this.$(t2) : t2._$litType$ !== void 0 ? this.T(t2) : t2.nodeType !== void 0 ? this.k(t2) : u(t2) ? this.S(t2) : this.$(t2);
+    t2 = P(this, t2, i2), r(t2) ? t2 === w$1 || t2 == null || t2 === "" ? (this._$AH !== w$1 && this._$AR(), this._$AH = w$1) : t2 !== this._$AH && t2 !== b && this.$(t2) : t2._$litType$ !== void 0 ? this.T(t2) : t2.nodeType !== void 0 ? this.k(t2) : u(t2) ? this.S(t2) : this.$(t2);
   }
   M(t2, i2 = this._$AB) {
     return this._$AA.parentNode.insertBefore(t2, i2);
@@ -479,7 +479,7 @@ class N {
     this._$AM === void 0 && (this._$Cg = t2, (i2 = this._$AP) === null || i2 === void 0 || i2.call(this, t2));
   }
 }
-class S$1 {
+class S {
   constructor(t2, i2, s2, e2, o2) {
     this.type = 1, this._$AH = w$1, this._$AN = void 0, this.element = t2, this.name = i2, this._$AM = e2, this.options = o2, s2.length > 2 || s2[0] !== "" || s2[1] !== "" ? (this._$AH = Array(s2.length - 1).fill(new String()), this.strings = s2) : this._$AH = w$1;
   }
@@ -493,12 +493,12 @@ class S$1 {
     const o2 = this.strings;
     let n2 = false;
     if (o2 === void 0)
-      t2 = P$1(this, t2, i2, 0), n2 = !r(t2) || t2 !== this._$AH && t2 !== b, n2 && (this._$AH = t2);
+      t2 = P(this, t2, i2, 0), n2 = !r(t2) || t2 !== this._$AH && t2 !== b, n2 && (this._$AH = t2);
     else {
       const e3 = t2;
       let l2, h2;
       for (t2 = o2[0], l2 = 0; l2 < o2.length - 1; l2++)
-        h2 = P$1(this, e3[s2 + l2], i2, l2), h2 === b && (h2 = this._$AH[l2]), n2 || (n2 = !r(h2) || h2 !== this._$AH[l2]), h2 === w$1 ? t2 = w$1 : t2 !== w$1 && (t2 += (h2 != null ? h2 : "") + o2[l2 + 1]), this._$AH[l2] = h2;
+        h2 = P(this, e3[s2 + l2], i2, l2), h2 === b && (h2 = this._$AH[l2]), n2 || (n2 = !r(h2) || h2 !== this._$AH[l2]), h2 === w$1 ? t2 = w$1 : t2 !== w$1 && (t2 += (h2 != null ? h2 : "") + o2[l2 + 1]), this._$AH[l2] = h2;
     }
     n2 && !e2 && this.C(t2);
   }
@@ -506,7 +506,7 @@ class S$1 {
     t2 === w$1 ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t2 != null ? t2 : "");
   }
 }
-class M extends S$1 {
+class M extends S {
   constructor() {
     super(...arguments), this.type = 3;
   }
@@ -515,7 +515,7 @@ class M extends S$1 {
   }
 }
 const k$1 = i$3 ? i$3.emptyScript : "";
-class H extends S$1 {
+class H$1 extends S {
   constructor() {
     super(...arguments), this.type = 4;
   }
@@ -523,13 +523,13 @@ class H extends S$1 {
     t2 && t2 !== w$1 ? this.element.setAttribute(this.name, k$1) : this.element.removeAttribute(this.name);
   }
 }
-class I extends S$1 {
+class I$1 extends S {
   constructor(t2, i2, s2, e2, o2) {
     super(t2, i2, s2, e2, o2), this.type = 5;
   }
   _$AI(t2, i2 = this) {
     var s2;
-    if ((t2 = (s2 = P$1(this, t2, i2, 0)) !== null && s2 !== void 0 ? s2 : w$1) === b)
+    if ((t2 = (s2 = P(this, t2, i2, 0)) !== null && s2 !== void 0 ? s2 : w$1) === b)
       return;
     const e2 = this._$AH, o2 = t2 === w$1 && e2 !== w$1 || t2.capture !== e2.capture || t2.once !== e2.once || t2.passive !== e2.passive, n2 = t2 !== w$1 && (e2 === w$1 || o2);
     o2 && this.element.removeEventListener(this.name, this, e2), n2 && this.element.addEventListener(this.name, this, t2), this._$AH = t2;
@@ -547,7 +547,7 @@ class L {
     return this._$AM._$AU;
   }
   _$AI(t2) {
-    P$1(this, t2);
+    P(this, t2);
   }
 }
 const z = window.litHtmlPolyfillSupport;
@@ -853,18 +853,18 @@ const decode = (blurhash, width, height, punch) => {
 var k = Object.defineProperty;
 var x = Object.getOwnPropertyDescriptor;
 var _ = Object.getOwnPropertySymbols;
-var S = Object.prototype.hasOwnProperty, T = Object.prototype.propertyIsEnumerable;
-var w = (n2, r2, e2) => r2 in n2 ? k(n2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[r2] = e2, E = (n2, r2) => {
+var F = Object.prototype.hasOwnProperty, T = Object.prototype.propertyIsEnumerable;
+var w = (l2, r2, e2) => r2 in l2 ? k(l2, r2, { enumerable: true, configurable: true, writable: true, value: e2 }) : l2[r2] = e2, E = (l2, r2) => {
   for (var e2 in r2 || (r2 = {}))
-    S.call(r2, e2) && w(n2, e2, r2[e2]);
+    F.call(r2, e2) && w(l2, e2, r2[e2]);
   if (_)
     for (var e2 of _(r2))
-      T.call(r2, e2) && w(n2, e2, r2[e2]);
-  return n2;
+      T.call(r2, e2) && w(l2, e2, r2[e2]);
+  return l2;
 };
-var i = (n2, r2, e2, t2) => {
-  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, o2 = n2.length - 1, c2; o2 >= 0; o2--)
-    (c2 = n2[o2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
+var i = (l2, r2, e2, t2) => {
+  for (var a2 = t2 > 1 ? void 0 : t2 ? x(r2, e2) : r2, o2 = l2.length - 1, c2; o2 >= 0; o2--)
+    (c2 = l2[o2]) && (a2 = (t2 ? c2(r2, e2, a2) : c2(a2)) || a2);
   return t2 && a2 && k(r2, e2, a2), a2;
 };
 var d = class {
@@ -881,7 +881,11 @@ var d = class {
     this._baseUrl = r2;
   }
 };
-var $ = r$2`
+var H = r$2`
+  :root {
+    --mave_embed_dialog_height: 100vh !important;
+  }
+
   dialog {
     position: relative;
     display: flex;
@@ -891,10 +895,23 @@ var $ = r$2`
     width: 100%;
     height: 100%;
     max-width: 100vw !important;
-    max-height: 100vh !important;
+    max-height: var(--mave_embed_dialog_height);
     padding: 0;
     margin: 0;
     background: transparent;
+  }
+
+  @media (max-width: 768px) {
+    dialog {
+      transition-property: max-height;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+  }
+
+  .active_fullscreen {
+    min-width: 100vw !important;
+    min-height: 100vh !important;
   }
 
   dialog::backdrop {
@@ -1023,7 +1040,7 @@ var h = class extends s$1 {
     e2.type == "close" && window.postMessage({ message: "mave:close_settings", hash: this.embed }, "*"), e2.target == this.dialog && this.dialog.close();
   }
   render() {
-    return $$1`
+    return $`
       <dialog
         id="dialog"
         @close=${this.dialogHandler}
@@ -1105,12 +1122,14 @@ h.styles = r$2`
     }
   `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
 customElements.get("mave-settings") || customElements.define("mave-settings", h);
-var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+console.log("KUT");
+var I = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, r2) => l2 += (r2 &= 63) < 36 ? r2.toString(36) : r2 < 62 ? (r2 - 26).toString(36).toUpperCase() : r2 < 63 ? "_" : "-", ""), s = class extends s$1 {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
     this._blurhashShouldBeVisible = true;
     this._overlayActive = false;
+    this._isFullscreen = false;
     this._uploadActive = false;
     this._hlsLoaded = false;
     this._iframeReady = false;
@@ -1118,13 +1137,19 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
     this.baseUrl = d.getInstance().baseUrl;
     this.canPlay = false;
     this.loadeddata = false;
+    this.debouncedAppHeight = this.debounce(this.appHeight.bind(this), 550);
   }
   connectedCallback() {
     var e2;
-    super.connectedCallback(), window.addEventListener("message", this.messageHandler.bind(this)), window.addEventListener("load", this.visibilityHandler.bind(this)), window.addEventListener("scroll", this.visibilityHandler.bind(this)), window.addEventListener("resize", this.visibilityHandler.bind(this)), ((e2 = this.video) == null ? void 0 : e2.canPlayType("application/vnd.apple.mpegurl")) && !this._hlsLoaded && this.scriptHandler();
+    super.connectedCallback(), window.addEventListener("message", this.messageHandler.bind(this)), window.addEventListener("load", this.visibilityHandler.bind(this)), window.addEventListener("scroll", this.visibilityHandler.bind(this)), window.addEventListener("resize", this.visibilityHandler.bind(this));
+    for (let t2 of ["fullscreenchange", "webkitfullscreenchange"])
+      this.addEventListener(t2, this.fullscreenChangeHandler.bind(this));
+    ((e2 = this.video) == null ? void 0 : e2.canPlayType("application/vnd.apple.mpegurl")) && !this._hlsLoaded && this.scriptHandler();
   }
   disconnectedCallback() {
     window.removeEventListener("message", this.messageHandler.bind(this)), window.removeEventListener("load", this.visibilityHandler.bind(this)), window.removeEventListener("scroll", this.visibilityHandler.bind(this)), window.removeEventListener("resize", this.visibilityHandler.bind(this));
+    for (let t2 of ["fullscreenchange", "webkitfullscreenchange"])
+      this.removeEventListener(t2, this.fullscreenChangeHandler.bind(this));
     let e2 = document.querySelector("mave-settings");
     e2 && e2.remove(), super.disconnectedCallback();
   }
@@ -1191,7 +1216,7 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
               c2.play ? this.video.play() : this.video.pause();
               break;
             case "muted":
-              this.video.muted = c2.muted;
+              this.video.muted = c2.muted, this.sendMessage("mave:video_muted", { muted: this.video.muted });
               break;
             case "volume":
               this.video.volume = c2.volume;
@@ -1202,10 +1227,14 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
           }
           break;
         case "mave:open_popup_overlay":
-          this._overlayActive = true, this._blurhashShouldBeVisible && (this._blurhashShouldBeVisible = false), this.dialog.showModal(), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
+          if (this.isFullscreen())
+            return;
+          this.openOverlay();
           break;
         case "mave:close_popup_overlay":
-          this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
+          if (this.isFullscreen())
+            return;
+          this.closeOverlay();
           break;
         case "mave:open_dialog":
           this.dialog.showModal(), this._uploadActive = true;
@@ -1214,10 +1243,10 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
           this.dialog.close(), this._uploadActive = false;
           break;
         case "mave:toggle_fullscreen":
-          document.fullscreenElement ? this.closeFullscreen() : this.openFullscreen();
+          this.isFullscreen() || this._overlayActive ? this.closeFullscreen() : this.openFullscreen();
           break;
         case "mave:open_fullscreen":
-          this.openFullscreen();
+          this._overlayActive || this.openFullscreen();
           break;
         case "mave:close_fullscreen":
           this.closeFullscreen();
@@ -1249,9 +1278,12 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
           break;
       }
   }
+  fullscreenChangeHandler() {
+    this._isFullscreen = !this._isFullscreen, this.sendMessage("mave:video_fullscreen", { fullscreen: this.isFullscreen() });
+  }
   generateStyle() {
     let e2 = document.createElement("style");
-    if (this._overlayActive && (e2.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
+    if ((this._overlayActive || this._isFullscreen) && (e2.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
       e2.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; }`;
     else if (this.aspectRatio) {
       let [t2, a2] = this.aspectRatio.split(":");
@@ -1261,7 +1293,7 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
     return e2;
   }
   closeDialog() {
-    this._overlayActive = false, this._uploadActive = false, this.sendMessage("mave:closing_overlay");
+    this.isFullscreen() ? this.closeFullscreen() : (this._overlayActive = false, this._uploadActive = false, this.sendMessage("mave:close_overlay"));
   }
   clickDialog(e2) {
     this._uploadActive && e2.target == this.dialog && (this.closeDialog(), this.sendMessage("mave:cancel_upload"));
@@ -1271,18 +1303,18 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
     return this.posterImage ? this.posterImage : `${(e2 = this.src) == null ? void 0 : e2.replace("stream", "image")}/thumbnail.jpg?time=0`;
   }
   render() {
-    return $$1`
+    return $`
       ${this.generateStyle()}
       <dialog
         id="dialog"
         @click=${this.clickDialog}
         @close=${this.closeDialog}
-        class=${this._overlayActive ? "active_overlay" : this._uploadActive ? "active_upload" : ""}
+        class=${this._overlayActive || this._isFullscreen ? "active_overlay" : this._uploadActive ? "active_upload" : ""}
       >
         ${this.renderCanvas()}
-        ${this.src ? $$1`
+        ${this.src ? $`
               ${this.initiateScript()}
-              ${this._blurhashShouldBeVisible ? $$1`
+              ${this._blurhashShouldBeVisible ? $`
                     <img
                       class="poster"
                       .src=${this.poster()}
@@ -1304,10 +1336,9 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
                 .src=${this.src}
-                .poster=${this.poster()}
               ></video>
             ` : ""}
-        ${this.embed ? $$1`
+        ${this.embed ? $`
               <iframe
                 title="embed"
                 id="iframe"
@@ -1322,8 +1353,11 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
       </dialog>
     `;
   }
+  firstUpdated(e2) {
+    this.appHeight();
+  }
   generateUrl() {
-    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${P}`;
+    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${I}`;
   }
   sendMessage(e2, t2 = {}) {
     if (!this.iframe.contentWindow || !this.video)
@@ -1332,10 +1366,10 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
     this.iframe.contentWindow.postMessage(a2, "*");
   }
   openFullscreen() {
-    document.fullscreenElement || (this.requestFullscreen ? this.requestFullscreen() : this.video.webkitEnterFullScreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: true }));
+    this.isFullscreen() || (this.requestFullscreen ? this.requestFullscreen() : this.webkitRequestFullscreen ? this.webkitRequestFullscreen() : (this.sendMessage("mave:open_overlay", {}), this.openOverlay()), this.video && !this.video.paused && (this.video.muted = false, this.sendMessage("mave:video_muted", { muted: this.video.muted })));
   }
   closeFullscreen() {
-    document.fullscreenElement && (document.exitFullscreen(), this.sendMessage("mave:video_fullscreen", { fullscreen: false }));
+    (this.isFullscreen() || this._overlayActive) && (document.exitFullscreen && !this._overlayActive ? document.exitFullscreen() : document.webkitExitFullscreen && !this._overlayActive ? document.webkitExitFullscreen() : (this.sendMessage("mave:close_overlay", {}), this.closeOverlay(), this.closeDialog()));
   }
   renderCanvas() {
     if (!this.blurhash || !this._blurhashShouldBeVisible)
@@ -1369,14 +1403,34 @@ var P = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, r2) => n2 += (r2 
       this._hlsLoaded = true;
     }
   }
+  appHeight() {
+    document.documentElement.style.setProperty("--mave_embed_dialog_height", `${window.innerHeight}px`);
+  }
   visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow)
       return;
     let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), a2 = window.innerHeight || document.documentElement.clientHeight, o2 = (e2 > 0 || t2 > 0) && e2 < a2;
-    this.sendMessage(o2 ? "mave:video_in_viewport" : "mave:video_out_viewport");
+    this.sendMessage(o2 ? "mave:video_in_viewport" : "mave:video_out_viewport"), this.debouncedAppHeight();
+  }
+  isFullscreen() {
+    return !!document.fullscreenElement || !!document.webkitFullscreenElement || "ontouchend" in document && this._isFullscreen;
+  }
+  openOverlay() {
+    this.isFullscreen() || (this._overlayActive = true, this._blurhashShouldBeVisible && (this._blurhashShouldBeVisible = false), this.dialog.showModal(), this._globalStyle = document.documentElement.getAttribute("style") || "", document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`));
+  }
+  closeOverlay() {
+    this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
+  }
+  debounce(e2, t2) {
+    let a2;
+    return (...o2) => {
+      clearTimeout(a2), a2 = setTimeout(() => {
+        e2(...o2);
+      }, t2);
+    };
   }
 };
-s.styles = $, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([e({ type: String, attribute: "poster-image" })], s.prototype, "posterImage", 2), i([e({ type: String, attribute: "poster-video-source" })], s.prototype, "posterVideoSource", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_uploadActive", 2);
+s.styles = H, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([e({ type: String, attribute: "poster-image" })], s.prototype, "posterImage", 2), i([e({ type: String, attribute: "poster-video-source" })], s.prototype, "posterVideoSource", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_isFullscreen", 2), i([t()], s.prototype, "_uploadActive", 2);
 customElements.get("mave-component") || customElements.define("mave-component", s);
 const _hoisted_1 = ["src", "blurhash", "loop", "autoplay", "muted", "width", "height", "aspectRatio"];
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({

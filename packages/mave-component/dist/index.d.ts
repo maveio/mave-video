@@ -54,6 +54,7 @@ declare class MaveComponent extends LitElement {
     private _settingsActive;
     private _blurhashShouldBeVisible;
     private _overlayActive;
+    private _isFullscreen;
     private _uploadActive;
     private _hlsLoaded;
     private _iframeReady;
@@ -64,16 +65,19 @@ declare class MaveComponent extends LitElement {
     private _globalStyle?;
     private canPlay;
     private loadeddata;
+    private debouncedAppHeight;
     connectedCallback(): void;
     disconnectedCallback(): void;
     initializeVideo(): void;
     videoHandler(event: Event): void;
     messageHandler(event: IEvent): void;
+    fullscreenChangeHandler(): void;
     generateStyle(): HTMLStyleElement;
     closeDialog(): void;
     clickDialog(e: Event): void;
     poster(): string;
     render(): lit_html.TemplateResult<1>;
+    firstUpdated(changedProperties: any): void;
     private generateUrl;
     private sendMessage;
     private openFullscreen;
@@ -82,7 +86,12 @@ declare class MaveComponent extends LitElement {
     private timeUpdate;
     private initiateScript;
     private scriptHandler;
+    private appHeight;
     private visibilityHandler;
+    private isFullscreen;
+    private openOverlay;
+    private closeOverlay;
+    private debounce;
 }
 
 export { Config, MaveComponent };

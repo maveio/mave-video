@@ -1,6 +1,10 @@
 import { css } from "lit";
 
 export const style = css`
+  :root {
+    --mave_embed_dialog_height: 100vh !important;
+  }
+
   dialog {
     position: relative;
     display: flex;
@@ -10,10 +14,23 @@ export const style = css`
     width: 100%;
     height: 100%;
     max-width: 100vw !important;
-    max-height: 100vh !important;
+    max-height: var(--mave_embed_dialog_height);
     padding: 0;
     margin: 0;
     background: transparent;
+  }
+
+  @media (max-width: 768px) {
+    dialog {
+      transition-property: max-height;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+  }
+
+  .active_fullscreen {
+    min-width: 100vw !important;
+    min-height: 100vh !important;
   }
 
   dialog::backdrop {
