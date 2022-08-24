@@ -607,6 +607,8 @@ export class MaveComponent extends LitElement {
   }
 
   private initiateScript() {
+    if(this.src && !this.src.includes(".m3u8")) return;
+
     let script = document.createElement("script");
     script.onload = this.scriptHandler.bind(this);
     script.src =
@@ -617,15 +619,15 @@ export class MaveComponent extends LitElement {
   private scriptHandler() {
     if (!this.video || !this.src || this._hlsLoaded) return;
 
-    if (this.video.canPlayType("application/vnd.apple.mpegurl")) {
+    if (this.video.canPlayType("application/vnd.apple.mpegurl") || !this.src.includes(".m3u8")) {
       this.video.src = this.src;
-
       // no bitrate detected
 
       // @ts-ignore
     } else if (Hls.isSupported()) {
       // @ts-ignore
       const hls = new Hls();
+
       hls.loadSource(this.src);
       hls.attachMedia(this.video);
       let levels: any = [];
