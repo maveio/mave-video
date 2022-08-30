@@ -1,6 +1,6 @@
 import * as lit_html from 'lit-html';
 import * as lit from 'lit';
-import { LitElement } from 'lit';
+import { LitElement, nothing } from 'lit';
 
 declare class Config {
     private _baseUrl;
@@ -76,9 +76,9 @@ declare class MaveComponent extends LitElement {
     generateStyle(): HTMLStyleElement;
     closeDialog(): void;
     clickDialog(e: Event): void;
-    poster(): string;
-    videoPoster(): string;
-    videoStyle(): "" | "opacity: 0;";
+    poster(): string | typeof nothing;
+    videoPoster(): string | typeof nothing;
+    videoStyle(): typeof nothing | "opacity: 0;";
     render(): lit_html.TemplateResult<1>;
     firstUpdated(changedProperties: any): void;
     private generateUrl;
