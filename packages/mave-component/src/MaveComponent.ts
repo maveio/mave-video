@@ -1,4 +1,4 @@
-import { html, LitElement } from "lit";
+import { html, LitElement, nothing } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { Config } from "../../config/config";
 import { style } from "./style";
@@ -170,7 +170,7 @@ export class MaveComponent extends LitElement {
       const checkPlayerState = () => {
         if (this._iframeReady) return;
 
-        this.sendMessage("mave:video_canplay");
+        this.sendMessage("mave:video_canplay", { duration: this.video?.duration });
         setTimeout(checkPlayerState.bind(this), 25);
         this.canPlay = true;
       };
@@ -442,21 +442,25 @@ export class MaveComponent extends LitElement {
     if (this.posterImage && !this.autoplay) {
       return this.posterImage;
     } else {
-      return `${this.src?.replace("stream", "image")}/thumbnail.jpg?time=0`;
+      if(this.src?.includes("stream")) {
+        return `${this.src?.replace("stream", "image")}/thumbnail.jpg?time=0`;
+      } else {
+        return nothing;
+      }
     }
   }
 
   videoPoster() {
     return navigator.userAgent.toLowerCase().includes("chrome")
       ? this.poster()
-      : "";
+      : nothing;
   }
 
   videoStyle() {
     return !navigator.userAgent.toLowerCase().includes("chrome") &&
       this._posterShouldBeVisible
       ? "opacity: 0;"
-      : "";
+      : nothing;
   }
 
   render() {

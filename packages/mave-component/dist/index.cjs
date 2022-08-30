@@ -412,9 +412,10 @@ var MaveComponent = class extends import_lit3.LitElement {
     }
     if (!this.canPlay) {
       const checkPlayerState = () => {
+        var _a;
         if (this._iframeReady)
           return;
-        this.sendMessage("mave:video_canplay");
+        this.sendMessage("mave:video_canplay", { duration: (_a = this.video) == null ? void 0 : _a.duration });
         setTimeout(checkPlayerState.bind(this), 25);
         this.canPlay = true;
       };
@@ -636,18 +637,22 @@ var MaveComponent = class extends import_lit3.LitElement {
     }
   }
   poster() {
-    var _a;
+    var _a, _b;
     if (this.posterImage && !this.autoplay) {
       return this.posterImage;
     } else {
-      return `${(_a = this.src) == null ? void 0 : _a.replace("stream", "image")}/thumbnail.jpg?time=0`;
+      if ((_a = this.src) == null ? void 0 : _a.includes("stream")) {
+        return `${(_b = this.src) == null ? void 0 : _b.replace("stream", "image")}/thumbnail.jpg?time=0`;
+      } else {
+        return import_lit3.nothing;
+      }
     }
   }
   videoPoster() {
-    return navigator.userAgent.toLowerCase().includes("chrome") ? this.poster() : "";
+    return navigator.userAgent.toLowerCase().includes("chrome") ? this.poster() : import_lit3.nothing;
   }
   videoStyle() {
-    return !navigator.userAgent.toLowerCase().includes("chrome") && this._posterShouldBeVisible ? "opacity: 0;" : "";
+    return !navigator.userAgent.toLowerCase().includes("chrome") && this._posterShouldBeVisible ? "opacity: 0;" : import_lit3.nothing;
   }
   render() {
     return import_lit3.html`

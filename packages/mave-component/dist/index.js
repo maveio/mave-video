@@ -45,7 +45,7 @@ var Config = class {
 };
 
 // src/MaveComponent.ts
-import { html as html2, LitElement as LitElement2 } from "lit";
+import { html as html2, LitElement as LitElement2, nothing } from "lit";
 import { property as property2, query as query2, state as state2 } from "lit/decorators.js";
 
 // src/style.ts
@@ -390,9 +390,10 @@ var MaveComponent = class extends LitElement2 {
     }
     if (!this.canPlay) {
       const checkPlayerState = () => {
+        var _a;
         if (this._iframeReady)
           return;
-        this.sendMessage("mave:video_canplay");
+        this.sendMessage("mave:video_canplay", { duration: (_a = this.video) == null ? void 0 : _a.duration });
         setTimeout(checkPlayerState.bind(this), 25);
         this.canPlay = true;
       };
@@ -614,18 +615,22 @@ var MaveComponent = class extends LitElement2 {
     }
   }
   poster() {
-    var _a;
+    var _a, _b;
     if (this.posterImage && !this.autoplay) {
       return this.posterImage;
     } else {
-      return `${(_a = this.src) == null ? void 0 : _a.replace("stream", "image")}/thumbnail.jpg?time=0`;
+      if ((_a = this.src) == null ? void 0 : _a.includes("stream")) {
+        return `${(_b = this.src) == null ? void 0 : _b.replace("stream", "image")}/thumbnail.jpg?time=0`;
+      } else {
+        return nothing;
+      }
     }
   }
   videoPoster() {
-    return navigator.userAgent.toLowerCase().includes("chrome") ? this.poster() : "";
+    return navigator.userAgent.toLowerCase().includes("chrome") ? this.poster() : nothing;
   }
   videoStyle() {
-    return !navigator.userAgent.toLowerCase().includes("chrome") && this._posterShouldBeVisible ? "opacity: 0;" : "";
+    return !navigator.userAgent.toLowerCase().includes("chrome") && this._posterShouldBeVisible ? "opacity: 0;" : nothing;
   }
   render() {
     return html2`
