@@ -746,7 +746,7 @@ var MaveComponent = class extends LitElement2 {
     });
   }
   initiateScript() {
-    if (this.src && !this.src.includes(".m3u8"))
+    if (this.src && !this.src.includes(".m3u8") && !this.src.includes("mux.com"))
       return;
     let script = document.createElement("script");
     script.onload = this.scriptHandler.bind(this);
@@ -756,7 +756,7 @@ var MaveComponent = class extends LitElement2 {
   scriptHandler() {
     if (!this.video || !this.src || this._hlsLoaded)
       return;
-    if (this.video.canPlayType("application/vnd.apple.mpegurl") || !this.src.includes(".m3u8")) {
+    if (this.video.canPlayType("application/vnd.apple.mpegurl") || !this.src.includes(".m3u8") && !this.src.includes("mux.com")) {
       this.video.src = this.src;
     } else if (Hls.isSupported()) {
       const hls = new Hls();
