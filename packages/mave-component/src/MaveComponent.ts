@@ -611,7 +611,7 @@ export class MaveComponent extends LitElement {
   }
 
   private initiateScript() {
-    if(this.src && !this.src.includes(".m3u8")) return;
+    if(this.src && !this.src.includes(".m3u8") && !this.src.includes("mux.com")) return;
 
     let script = document.createElement("script");
     script.onload = this.scriptHandler.bind(this);
@@ -623,7 +623,7 @@ export class MaveComponent extends LitElement {
   private scriptHandler() {
     if (!this.video || !this.src || this._hlsLoaded) return;
 
-    if (this.video.canPlayType("application/vnd.apple.mpegurl") || !this.src.includes(".m3u8")) {
+    if (this.video.canPlayType("application/vnd.apple.mpegurl") || (!this.src.includes(".m3u8") && !this.src.includes("mux.com"))) {
       this.video.src = this.src;
       // no bitrate detected
 
