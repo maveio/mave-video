@@ -170,7 +170,9 @@ export class MaveComponent extends LitElement {
       const checkPlayerState = () => {
         if (this._iframeReady) return;
 
-        this.sendMessage("mave:video_canplay", { duration: this.video?.duration });
+        this.sendMessage("mave:video_canplay", {
+          duration: this.video?.duration,
+        });
         setTimeout(checkPlayerState.bind(this), 25);
         this.canPlay = true;
       };
@@ -442,11 +444,7 @@ export class MaveComponent extends LitElement {
     if (this.posterImage && !this.autoplay) {
       return this.posterImage;
     } else {
-      if(this.src?.includes("stream")) {
-        return `${this.src?.replace("stream", "image")}/thumbnail.jpg?time=0`;
-      } else {
-        return nothing;
-      }
+      return nothing;
     }
   }
 
@@ -611,7 +609,12 @@ export class MaveComponent extends LitElement {
   }
 
   private initiateScript() {
-    if(this.src && !this.src.includes(".m3u8") && !this.src.includes("mux.com")) return;
+    if (
+      this.src &&
+      !this.src.includes(".m3u8") &&
+      !this.src.includes("mux.com")
+    )
+      return;
 
     let script = document.createElement("script");
     script.onload = this.scriptHandler.bind(this);
@@ -623,7 +626,11 @@ export class MaveComponent extends LitElement {
   private scriptHandler() {
     if (!this.video || !this.src || this._hlsLoaded) return;
 
-    if (this.video.canPlayType("application/vnd.apple.mpegurl") || (!this.src.includes(".m3u8") && !this.src.includes("mux.com"))) {
+    if (
+      this.video.canPlayType("application/vnd.apple.mpegurl") ||
+      (!this.src.includes(".m3u8") && !this.src.includes("mux.com"))
+    ) {
+      this.video.preload = "metadata";
       this.video.src = this.src;
       // no bitrate detected
 
@@ -631,6 +638,7 @@ export class MaveComponent extends LitElement {
     } else if (Hls.isSupported()) {
       // @ts-ignore
       const hls = new Hls();
+      hls.config.startLevel = 3;
 
       hls.loadSource(this.src);
       hls.attachMedia(this.video);
