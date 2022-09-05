@@ -16,6 +16,8 @@ var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
     padding: 0;
     margin: 0;
     background: transparent;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (max-width: 768px) {
@@ -55,7 +57,6 @@ var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
     transform: scale(1.01);
     position: absolute;
     top: 0;
-    width: 100%;
     height: 100%;
     aspect-ratio: 16 / 9;
   }

@@ -1,6 +1,6 @@
 {
   "name": "@maveio/mave-component",
-  "version": "0.0.1-beta.30",
+  "version": "0.0.1-beta.31",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
