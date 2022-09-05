@@ -37,6 +37,7 @@ interface IEvent extends Event {
     loop?: boolean;
     poster_image?: string;
     poster_video_source?: string;
+    file_type?: string;
   };
 }
 
@@ -75,6 +76,8 @@ export class MaveComponent extends LitElement {
 
   @property({ type: String, attribute: "poster-video-source" })
   posterVideoSource?: string;
+
+  @property({ type: String, attribute: "file-type" }) fileType?: string;
 
   @query("#dialog") dialog!: HTMLDialogElement;
 
@@ -133,10 +136,7 @@ export class MaveComponent extends LitElement {
       this.addEventListener(e, this.fullscreenChangeHandler.bind(this));
     }
 
-    if (
-      this.video?.canPlayType("application/vnd.apple.mpegurl") &&
-      !this._hlsLoaded
-    ) {
+    if (!this._hlsLoaded) {
       this.scriptHandler();
     }
   }
@@ -207,7 +207,7 @@ export class MaveComponent extends LitElement {
           if (document.webkitExitFullscreen) {
             setTimeout(() => {
               this._posterShouldBeVisible = false;
-            }, 250);
+            }, 450);
           } else {
             this._posterShouldBeVisible = false;
           }
@@ -382,6 +382,7 @@ export class MaveComponent extends LitElement {
         this.canPlay = false;
 
         if (this.src != data.video_src) this.src = data.video_src;
+        if (this.fileType != data.file_type) this.fileType = data.file_type;
         if (this.autoplay != data.autoplay) this.autoplay = data.autoplay;
         if (this.blurhash != data.blurhash) this.blurhash = data.blurhash;
         if (this.posterImage != data.poster_image)
@@ -497,8 +498,17 @@ export class MaveComponent extends LitElement {
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
-                .src=${this.src}
-              ></video>
+                .src=${this.needsHls() ? this.src : nothing}
+              >
+                ${!this.needsHls()
+                  ? html`<source
+                      src=${this.src}
+                      type=${this.fileType
+                        ? "video/" + this.fileType
+                        : "video/mp4"}
+                    />`
+                  : nothing}
+              </video>
             `
           : ""}
         ${this.embed
@@ -609,12 +619,7 @@ export class MaveComponent extends LitElement {
   }
 
   private initiateScript() {
-    if (
-      this.src &&
-      !this.src.includes(".m3u8") &&
-      !this.src.includes("mux.com")
-    )
-      return;
+    if (this.src && !this.needsHls()) return;
 
     let script = document.createElement("script");
     script.onload = this.scriptHandler.bind(this);
@@ -623,19 +628,15 @@ export class MaveComponent extends LitElement {
     return script;
   }
 
+  private needsHls() {
+    return this.src?.includes(".m3u8") || this.src?.includes("mux.com");
+  }
+
   private scriptHandler() {
-    if (!this.video || !this.src || this._hlsLoaded) return;
+    if (!this.video || !this.src || this._hlsLoaded || !this.needsHls()) return;
 
-    if (
-      this.video.canPlayType("application/vnd.apple.mpegurl") ||
-      (!this.src.includes(".m3u8") && !this.src.includes("mux.com"))
-    ) {
-      this.video.preload = "metadata";
-      this.video.src = this.src;
-      // no bitrate detected
-
-      // @ts-ignore
-    } else if (Hls.isSupported()) {
+    // @ts-ignore
+    if (Hls.isSupported()) {
       // @ts-ignore
       const hls = new Hls();
       hls.config.startLevel = 3;

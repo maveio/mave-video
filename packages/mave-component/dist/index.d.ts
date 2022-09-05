@@ -27,6 +27,7 @@ interface IEvent extends Event {
         loop?: boolean;
         poster_image?: string;
         poster_video_source?: string;
+        file_type?: string;
     };
 }
 declare class MaveComponent extends LitElement {
@@ -46,6 +47,7 @@ declare class MaveComponent extends LitElement {
     height?: string;
     posterImage?: string;
     posterVideoSource?: string;
+    fileType?: string;
     dialog: HTMLDialogElement;
     iframe: HTMLIFrameElement;
     video?: HTMLVideoElement;
@@ -88,6 +90,7 @@ declare class MaveComponent extends LitElement {
     private renderCanvas;
     private timeUpdate;
     private initiateScript;
+    private needsHls;
     private scriptHandler;
     private appHeight;
     private visibilityHandler;

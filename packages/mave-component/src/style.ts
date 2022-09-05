@@ -56,7 +56,6 @@ export const style = css`
 
   canvas,
   .poster {
-    transform: scale(1.01);
     position: absolute;
     top: 0;
     height: 100%;
