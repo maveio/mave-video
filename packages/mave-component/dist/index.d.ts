@@ -97,6 +97,7 @@ declare class MaveComponent extends LitElement {
     private isFullscreen;
     private openOverlay;
     private closeOverlay;
+    private triggerEvent;
     private debounce;
 }
 

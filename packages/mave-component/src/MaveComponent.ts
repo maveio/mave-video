@@ -170,6 +170,8 @@ export class MaveComponent extends LitElement {
       const checkPlayerState = () => {
         if (this._iframeReady) return;
 
+        this.triggerEvent("ready", { videoElement: this.video });
+
         this.sendMessage("mave:video_canplay", {
           duration: this.video?.duration,
         });
@@ -714,6 +716,12 @@ export class MaveComponent extends LitElement {
     this._overlayActive = false;
 
     document.documentElement.setAttribute("style", this._globalStyle || "");
+  }
+
+  private triggerEvent(eventName: string, data?: any) {
+    const object = data ? { detail: data } : undefined;
+    const event = new CustomEvent(eventName, object);
+    this.dispatchEvent(event);
   }
 
   private debounce<Params extends any[]>(

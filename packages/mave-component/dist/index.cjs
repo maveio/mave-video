@@ -1,4 +1,78 @@
-var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames,y=Object.getOwnPropertySymbols;var k=Object.prototype.hasOwnProperty,S=Object.prototype.propertyIsEnumerable;var _=(n,i,e)=>i in n?g(n,i,{enumerable:!0,configurable:!0,writable:!0,value:e}):n[i]=e,E=(n,i)=>{for(var e in i||(i={}))k.call(i,e)&&_(n,e,i[e]);if(y)for(var e of y(i))S.call(i,e)&&_(n,e,i[e]);return n};var T=(n,i)=>{for(var e in i)g(n,e,{get:i[e],enumerable:!0})},F=(n,i,e,t)=>{if(i&&typeof i=="object"||typeof i=="function")for(let o of x(i))!k.call(n,o)&&o!==e&&g(n,o,{get:()=>i[o],enumerable:!(t=w(i,o))||t.enumerable});return n};var A=n=>F(g({},"__esModule",{value:!0}),n),s=(n,i,e,t)=>{for(var o=t>1?void 0:t?w(i,e):i,l=n.length-1,u;l>=0;l--)(u=n[l])&&(o=(t?u(i,e,o):u(o))||o);return t&&o&&g(i,e,o),o};var U={};T(U,{Config:()=>h,MaveComponent:()=>a});module.exports=A(U);var h=class{constructor(){this._baseUrl="mave.io"}static getInstance(){return h._inst||(h._inst=new h),h._inst}get baseUrl(){return this._baseUrl}set baseUrl(i){this._baseUrl=i}};var d=require("lit"),r=require("lit/decorators.js");var H=require("lit"),$=H.css`
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __decorateClass = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+  for (var i = decorators.length - 1, decorator; i >= 0; i--)
+    if (decorator = decorators[i])
+      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+  if (kind && result)
+    __defProp(target, key, result);
+  return result;
+};
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  Config: () => Config,
+  MaveComponent: () => MaveComponent
+});
+module.exports = __toCommonJS(src_exports);
+
+// ../config/config.ts
+var Config = class {
+  constructor() {
+    this._baseUrl = "mave.io";
+  }
+  static getInstance() {
+    if (!Config._inst) {
+      Config._inst = new Config();
+    }
+    return Config._inst;
+  }
+  get baseUrl() {
+    return this._baseUrl;
+  }
+  set baseUrl(val) {
+    this._baseUrl = val;
+  }
+};
+
+// src/MaveComponent.ts
+var import_lit3 = require("lit");
+var import_decorators2 = require("lit/decorators.js");
+
+// src/style.ts
+var import_lit = require("lit");
+var style = import_lit.css`
   :root {
     --mave_embed_dialog_height: 100vh !important;
   }
@@ -128,26 +202,83 @@ var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
   #video::-webkit-media-text-track-display-backdrop {
     background: transparent !important;
   }
-`;var v=require("lit"),m=require("lit/decorators.js");var c=class extends v.LitElement{constructor(){super(...arguments);this._ghostActive=!0;this._loaded=!0;this._delayed=!1}connectedCallback(){var e;super.connectedCallback(),setTimeout(()=>{this._delayed=!0},250),this._globalStyle=document.documentElement.getAttribute("style")||"",document.documentElement.setAttribute("style",`${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`),window.addEventListener("resize",this.appHeight),window.addEventListener("focus",this.appHeight),this.appHeight(),setTimeout(()=>{this._ghostActive=!0,this.dialog.showModal()},0),(e=this.iframe)==null||e.addEventListener("load",this.iframeLoaded.bind(this))}appHeight(){document.documentElement.style.setProperty("--app-height",`${window.innerHeight}px`)}disconnectedCallback(){var e;document.documentElement.setAttribute("style",this._globalStyle||""),(e=this.iframe)==null||e.removeEventListener("load",this.iframeLoaded.bind(this)),this.dialog.close(),window.removeEventListener("resize",this.appHeight),window.removeEventListener("focus",this.appHeight),super.disconnectedCallback()}dialogHandler(e){e.type=="close"&&window.postMessage({message:"mave:close_settings",hash:this.embed},"*"),e.target==this.dialog&&this.dialog.close()}render(){return v.html`
+`;
+
+// src/SettingsComponent.ts
+var import_lit2 = require("lit");
+var import_decorators = require("lit/decorators.js");
+var SettingsComponent = class extends import_lit2.LitElement {
+  constructor() {
+    super(...arguments);
+    this._ghostActive = true;
+    this._loaded = true;
+    this._delayed = false;
+  }
+  connectedCallback() {
+    var _a;
+    super.connectedCallback();
+    setTimeout(() => {
+      this._delayed = true;
+    }, 250);
+    this._globalStyle = document.documentElement.getAttribute("style") || "";
+    document.documentElement.setAttribute("style", `${this._globalStyle}; padding-right: 14rem; transition: padding 150ms; transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`);
+    window.addEventListener("resize", this.appHeight);
+    window.addEventListener("focus", this.appHeight);
+    this.appHeight();
+    setTimeout(() => {
+      this._ghostActive = true;
+      this.dialog.showModal();
+    }, 0);
+    (_a = this.iframe) == null ? void 0 : _a.addEventListener("load", this.iframeLoaded.bind(this));
+  }
+  appHeight() {
+    const doc = document.documentElement;
+    doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+  }
+  disconnectedCallback() {
+    var _a;
+    document.documentElement.setAttribute("style", this._globalStyle || "");
+    (_a = this.iframe) == null ? void 0 : _a.removeEventListener("load", this.iframeLoaded.bind(this));
+    this.dialog.close();
+    window.removeEventListener("resize", this.appHeight);
+    window.removeEventListener("focus", this.appHeight);
+    super.disconnectedCallback();
+  }
+  dialogHandler(event) {
+    if (event.type == "close") {
+      window.postMessage({ message: "mave:close_settings", hash: this.embed }, "*");
+    }
+    if (event.target == this.dialog) {
+      this.dialog.close();
+    }
+  }
+  render() {
+    return import_lit2.html`
       <dialog
         id="dialog"
         @close=${this.dialogHandler}
         @click=${this.dialogHandler}
       >
-        <div class=${this._ghostActive?"ghost active":"ghost"}></div>
+        <div class=${this._ghostActive ? "ghost active" : "ghost"}></div>
         <div class="settings">
           <iframe
-            src="https://${h.getInstance().baseUrl}/e/${this.embed}/settings"
+            src="https://${Config.getInstance().baseUrl}/e/${this.embed}/settings"
             frameborder="0"
             sandbox="allow-scripts allow-forms allow-same-origin"
             allow="autoplay; fullscreen; clipboard-write;"
             width="100%"
             height="100%"
-            class=${this._loaded&&this._delayed?"loaded":"initial"}
+            class=${this._loaded && this._delayed ? "loaded" : "initial"}
           ></iframe>
         </div>
       </dialog>
-    `}iframeLoaded(){this._loaded=!0}};c.styles=v.css`
+    `;
+  }
+  iframeLoaded() {
+    this._loaded = true;
+  }
+};
+SettingsComponent.styles = import_lit2.css`
     dialog {
       position: relative;
       display: flex;
@@ -202,19 +333,339 @@ var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `,s([(0,m.property)({type:String})],c.prototype,"embed",2),s([(0,m.query)("#dialog")],c.prototype,"dialog",2),s([(0,m.query)("#iframe")],c.prototype,"iframe",2),s([(0,m.state)()],c.prototype,"_ghostActive",2),s([(0,m.state)()],c.prototype,"_loaded",2),s([(0,m.state)()],c.prototype,"_delayed",2);customElements.get("mave-settings")||customElements.define("mave-settings",c);var L=crypto.getRandomValues(new Uint8Array(21)).reduce((n,i)=>n+=(i&=63)<36?i.toString(36):i<62?(i-26).toString(36).toUpperCase():i<63?"_":"-",""),a=class extends d.LitElement{constructor(){super(...arguments);this._settingsActive=!1;this._blurhashShouldBeVisible=!0;this._overlayActive=!1;this._isFullscreen=!1;this._uploadActive=!1;this._posterShouldBeVisible=!0;this._hlsLoaded=!1;this._iframeReady=!1;this._initialPlayEventTriggered=!1;this.baseUrl=h.getInstance().baseUrl;this.canPlay=!1;this.loadeddata=!1;this.debouncedAppHeight=this.debounce(this.appHeight.bind(this),550)}connectedCallback(){super.connectedCallback(),window.addEventListener("message",this.messageHandler.bind(this)),window.addEventListener("load",this.visibilityHandler.bind(this)),window.addEventListener("scroll",this.visibilityHandler.bind(this)),window.addEventListener("resize",this.visibilityHandler.bind(this));for(let e of["fullscreenchange","webkitfullscreenchange"])this.addEventListener(e,this.fullscreenChangeHandler.bind(this));this._hlsLoaded||this.scriptHandler()}disconnectedCallback(){window.removeEventListener("message",this.messageHandler.bind(this)),window.removeEventListener("load",this.visibilityHandler.bind(this)),window.removeEventListener("scroll",this.visibilityHandler.bind(this)),window.removeEventListener("resize",this.visibilityHandler.bind(this));for(let t of["fullscreenchange","webkitfullscreenchange"])this.removeEventListener(t,this.fullscreenChangeHandler.bind(this));let e=document.querySelector("mave-settings");e&&e.remove(),super.disconnectedCallback()}initializeVideo(){if(!this.loadeddata&&this.video&&this.video.readyState>=2&&(setTimeout(()=>{this.blurhash&&(this._blurhashShouldBeVisible=!1)},1250),this.loadeddata=!0),!this.canPlay){let e=()=>{var t;this._iframeReady||(this.sendMessage("mave:video_canplay",{duration:(t=this.video)==null?void 0:t.duration}),setTimeout(e.bind(this),25),this.canPlay=!0)};e()}}videoHandler(e){if(!!this.video)switch(e.type){case"loadeddata":case"canplay":this.initializeVideo();break;case"progress":(!this.canPlay||!this.loadeddata)&&this.initializeVideo();try{let t=this.video.buffered.length-1,o=Math.round(this.video.buffered.end(t)/this.video.duration*100);this.sendMessage("mave:video_progress",{buffer:o})}catch{}break;case"play":if(this._posterShouldBeVisible&&(document.webkitExitFullscreen?setTimeout(()=>{this._posterShouldBeVisible=!1},450):this._posterShouldBeVisible=!1),this._iframeReady){this.timeUpdate();let t=this.autoplay&&!this._initialPlayEventTriggered||this.video.currentTime<1e-4?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:t,bitrate:this._bitrate}),this._initialPlayEventTriggered=!0}break;case"timeupdate":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime});break;case"pause":case"ended":this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this._animationFrame&&(cancelAnimationFrame(this._animationFrame),this._animationFrame=void 0),setTimeout(()=>{this.sendMessage(e.type=="ended"?"mave:video_ended":"mave:video_pause")},25);break}}messageHandler(e){var l;let{data:t}=e,{message:o}=t;if(!(!this.isConnected||!t||t.hash!=this.embed))switch(o){case"mave:player_ready":if(this._iframeReady=!0,!this._initialPlayEventTriggered&&this.video&&!this.video.paused){let p=this.autoplay?0:this.video.currentTime;this.sendMessage("mave:video_play",{currentTime:p,bitrate:this._bitrate}),this._initialPlayEventTriggered=!0}break;case"mave:player_event":if(!this.video)return;let u=t.event;switch(Object.keys(u)[0]){case"play":u.play?this.video.play():this.video.pause();break;case"muted":this.video.muted=u.muted,this.sendMessage("mave:video_muted",{muted:this.video.muted});break;case"volume":this.video.volume=u.volume;break;case"currentTime":this.video.currentTime=u.currentTime;break}break;case"mave:open_popup_overlay":if(this.isFullscreen())return;this.openOverlay();break;case"mave:close_popup_overlay":if(this.isFullscreen())return;this.closeOverlay();break;case"mave:open_dialog":this.dialog.showModal(),this._uploadActive=!0;break;case"mave:close_dialog":this.dialog.close(),this._uploadActive=!1;break;case"mave:toggle_fullscreen":this.isFullscreen()||this._overlayActive?this.closeFullscreen():this.openFullscreen();break;case"mave:open_fullscreen":this._overlayActive||this.openFullscreen();break;case"mave:close_fullscreen":this.closeFullscreen();break;case"mave:open_settings":if(this._settingsActive=!this._settingsActive,this._settingsActive){let p=document.createElement("mave-settings");p.setAttribute("embed",this.embed),document.body.appendChild(p)}else{let p=document.querySelector("mave-settings");p&&p.remove()}break;case"mave:close_settings":this._settingsActive=!1;let f=document.querySelector("mave-settings");f&&f.remove();break;case"mave:update_embed_settings":this.aspectRatio=t.aspect_ratio_enabled?t.aspect_ratio:void 0,this.width=t.aspect_ratio_enabled?void 0:t.width,this.height=t.aspect_ratio_enabled?void 0:t.height,this.loop=t.loop,this.autoplay=t.autoplay_enabled,this.autoplay&&((l=this.video)==null?void 0:l.paused)&&this.video.currentTime<this.video.duration&&this.video.play(),this.visibilityHandler();break;case"mave:request_in_viewport":setTimeout(()=>{this.visibilityHandler()},20);break;case"mave:render_video":this._hlsLoaded=!1,this._blurhashShouldBeVisible=!1,this.loadeddata=!1,this.canPlay=!1,this.src!=t.video_src&&(this.src=t.video_src),this.fileType!=t.file_type&&(this.fileType=t.file_type),this.autoplay!=t.autoplay&&(this.autoplay=t.autoplay),this.blurhash!=t.blurhash&&(this.blurhash=t.blurhash),this.posterImage!=t.poster_image&&(this.posterImage=t.poster_image),this.posterVideoSource!=t.poster_video_source&&(this.posterVideoSource=t.poster_video_source);break}}fullscreenChangeHandler(){this._isFullscreen=!this._isFullscreen,this.sendMessage("mave:video_fullscreen",{fullscreen:this.isFullscreen()})}generateStyle(){let e=document.createElement("style");if((this._overlayActive||this._isFullscreen)&&(e.textContent=":host { overflow: hidden; width: 100%; height: 100%; }"),this.width&&this.height)e.textContent=`:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; } canvas, .poster { width: ${this.width}; object-fit: cover; } #video, #video[poster] { object-fit: cover; }`;else if(this.aspectRatio){let[t,o]=this.aspectRatio.split(":");e.textContent=`:host { display: block; overflow: hidden; aspect-ratio: ${t} / ${o}; width: 100%; min-width: 320px; min-height: 180px; } canvas, .poster { aspect-ratio: ${t} / ${o}; object-fit: contain; } #video, #video[poster] { object-fit: contain; }`}else e.textContent=":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; } #video, #video[poster] { object-fit: contain; }";return e}closeDialog(){this.isFullscreen()?this.closeFullscreen():(this._overlayActive=!1,this._uploadActive=!1,this.sendMessage("mave:close_overlay"))}clickDialog(e){this._uploadActive&&e.target==this.dialog&&(this.closeDialog(),this.sendMessage("mave:cancel_upload"))}poster(){return this.posterImage&&!this.autoplay?this.posterImage:d.nothing}videoPoster(){return navigator.userAgent.toLowerCase().includes("chrome")?this.poster():d.nothing}videoStyle(){return!navigator.userAgent.toLowerCase().includes("chrome")&&this._posterShouldBeVisible?"opacity: 0;":d.nothing}render(){return d.html`
+  `;
+__decorateClass([
+  (0, import_decorators.property)({ type: String })
+], SettingsComponent.prototype, "embed", 2);
+__decorateClass([
+  (0, import_decorators.query)("#dialog")
+], SettingsComponent.prototype, "dialog", 2);
+__decorateClass([
+  (0, import_decorators.query)("#iframe")
+], SettingsComponent.prototype, "iframe", 2);
+__decorateClass([
+  (0, import_decorators.state)()
+], SettingsComponent.prototype, "_ghostActive", 2);
+__decorateClass([
+  (0, import_decorators.state)()
+], SettingsComponent.prototype, "_loaded", 2);
+__decorateClass([
+  (0, import_decorators.state)()
+], SettingsComponent.prototype, "_delayed", 2);
+if (!customElements.get("mave-settings")) {
+  customElements.define("mave-settings", SettingsComponent);
+}
+
+// src/MaveComponent.ts
+var nanoid = crypto.getRandomValues(new Uint8Array(21)).reduce((t, e) => t += (e &= 63) < 36 ? e.toString(36) : e < 62 ? (e - 26).toString(36).toUpperCase() : e < 63 ? "_" : "-", "");
+var MaveComponent = class extends import_lit3.LitElement {
+  constructor() {
+    super(...arguments);
+    this._settingsActive = false;
+    this._blurhashShouldBeVisible = true;
+    this._overlayActive = false;
+    this._isFullscreen = false;
+    this._uploadActive = false;
+    this._posterShouldBeVisible = true;
+    this._hlsLoaded = false;
+    this._iframeReady = false;
+    this._initialPlayEventTriggered = false;
+    this.baseUrl = Config.getInstance().baseUrl;
+    this.canPlay = false;
+    this.loadeddata = false;
+    this.debouncedAppHeight = this.debounce(this.appHeight.bind(this), 550);
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("message", this.messageHandler.bind(this));
+    window.addEventListener("load", this.visibilityHandler.bind(this));
+    window.addEventListener("scroll", this.visibilityHandler.bind(this));
+    window.addEventListener("resize", this.visibilityHandler.bind(this));
+    for (const e of ["fullscreenchange", "webkitfullscreenchange"]) {
+      this.addEventListener(e, this.fullscreenChangeHandler.bind(this));
+    }
+    if (!this._hlsLoaded) {
+      this.scriptHandler();
+    }
+  }
+  disconnectedCallback() {
+    window.removeEventListener("message", this.messageHandler.bind(this));
+    window.removeEventListener("load", this.visibilityHandler.bind(this));
+    window.removeEventListener("scroll", this.visibilityHandler.bind(this));
+    window.removeEventListener("resize", this.visibilityHandler.bind(this));
+    for (const e of ["fullscreenchange", "webkitfullscreenchange"]) {
+      this.removeEventListener(e, this.fullscreenChangeHandler.bind(this));
+    }
+    const settings = document.querySelector("mave-settings");
+    if (settings)
+      settings.remove();
+    super.disconnectedCallback();
+  }
+  initializeVideo() {
+    if (!this.loadeddata && this.video && this.video.readyState >= 2) {
+      setTimeout(() => {
+        if (this.blurhash)
+          this._blurhashShouldBeVisible = false;
+      }, 1250);
+      this.loadeddata = true;
+    }
+    if (!this.canPlay) {
+      const checkPlayerState = () => {
+        var _a;
+        if (this._iframeReady)
+          return;
+        this.triggerEvent("ready", { videoElement: this.video });
+        this.sendMessage("mave:video_canplay", {
+          duration: (_a = this.video) == null ? void 0 : _a.duration
+        });
+        setTimeout(checkPlayerState.bind(this), 25);
+        this.canPlay = true;
+      };
+      checkPlayerState();
+    }
+  }
+  videoHandler(event) {
+    if (!this.video)
+      return;
+    switch (event.type) {
+      case "loadeddata":
+      case "canplay":
+        this.initializeVideo();
+        break;
+      case "progress":
+        if (!this.canPlay || !this.loadeddata)
+          this.initializeVideo();
+        try {
+          const lastBuffer = this.video.buffered.length - 1;
+          const buffer = Math.round(this.video.buffered.end(lastBuffer) / this.video.duration * 100);
+          this.sendMessage("mave:video_progress", { buffer });
+        } catch (e) {
+        }
+        break;
+      case "play":
+        if (this._posterShouldBeVisible) {
+          if (document.webkitExitFullscreen) {
+            setTimeout(() => {
+              this._posterShouldBeVisible = false;
+            }, 450);
+          } else {
+            this._posterShouldBeVisible = false;
+          }
+        }
+        if (this._iframeReady) {
+          this.timeUpdate();
+          const time = this.autoplay && !this._initialPlayEventTriggered || this.video.currentTime < 1e-4 ? 0 : this.video.currentTime;
+          this.sendMessage("mave:video_play", {
+            currentTime: time,
+            bitrate: this._bitrate
+          });
+          this._initialPlayEventTriggered = true;
+        }
+        break;
+      case "timeupdate":
+        this.sendMessage("mave:video_timeupdate", {
+          currentTime: this.video.currentTime
+        });
+        break;
+      case "pause":
+      case "ended":
+        this.sendMessage("mave:video_timeupdate", {
+          currentTime: this.video.currentTime
+        });
+        if (this._animationFrame) {
+          cancelAnimationFrame(this._animationFrame);
+          this._animationFrame = void 0;
+        }
+        setTimeout(() => {
+          this.sendMessage(event.type == "ended" ? "mave:video_ended" : "mave:video_pause");
+        }, 25);
+        break;
+    }
+  }
+  messageHandler(event) {
+    var _a;
+    const { data } = event;
+    const { message } = data;
+    if (!this.isConnected || !data || data.hash != this.embed)
+      return;
+    switch (message) {
+      case "mave:player_ready":
+        this._iframeReady = true;
+        if (!this._initialPlayEventTriggered && this.video && !this.video.paused) {
+          const time = this.autoplay ? 0 : this.video.currentTime;
+          this.sendMessage("mave:video_play", {
+            currentTime: time,
+            bitrate: this._bitrate
+          });
+          this._initialPlayEventTriggered = true;
+        }
+        break;
+      case "mave:player_event":
+        if (!this.video)
+          return;
+        const playerEvent = data.event;
+        const type = Object.keys(playerEvent)[0];
+        switch (type) {
+          case "play":
+            playerEvent.play ? this.video.play() : this.video.pause();
+            break;
+          case "muted":
+            this.video.muted = playerEvent.muted;
+            this.sendMessage("mave:video_muted", { muted: this.video.muted });
+            break;
+          case "volume":
+            this.video.volume = playerEvent.volume;
+            break;
+          case "currentTime":
+            this.video.currentTime = playerEvent.currentTime;
+            break;
+        }
+        break;
+      case "mave:open_popup_overlay":
+        if (this.isFullscreen())
+          return;
+        this.openOverlay();
+        break;
+      case "mave:close_popup_overlay":
+        if (this.isFullscreen())
+          return;
+        this.closeOverlay();
+        break;
+      case "mave:open_dialog":
+        this.dialog.showModal();
+        this._uploadActive = true;
+        break;
+      case "mave:close_dialog":
+        this.dialog.close();
+        this._uploadActive = false;
+        break;
+      case "mave:toggle_fullscreen":
+        this.isFullscreen() || this._overlayActive ? this.closeFullscreen() : this.openFullscreen();
+        break;
+      case "mave:open_fullscreen":
+        if (!this._overlayActive)
+          this.openFullscreen();
+        break;
+      case "mave:close_fullscreen":
+        this.closeFullscreen();
+        break;
+      case "mave:open_settings":
+        this._settingsActive = !this._settingsActive;
+        if (this._settingsActive) {
+          const settings2 = document.createElement(`mave-settings`);
+          settings2.setAttribute("embed", this.embed);
+          document.body.appendChild(settings2);
+        } else {
+          const settings2 = document.querySelector("mave-settings");
+          if (settings2)
+            settings2.remove();
+        }
+        break;
+      case "mave:close_settings":
+        this._settingsActive = false;
+        const settings = document.querySelector("mave-settings");
+        if (settings)
+          settings.remove();
+        break;
+      case "mave:update_embed_settings":
+        this.aspectRatio = data.aspect_ratio_enabled ? data.aspect_ratio : void 0;
+        this.width = data.aspect_ratio_enabled ? void 0 : data.width;
+        this.height = data.aspect_ratio_enabled ? void 0 : data.height;
+        this.loop = data.loop;
+        this.autoplay = data.autoplay_enabled;
+        if (this.autoplay && ((_a = this.video) == null ? void 0 : _a.paused) && this.video.currentTime < this.video.duration)
+          this.video.play();
+        this.visibilityHandler();
+        break;
+      case "mave:request_in_viewport":
+        setTimeout(() => {
+          this.visibilityHandler();
+        }, 20);
+        break;
+      case "mave:render_video":
+        this._hlsLoaded = false;
+        this._blurhashShouldBeVisible = false;
+        this.loadeddata = false;
+        this.canPlay = false;
+        if (this.src != data.video_src)
+          this.src = data.video_src;
+        if (this.fileType != data.file_type)
+          this.fileType = data.file_type;
+        if (this.autoplay != data.autoplay)
+          this.autoplay = data.autoplay;
+        if (this.blurhash != data.blurhash)
+          this.blurhash = data.blurhash;
+        if (this.posterImage != data.poster_image)
+          this.posterImage = data.poster_image;
+        if (this.posterVideoSource != data.poster_video_source)
+          this.posterVideoSource = data.poster_video_source;
+        break;
+    }
+  }
+  fullscreenChangeHandler() {
+    this._isFullscreen = !this._isFullscreen;
+    this.sendMessage("mave:video_fullscreen", {
+      fullscreen: this.isFullscreen()
+    });
+  }
+  generateStyle() {
+    const css3 = document.createElement("style");
+    if (this._overlayActive || this._isFullscreen) {
+      css3.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }";
+    }
+    if (this.width && this.height) {
+      css3.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; } canvas, .poster { width: ${this.width}; object-fit: cover; } #video, #video[poster] { object-fit: cover; }`;
+    } else {
+      if (this.aspectRatio) {
+        const [w, h] = this.aspectRatio.split(":");
+        css3.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${w} / ${h}; width: 100%; min-width: 320px; min-height: 180px; } canvas, .poster { aspect-ratio: ${w} / ${h}; object-fit: contain; } #video, #video[poster] { object-fit: contain; }`;
+      } else {
+        css3.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; } #video, #video[poster] { object-fit: contain; }";
+      }
+    }
+    return css3;
+  }
+  closeDialog() {
+    if (this.isFullscreen()) {
+      this.closeFullscreen();
+    } else {
+      this._overlayActive = false;
+      this._uploadActive = false;
+      this.sendMessage("mave:close_overlay");
+    }
+  }
+  clickDialog(e) {
+    if (this._uploadActive && e.target == this.dialog) {
+      this.closeDialog();
+      this.sendMessage("mave:cancel_upload");
+    }
+  }
+  poster() {
+    if (this.posterImage && !this.autoplay) {
+      return this.posterImage;
+    } else {
+      return import_lit3.nothing;
+    }
+  }
+  videoPoster() {
+    return navigator.userAgent.toLowerCase().includes("chrome") ? this.poster() : import_lit3.nothing;
+  }
+  videoStyle() {
+    return !navigator.userAgent.toLowerCase().includes("chrome") && this._posterShouldBeVisible ? "opacity: 0;" : import_lit3.nothing;
+  }
+  render() {
+    return import_lit3.html`
       ${this.generateStyle()}
       <dialog
         id="dialog"
         @click=${this.clickDialog}
         @close=${this.closeDialog}
-        class=${this._overlayActive||this._isFullscreen?"active_overlay":this._uploadActive?"active_upload":""}
+        class=${this._overlayActive || this._isFullscreen ? "active_overlay" : this._uploadActive ? "active_upload" : ""}
       >
         ${this.renderCanvas()}
-        ${this.src?d.html`
+        ${this.src ? import_lit3.html`
               ${this.initiateScript()}
-
-              ${this._posterShouldBeVisible?d.html` <img class="poster" .src=${this.poster()} /> `:""}
+              ${this._posterShouldBeVisible ? import_lit3.html` <img class="poster" .src=${this.poster()} /> ` : ""}
 
               <video
                 id="video"
@@ -231,12 +682,15 @@ var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
-                .src=${this.needsHls()?this.src:d.nothing}
+                .src=${this.needsHls() ? this.src : import_lit3.nothing}
               >
-                ${this.needsHls()?d.nothing:d.html`<source src=${this.src} type=${this.fileType?"video/"+this.fileType:"video/mp4"}>`}
+                ${!this.needsHls() ? import_lit3.html`<source
+                      src=${this.src}
+                      type=${this.fileType ? "video/" + this.fileType : "video/mp4"}
+                    />` : import_lit3.nothing}
               </video>
-            `:""}
-        ${this.embed?d.html`
+            ` : ""}
+        ${this.embed ? import_lit3.html`
               <iframe
                 title="embed"
                 id="iframe"
@@ -247,6 +701,244 @@ var g=Object.defineProperty;var w=Object.getOwnPropertyDescriptor;var x=Object.g
                 scrolling="no"
               >
               </iframe>
-            `:""}
+            ` : ""}
       </dialog>
-    `}firstUpdated(e){this.appHeight()}generateUrl(){return this.jwt?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}`:this.reference_id&&this.display_name?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}`:this.reference_id?`https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`:this.display_name?`https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}`:`https://${this.baseUrl}/e/${this.embed}?reference_id=${L}`}sendMessage(e,t={}){if(!this.iframe.contentWindow||!this.video)return;let o=E({message:e},t);this.iframe.contentWindow.postMessage(o,"*")}openFullscreen(){this.isFullscreen()||(this.requestFullscreen?this.requestFullscreen():this.webkitRequestFullscreen?this.webkitRequestFullscreen():(this.sendMessage("mave:open_overlay",{}),this.openOverlay()),this.video&&!this.video.paused&&(this.video.muted=!1,this.sendMessage("mave:video_muted",{muted:this.video.muted})))}closeFullscreen(){(this.isFullscreen()||this._overlayActive)&&(document.exitFullscreen&&!this._overlayActive?document.exitFullscreen():document.webkitExitFullscreen&&!this._overlayActive?document.webkitExitFullscreen():(this.sendMessage("mave:close_overlay",{}),this.closeOverlay(),this.closeDialog()))}renderCanvas(){}timeUpdate(){this._animationFrame=requestAnimationFrame(()=>{!this.video||(this.sendMessage("mave:video_timeupdate",{currentTime:this.video.currentTime}),this.timeUpdate())})}initiateScript(){if(this.src&&!this.needsHls())return;let e=document.createElement("script");return e.onload=this.scriptHandler.bind(this),e.src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js",e}needsHls(){var e,t;return((e=this.src)==null?void 0:e.includes(".m3u8"))||((t=this.src)==null?void 0:t.includes("mux.com"))}scriptHandler(){if(!(!this.video||!this.src||this._hlsLoaded||!this.needsHls())){if(Hls.isSupported()){let e=new Hls;e.config.startLevel=3,e.loadSource(this.src),e.attachMedia(this.video);let t=[];e.on(Hls.Events.MANIFEST_LOADED,(o,l)=>{t=l.levels.reverse()}),e.on(Hls.Events.LEVEL_LOADED,(o,l)=>{this._bitrate!=t[l.level].bitrate&&(this._bitrate=t[l.level].bitrate,this.sendMessage("mave:bitrate",{bitrate:this._bitrate}))}),e.subtitleTrack=0,e.subtitleDisplay=!0}this._hlsLoaded=!0}}appHeight(){document.documentElement.style.setProperty("--mave_embed_dialog_height",`${window.innerHeight}px`)}visibilityHandler(){if(!this.iframe||!this.iframe.contentWindow)return;let{top:e,bottom:t}=this.iframe.getBoundingClientRect(),o=window.innerHeight||document.documentElement.clientHeight,l=(e>0||t>0)&&e<o;this.sendMessage(l?"mave:video_in_viewport":"mave:video_out_viewport"),this.debouncedAppHeight()}isFullscreen(){return!!document.fullscreenElement||!!document.webkitFullscreenElement||"ontouchend"in document&&this._isFullscreen}openOverlay(){this.isFullscreen()||(this._overlayActive=!0,this._blurhashShouldBeVisible&&(this._blurhashShouldBeVisible=!1),this.dialog.showModal(),this._globalStyle=document.documentElement.getAttribute("style")||"",document.documentElement.setAttribute("style",`${this._globalStyle}; overflow: hidden;`))}closeOverlay(){this.dialog.close(),this._overlayActive=!1,document.documentElement.setAttribute("style",this._globalStyle||"")}debounce(e,t){let o;return(...l)=>{clearTimeout(o),o=setTimeout(()=>{e(...l)},t)}}};a.styles=$,s([(0,r.property)({type:String})],a.prototype,"embed",2),s([(0,r.property)({type:String})],a.prototype,"reference_id",2),s([(0,r.property)({type:String})],a.prototype,"display_name",2),s([(0,r.property)({type:String})],a.prototype,"jwt",2),s([(0,r.property)({type:String})],a.prototype,"classname",2),s([(0,r.property)({type:Boolean})],a.prototype,"muted",2),s([(0,r.property)({type:Boolean})],a.prototype,"autoplay",2),s([(0,r.property)({type:Boolean})],a.prototype,"loop",2),s([(0,r.property)({type:String})],a.prototype,"src",2),s([(0,r.property)({type:String})],a.prototype,"blurhash",2),s([(0,r.property)({type:String,attribute:"aspect-ratio"})],a.prototype,"aspectRatio",2),s([(0,r.property)({type:String})],a.prototype,"width",2),s([(0,r.property)({type:String})],a.prototype,"height",2),s([(0,r.property)({type:String,attribute:"poster-image"})],a.prototype,"posterImage",2),s([(0,r.property)({type:String,attribute:"poster-video-source"})],a.prototype,"posterVideoSource",2),s([(0,r.property)({type:String,attribute:"file-type"})],a.prototype,"fileType",2),s([(0,r.query)("#dialog")],a.prototype,"dialog",2),s([(0,r.query)("#iframe")],a.prototype,"iframe",2),s([(0,r.query)("#video")],a.prototype,"video",2),s([(0,r.query)("#canvas")],a.prototype,"canvas",2),s([(0,r.query)("#script")],a.prototype,"script",2),s([(0,r.state)()],a.prototype,"_settingsActive",2),s([(0,r.state)()],a.prototype,"_blurhashShouldBeVisible",2),s([(0,r.state)()],a.prototype,"_overlayActive",2),s([(0,r.state)()],a.prototype,"_isFullscreen",2),s([(0,r.state)()],a.prototype,"_uploadActive",2),s([(0,r.state)()],a.prototype,"_posterShouldBeVisible",2);customElements.get("mave-component")||customElements.define("mave-component",a);0&&(module.exports={Config,MaveComponent});
+    `;
+  }
+  firstUpdated(changedProperties) {
+    this.appHeight();
+  }
+  generateUrl() {
+    if (this.jwt) {
+      return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}`;
+    } else {
+      if (this.reference_id && this.display_name) {
+        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}`;
+      } else if (this.reference_id) {
+        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}`;
+      } else if (this.display_name) {
+        return `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}`;
+      } else {
+        return `https://${this.baseUrl}/e/${this.embed}?reference_id=${nanoid}`;
+      }
+    }
+  }
+  sendMessage(event, options = {}) {
+    if (!this.iframe.contentWindow || !this.video)
+      return;
+    const payload = __spreadValues({ message: event }, options);
+    this.iframe.contentWindow.postMessage(payload, "*");
+  }
+  openFullscreen() {
+    if (!this.isFullscreen()) {
+      if (this.requestFullscreen) {
+        this.requestFullscreen();
+      } else if (this.webkitRequestFullscreen) {
+        this.webkitRequestFullscreen();
+      } else {
+        this.sendMessage("mave:open_overlay", {});
+        this.openOverlay();
+      }
+      if (this.video && !this.video.paused) {
+        this.video.muted = false;
+        this.sendMessage("mave:video_muted", { muted: this.video.muted });
+      }
+    }
+  }
+  closeFullscreen() {
+    if (this.isFullscreen() || this._overlayActive) {
+      if (document.exitFullscreen && !this._overlayActive) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen && !this._overlayActive) {
+        document.webkitExitFullscreen();
+      } else {
+        this.sendMessage("mave:close_overlay", {});
+        this.closeOverlay();
+        this.closeDialog();
+      }
+    }
+  }
+  renderCanvas() {
+    return;
+  }
+  timeUpdate() {
+    this._animationFrame = requestAnimationFrame(() => {
+      if (!this.video)
+        return;
+      this.sendMessage("mave:video_timeupdate", {
+        currentTime: this.video.currentTime
+      });
+      this.timeUpdate();
+    });
+  }
+  initiateScript() {
+    if (this.src && !this.needsHls())
+      return;
+    let script = document.createElement("script");
+    script.onload = this.scriptHandler.bind(this);
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js";
+    return script;
+  }
+  needsHls() {
+    var _a, _b;
+    return ((_a = this.src) == null ? void 0 : _a.includes(".m3u8")) || ((_b = this.src) == null ? void 0 : _b.includes("mux.com"));
+  }
+  scriptHandler() {
+    if (!this.video || !this.src || this._hlsLoaded || !this.needsHls())
+      return;
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.config.startLevel = 3;
+      hls.loadSource(this.src);
+      hls.attachMedia(this.video);
+      let levels = [];
+      hls.on(Hls.Events.MANIFEST_LOADED, (_, data) => {
+        levels = data.levels.reverse();
+      });
+      hls.on(Hls.Events.LEVEL_LOADED, (_, data) => {
+        if (this._bitrate != levels[data.level].bitrate) {
+          this._bitrate = levels[data.level].bitrate;
+          this.sendMessage("mave:bitrate", { bitrate: this._bitrate });
+        }
+      });
+      hls.subtitleTrack = 0;
+      hls.subtitleDisplay = true;
+    }
+    this._hlsLoaded = true;
+  }
+  appHeight() {
+    const doc = document.documentElement;
+    doc.style.setProperty("--mave_embed_dialog_height", `${window.innerHeight}px`);
+  }
+  visibilityHandler() {
+    if (!this.iframe || !this.iframe.contentWindow)
+      return;
+    const { top, bottom } = this.iframe.getBoundingClientRect();
+    const vHeight = window.innerHeight || document.documentElement.clientHeight;
+    const visible = (top > 0 || bottom > 0) && top < vHeight;
+    this.sendMessage(visible ? "mave:video_in_viewport" : "mave:video_out_viewport");
+    this.debouncedAppHeight();
+  }
+  isFullscreen() {
+    return !!document.fullscreenElement || !!document.webkitFullscreenElement || "ontouchend" in document && this._isFullscreen;
+  }
+  openOverlay() {
+    if (this.isFullscreen())
+      return;
+    this._overlayActive = true;
+    if (this._blurhashShouldBeVisible)
+      this._blurhashShouldBeVisible = false;
+    this.dialog.showModal();
+    this._globalStyle = document.documentElement.getAttribute("style") || "";
+    document.documentElement.setAttribute("style", `${this._globalStyle}; overflow: hidden;`);
+  }
+  closeOverlay() {
+    this.dialog.close();
+    this._overlayActive = false;
+    document.documentElement.setAttribute("style", this._globalStyle || "");
+  }
+  triggerEvent(eventName, data) {
+    const object = data ? { detail: data } : void 0;
+    const event = new CustomEvent(eventName, object);
+    this.dispatchEvent(event);
+  }
+  debounce(func, timeout) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, timeout);
+    };
+  }
+};
+MaveComponent.styles = style;
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "embed", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "reference_id", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "display_name", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "jwt", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "classname", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: Boolean })
+], MaveComponent.prototype, "muted", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: Boolean })
+], MaveComponent.prototype, "autoplay", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: Boolean })
+], MaveComponent.prototype, "loop", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "src", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "blurhash", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String, attribute: "aspect-ratio" })
+], MaveComponent.prototype, "aspectRatio", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "width", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String })
+], MaveComponent.prototype, "height", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String, attribute: "poster-image" })
+], MaveComponent.prototype, "posterImage", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String, attribute: "poster-video-source" })
+], MaveComponent.prototype, "posterVideoSource", 2);
+__decorateClass([
+  (0, import_decorators2.property)({ type: String, attribute: "file-type" })
+], MaveComponent.prototype, "fileType", 2);
+__decorateClass([
+  (0, import_decorators2.query)("#dialog")
+], MaveComponent.prototype, "dialog", 2);
+__decorateClass([
+  (0, import_decorators2.query)("#iframe")
+], MaveComponent.prototype, "iframe", 2);
+__decorateClass([
+  (0, import_decorators2.query)("#video")
+], MaveComponent.prototype, "video", 2);
+__decorateClass([
+  (0, import_decorators2.query)("#canvas")
+], MaveComponent.prototype, "canvas", 2);
+__decorateClass([
+  (0, import_decorators2.query)("#script")
+], MaveComponent.prototype, "script", 2);
+__decorateClass([
+  (0, import_decorators2.state)()
+], MaveComponent.prototype, "_settingsActive", 2);
+__decorateClass([
+  (0, import_decorators2.state)()
+], MaveComponent.prototype, "_blurhashShouldBeVisible", 2);
+__decorateClass([
+  (0, import_decorators2.state)()
+], MaveComponent.prototype, "_overlayActive", 2);
+__decorateClass([
+  (0, import_decorators2.state)()
+], MaveComponent.prototype, "_isFullscreen", 2);
+__decorateClass([
+  (0, import_decorators2.state)()
+], MaveComponent.prototype, "_uploadActive", 2);
+__decorateClass([
+  (0, import_decorators2.state)()
+], MaveComponent.prototype, "_posterShouldBeVisible", 2);
+if (!customElements.get("mave-component")) {
+  customElements.define("mave-component", MaveComponent);
+}
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  Config,
+  MaveComponent
+});
