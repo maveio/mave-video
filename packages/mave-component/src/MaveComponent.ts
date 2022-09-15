@@ -127,6 +127,32 @@ export class MaveComponent extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
+    if (!this.src && this.embed) {
+      const url = `https://${Config.getInstance().baseUrl}/${this.embed}/json`;
+
+      const fetchData = async () => {
+        try {
+          // @ts-ignore
+          const response = await fetch(url);
+          const data = await response.json();
+
+          this.autoplay = data.autoPlay;
+          this.loop = data.loop;
+          this.aspectRatio = data.settingsAspectRatio;
+          this.blurhash = data.videoBlurHash;
+          this.src = data.videoSource;
+          this.height = data.height;
+          this.width = data.width;
+          this.posterImage = data.posterImage;
+          this.posterVideoSource = data.posterVideoSource;
+        } catch (error) {
+          console.log("error", error);
+        }
+      };
+
+      fetchData();
+    }
+
     window.addEventListener("message", this.messageHandler.bind(this));
     window.addEventListener("load", this.visibilityHandler.bind(this));
     window.addEventListener("scroll", this.visibilityHandler.bind(this));
@@ -512,7 +538,7 @@ export class MaveComponent extends LitElement {
                   : nothing}
               </video>
             `
-          : ""}
+          : nothing}
         ${this.embed
           ? html`
               <iframe
@@ -526,7 +552,7 @@ export class MaveComponent extends LitElement {
               >
               </iframe>
             `
-          : ""}
+          : nothing}
       </dialog>
     `;
   }
