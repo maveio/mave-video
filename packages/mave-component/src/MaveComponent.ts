@@ -217,6 +217,9 @@ export class MaveComponent extends LitElement {
       case "canplay":
         this.initializeVideo();
         break;
+      case "buffered":
+        this.triggerEvent(event.type, {});
+        break;
       case "progress":
         if (!this.canPlay || !this.loadeddata) this.initializeVideo();
         try {
@@ -228,6 +231,8 @@ export class MaveComponent extends LitElement {
         } catch (e) {}
         break;
       case "play":
+        this.triggerEvent(event.type, {duration: this.video.duration});
+
         if (this._posterShouldBeVisible) {
           // workaround for Safari (poster image glitch)
 
@@ -259,6 +264,8 @@ export class MaveComponent extends LitElement {
         }
         break;
       case "timeupdate":
+        this.triggerEvent(event.type, {seconds: this.video.currentTime, duration: this.video.duration});
+
         this.sendMessage("mave:video_timeupdate", {
           currentTime: this.video.currentTime,
         });
