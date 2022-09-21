@@ -196,8 +196,6 @@ export class MaveComponent extends LitElement {
       const checkPlayerState = () => {
         if (this._iframeReady) return;
 
-        this.triggerEvent("ready", { videoElement: this.video });
-
         this.sendMessage("mave:video_canplay", {
           duration: this.video?.duration,
         });
@@ -294,6 +292,7 @@ export class MaveComponent extends LitElement {
     switch (message) {
       case "mave:player_ready":
         this._iframeReady = true;
+        this.triggerEvent("ready", { videoElement: this.video });
 
         if (
           !this._initialPlayEventTriggered &&
