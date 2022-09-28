@@ -1,4 +1,6 @@
 import { html, LitElement, nothing } from "lit";
+import { ref } from "lit/directives/ref.js";
+
 import { property, query, state } from "lit/decorators.js";
 import { Config } from "../../config/config";
 import { style } from "./style";
@@ -40,6 +42,39 @@ interface IEvent extends Event {
     file_type?: string;
   };
 }
+
+const videoEvents = [
+  'abort',
+  'canplay',
+  'canplaythrough',
+  'durationchange',
+  'emptied',
+  'encrypted',
+  'ended',
+  'error',
+  'loadeddata',
+  'loadedmetadata',
+  'loadstart',
+  'pause',
+  'play',
+  'playing',
+  'progress',
+  'ratechange',
+  'seeked',
+  'seeking',
+  'stalled',
+  'suspend',
+  'timeupdate',
+  'volumechange',
+  'waiting',
+  'waitingforkey',
+  'resize',
+  'enterpictureinpicture',
+  'leavepictureinpicture',
+  'castchange',
+  'entercast',
+  'leavecast',
+]
 
 export class MaveComponent extends LitElement {
   static styles = style;
@@ -182,6 +217,26 @@ export class MaveComponent extends LitElement {
     if (settings) settings.remove();
 
     super.disconnectedCallback();
+  }
+
+  play() {
+    return this.video?.play
+  }
+
+  pause() {
+    return this.video?.pause
+  }
+
+  setVolume(volume: number) {
+    if(this.video) this.video.volume = volume
+  }
+
+  setCurrentTime(time: number) {
+    if(this.video) this.video.currentTime = time
+  }
+
+  getCurrentTime() {
+    return this.video?.currentTime
   }
 
   initializeVideo() {
@@ -383,6 +438,7 @@ export class MaveComponent extends LitElement {
           : undefined;
         this.width = data.aspect_ratio_enabled ? undefined : data.width;
         this.height = data.aspect_ratio_enabled ? undefined : data.height;
+
         this.loop = data.loop;
         this.autoplay = data.autoplay_enabled;
 
@@ -489,6 +545,15 @@ export class MaveComponent extends LitElement {
       : nothing;
   }
 
+  videoRendered(video?: Element) {
+    videoEvents.forEach((type) => {
+      video?.addEventListener(type, (event) => {
+        // @ts-ignore
+        this.dispatchEvent(new CustomEvent(event.type, { detail: event.detail }));
+      });
+    });
+  }
+
   render() {
     return html`
       ${this.generateStyle()}
@@ -509,8 +574,9 @@ export class MaveComponent extends LitElement {
               ${this._posterShouldBeVisible
                 ? html` <img class="poster" .src=${this.poster()} /> `
                 : ""}
-
+              
               <video
+                ${ref(this.videoRendered)}
                 id="video"
                 style=${this.videoStyle()}
                 playsinline
@@ -527,6 +593,7 @@ export class MaveComponent extends LitElement {
                 .loop=${this.loop}
                 .src=${this.needsHls() ? this.src : nothing}
               >
+
                 ${!this.needsHls()
                   ? html`<source
                       src=${this.src}

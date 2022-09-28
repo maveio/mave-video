@@ -71,6 +71,11 @@ declare class MaveComponent extends LitElement {
     private debouncedAppHeight;
     connectedCallback(): void;
     disconnectedCallback(): void;
+    play(): (() => Promise<void>) | undefined;
+    pause(): (() => void) | undefined;
+    setVolume(volume: number): void;
+    setCurrentTime(time: number): void;
+    getCurrentTime(): number | undefined;
     initializeVideo(): void;
     videoHandler(event: Event): void;
     messageHandler(event: IEvent): void;
@@ -81,6 +86,7 @@ declare class MaveComponent extends LitElement {
     poster(): string | typeof nothing;
     videoPoster(): string | typeof nothing;
     videoStyle(): typeof nothing | "opacity: 0;";
+    videoRendered(video?: Element): void;
     render(): lit_html.TemplateResult<1>;
     firstUpdated(changedProperties: any): void;
     private generateUrl;
