@@ -391,6 +391,20 @@ var videoEvents = [
   "entercast",
   "leavecast"
 ];
+var maveEvents = [
+  "mave:video_canplay",
+  "mave:video_progress",
+  "mave:video_play",
+  "mave:video_pause",
+  "mave:video_ended",
+  "mave:video_timeupdate",
+  "mave:vide_muted",
+  "mave:vide_muted",
+  "mave:video_fullscreen",
+  "mave:open_overlay",
+  "mave:close_overlay",
+  "mave:bitrate"
+];
 var MaveComponent = class extends import_lit3.LitElement {
   constructor() {
     super(...arguments);
@@ -454,6 +468,9 @@ var MaveComponent = class extends import_lit3.LitElement {
     if (settings)
       settings.remove();
     super.disconnectedCallback();
+  }
+  listEvents() {
+    return [...videoEvents, ...maveEvents];
   }
   play() {
     var _a;
@@ -811,6 +828,7 @@ var MaveComponent = class extends import_lit3.LitElement {
       return;
     const payload = __spreadValues({ message: event }, options);
     this.iframe.contentWindow.postMessage(payload, "*");
+    this.triggerEvent(event, payload);
   }
   openFullscreen() {
     if (!this.isFullscreen()) {

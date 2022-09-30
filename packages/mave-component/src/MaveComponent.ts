@@ -76,6 +76,21 @@ const videoEvents = [
   'leavecast',
 ]
 
+const maveEvents = [
+  'mave:video_canplay',
+  'mave:video_progress',
+  'mave:video_play',
+  'mave:video_pause',
+  'mave:video_ended',
+  'mave:video_timeupdate',
+  'mave:vide_muted',
+  'mave:vide_muted',
+  'mave:video_fullscreen',
+  'mave:open_overlay',
+  'mave:close_overlay',
+  'mave:bitrate'
+]
+
 export class MaveComponent extends LitElement {
   static styles = style;
 
@@ -219,24 +234,28 @@ export class MaveComponent extends LitElement {
     super.disconnectedCallback();
   }
 
+  listEvents() {
+    return [...videoEvents, ...maveEvents];
+  }
+
   play() {
-    return this.video?.play
+    return this.video?.play;
   }
 
   pause() {
-    return this.video?.pause
+    return this.video?.pause;
   }
 
   setVolume(volume: number) {
-    if(this.video) this.video.volume = volume
+    if(this.video) this.video.volume = volume;
   }
 
   setCurrentTime(time: number) {
-    if(this.video) this.video.currentTime = time
+    if(this.video) this.video.currentTime = time;
   }
 
   getCurrentTime() {
-    return this.video?.currentTime
+    return this.video?.currentTime;
   }
 
   initializeVideo() {
@@ -277,6 +296,7 @@ export class MaveComponent extends LitElement {
           const buffer = Math.round(
             (this.video.buffered.end(lastBuffer) / this.video.duration) * 100
           );
+
           this.sendMessage("mave:video_progress", { buffer });
         } catch (e) {}
         break;
@@ -648,6 +668,7 @@ export class MaveComponent extends LitElement {
 
     const payload = { message: event, ...options };
     this.iframe.contentWindow.postMessage(payload, "*");
+    this.triggerEvent(event, payload);
   }
 
   private openFullscreen() {

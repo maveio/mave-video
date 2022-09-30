@@ -71,6 +71,7 @@ declare class MaveComponent extends LitElement {
     private debouncedAppHeight;
     connectedCallback(): void;
     disconnectedCallback(): void;
+    listEvents(): string[];
     play(): (() => Promise<void>) | undefined;
     pause(): (() => void) | undefined;
     setVolume(volume: number): void;
