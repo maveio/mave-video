@@ -44,52 +44,52 @@ interface IEvent extends Event {
 }
 
 const videoEvents = [
-  'abort',
-  'canplay',
-  'canplaythrough',
-  'durationchange',
-  'emptied',
-  'encrypted',
-  'ended',
-  'error',
-  'loadeddata',
-  'loadedmetadata',
-  'loadstart',
-  'pause',
-  'play',
-  'playing',
-  'progress',
-  'ratechange',
-  'seeked',
-  'seeking',
-  'stalled',
-  'suspend',
-  'timeupdate',
-  'volumechange',
-  'waiting',
-  'waitingforkey',
-  'resize',
-  'enterpictureinpicture',
-  'leavepictureinpicture',
-  'castchange',
-  'entercast',
-  'leavecast',
-]
+  "abort",
+  "canplay",
+  "canplaythrough",
+  "durationchange",
+  "emptied",
+  "encrypted",
+  "ended",
+  "error",
+  "loadeddata",
+  "loadedmetadata",
+  "loadstart",
+  "pause",
+  "play",
+  "playing",
+  "progress",
+  "ratechange",
+  "seeked",
+  "seeking",
+  "stalled",
+  "suspend",
+  "timeupdate",
+  "volumechange",
+  "waiting",
+  "waitingforkey",
+  "resize",
+  "enterpictureinpicture",
+  "leavepictureinpicture",
+  "castchange",
+  "entercast",
+  "leavecast",
+];
 
 const maveEvents = [
-  'mave:video_canplay',
-  'mave:video_progress',
-  'mave:video_play',
-  'mave:video_pause',
-  'mave:video_ended',
-  'mave:video_timeupdate',
-  'mave:vide_muted',
-  'mave:vide_muted',
-  'mave:video_fullscreen',
-  'mave:open_overlay',
-  'mave:close_overlay',
-  'mave:bitrate'
-]
+  "mave:video_canplay",
+  "mave:video_progress",
+  "mave:video_play",
+  "mave:video_pause",
+  "mave:video_ended",
+  "mave:video_timeupdate",
+  "mave:vide_muted",
+  "mave:vide_muted",
+  "mave:video_fullscreen",
+  "mave:open_overlay",
+  "mave:close_overlay",
+  "mave:bitrate",
+];
 
 export class MaveComponent extends LitElement {
   static styles = style;
@@ -247,11 +247,14 @@ export class MaveComponent extends LitElement {
   }
 
   setVolume(volume: number) {
-    if(this.video) this.video.volume = volume;
+    if (this.video) {
+      if (volume > 0) this.video.muted = false;
+      this.video.volume = volume;
+    }
   }
 
   setCurrentTime(time: number) {
-    if(this.video) this.video.currentTime = time;
+    if (this.video) this.video.currentTime = time;
   }
 
   getCurrentTime() {
@@ -323,9 +326,12 @@ export class MaveComponent extends LitElement {
               ? 0
               : this.video.currentTime;
 
+          console.log("this.video.duration", this.video.duration);
+
           this.sendMessage("mave:video_play", {
             currentTime: time,
             bitrate: this._bitrate,
+            duration: this.video.duration,
           });
 
           this._initialPlayEventTriggered = true;
@@ -568,8 +574,10 @@ export class MaveComponent extends LitElement {
   videoRendered(video?: Element) {
     videoEvents.forEach((type) => {
       video?.addEventListener(type, (event) => {
-        // @ts-ignore
-        this.dispatchEvent(new CustomEvent(event.type, { detail: event.detail }));
+        this.dispatchEvent(
+          // @ts-ignore
+          new CustomEvent(event.type, { detail: event.detail })
+        );
       });
     });
   }
@@ -594,7 +602,7 @@ export class MaveComponent extends LitElement {
               ${this._posterShouldBeVisible
                 ? html` <img class="poster" .src=${this.poster()} /> `
                 : ""}
-              
+
               <video
                 ${ref(this.videoRendered)}
                 id="video"
@@ -613,7 +621,6 @@ export class MaveComponent extends LitElement {
                 .loop=${this.loop}
                 .src=${this.needsHls() ? this.src : nothing}
               >
-
                 ${!this.needsHls()
                   ? html`<source
                       src=${this.src}
