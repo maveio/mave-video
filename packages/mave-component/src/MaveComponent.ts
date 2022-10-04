@@ -239,17 +239,27 @@ export class MaveComponent extends LitElement {
   }
 
   play() {
-    return this.video?.play;
+    if (this.video && this.video?.currentTime >= this.video?.duration)
+      this.video.currentTime = 0;
+    this.video?.play();
   }
 
   pause() {
-    return this.video?.pause;
+    this.video?.pause();
   }
 
   setVolume(volume: number) {
     if (this.video) {
       if (volume > 0) this.video.muted = false;
       this.video.volume = volume;
+      this.sendMessage("mave:volume_change", { volume });
+    }
+  }
+
+  setMuted(muted: boolean) {
+    if (this.video) {
+      this.video.muted = muted;
+      this.sendMessage("mave:video_muted", { muted: this.video.muted });
     }
   }
 
@@ -326,8 +336,6 @@ export class MaveComponent extends LitElement {
               ? 0
               : this.video.currentTime;
 
-          console.log("this.video.duration", this.video.duration);
-
           this.sendMessage("mave:video_play", {
             currentTime: time,
             bitrate: this._bitrate,
@@ -341,6 +349,8 @@ export class MaveComponent extends LitElement {
         this.sendMessage("mave:video_timeupdate", {
           currentTime: this.video.currentTime,
         });
+        break;
+      case "volumechange":
         break;
       case "pause":
       case "ended":
@@ -385,6 +395,7 @@ export class MaveComponent extends LitElement {
           this.sendMessage("mave:video_play", {
             currentTime: time,
             bitrate: this._bitrate,
+            duration: this.video.duration,
           });
           this._initialPlayEventTriggered = true;
         }
@@ -574,9 +585,17 @@ export class MaveComponent extends LitElement {
   videoRendered(video?: Element) {
     videoEvents.forEach((type) => {
       video?.addEventListener(type, (event) => {
+        let data;
+        if (type == "seeked") {
+          data = {
+            detail: { duration: this.video?.duration, embed: this.embed },
+          };
+        } else {
+          data = { detail: { embed: this.embed } };
+        }
         this.dispatchEvent(
           // @ts-ignore
-          new CustomEvent(event.type, { detail: event.detail })
+          new CustomEvent(event.type, data)
         );
       });
     });
@@ -615,6 +634,7 @@ export class MaveComponent extends LitElement {
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
+                @volumechange=${this.videoHandler}
                 .poster=${this.videoPoster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
@@ -673,7 +693,7 @@ export class MaveComponent extends LitElement {
   private sendMessage(event: string, options: any = {}) {
     if (!this.iframe.contentWindow || !this.video) return;
 
-    const payload = { message: event, ...options };
+    const payload = { message: event, ...options, embed: this.embed };
     this.iframe.contentWindow.postMessage(payload, "*");
     this.triggerEvent(event, payload);
   }
