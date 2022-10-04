@@ -72,9 +72,10 @@ declare class MaveComponent extends LitElement {
     connectedCallback(): void;
     disconnectedCallback(): void;
     listEvents(): string[];
-    play(): (() => Promise<void>) | undefined;
-    pause(): (() => void) | undefined;
+    play(): void;
+    pause(): void;
     setVolume(volume: number): void;
+    setMuted(muted: boolean): void;
     setCurrentTime(time: number): void;
     getCurrentTime(): number | undefined;
     initializeVideo(): void;
