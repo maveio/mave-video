@@ -53,6 +53,7 @@ declare class MaveComponent extends LitElement {
     video?: HTMLVideoElement;
     canvas?: HTMLCanvasElement;
     script?: HTMLScriptElement;
+    endElement?: HTMLElement;
     private _settingsActive;
     private _blurhashShouldBeVisible;
     private _overlayActive;
@@ -78,6 +79,7 @@ declare class MaveComponent extends LitElement {
     setMuted(muted: boolean): void;
     setCurrentTime(time: number): void;
     getCurrentTime(): number | undefined;
+    toggleEndScreen(): void;
     initializeVideo(): void;
     videoHandler(event: Event): void;
     messageHandler(event: IEvent): void;

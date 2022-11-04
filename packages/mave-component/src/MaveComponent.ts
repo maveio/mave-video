@@ -139,6 +139,8 @@ export class MaveComponent extends LitElement {
 
   @query("#script") script?: HTMLScriptElement;
 
+  @query("#end") endElement?: HTMLElement;
+
   @state() private _settingsActive: boolean = false;
 
   @state() private _blurhashShouldBeVisible: boolean = true;
@@ -271,6 +273,16 @@ export class MaveComponent extends LitElement {
     return this.video?.currentTime;
   }
 
+  toggleEndScreen() {
+    if (this.endElement) {
+      if (this.endElement.style.display === "block") {
+        this.endElement.style.display = "none";
+      } else {
+        this.endElement.style.display = "block";
+      }
+    }
+  }
+
   initializeVideo() {
     if (!this.loadeddata && this.video && this.video.readyState >= 2) {
       setTimeout(() => {
@@ -369,6 +381,10 @@ export class MaveComponent extends LitElement {
             event.type == "ended" ? "mave:video_ended" : "mave:video_pause"
           );
         }, 25);
+
+        if (!this.loop && this.endElement) {
+          this.endElement.style.display = "block";
+        }
 
         break;
     }
@@ -664,6 +680,7 @@ export class MaveComponent extends LitElement {
                 scrolling="no"
               >
               </iframe>
+              <slot id="end" name="end-screen"></slot>
             `
           : nothing}
       </dialog>

@@ -130,4 +130,14 @@ export const style = css`
   #video::-webkit-media-text-track-display-backdrop {
     background: transparent !important;
   }
+
+  #end {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 30;
+    top: 0;
+    left: 0;
+  }
 `;
