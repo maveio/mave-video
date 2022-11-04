@@ -382,7 +382,7 @@ export class MaveComponent extends LitElement {
           );
         }, 25);
 
-        if (!this.loop && this.endElement) {
+        if (event.type == "ended" && !this.loop && this.endElement) {
           this.endElement.style.display = "block";
         }
 

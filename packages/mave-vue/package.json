@@ -1,6 +1,6 @@
 {
   "name": "@maveio/mave-vue",
-  "version": "0.0.1-beta.15",
+  "version": "0.0.1-beta.16",
   "files": [
     "dist"
   ],
@@ -8,10 +8,8 @@
   "module": "./dist/index.es.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
+    "import": "./dist/index.es.js",
+    "require": "./dist/index.umd.js"
   },
   "type": "module",
   "license": "MIT",
