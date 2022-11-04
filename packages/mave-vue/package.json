@@ -1,6 +1,6 @@
 {
   "name": "@maveio/mave-vue",
-  "version": "0.0.1-beta.14",
+  "version": "0.0.1-beta.15",
   "files": [
     "dist"
   ],
@@ -25,7 +25,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@maveio/mave-component": "0.0.1-beta.30"
+    "@maveio/mave-component": "0.0.1-beta.36"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
