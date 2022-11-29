@@ -59,7 +59,6 @@ export const style = css`
     position: absolute;
     top: 0;
     height: 100%;
-    aspect-ratio: 16 / 9;
   }
 
   .active_upload {
