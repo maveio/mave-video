@@ -1588,10 +1588,10 @@
   resolved "https://registry.npmjs.org/@lit/reactive-element/-/reactive-element-1.3.1.tgz"
   integrity sha512-nOJARIr3pReqK3hfFCSW2Zg/kFcFsSAlIE7z4a0C9D2dPrgD/YSn3ZP2ET/rxKB65SXyG7jJbkynBRm+tGlacw==
 
-"@maveio/mave-component@0.0.1-beta.26":
-  version "0.0.1-beta.26"
-  resolved "https://registry.yarnpkg.com/@maveio/mave-component/-/mave-component-0.0.1-beta.26.tgz#178a96f32032181a2ddcc98225c47024ad9ee156"
-  integrity sha512-1lNQoNkPvRM+CJ/5K1jod5Z23FyP25SA/O4LfqLDW1RY3eK9dNhQTF3q21BpAqUWIPv6jvLHsVvx80PRqULXOQ==
+"@maveio/mave-component@0.0.1-beta.36":
+  version "0.0.1-beta.36"
+  resolved "https://registry.yarnpkg.com/@maveio/mave-component/-/mave-component-0.0.1-beta.36.tgz#ffbcfa7b71241a84c1b5599c4fb66c134e0bd8c3"
+  integrity sha512-FKd/gtnze25d+bCGV31Uur+0lAos74pFf4xtZQ0WCn4nyKeWAZJT2bqVE7fOlg64xae6XDmUSD8lNkiu04HbOw==
   dependencies:
     "@fpapado/blurhash" "^1.1.4"
     lit "^2.0.2"
