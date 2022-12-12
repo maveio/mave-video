@@ -135,7 +135,6 @@ var style = import_lit.css`
     position: absolute;
     top: 0;
     height: 100%;
-    aspect-ratio: 16 / 9;
   }
 
   .active_upload {

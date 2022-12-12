@@ -549,8 +549,12 @@ export class MaveComponent extends LitElement {
       css.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; } canvas, .poster { width: ${this.width}; object-fit: cover; } #video, #video[poster] { object-fit: cover; }`;
     } else {
       if (this.aspectRatio) {
-        const aspectRatio = this.aspectRatio.includes(':') ? `${this.aspectRatio.split(":")[0]} / ${this.aspectRatio.split(":")[1]}` : '16 / 9';
-        
+        const aspectRatio = this.aspectRatio.includes(":")
+          ? `${this.aspectRatio.split(":")[0]} / ${
+              this.aspectRatio.split(":")[1]
+            }`
+          : "16 / 9";
+
         css.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${aspectRatio}; width: 100%; min-width: 320px; min-height: 180px; } canvas, .poster { aspect-ratio: ${aspectRatio}; object-fit: contain; } #video, #video[poster] { object-fit: contain; }`;
       } else {
         css.textContent =
