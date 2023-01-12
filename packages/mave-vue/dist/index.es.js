@@ -40,22 +40,22 @@ class Config {
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const t$2 = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, e$3 = Symbol(), n$4 = /* @__PURE__ */ new Map();
-class s$4 {
+const t$3 = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, e$5 = Symbol(), n$6 = /* @__PURE__ */ new Map();
+class s$3 {
   constructor(t2, n2) {
-    if (this._$cssResult$ = true, n2 !== e$3)
+    if (this._$cssResult$ = true, n2 !== e$5)
       throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = t2;
   }
   get styleSheet() {
-    let e2 = n$4.get(this.cssText);
-    return t$2 && e2 === void 0 && (n$4.set(this.cssText, e2 = new CSSStyleSheet()), e2.replaceSync(this.cssText)), e2;
+    let e2 = n$6.get(this.cssText);
+    return t$3 && e2 === void 0 && (n$6.set(this.cssText, e2 = new CSSStyleSheet()), e2.replaceSync(this.cssText)), e2;
   }
   toString() {
     return this.cssText;
   }
 }
-const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t2, ...n2) => {
+const o$5 = (t2) => new s$3(typeof t2 == "string" ? t2 : t2 + "", e$5), r$4 = (t2, ...n2) => {
   const o2 = t2.length === 1 ? t2[0] : n2.reduce((e2, n3, s2) => e2 + ((t3) => {
     if (t3._$cssResult$ === true)
       return t3.cssText;
@@ -63,28 +63,28 @@ const o$4 = (t2) => new s$4(typeof t2 == "string" ? t2 : t2 + "", e$3), r$2 = (t
       return t3;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + t3 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
   })(n3) + t2[s2 + 1], t2[0]);
-  return new s$4(o2, e$3);
-}, i$4 = (e2, n2) => {
-  t$2 ? e2.adoptedStyleSheets = n2.map((t2) => t2 instanceof CSSStyleSheet ? t2 : t2.styleSheet) : n2.forEach((t2) => {
+  return new s$3(o2, e$5);
+}, i$5 = (e2, n2) => {
+  t$3 ? e2.adoptedStyleSheets = n2.map((t2) => t2 instanceof CSSStyleSheet ? t2 : t2.styleSheet) : n2.forEach((t2) => {
     const n3 = document.createElement("style"), s2 = window.litNonce;
     s2 !== void 0 && n3.setAttribute("nonce", s2), n3.textContent = t2.cssText, e2.appendChild(n3);
   });
-}, S$2 = t$2 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+}, S$2 = t$3 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
   let e2 = "";
   for (const n2 of t3.cssRules)
     e2 += n2.cssText;
-  return o$4(e2);
+  return o$5(e2);
 })(t2) : t2;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var s$3;
-const e$2 = window.trustedTypes, r$1 = e$2 ? e$2.emptyScript : "", h$2 = window.reactiveElementPolyfillSupport, o$3 = { toAttribute(t2, i2) {
+var s$2;
+const e$4 = window.trustedTypes, r$3 = e$4 ? e$4.emptyScript : "", h$3 = window.reactiveElementPolyfillSupport, o$4 = { toAttribute(t2, i2) {
   switch (i2) {
     case Boolean:
-      t2 = t2 ? r$1 : null;
+      t2 = t2 ? r$3 : null;
       break;
     case Object:
     case Array:
@@ -109,8 +109,8 @@ const e$2 = window.trustedTypes, r$1 = e$2 ? e$2.emptyScript : "", h$2 = window.
       }
   }
   return s2;
-} }, n$3 = (t2, i2) => i2 !== t2 && (i2 == i2 || t2 == t2), l$2 = { attribute: true, type: String, converter: o$3, reflect: false, hasChanged: n$3 };
-class a$1 extends HTMLElement {
+} }, n$5 = (t2, i2) => i2 !== t2 && (i2 == i2 || t2 == t2), l$3 = { attribute: true, type: String, converter: o$4, reflect: false, hasChanged: n$5 };
+class a$2 extends HTMLElement {
   constructor() {
     super(), this._$Et = /* @__PURE__ */ new Map(), this.isUpdatePending = false, this.hasUpdated = false, this._$Ei = null, this.o();
   }
@@ -126,7 +126,7 @@ class a$1 extends HTMLElement {
       e2 !== void 0 && (this._$Eu.set(e2, s2), t2.push(e2));
     }), t2;
   }
-  static createProperty(t2, i2 = l$2) {
+  static createProperty(t2, i2 = l$3) {
     if (i2.state && (i2.attribute = false), this.finalize(), this.elementProperties.set(t2, i2), !i2.noAccessor && !this.prototype.hasOwnProperty(t2)) {
       const s2 = typeof t2 == "symbol" ? Symbol() : "__" + t2, e2 = this.getPropertyDescriptor(t2, s2, i2);
       e2 !== void 0 && Object.defineProperty(this.prototype, t2, e2);
@@ -141,7 +141,7 @@ class a$1 extends HTMLElement {
     }, configurable: true, enumerable: true };
   }
   static getPropertyOptions(t2) {
-    return this.elementProperties.get(t2) || l$2;
+    return this.elementProperties.get(t2) || l$3;
   }
   static finalize() {
     if (this.hasOwnProperty("finalized"))
@@ -189,7 +189,7 @@ class a$1 extends HTMLElement {
   createRenderRoot() {
     var t2;
     const s2 = (t2 = this.shadowRoot) !== null && t2 !== void 0 ? t2 : this.attachShadow(this.constructor.shadowRootOptions);
-    return i$4(s2, this.constructor.elementStyles), s2;
+    return i$5(s2, this.constructor.elementStyles), s2;
   }
   connectedCallback() {
     var t2;
@@ -210,11 +210,11 @@ class a$1 extends HTMLElement {
   attributeChangedCallback(t2, i2, s2) {
     this._$AK(t2, s2);
   }
-  _$ES(t2, i2, s2 = l$2) {
+  _$ES(t2, i2, s2 = l$3) {
     var e2, r2;
     const h2 = this.constructor._$Eh(t2, s2);
     if (h2 !== void 0 && s2.reflect === true) {
-      const n2 = ((r2 = (e2 = s2.converter) === null || e2 === void 0 ? void 0 : e2.toAttribute) !== null && r2 !== void 0 ? r2 : o$3.toAttribute)(i2, s2.type);
+      const n2 = ((r2 = (e2 = s2.converter) === null || e2 === void 0 ? void 0 : e2.toAttribute) !== null && r2 !== void 0 ? r2 : o$4.toAttribute)(i2, s2.type);
       this._$Ei = t2, n2 == null ? this.removeAttribute(h2) : this.setAttribute(h2, n2), this._$Ei = null;
     }
   }
@@ -222,13 +222,13 @@ class a$1 extends HTMLElement {
     var s2, e2, r2;
     const h2 = this.constructor, n2 = h2._$Eu.get(t2);
     if (n2 !== void 0 && this._$Ei !== n2) {
-      const t3 = h2.getPropertyOptions(n2), l2 = t3.converter, a2 = (r2 = (e2 = (s2 = l2) === null || s2 === void 0 ? void 0 : s2.fromAttribute) !== null && e2 !== void 0 ? e2 : typeof l2 == "function" ? l2 : null) !== null && r2 !== void 0 ? r2 : o$3.fromAttribute;
+      const t3 = h2.getPropertyOptions(n2), l2 = t3.converter, a2 = (r2 = (e2 = (s2 = l2) === null || s2 === void 0 ? void 0 : s2.fromAttribute) !== null && e2 !== void 0 ? e2 : typeof l2 == "function" ? l2 : null) !== null && r2 !== void 0 ? r2 : o$4.fromAttribute;
       this._$Ei = n2, this[n2] = a2(i2, t3.type), this._$Ei = null;
     }
   }
   requestUpdate(t2, i2, s2) {
     let e2 = true;
-    t2 !== void 0 && (((s2 = s2 || this.constructor.getPropertyOptions(t2)).hasChanged || n$3)(this[t2], i2) ? (this._$AL.has(t2) || this._$AL.set(t2, i2), s2.reflect === true && this._$Ei !== t2 && (this._$EC === void 0 && (this._$EC = /* @__PURE__ */ new Map()), this._$EC.set(t2, s2))) : e2 = false), !this.isUpdatePending && e2 && (this._$Ep = this._$E_());
+    t2 !== void 0 && (((s2 = s2 || this.constructor.getPropertyOptions(t2)).hasChanged || n$5)(this[t2], i2) ? (this._$AL.has(t2) || this._$AL.set(t2, i2), s2.reflect === true && this._$Ei !== t2 && (this._$EC === void 0 && (this._$EC = /* @__PURE__ */ new Map()), this._$EC.set(t2, s2))) : e2 = false), !this.isUpdatePending && e2 && (this._$Ep = this._$E_());
   }
   async _$E_() {
     this.isUpdatePending = true;
@@ -289,40 +289,40 @@ class a$1 extends HTMLElement {
   firstUpdated(t2) {
   }
 }
-a$1.finalized = true, a$1.elementProperties = /* @__PURE__ */ new Map(), a$1.elementStyles = [], a$1.shadowRootOptions = { mode: "open" }, h$2 == null || h$2({ ReactiveElement: a$1 }), ((s$3 = globalThis.reactiveElementVersions) !== null && s$3 !== void 0 ? s$3 : globalThis.reactiveElementVersions = []).push("1.3.1");
+a$2.finalized = true, a$2.elementProperties = /* @__PURE__ */ new Map(), a$2.elementStyles = [], a$2.shadowRootOptions = { mode: "open" }, h$3 == null || h$3({ ReactiveElement: a$2 }), ((s$2 = globalThis.reactiveElementVersions) !== null && s$2 !== void 0 ? s$2 : globalThis.reactiveElementVersions = []).push("1.3.1");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var t$1;
-const i$3 = globalThis.trustedTypes, s$2 = i$3 ? i$3.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$1 = `lit$${(Math.random() + "").slice(9)}$`, o$2 = "?" + e$1, n$2 = `<${o$2}>`, l$1 = document, h$1 = (t2 = "") => l$1.createComment(t2), r = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$1 = Array.isArray, u = (t2) => {
+var t$2;
+const i$4 = globalThis.trustedTypes, s$1 = i$4 ? i$4.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, e$3 = `lit$${(Math.random() + "").slice(9)}$`, o$3 = "?" + e$3, n$4 = `<${o$3}>`, l$2 = document, h$2 = (t2 = "") => l$2.createComment(t2), r$2 = (t2) => t2 === null || typeof t2 != "object" && typeof t2 != "function", d$2 = Array.isArray, u = (t2) => {
   var i2;
-  return d$1(t2) || typeof ((i2 = t2) === null || i2 === void 0 ? void 0 : i2[Symbol.iterator]) == "function";
-}, c = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _ = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T = /* @__PURE__ */ new WeakMap(), x = (t2, i2, s2) => {
+  return d$2(t2) || typeof ((i2 = t2) === null || i2 === void 0 ? void 0 : i2[Symbol.iterator]) == "function";
+}, c$1 = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, v = /-->/g, a$1 = />/g, f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g, _ = /'/g, m = /"/g, g = /^(?:script|style|textarea|title)$/i, p = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), $$1 = p(1), b = Symbol.for("lit-noChange"), w$1 = Symbol.for("lit-nothing"), T = /* @__PURE__ */ new WeakMap(), x$1 = (t2, i2, s2) => {
   var e2, o2;
   const n2 = (e2 = s2 == null ? void 0 : s2.renderBefore) !== null && e2 !== void 0 ? e2 : i2;
   let l2 = n2._$litPart$;
   if (l2 === void 0) {
     const t3 = (o2 = s2 == null ? void 0 : s2.renderBefore) !== null && o2 !== void 0 ? o2 : null;
-    n2._$litPart$ = l2 = new N(i2.insertBefore(h$1(), t3), t3, void 0, s2 != null ? s2 : {});
+    n2._$litPart$ = l2 = new N(i2.insertBefore(h$2(), t3), t3, void 0, s2 != null ? s2 : {});
   }
   return l2._$AI(t2), l2;
-}, A$1 = l$1.createTreeWalker(l$1, 129, null, false), C = (t2, i2) => {
+}, A$1 = l$2.createTreeWalker(l$2, 129, null, false), C = (t2, i2) => {
   const o2 = t2.length - 1, l2 = [];
-  let h2, r2 = i2 === 2 ? "<svg>" : "", d2 = c;
+  let h2, r2 = i2 === 2 ? "<svg>" : "", d2 = c$1;
   for (let i3 = 0; i3 < o2; i3++) {
     const s2 = t2[i3];
     let o3, u3, p2 = -1, $2 = 0;
     for (; $2 < s2.length && (d2.lastIndex = $2, u3 = d2.exec(s2), u3 !== null); )
-      $2 = d2.lastIndex, d2 === c ? u3[1] === "!--" ? d2 = v : u3[1] !== void 0 ? d2 = a : u3[2] !== void 0 ? (g.test(u3[2]) && (h2 = RegExp("</" + u3[2], "g")), d2 = f) : u3[3] !== void 0 && (d2 = f) : d2 === f ? u3[0] === ">" ? (d2 = h2 != null ? h2 : c, p2 = -1) : u3[1] === void 0 ? p2 = -2 : (p2 = d2.lastIndex - u3[2].length, o3 = u3[1], d2 = u3[3] === void 0 ? f : u3[3] === '"' ? m : _) : d2 === m || d2 === _ ? d2 = f : d2 === v || d2 === a ? d2 = c : (d2 = f, h2 = void 0);
+      $2 = d2.lastIndex, d2 === c$1 ? u3[1] === "!--" ? d2 = v : u3[1] !== void 0 ? d2 = a$1 : u3[2] !== void 0 ? (g.test(u3[2]) && (h2 = RegExp("</" + u3[2], "g")), d2 = f) : u3[3] !== void 0 && (d2 = f) : d2 === f ? u3[0] === ">" ? (d2 = h2 != null ? h2 : c$1, p2 = -1) : u3[1] === void 0 ? p2 = -2 : (p2 = d2.lastIndex - u3[2].length, o3 = u3[1], d2 = u3[3] === void 0 ? f : u3[3] === '"' ? m : _) : d2 === m || d2 === _ ? d2 = f : d2 === v || d2 === a$1 ? d2 = c$1 : (d2 = f, h2 = void 0);
     const y = d2 === f && t2[i3 + 1].startsWith("/>") ? " " : "";
-    r2 += d2 === c ? s2 + n$2 : p2 >= 0 ? (l2.push(o3), s2.slice(0, p2) + "$lit$" + s2.slice(p2) + e$1 + y) : s2 + e$1 + (p2 === -2 ? (l2.push(void 0), i3) : y);
+    r2 += d2 === c$1 ? s2 + n$4 : p2 >= 0 ? (l2.push(o3), s2.slice(0, p2) + "$lit$" + s2.slice(p2) + e$3 + y) : s2 + e$3 + (p2 === -2 ? (l2.push(void 0), i3) : y);
   }
   const u2 = r2 + (t2[o2] || "<?>") + (i2 === 2 ? "</svg>" : "");
   if (!Array.isArray(t2) || !t2.hasOwnProperty("raw"))
     throw Error("invalid template strings array");
-  return [s$2 !== void 0 ? s$2.createHTML(u2) : u2, l2];
+  return [s$1 !== void 0 ? s$1.createHTML(u2) : u2, l2];
 };
 class E$1 {
   constructor({ strings: t2, _$litType$: s2 }, n2) {
@@ -339,10 +339,10 @@ class E$1 {
         if (l2.hasAttributes()) {
           const t3 = [];
           for (const i2 of l2.getAttributeNames())
-            if (i2.endsWith("$lit$") || i2.startsWith(e$1)) {
+            if (i2.endsWith("$lit$") || i2.startsWith(e$3)) {
               const s3 = a2[d2++];
               if (t3.push(i2), s3 !== void 0) {
-                const t4 = l2.getAttribute(s3.toLowerCase() + "$lit$").split(e$1), i3 = /([.?@])?(.*)/.exec(s3);
+                const t4 = l2.getAttribute(s3.toLowerCase() + "$lit$").split(e$3), i3 = /([.?@])?(.*)/.exec(s3);
                 c2.push({ type: 1, index: r2, name: i3[2], strings: t4, ctor: i3[1] === "." ? M : i3[1] === "?" ? H$1 : i3[1] === "@" ? I : S$1 });
               } else
                 c2.push({ type: 6, index: r2 });
@@ -351,27 +351,27 @@ class E$1 {
             l2.removeAttribute(i2);
         }
         if (g.test(l2.tagName)) {
-          const t3 = l2.textContent.split(e$1), s3 = t3.length - 1;
+          const t3 = l2.textContent.split(e$3), s3 = t3.length - 1;
           if (s3 > 0) {
-            l2.textContent = i$3 ? i$3.emptyScript : "";
+            l2.textContent = i$4 ? i$4.emptyScript : "";
             for (let i2 = 0; i2 < s3; i2++)
-              l2.append(t3[i2], h$1()), A$1.nextNode(), c2.push({ type: 2, index: ++r2 });
-            l2.append(t3[s3], h$1());
+              l2.append(t3[i2], h$2()), A$1.nextNode(), c2.push({ type: 2, index: ++r2 });
+            l2.append(t3[s3], h$2());
           }
         }
       } else if (l2.nodeType === 8)
-        if (l2.data === o$2)
+        if (l2.data === o$3)
           c2.push({ type: 2, index: r2 });
         else {
           let t3 = -1;
-          for (; (t3 = l2.data.indexOf(e$1, t3 + 1)) !== -1; )
-            c2.push({ type: 7, index: r2 }), t3 += e$1.length - 1;
+          for (; (t3 = l2.data.indexOf(e$3, t3 + 1)) !== -1; )
+            c2.push({ type: 7, index: r2 }), t3 += e$3.length - 1;
         }
       r2++;
     }
   }
   static createElement(t2, i2) {
-    const s2 = l$1.createElement("template");
+    const s2 = l$2.createElement("template");
     return s2.innerHTML = t2, s2;
   }
 }
@@ -380,10 +380,10 @@ function P(t2, i2, s2 = t2, e2) {
   if (i2 === b)
     return i2;
   let d2 = e2 !== void 0 ? (o2 = s2._$Cl) === null || o2 === void 0 ? void 0 : o2[e2] : s2._$Cu;
-  const u2 = r(i2) ? void 0 : i2._$litDirective$;
+  const u2 = r$2(i2) ? void 0 : i2._$litDirective$;
   return (d2 == null ? void 0 : d2.constructor) !== u2 && ((n2 = d2 == null ? void 0 : d2._$AO) === null || n2 === void 0 || n2.call(d2, false), u2 === void 0 ? d2 = void 0 : (d2 = new u2(t2), d2._$AT(t2, s2, e2)), e2 !== void 0 ? ((l2 = (h2 = s2)._$Cl) !== null && l2 !== void 0 ? l2 : h2._$Cl = [])[e2] = d2 : s2._$Cu = d2), d2 !== void 0 && (i2 = P(t2, d2._$AS(t2, i2.values), d2, e2)), i2;
 }
-class V {
+class V$1 {
   constructor(t2, i2) {
     this.v = [], this._$AN = void 0, this._$AD = t2, this._$AM = i2;
   }
@@ -395,13 +395,13 @@ class V {
   }
   p(t2) {
     var i2;
-    const { el: { content: s2 }, parts: e2 } = this._$AD, o2 = ((i2 = t2 == null ? void 0 : t2.creationScope) !== null && i2 !== void 0 ? i2 : l$1).importNode(s2, true);
+    const { el: { content: s2 }, parts: e2 } = this._$AD, o2 = ((i2 = t2 == null ? void 0 : t2.creationScope) !== null && i2 !== void 0 ? i2 : l$2).importNode(s2, true);
     A$1.currentNode = o2;
     let n2 = A$1.nextNode(), h2 = 0, r2 = 0, d2 = e2[0];
     for (; d2 !== void 0; ) {
       if (h2 === d2.index) {
         let i3;
-        d2.type === 2 ? i3 = new N(n2, n2.nextSibling, this, t2) : d2.type === 1 ? i3 = new d2.ctor(n2, d2.name, d2.strings, this, t2) : d2.type === 6 && (i3 = new L(n2, this, t2)), this.v.push(i3), d2 = e2[++r2];
+        d2.type === 2 ? i3 = new N(n2, n2.nextSibling, this, t2) : d2.type === 1 ? i3 = new d2.ctor(n2, d2.name, d2.strings, this, t2) : d2.type === 6 && (i3 = new L$1(n2, this, t2)), this.v.push(i3), d2 = e2[++r2];
       }
       h2 !== (d2 == null ? void 0 : d2.index) && (n2 = A$1.nextNode(), h2++);
     }
@@ -434,7 +434,7 @@ class N {
     return this._$AB;
   }
   _$AI(t2, i2 = this) {
-    t2 = P(this, t2, i2), r(t2) ? t2 === w$1 || t2 == null || t2 === "" ? (this._$AH !== w$1 && this._$AR(), this._$AH = w$1) : t2 !== this._$AH && t2 !== b && this.$(t2) : t2._$litType$ !== void 0 ? this.T(t2) : t2.nodeType !== void 0 ? this.k(t2) : u(t2) ? this.S(t2) : this.$(t2);
+    t2 = P(this, t2, i2), r$2(t2) ? t2 === w$1 || t2 == null || t2 === "" ? (this._$AH !== w$1 && this._$AR(), this._$AH = w$1) : t2 !== this._$AH && t2 !== b && this.$(t2) : t2._$litType$ !== void 0 ? this.T(t2) : t2.nodeType !== void 0 ? this.k(t2) : u(t2) ? this.S(t2) : this.$(t2);
   }
   M(t2, i2 = this._$AB) {
     return this._$AA.parentNode.insertBefore(t2, i2);
@@ -443,7 +443,7 @@ class N {
     this._$AH !== t2 && (this._$AR(), this._$AH = this.M(t2));
   }
   $(t2) {
-    this._$AH !== w$1 && r(this._$AH) ? this._$AA.nextSibling.data = t2 : this.k(l$1.createTextNode(t2)), this._$AH = t2;
+    this._$AH !== w$1 && r$2(this._$AH) ? this._$AA.nextSibling.data = t2 : this.k(l$2.createTextNode(t2)), this._$AH = t2;
   }
   T(t2) {
     var i2;
@@ -451,7 +451,7 @@ class N {
     if (((i2 = this._$AH) === null || i2 === void 0 ? void 0 : i2._$AD) === o2)
       this._$AH.m(s2);
     else {
-      const t3 = new V(o2, this), i3 = t3.p(this.options);
+      const t3 = new V$1(o2, this), i3 = t3.p(this.options);
       t3.m(s2), this.k(i3), this._$AH = t3;
     }
   }
@@ -460,11 +460,11 @@ class N {
     return i2 === void 0 && T.set(t2.strings, i2 = new E$1(t2)), i2;
   }
   S(t2) {
-    d$1(this._$AH) || (this._$AH = [], this._$AR());
+    d$2(this._$AH) || (this._$AH = [], this._$AR());
     const i2 = this._$AH;
     let s2, e2 = 0;
     for (const o2 of t2)
-      e2 === i2.length ? i2.push(s2 = new N(this.M(h$1()), this.M(h$1()), this, this.options)) : s2 = i2[e2], s2._$AI(o2), e2++;
+      e2 === i2.length ? i2.push(s2 = new N(this.M(h$2()), this.M(h$2()), this, this.options)) : s2 = i2[e2], s2._$AI(o2), e2++;
     e2 < i2.length && (this._$AR(s2 && s2._$AB.nextSibling, e2), i2.length = e2);
   }
   _$AR(t2 = this._$AA.nextSibling, i2) {
@@ -493,12 +493,12 @@ class S$1 {
     const o2 = this.strings;
     let n2 = false;
     if (o2 === void 0)
-      t2 = P(this, t2, i2, 0), n2 = !r(t2) || t2 !== this._$AH && t2 !== b, n2 && (this._$AH = t2);
+      t2 = P(this, t2, i2, 0), n2 = !r$2(t2) || t2 !== this._$AH && t2 !== b, n2 && (this._$AH = t2);
     else {
       const e3 = t2;
       let l2, h2;
       for (t2 = o2[0], l2 = 0; l2 < o2.length - 1; l2++)
-        h2 = P(this, e3[s2 + l2], i2, l2), h2 === b && (h2 = this._$AH[l2]), n2 || (n2 = !r(h2) || h2 !== this._$AH[l2]), h2 === w$1 ? t2 = w$1 : t2 !== w$1 && (t2 += (h2 != null ? h2 : "") + o2[l2 + 1]), this._$AH[l2] = h2;
+        h2 = P(this, e3[s2 + l2], i2, l2), h2 === b && (h2 = this._$AH[l2]), n2 || (n2 = !r$2(h2) || h2 !== this._$AH[l2]), h2 === w$1 ? t2 = w$1 : t2 !== w$1 && (t2 += (h2 != null ? h2 : "") + o2[l2 + 1]), this._$AH[l2] = h2;
     }
     n2 && !e2 && this.C(t2);
   }
@@ -514,7 +514,7 @@ class M extends S$1 {
     this.element[this.name] = t2 === w$1 ? void 0 : t2;
   }
 }
-const k$1 = i$3 ? i$3.emptyScript : "";
+const k$1 = i$4 ? i$4.emptyScript : "";
 class H$1 extends S$1 {
   constructor() {
     super(...arguments), this.type = 4;
@@ -539,7 +539,7 @@ class I extends S$1 {
     typeof this._$AH == "function" ? this._$AH.call((s2 = (i2 = this.options) === null || i2 === void 0 ? void 0 : i2.host) !== null && s2 !== void 0 ? s2 : this.element, t2) : this._$AH.handleEvent(t2);
   }
 }
-class L {
+class L$1 {
   constructor(t2, i2, s2) {
     this.element = t2, this.type = 6, this._$AN = void 0, this._$AM = i2, this.options = s2;
   }
@@ -551,14 +551,14 @@ class L {
   }
 }
 const z = window.litHtmlPolyfillSupport;
-z == null || z(E$1, N), ((t$1 = globalThis.litHtmlVersions) !== null && t$1 !== void 0 ? t$1 : globalThis.litHtmlVersions = []).push("2.2.2");
+z == null || z(E$1, N), ((t$2 = globalThis.litHtmlVersions) !== null && t$2 !== void 0 ? t$2 : globalThis.litHtmlVersions = []).push("2.2.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var l, o$1;
-class s$1 extends a$1 {
+var l$1, o$2;
+class s extends a$2 {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Dt = void 0;
   }
@@ -569,7 +569,7 @@ class s$1 extends a$1 {
   }
   update(t2) {
     const i2 = this.render();
-    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t2), this._$Dt = x(i2, this.renderRoot, this.renderOptions);
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t2), this._$Dt = x$1(i2, this.renderRoot, this.renderOptions);
   }
   connectedCallback() {
     var t2;
@@ -583,10 +583,140 @@ class s$1 extends a$1 {
     return b;
   }
 }
-s$1.finalized = true, s$1._$litElement$ = true, (l = globalThis.litElementHydrateSupport) === null || l === void 0 || l.call(globalThis, { LitElement: s$1 });
-const n$1 = globalThis.litElementPolyfillSupport;
-n$1 == null || n$1({ LitElement: s$1 });
-((o$1 = globalThis.litElementVersions) !== null && o$1 !== void 0 ? o$1 : globalThis.litElementVersions = []).push("3.2.0");
+s.finalized = true, s._$litElement$ = true, (l$1 = globalThis.litElementHydrateSupport) === null || l$1 === void 0 || l$1.call(globalThis, { LitElement: s });
+const n$3 = globalThis.litElementPolyfillSupport;
+n$3 == null || n$3({ LitElement: s });
+((o$2 = globalThis.litElementVersions) !== null && o$2 !== void 0 ? o$2 : globalThis.litElementVersions = []).push("3.2.0");
+/**
+ * @license
+ * Copyright 2020 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const r$1 = (o2) => o2.strings === void 0;
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t$1 = { ATTRIBUTE: 1, CHILD: 2, PROPERTY: 3, BOOLEAN_ATTRIBUTE: 4, EVENT: 5, ELEMENT: 6 }, e$2 = (t2) => (...e2) => ({ _$litDirective$: t2, values: e2 });
+class i$3 {
+  constructor(t2) {
+  }
+  get _$AU() {
+    return this._$AM._$AU;
+  }
+  _$AT(t2, e2, i2) {
+    this._$Ct = t2, this._$AM = e2, this._$Ci = i2;
+  }
+  _$AS(t2, e2) {
+    return this.update(t2, e2);
+  }
+  update(t2, e2) {
+    return this.render(...e2);
+  }
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const e$1 = (i2, t2) => {
+  var s2, o2;
+  const n2 = i2._$AN;
+  if (n2 === void 0)
+    return false;
+  for (const i3 of n2)
+    (o2 = (s2 = i3)._$AO) === null || o2 === void 0 || o2.call(s2, t2, false), e$1(i3, t2);
+  return true;
+}, o$1 = (i2) => {
+  let t2, s2;
+  do {
+    if ((t2 = i2._$AM) === void 0)
+      break;
+    s2 = t2._$AN, s2.delete(i2), i2 = t2;
+  } while ((s2 == null ? void 0 : s2.size) === 0);
+}, n$2 = (i2) => {
+  for (let t2; t2 = i2._$AM; i2 = t2) {
+    let s2 = t2._$AN;
+    if (s2 === void 0)
+      t2._$AN = s2 = /* @__PURE__ */ new Set();
+    else if (s2.has(i2))
+      break;
+    s2.add(i2), l(t2);
+  }
+};
+function r(i2) {
+  this._$AN !== void 0 ? (o$1(this), this._$AM = i2, n$2(this)) : this._$AM = i2;
+}
+function h$1(i2, t2 = false, s2 = 0) {
+  const n2 = this._$AH, r2 = this._$AN;
+  if (r2 !== void 0 && r2.size !== 0)
+    if (t2)
+      if (Array.isArray(n2))
+        for (let i3 = s2; i3 < n2.length; i3++)
+          e$1(n2[i3], false), o$1(n2[i3]);
+      else
+        n2 != null && (e$1(n2, false), o$1(n2));
+    else
+      e$1(this, i2);
+}
+const l = (i2) => {
+  var t2, e2, o2, n2;
+  i2.type == t$1.CHILD && ((t2 = (o2 = i2)._$AP) !== null && t2 !== void 0 || (o2._$AP = h$1), (e2 = (n2 = i2)._$AQ) !== null && e2 !== void 0 || (n2._$AQ = r));
+};
+class d$1 extends i$3 {
+  constructor() {
+    super(...arguments), this._$AN = void 0;
+  }
+  _$AT(i2, t2, s2) {
+    super._$AT(i2, t2, s2), n$2(this), this.isConnected = i2._$AU;
+  }
+  _$AO(i2, t2 = true) {
+    var s2, n2;
+    i2 !== this.isConnected && (this.isConnected = i2, i2 ? (s2 = this.reconnected) === null || s2 === void 0 || s2.call(this) : (n2 = this.disconnected) === null || n2 === void 0 || n2.call(this)), t2 && (e$1(this, i2), o$1(this));
+  }
+  setValue(t2) {
+    if (r$1(this._$Ct))
+      this._$Ct._$AI(t2, this);
+    else {
+      const i2 = [...this._$Ct._$AH];
+      i2[this._$Ci] = t2, this._$Ct._$AI(i2, this, 0);
+    }
+  }
+  disconnected() {
+  }
+  reconnected() {
+  }
+}
+const h = /* @__PURE__ */ new WeakMap(), n$1 = e$2(class extends d$1 {
+  render(t2) {
+    return w$1;
+  }
+  update(t2, [s2]) {
+    var e2;
+    const o2 = s2 !== this.U;
+    return o2 && this.U !== void 0 && this.ot(void 0), (o2 || this.rt !== this.lt) && (this.U = s2, this.ht = (e2 = t2.options) === null || e2 === void 0 ? void 0 : e2.host, this.ot(this.lt = t2.element)), w$1;
+  }
+  ot(i2) {
+    var t2;
+    if (typeof this.U == "function") {
+      const s2 = (t2 = this.ht) !== null && t2 !== void 0 ? t2 : globalThis;
+      let e2 = h.get(s2);
+      e2 === void 0 && (e2 = /* @__PURE__ */ new WeakMap(), h.set(s2, e2)), e2.get(this.U) !== void 0 && this.U.call(this.ht, void 0), e2.set(this.U, i2), i2 !== void 0 && this.U.call(this.ht, i2);
+    } else
+      this.U.value = i2;
+  }
+  get rt() {
+    var i2, t2, s2;
+    return typeof this.U == "function" ? (t2 = h.get((i2 = this.ht) !== null && i2 !== void 0 ? i2 : globalThis)) === null || t2 === void 0 ? void 0 : t2.get(this.U) : (s2 = this.U) === null || s2 === void 0 ? void 0 : s2.value;
+  }
+  disconnected() {
+    this.rt === this.lt && this.ot(void 0);
+  }
+  reconnected() {
+    this.ot(this.lt);
+  }
+});
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -658,22 +788,21 @@ function i$1(i2, n2) {
  */
 var n;
 ((n = window.HTMLSlotElement) === null || n === void 0 ? void 0 : n.prototype.assignedElements) != null ? (o2, n2) => o2.assignedElements(n2) : (o2, n2) => o2.assignedNodes(n2).filter((o3) => o3.nodeType === Node.ELEMENT_NODE);
-var E = Object.defineProperty;
-var S = Object.getOwnPropertyDescriptor;
+var E = Object.defineProperty, A = Object.defineProperties, F = Object.getOwnPropertyDescriptor, L = Object.getOwnPropertyDescriptors;
 var w = Object.getOwnPropertySymbols;
-var F = Object.prototype.hasOwnProperty, A = Object.prototype.propertyIsEnumerable;
-var k = (l2, a2, e2) => a2 in l2 ? E(l2, a2, { enumerable: true, configurable: true, writable: true, value: e2 }) : l2[a2] = e2, $ = (l2, a2) => {
-  for (var e2 in a2 || (a2 = {}))
-    F.call(a2, e2) && k(l2, e2, a2[e2]);
+var V = Object.prototype.hasOwnProperty, U = Object.prototype.propertyIsEnumerable;
+var k = (n2, o2, e2) => o2 in n2 ? E(n2, o2, { enumerable: true, configurable: true, writable: true, value: e2 }) : n2[o2] = e2, H = (n2, o2) => {
+  for (var e2 in o2 || (o2 = {}))
+    V.call(o2, e2) && k(n2, e2, o2[e2]);
   if (w)
-    for (var e2 of w(a2))
-      A.call(a2, e2) && k(l2, e2, a2[e2]);
-  return l2;
-};
-var i = (l2, a2, e2, t2) => {
-  for (var r2 = t2 > 1 ? void 0 : t2 ? S(a2, e2) : a2, o2 = l2.length - 1, c2; o2 >= 0; o2--)
-    (c2 = l2[o2]) && (r2 = (t2 ? c2(a2, e2, r2) : c2(r2)) || r2);
-  return t2 && r2 && E(a2, e2, r2), r2;
+    for (var e2 of w(o2))
+      U.call(o2, e2) && k(n2, e2, o2[e2]);
+  return n2;
+}, $ = (n2, o2) => A(n2, L(o2));
+var i = (n2, o2, e2, t2) => {
+  for (var s2 = t2 > 1 ? void 0 : t2 ? F(o2, e2) : o2, r2 = n2.length - 1, h2; r2 >= 0; r2--)
+    (h2 = n2[r2]) && (s2 = (t2 ? h2(o2, e2, s2) : h2(s2)) || s2);
+  return t2 && s2 && E(o2, e2, s2), s2;
 };
 var d = class {
   constructor() {
@@ -685,11 +814,11 @@ var d = class {
   get baseUrl() {
     return this._baseUrl;
   }
-  set baseUrl(a2) {
-    this._baseUrl = a2;
+  set baseUrl(o2) {
+    this._baseUrl = o2;
   }
 };
-var H = r$2`
+var x = r$4`
   :root {
     --mave_embed_dialog_height: 100vh !important;
   }
@@ -707,6 +836,8 @@ var H = r$2`
     padding: 0;
     margin: 0;
     background: transparent;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (max-width: 768px) {
@@ -743,10 +874,8 @@ var H = r$2`
 
   canvas,
   .poster {
-    transform: scale(1.01);
     position: absolute;
     top: 0;
-    width: 100%;
     height: 100%;
     aspect-ratio: 16 / 9;
   }
@@ -819,8 +948,18 @@ var H = r$2`
   #video::-webkit-media-text-track-display-backdrop {
     background: transparent !important;
   }
+
+  #end {
+    display: none;
+    position: absolute; 
+    width: 100%; 
+    height: 100%;
+    z-index: 30;
+    top: 0;
+    left: 0;
+  }
 `;
-var h = class extends s$1 {
+var c = class extends s {
   constructor() {
     super(...arguments);
     this._ghostActive = true;
@@ -871,7 +1010,7 @@ var h = class extends s$1 {
     this._loaded = true;
   }
 };
-h.styles = r$2`
+c.styles = r$4`
     dialog {
       position: relative;
       display: flex;
@@ -926,9 +1065,9 @@ h.styles = r$2`
       transition: opacity, transform 150ms;
       transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
-  `, i([e({ type: String })], h.prototype, "embed", 2), i([i$1("#dialog")], h.prototype, "dialog", 2), i([i$1("#iframe")], h.prototype, "iframe", 2), i([t()], h.prototype, "_ghostActive", 2), i([t()], h.prototype, "_loaded", 2), i([t()], h.prototype, "_delayed", 2);
-customElements.get("mave-settings") || customElements.define("mave-settings", h);
-var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 &= 63) < 36 ? a2.toString(36) : a2 < 62 ? (a2 - 26).toString(36).toUpperCase() : a2 < 63 ? "_" : "-", ""), s = class extends s$1 {
+  `, i([e({ type: String })], c.prototype, "embed", 2), i([i$1("#dialog")], c.prototype, "dialog", 2), i([i$1("#iframe")], c.prototype, "iframe", 2), i([t()], c.prototype, "_ghostActive", 2), i([t()], c.prototype, "_loaded", 2), i([t()], c.prototype, "_delayed", 2);
+customElements.get("mave-settings") || customElements.define("mave-settings", c);
+var q = crypto.getRandomValues(new Uint8Array(21)).reduce((n2, o2) => n2 += (o2 &= 63) < 36 ? o2.toString(36) : o2 < 62 ? (o2 - 26).toString(36).toUpperCase() : o2 < 63 ? "_" : "-", ""), S = ["abort", "canplay", "canplaythrough", "durationchange", "emptied", "encrypted", "ended", "error", "loadeddata", "loadedmetadata", "loadstart", "pause", "play", "playing", "progress", "ratechange", "seeked", "seeking", "stalled", "suspend", "timeupdate", "volumechange", "waiting", "waitingforkey", "resize", "enterpictureinpicture", "leavepictureinpicture", "castchange", "entercast", "leavecast"], O = ["mave:video_canplay", "mave:video_progress", "mave:video_play", "mave:video_pause", "mave:video_ended", "mave:video_timeupdate", "mave:vide_muted", "mave:vide_muted", "mave:video_fullscreen", "mave:open_overlay", "mave:close_overlay", "mave:bitrate"], a = class extends s {
   constructor() {
     super(...arguments);
     this._settingsActive = false;
@@ -946,11 +1085,21 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
     this.debouncedAppHeight = this.debounce(this.appHeight.bind(this), 550);
   }
   connectedCallback() {
-    var e2;
-    super.connectedCallback(), window.addEventListener("message", this.messageHandler.bind(this)), window.addEventListener("load", this.visibilityHandler.bind(this)), window.addEventListener("scroll", this.visibilityHandler.bind(this)), window.addEventListener("resize", this.visibilityHandler.bind(this));
-    for (let t2 of ["fullscreenchange", "webkitfullscreenchange"])
-      this.addEventListener(t2, this.fullscreenChangeHandler.bind(this));
-    ((e2 = this.video) == null ? void 0 : e2.canPlayType("application/vnd.apple.mpegurl")) && !this._hlsLoaded && this.scriptHandler();
+    if (super.connectedCallback(), !this.src && this.embed) {
+      let e2 = `https://${d.getInstance().baseUrl}/${this.embed}/json`;
+      (async () => {
+        try {
+          let r2 = await (await fetch(e2)).json();
+          this.autoplay = r2.autoPlay, this.loop = r2.loop, this.aspectRatio = r2.settingsAspectRatio, this.blurhash = r2.videoBlurHash, this.src = r2.videoSource, this.height = r2.height, this.width = r2.width, this.posterImage = r2.posterImage, this.posterVideoSource = r2.posterVideoSource;
+        } catch (s2) {
+          console.log("error", s2);
+        }
+      })();
+    }
+    window.addEventListener("message", this.messageHandler.bind(this)), window.addEventListener("load", this.visibilityHandler.bind(this)), window.addEventListener("scroll", this.visibilityHandler.bind(this)), window.addEventListener("resize", this.visibilityHandler.bind(this));
+    for (let e2 of ["fullscreenchange", "webkitfullscreenchange"])
+      this.addEventListener(e2, this.fullscreenChangeHandler.bind(this));
+    this._hlsLoaded || this.scriptHandler();
   }
   disconnectedCallback() {
     window.removeEventListener("message", this.messageHandler.bind(this)), window.removeEventListener("load", this.visibilityHandler.bind(this)), window.removeEventListener("scroll", this.visibilityHandler.bind(this)), window.removeEventListener("resize", this.visibilityHandler.bind(this));
@@ -958,6 +1107,33 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
       this.removeEventListener(t2, this.fullscreenChangeHandler.bind(this));
     let e2 = document.querySelector("mave-settings");
     e2 && e2.remove(), super.disconnectedCallback();
+  }
+  listEvents() {
+    return [...S, ...O];
+  }
+  play() {
+    var e2, t2, s2;
+    this.video && ((e2 = this.video) == null ? void 0 : e2.currentTime) >= ((t2 = this.video) == null ? void 0 : t2.duration) && (this.video.currentTime = 0), (s2 = this.video) == null || s2.play();
+  }
+  pause() {
+    var e2;
+    (e2 = this.video) == null || e2.pause();
+  }
+  setVolume(e2) {
+    this.video && (e2 > 0 && (this.video.muted = false), this.video.volume = e2, this.sendMessage("mave:volume_change", { volume: e2 }));
+  }
+  setMuted(e2) {
+    this.video && (this.video.muted = e2, this.sendMessage("mave:video_muted", { muted: this.video.muted }));
+  }
+  setCurrentTime(e2) {
+    this.video && (this.video.currentTime = e2);
+  }
+  getCurrentTime() {
+    var e2;
+    return (e2 = this.video) == null ? void 0 : e2.currentTime;
+  }
+  toggleEndScreen() {
+    this.endElement && (this.endElement.style.display === "block" ? this.endElement.style.display = "none" : this.endElement.style.display = "block");
   }
   initializeVideo() {
     if (!this.loadeddata && this.video && this.video.readyState >= 2 && (setTimeout(() => {
@@ -980,58 +1156,60 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
         case "progress":
           (!this.canPlay || !this.loadeddata) && this.initializeVideo();
           try {
-            let t2 = this.video.buffered.length - 1, r2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
-            this.sendMessage("mave:video_progress", { buffer: r2 });
+            let t2 = this.video.buffered.length - 1, s2 = Math.round(this.video.buffered.end(t2) / this.video.duration * 100);
+            this.sendMessage("mave:video_progress", { buffer: s2 });
           } catch {
           }
           break;
         case "play":
           if (this._posterShouldBeVisible && (document.webkitExitFullscreen ? setTimeout(() => {
             this._posterShouldBeVisible = false;
-          }, 250) : this._posterShouldBeVisible = false), this._iframeReady) {
+          }, 450) : this._posterShouldBeVisible = false), this._iframeReady) {
             this.timeUpdate();
             let t2 = this.autoplay && !this._initialPlayEventTriggered || this.video.currentTime < 1e-4 ? 0 : this.video.currentTime;
-            this.sendMessage("mave:video_play", { currentTime: t2, bitrate: this._bitrate }), this._initialPlayEventTriggered = true;
+            this.sendMessage("mave:video_play", { currentTime: t2, bitrate: this._bitrate, duration: this.video.duration }), this._initialPlayEventTriggered = true;
           }
           break;
         case "timeupdate":
           this.sendMessage("mave:video_timeupdate", { currentTime: this.video.currentTime });
           break;
+        case "volumechange":
+          break;
         case "pause":
         case "ended":
           this.sendMessage("mave:video_timeupdate", { currentTime: this.video.currentTime }), this._animationFrame && (cancelAnimationFrame(this._animationFrame), this._animationFrame = void 0), setTimeout(() => {
             this.sendMessage(e2.type == "ended" ? "mave:video_ended" : "mave:video_pause");
-          }, 25);
+          }, 25), !this.loop && this.endElement && (this.endElement.style.display = "block");
           break;
       }
   }
   messageHandler(e2) {
-    var o2;
-    let { data: t2 } = e2, { message: r2 } = t2;
+    var r2;
+    let { data: t2 } = e2, { message: s2 } = t2;
     if (!(!this.isConnected || !t2 || t2.hash != this.embed))
-      switch (r2) {
+      switch (s2) {
         case "mave:player_ready":
-          if (this._iframeReady = true, !this._initialPlayEventTriggered && this.video && !this.video.paused) {
+          if (this._iframeReady = true, this.triggerEvent("ready", { videoElement: this.video }), !this._initialPlayEventTriggered && this.video && !this.video.paused) {
             let u2 = this.autoplay ? 0 : this.video.currentTime;
-            this.sendMessage("mave:video_play", { currentTime: u2, bitrate: this._bitrate }), this._initialPlayEventTriggered = true;
+            this.sendMessage("mave:video_play", { currentTime: u2, bitrate: this._bitrate, duration: this.video.duration }), this._initialPlayEventTriggered = true;
           }
           break;
         case "mave:player_event":
           if (!this.video)
             return;
-          let c2 = t2.event;
-          switch (Object.keys(c2)[0]) {
+          let h2 = t2.event;
+          switch (Object.keys(h2)[0]) {
             case "play":
-              c2.play ? this.video.play() : this.video.pause();
+              h2.play ? this.video.play() : this.video.pause();
               break;
             case "muted":
-              this.video.muted = c2.muted, this.sendMessage("mave:video_muted", { muted: this.video.muted });
+              this.video.muted = h2.muted, this.sendMessage("mave:video_muted", { muted: this.video.muted });
               break;
             case "volume":
-              this.video.volume = c2.volume;
+              this.video.volume = h2.volume;
               break;
             case "currentTime":
-              this.video.currentTime = c2.currentTime;
+              this.video.currentTime = h2.currentTime;
               break;
           }
           break;
@@ -1075,7 +1253,7 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
           _2 && _2.remove();
           break;
         case "mave:update_embed_settings":
-          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((o2 = this.video) == null ? void 0 : o2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
+          this.aspectRatio = t2.aspect_ratio_enabled ? t2.aspect_ratio : void 0, this.width = t2.aspect_ratio_enabled ? void 0 : t2.width, this.height = t2.aspect_ratio_enabled ? void 0 : t2.height, this.loop = t2.loop, this.autoplay = t2.autoplay_enabled, this.autoplay && ((r2 = this.video) == null ? void 0 : r2.paused) && this.video.currentTime < this.video.duration && this.video.play(), this.visibilityHandler();
           break;
         case "mave:request_in_viewport":
           setTimeout(() => {
@@ -1083,7 +1261,7 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
           }, 20);
           break;
         case "mave:render_video":
-          this._hlsLoaded = false, this._blurhashShouldBeVisible = false, this.loadeddata = false, this.canPlay = false, this.src != t2.video_src && (this.src = t2.video_src), this.autoplay != t2.autoplay && (this.autoplay = t2.autoplay), this.blurhash != t2.blurhash && (this.blurhash = t2.blurhash), this.posterImage != t2.poster_image && (this.posterImage = t2.poster_image), this.posterVideoSource != t2.poster_video_source && (this.posterVideoSource = t2.poster_video_source);
+          this._hlsLoaded = false, this._blurhashShouldBeVisible = false, this.loadeddata = false, this.canPlay = false, this.src != t2.video_src && (this.src = t2.video_src), this.fileType != t2.file_type && (this.fileType = t2.file_type), this.autoplay != t2.autoplay && (this.autoplay = t2.autoplay), this.blurhash != t2.blurhash && (this.blurhash = t2.blurhash), this.posterImage != t2.poster_image && (this.posterImage = t2.poster_image), this.posterVideoSource != t2.poster_video_source && (this.posterVideoSource = t2.poster_video_source);
           break;
       }
   }
@@ -1095,8 +1273,8 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
     if ((this._overlayActive || this._isFullscreen) && (e2.textContent = ":host { overflow: hidden; width: 100%; height: 100%; }"), this.width && this.height)
       e2.textContent = `:host { display: block; overflow: hidden; width: ${this.width}; height: ${this.height}; min-width: 320px; min-height: 180px; } canvas, .poster { width: ${this.width}; object-fit: cover; } #video, #video[poster] { object-fit: cover; }`;
     else if (this.aspectRatio) {
-      let [t2, r2] = this.aspectRatio.split(":");
-      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${r2}; width: 100%; min-width: 320px; min-height: 180px; } canvas, .poster { aspect-ratio: ${t2} / ${r2}; object-fit: contain; } #video, #video[poster] { object-fit: contain; }`;
+      let [t2, s2] = this.aspectRatio.split(":");
+      e2.textContent = `:host { display: block; overflow: hidden; aspect-ratio: ${t2} / ${s2}; width: 100%; min-width: 320px; min-height: 180px; } canvas, .poster { aspect-ratio: ${t2} / ${s2}; object-fit: contain; } #video, #video[poster] { object-fit: contain; }`;
     } else
       e2.textContent = ":host { display: block; overflow: hidden; aspect-ratio: 16 / 9; width: 100%; min-width: 320px; min-height: 180px; } #video, #video[poster] { object-fit: contain; }";
     return e2;
@@ -1116,6 +1294,15 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
   videoStyle() {
     return !navigator.userAgent.toLowerCase().includes("chrome") && this._posterShouldBeVisible ? "opacity: 0;" : w$1;
   }
+  videoRendered(e2) {
+    S.forEach((t2) => {
+      e2 == null || e2.addEventListener(t2, (s2) => {
+        var h2;
+        let r2;
+        t2 == "seeked" ? r2 = { detail: { duration: (h2 = this.video) == null ? void 0 : h2.duration, embed: this.embed } } : r2 = { detail: { embed: this.embed } }, this.dispatchEvent(new CustomEvent(s2.type, r2));
+      });
+    });
+  }
   render() {
     return $$1`
       ${this.generateStyle()}
@@ -1131,6 +1318,7 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
               ${this._posterShouldBeVisible ? $$1` <img class="poster" .src=${this.poster()} /> ` : ""}
 
               <video
+                ${n$1(this.videoRendered)}
                 id="video"
                 style=${this.videoStyle()}
                 playsinline
@@ -1141,13 +1329,19 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
                 @progress=${this.videoHandler}
                 @loadeddata=${this.videoHandler}
                 @timeupdate=${this.videoHandler}
+                @volumechange=${this.videoHandler}
                 .poster=${this.videoPoster()}
                 .muted=${this.muted}
                 .autoplay=${this.autoplay}
                 .loop=${this.loop}
-                .src=${this.src}
-              ></video>
-            ` : ""}
+                .src=${this.needsHls() ? this.src : w$1}
+              >
+                ${this.needsHls() ? w$1 : $$1`<source
+                      src=${this.src}
+                      type=${this.fileType ? "video/" + this.fileType : "video/mp4"}
+                    />`}
+              </video>
+            ` : w$1}
         ${this.embed ? $$1`
               <iframe
                 title="embed"
@@ -1159,21 +1353,22 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
                 scrolling="no"
               >
               </iframe>
-            ` : ""}
-      </dialog>
+              <slot id="end" name="end-screen"></slot>
+            ` : w$1}
+        </dialog>
     `;
   }
   firstUpdated(e2) {
     this.appHeight();
   }
   generateUrl() {
-    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${B}`;
+    return this.jwt ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.jwt}` : this.reference_id && this.display_name ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}&display_name=${this.display_name}` : this.reference_id ? `https://${this.baseUrl}/e/${this.embed}?reference_id=${this.reference_id}` : this.display_name ? `https://${this.baseUrl}/e/${this.embed}?display_name=${this.display_name}` : `https://${this.baseUrl}/e/${this.embed}?reference_id=${q}`;
   }
   sendMessage(e2, t2 = {}) {
     if (!this.iframe.contentWindow || !this.video)
       return;
-    let r2 = $({ message: e2 }, t2);
-    this.iframe.contentWindow.postMessage(r2, "*");
+    let s2 = $(H({ message: e2 }, t2), { embed: this.embed });
+    this.iframe.contentWindow.postMessage(s2, "*"), this.triggerEvent(e2, s2);
   }
   openFullscreen() {
     this.isFullscreen() || (this.requestFullscreen ? this.requestFullscreen() : this.webkitRequestFullscreen ? this.webkitRequestFullscreen() : (this.sendMessage("mave:open_overlay", {}), this.openOverlay()), this.video && !this.video.paused && (this.video.muted = false, this.sendMessage("mave:video_muted", { muted: this.video.muted })));
@@ -1189,23 +1384,25 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
     });
   }
   initiateScript() {
-    if (this.src && !this.src.includes(".m3u8") && !this.src.includes("mux.com"))
+    if (this.src && !this.needsHls())
       return;
     let e2 = document.createElement("script");
     return e2.onload = this.scriptHandler.bind(this), e2.src = "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.1.5/hls.min.js", e2;
   }
+  needsHls() {
+    var e2, t2;
+    return ((e2 = this.src) == null ? void 0 : e2.includes(".m3u8")) || ((t2 = this.src) == null ? void 0 : t2.includes("mux.com"));
+  }
   scriptHandler() {
-    if (!(!this.video || !this.src || this._hlsLoaded)) {
-      if (this.video.canPlayType("application/vnd.apple.mpegurl") || !this.src.includes(".m3u8") && !this.src.includes("mux.com"))
-        this.video.preload = "metadata", this.video.src = this.src;
-      else if (Hls.isSupported()) {
+    if (!(!this.video || !this.src || this._hlsLoaded || !this.needsHls())) {
+      if (Hls.isSupported()) {
         let e2 = new Hls();
         e2.config.startLevel = 3, e2.loadSource(this.src), e2.attachMedia(this.video);
         let t2 = [];
-        e2.on(Hls.Events.MANIFEST_LOADED, (r2, o2) => {
-          t2 = o2.levels.reverse();
-        }), e2.on(Hls.Events.LEVEL_LOADED, (r2, o2) => {
-          this._bitrate != t2[o2.level].bitrate && (this._bitrate = t2[o2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
+        e2.on(Hls.Events.MANIFEST_LOADED, (s2, r2) => {
+          t2 = r2.levels.reverse();
+        }), e2.on(Hls.Events.LEVEL_LOADED, (s2, r2) => {
+          this._bitrate != t2[r2.level].bitrate && (this._bitrate = t2[r2.level].bitrate, this.sendMessage("mave:bitrate", { bitrate: this._bitrate }));
         }), e2.subtitleTrack = 0, e2.subtitleDisplay = true;
       }
       this._hlsLoaded = true;
@@ -1217,8 +1414,8 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
   visibilityHandler() {
     if (!this.iframe || !this.iframe.contentWindow)
       return;
-    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), r2 = window.innerHeight || document.documentElement.clientHeight, o2 = (e2 > 0 || t2 > 0) && e2 < r2;
-    this.sendMessage(o2 ? "mave:video_in_viewport" : "mave:video_out_viewport"), this.debouncedAppHeight();
+    let { top: e2, bottom: t2 } = this.iframe.getBoundingClientRect(), s2 = window.innerHeight || document.documentElement.clientHeight, r2 = (e2 > 0 || t2 > 0) && e2 < s2;
+    this.sendMessage(r2 ? "mave:video_in_viewport" : "mave:video_out_viewport"), this.debouncedAppHeight();
   }
   isFullscreen() {
     return !!document.fullscreenElement || !!document.webkitFullscreenElement || "ontouchend" in document && this._isFullscreen;
@@ -1229,17 +1426,21 @@ var B = crypto.getRandomValues(new Uint8Array(21)).reduce((l2, a2) => l2 += (a2 
   closeOverlay() {
     this.dialog.close(), this._overlayActive = false, document.documentElement.setAttribute("style", this._globalStyle || "");
   }
+  triggerEvent(e2, t2) {
+    let s2 = t2 ? { detail: t2 } : void 0, r2 = new CustomEvent(e2, s2);
+    this.dispatchEvent(r2);
+  }
   debounce(e2, t2) {
-    let r2;
-    return (...o2) => {
-      clearTimeout(r2), r2 = setTimeout(() => {
-        e2(...o2);
+    let s2;
+    return (...r2) => {
+      clearTimeout(s2), s2 = setTimeout(() => {
+        e2(...r2);
       }, t2);
     };
   }
 };
-s.styles = H, i([e({ type: String })], s.prototype, "embed", 2), i([e({ type: String })], s.prototype, "reference_id", 2), i([e({ type: String })], s.prototype, "display_name", 2), i([e({ type: String })], s.prototype, "jwt", 2), i([e({ type: String })], s.prototype, "classname", 2), i([e({ type: Boolean })], s.prototype, "muted", 2), i([e({ type: Boolean })], s.prototype, "autoplay", 2), i([e({ type: Boolean })], s.prototype, "loop", 2), i([e({ type: String })], s.prototype, "src", 2), i([e({ type: String })], s.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], s.prototype, "aspectRatio", 2), i([e({ type: String })], s.prototype, "width", 2), i([e({ type: String })], s.prototype, "height", 2), i([e({ type: String, attribute: "poster-image" })], s.prototype, "posterImage", 2), i([e({ type: String, attribute: "poster-video-source" })], s.prototype, "posterVideoSource", 2), i([i$1("#dialog")], s.prototype, "dialog", 2), i([i$1("#iframe")], s.prototype, "iframe", 2), i([i$1("#video")], s.prototype, "video", 2), i([i$1("#canvas")], s.prototype, "canvas", 2), i([i$1("#script")], s.prototype, "script", 2), i([t()], s.prototype, "_settingsActive", 2), i([t()], s.prototype, "_blurhashShouldBeVisible", 2), i([t()], s.prototype, "_overlayActive", 2), i([t()], s.prototype, "_isFullscreen", 2), i([t()], s.prototype, "_uploadActive", 2), i([t()], s.prototype, "_posterShouldBeVisible", 2);
-customElements.get("mave-component") || customElements.define("mave-component", s);
+a.styles = x, i([e({ type: String })], a.prototype, "embed", 2), i([e({ type: String })], a.prototype, "reference_id", 2), i([e({ type: String })], a.prototype, "display_name", 2), i([e({ type: String })], a.prototype, "jwt", 2), i([e({ type: String })], a.prototype, "classname", 2), i([e({ type: Boolean })], a.prototype, "muted", 2), i([e({ type: Boolean })], a.prototype, "autoplay", 2), i([e({ type: Boolean })], a.prototype, "loop", 2), i([e({ type: String })], a.prototype, "src", 2), i([e({ type: String })], a.prototype, "blurhash", 2), i([e({ type: String, attribute: "aspect-ratio" })], a.prototype, "aspectRatio", 2), i([e({ type: String })], a.prototype, "width", 2), i([e({ type: String })], a.prototype, "height", 2), i([e({ type: String, attribute: "poster-image" })], a.prototype, "posterImage", 2), i([e({ type: String, attribute: "poster-video-source" })], a.prototype, "posterVideoSource", 2), i([e({ type: String, attribute: "file-type" })], a.prototype, "fileType", 2), i([i$1("#dialog")], a.prototype, "dialog", 2), i([i$1("#iframe")], a.prototype, "iframe", 2), i([i$1("#video")], a.prototype, "video", 2), i([i$1("#canvas")], a.prototype, "canvas", 2), i([i$1("#script")], a.prototype, "script", 2), i([i$1("#end")], a.prototype, "endElement", 2), i([t()], a.prototype, "_settingsActive", 2), i([t()], a.prototype, "_blurhashShouldBeVisible", 2), i([t()], a.prototype, "_overlayActive", 2), i([t()], a.prototype, "_isFullscreen", 2), i([t()], a.prototype, "_uploadActive", 2), i([t()], a.prototype, "_posterShouldBeVisible", 2);
+customElements.get("mave-component") || customElements.define("mave-component", a);
 const _hoisted_1 = ["src", "blurhash", "loop", "autoplay", "muted", "width", "height", "aspectRatio"];
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   props: {

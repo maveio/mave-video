@@ -721,6 +721,10 @@ export class MaveComponent extends LitElement {
   }
 
   private openFullscreen() {
+    // TODO:
+    // this value is not working?!?!
+
+    // @ts-ignore
     if (!this.isFullscreen()) {
       if (this.requestFullscreen) {
         this.requestFullscreen();
@@ -728,7 +732,12 @@ export class MaveComponent extends LitElement {
       } else if (this.webkitRequestFullscreen) {
         // @ts-ignore
         this.webkitRequestFullscreen();
+        // @ts-ignore
+      } else if (this.video.webkitEnterFullscreen) {
+        // @ts-ignore
+        this.video.webkitEnterFullscreen();
       } else {
+        console.log("going for open_overlay");
         this.sendMessage("mave:open_overlay", {});
         this.openOverlay();
       }
