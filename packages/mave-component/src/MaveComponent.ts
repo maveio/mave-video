@@ -386,7 +386,7 @@ export class MaveComponent extends LitElement {
           event.type == "ended" &&
           !this.loop &&
           this.endElement &&
-          this.endElement.innerHTML.length > 0
+          this.querySelector('[slot="end-screen"]')
         ) {
           this.endElement.style.display = "block";
         }
