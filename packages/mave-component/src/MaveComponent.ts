@@ -742,7 +742,6 @@ export class MaveComponent extends LitElement {
         // @ts-ignore
         this.video.webkitEnterFullscreen();
       } else {
-        console.log("going for open_overlay");
         this.sendMessage("mave:open_overlay", {});
         this.openOverlay();
       }

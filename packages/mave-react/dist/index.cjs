@@ -46,7 +46,7 @@ var import_react = __toESM(require("react"), 1);
 // ../config/config.ts
 var Config = class {
   constructor() {
-    this._baseUrl = "mave.io";
+    this._baseUrl = "app.mave.io";
   }
   static getInstance() {
     if (!Config._inst) {

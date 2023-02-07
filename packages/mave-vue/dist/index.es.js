@@ -20,7 +20,7 @@ var __spreadProps = (a2, b2) => __defProps(a2, __getOwnPropDescs(b2));
 import { defineComponent, withAsyncContext, openBlock, createElementBlock, mergeProps, unref, createBlock, Suspense, withCtx, createVNode, normalizeProps, guardReactiveProps } from "vue";
 class Config {
   constructor() {
-    this._baseUrl = "mave.io";
+    this._baseUrl = "app.mave.io";
   }
   static getInstance() {
     if (!Config._inst) {

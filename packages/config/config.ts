@@ -1,5 +1,5 @@
 export class Config {
-  private _baseUrl: string = "mave.io";
+  private _baseUrl: string = "app.mave.io";
   private static _inst: Config;
   private constructor() {}
   public static getInstance(): Config {
