@@ -1,4 +1,6 @@
-# Mave video components
+# Mave video components [DEPRECATED]
+
+⚠️ **Please use [our components library](https://github.com/maveio/components) instead, this is a deprecated repo** ⚠️
 
 Mave comes with powerful video components for your site, to add VOD, livestreaming and add interesting features alongside your video like chat and such. To use the components fully, you will need an account: https://mave.io.
 
